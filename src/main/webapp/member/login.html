@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+</head>
+
+<body>
+	<div>
+		<div>
+			<label for="username">Username: </label>
+			<input type="text" name="username" id="username" />
+		</div>
+		<div>
+			<label for="password">Password: </label>
+			<input type="password" name="password" id="password" />
+		</div>
+		<div>
+			<button id="loginBtn" type="button" class="btn btn-primary">Login</button>
+		</div>
+	</div>
+	<div id="errMsg" class="error"></div>
+</body>
+<script>
+	const username = document.querySelector('#username');
+	const password = document.querySelector('#password');
+	const errMsg = document.querySelector('#errMsg');
+	document.getElementById('loginBtn').addEventListener('click', () => {
+		fetch('login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				username: username.value,
+				password: password.value
+			}),
+		})
+		.then(resp => resp.json())
+		.then(body => {
+			errMsg.textContent = '';
+	        const { successful, message } = body;
+	        if (successful) {
+				alert(`${body.nickname} 您好！！！!!`);
+			} else {
+				errMsg.textContent = message;
+			}
+		});
+	});
+</script>
+</html>
