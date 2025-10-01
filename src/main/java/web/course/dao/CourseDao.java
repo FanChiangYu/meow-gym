@@ -1,5 +1,9 @@
 package web.course.dao;
 
-public interface CourseDao {
+import web.course.pojo.Course;
 
+public interface CourseDao {
+	
+	int insert(Course course);
+	
 }
