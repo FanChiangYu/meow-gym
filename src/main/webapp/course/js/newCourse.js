@@ -35,9 +35,21 @@ document.getElementById('apply-btn').addEventListener('click', function(){
   .then(resp => resp.json())
   .then(body => {
     if(body.successful){
-      alert(body.message);
+      // alert(body.message);
+      Swal.fire({
+        title: '完成',
+        text: body.message,
+        icon: 'success',
+        target: document.body 
+      });
     }else{
-      alert(body.message);
+      // alert(body.message);
+      Swal.fire({
+        title: '錯誤',
+        text: body.message,
+        icon: 'error',
+        target: document.body 
+      });
     }
   });
 });
