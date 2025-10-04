@@ -98,6 +98,7 @@ public class CourseServiceImpl  implements CourseService {
 		
 		course.setCoachId(1); // 暫定
 		course.setApprovalStatus("PENDING");
+		beginTx();
 		int count = dao.insert(course);
 		if(count == 1) {
 			course.setMessage("送出成功");
@@ -105,7 +106,10 @@ public class CourseServiceImpl  implements CourseService {
 		} else {
 			course.setMessage("送出失敗");
 			course.setSuccessful(false);
+			rollback();
 		}
+		
+		commit();
 		return course;
 	}
 

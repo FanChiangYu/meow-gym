@@ -1,6 +1,8 @@
 package web.course.controller;
 
 import java.io.IOException;
+import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -32,11 +34,12 @@ public class NewCourseServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Gson gson = new Gson();
-		Course course = gson.fromJson(request.getReader(), Course.class);
-		System.out.println(course.getTitle());
+//		Gson gson = new Gson();
+//		Course course = gson.fromJson(request.getReader(), Course.class);
+		
+		Course course = json2Pojo(request, Course.class);
 		course = service.apply(course);
-		JsonObject jsonObject = new JsonObject();
+//		JsonObject jsonObject = new JsonObject();
 		
 //		if(errorMessage != null) {
 //			jsonObject.addProperty("success", false);
@@ -47,9 +50,10 @@ public class NewCourseServlet extends HttpServlet{
 //		}
 		
 		
-		String json = gson.toJson(course);
-		response.setContentType("application/json");
-		response.getWriter().write(json);
+//		String json = gson.toJson(course);
+//		response.setContentType("application/json");
+//		response.getWriter().write(json);
+		writePojo2Json(response, course);
 	}
 	
 
