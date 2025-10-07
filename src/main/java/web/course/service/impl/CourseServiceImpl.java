@@ -103,13 +103,13 @@ public class CourseServiceImpl  implements CourseService {
 		if(count == 1) {
 			course.setMessage("送出成功");
 			course.setSuccessful(true);
+			commit();
 		} else {
 			course.setMessage("送出失敗");
 			course.setSuccessful(false);
 			rollback();
 		}
 		
-		commit();
 		return course;
 	}
 
