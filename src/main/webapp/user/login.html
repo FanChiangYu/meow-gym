@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8" />
+<title>User-Login</title>
+</head>
+
+<body>
+	<h1>請登入聊天室</h1>
+	<div>
+		<div>
+			<label for="email">Email: </label> <input type="text" name="email"
+				id="email" />
+		</div>
+		<div>
+			<label for="password">Password: </label> <input type="password"
+				name="password" id="password" />
+		</div>
+		<div>
+			<button id="loginBtn" type="button" class="btn btn-primary">Login</button>
+		</div>
+	</div>
+	<div id="errMsg" class="error"></div>
+</body>
+<script>
+	const email = document.querySelector('#email');
+	const password = document.querySelector('#password');
+	const errMsg = document.querySelector('#errMsg');
+
+	document.getElementById('loginBtn').addEventListener('click', () => {
+		
+		if(email.value=="" || password.value==""){
+			alert("信箱及密碼請務必填寫");
+			return;
+		}
+		
+		fetch('login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email: email.value.trim(),
+				password: password.value.trim()
+			}),
+		})
+		.then(resp => resp.json())
+		.then(body => {
+			errMsg.textContent = '';
+	        const { successful, message } = body;
+	        if (successful) {
+				alert(`${body.name} 您好！！！歡迎進入聊天室!!`);
+				window.location.href = '/meow-gym/chat/chatroom.html'; 
+				//會不會有後端session的問題????因為瀏覽器又發一次請求
+				//跳轉到 chatroom.html 時，瀏覽器會自動帶上 JSESSIONID Cookie
+			} else {
+				errMsg.textContent = message;
+			}
+		});
+	});
+</script>
+</html>

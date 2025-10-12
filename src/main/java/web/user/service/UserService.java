@@ -1,5 +1,7 @@
 package web.user.service;
 
-public interface UserService {
+import web.user.pojo.User;
 
+public interface UserService {
+	User login(User user);
 }

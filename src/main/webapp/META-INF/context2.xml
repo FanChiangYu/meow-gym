@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+    <Resource name="jdbc/javaFramework" type="javax.sql.DataSource"
+        url="jdbc:mysql://35.229.226.38:3306/JAVA_FRAMEWORK"
+        username="root"
+        password="Password_123456"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        maxActive="8"
+      	maxIdle="4"
+      	maxWait="5000"
+    />
+
+    
+
+</Context>

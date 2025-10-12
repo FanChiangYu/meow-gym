@@ -1,5 +1,7 @@
 package web.user.dao;
 
-public interface UserDao {
+import web.user.pojo.User;
 
+public interface UserDao {
+	User selectByUsernameAndPassword(User user);
 }
