@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>chat</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../assets/css/chat.css">
+</head>
+
+<body>
+	<div class="chat-wrap">
+		<div class="chat">
+			<h1>chat room</h1>
+			<div class="" aria-live="polite"></div>
+
+			<div class="chat-place">
+				<textarea class="input-message" placeholder="輸入訊息"></textarea>
+				<!-- 這裡改成 button -->
+				<button type="button" class="send-button">送出</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+
+<script>console.log("into chat-test.js");
+
+const sendButton = document.querySelector(".send-button");
+
+sendButton.addEventListener("click", function () {
+  const msg = document.querySelector(".input-message").value.trim();
+
+     fetch("addChat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        courseId: 1,
+        userId: 1,
+        coachId: 1,
+        content: msg,
+      }),
+    })
+    .then(resp=>{
+    	console.log(resp);
+    });
+
+
+ // 測試 Servlet (GET)
+    //const response = fetch("addChat");
+
+    //if (!response.ok) {
+      //throw new Error("HTTP error " + response.status);
+    //}
+
+    // 取得文字或 JSON
+    //const text = response.text(); // 如果後端回 JSON，可改 response.json()
+    //console.log("GET response:", text);
+
+});
+
+
+
+</script>
+</html>
