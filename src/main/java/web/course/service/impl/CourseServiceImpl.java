@@ -136,27 +136,27 @@ public class CourseServiceImpl implements CourseService {
 //			rule.setRuleId(id);
 			rule.setCourseId(id);
 			if(rule.getWeekday() == null) {
-				result.addProperty("success", false);
-				result.addProperty("errorMessage", "未選擇星期");
+				result.addProperty("successful", false);
+				result.addProperty("Message", "未選擇星期");
 				return result;
 			}
 			
 			if(rule.getTimeSlot() == null) {
-				result.addProperty("success", false);
-				result.addProperty("errorMessage", "未選擇時段");
+				result.addProperty("successful", false);
+				result.addProperty("Message", "未選擇時段");
 				return result;
 			}
 			System.out.println(id);
 			int count = dao.insert(rule);
 			if(count != 1) {
-				result.addProperty("success", false);
-				result.addProperty("errorMessage", "送出失敗");
+				result.addProperty("successful", false);
+				result.addProperty("Message", "送出失敗");
 //				rollback();
 				return result;
 			}
 		}
-		result.addProperty("success", true);
-		result.addProperty("errorMessage", "送出成功");
+		result.addProperty("successful", true);
+		result.addProperty("Message", "送出成功");
 //		commit();
 		return result;
 	}
