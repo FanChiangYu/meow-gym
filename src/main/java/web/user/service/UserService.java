@@ -1,5 +1,12 @@
 package web.user.service;
 
-public interface UserService {
+import core.service.CoreService;
+import web.user.pojo.User;
 
+public interface UserService extends CoreService{
+	
+	User login(User user);
+	
+	
+	
 }

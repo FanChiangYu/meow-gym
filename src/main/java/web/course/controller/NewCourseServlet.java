@@ -1,6 +1,8 @@
 package web.course.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
@@ -15,6 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import web.course.pojo.Course;
+import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.NewCourseRequest;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
 
@@ -37,9 +41,21 @@ public class NewCourseServlet extends HttpServlet{
 //		Gson gson = new Gson();
 //		Course course = gson.fromJson(request.getReader(), Course.class);
 		
-		Course course = json2Pojo(request, Course.class);
+//		Course course = json2Pojo(request, Course.class);
+		JsonObject respbody = new JsonObject();
+		NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
+		Course course = newCourseRequest.getCourse();
+		List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
 		course = service.apply(course);
-//		JsonObject jsonObject = new JsonObject();
+		
+		if(course.isSuccessful()) {
+			System.out.println(course.getCourseId());
+			respbody = service.apply(Rules, course.getCourseId());
+			writePojo2Json(response, respbody);
+		} else {
+			writePojo2Json(response, course);
+		}
+////		JsonObject jsonObject = new JsonObject();
 		
 //		if(errorMessage != null) {
 //			jsonObject.addProperty("success", false);
@@ -53,7 +69,7 @@ public class NewCourseServlet extends HttpServlet{
 //		String json = gson.toJson(course);
 //		response.setContentType("application/json");
 //		response.getWriter().write(json);
-		writePojo2Json(response, course);
+//		writePojo2Json(response, course);
 	}
 	
 
