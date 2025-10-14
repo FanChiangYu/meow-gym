@@ -1,5 +1,9 @@
 package web.blacklist.dao;
 
-public interface BlackLisyDao {
+import web.blacklist.pojo.User;
 
+public interface BlackLisyDao {
+	int insert(User user);
+
+	int update(User user);
 }

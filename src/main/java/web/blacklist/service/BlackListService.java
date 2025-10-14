@@ -1,5 +1,7 @@
 package web.blacklist.service;
 
-public interface BlackListService {
+import web.blacklist.pojo.User;
 
+public interface BlackListService {
+	User insert();
 }
