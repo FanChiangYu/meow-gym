@@ -3,151 +3,67 @@ package web.user.pojo;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import core.pojo.Core;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class User  extends Core{
+import core.pojo.Core;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class User extends Core {
 
 	private static final long serialVersionUID = 1L;
-	// === 欄位對應 ===
-    private Integer userId;           // 使用者ID (PRIMARY KEY)
-    private Integer cntCode;          // 縣市代碼ID (FK → country.cnt_code)
-    private Integer distCode;         // 鄉鎮區代碼ID (FK → district.dist_code)
-    private String detailAddress;     // 詳細地址
-    private String email;             // 帳號 (UNIQUE)
-    private String password;          // 密碼
-    private String name;              // 姓名
-    private String resetCode;         // 6位數認證碼
-    private String phone;             // 電話號碼
-    private String avatarUrl;         // 頭像URL
-    private Boolean isBanned;         // 黑名單狀態
-    private Date birthday;            // 生日
-    private String gender;            // 性別 (M/F)
-    private Timestamp createdAt;      // 建立時間
-    
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userId;
 
-    // === Getter / Setter ===
+	@Column(name = "cnt_code")
+	private int cntCode;
 
-    public User() {
-	
-	}
-    
-	public Integer getUserId() {
-        return userId;
-    }
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	@Column(name = "dist_code")
+	private int distCode;
 
-    public Integer getCntCode() {
-        return cntCode;
-    }
-    public void setCntCode(Integer cntCode) {
-        this.cntCode = cntCode;
-    }
+	@Column(name = "detail_address")
+	private String detailAddress;
 
-    public Integer getDistCode() {
-        return distCode;
-    }
-    public void setDistCode(Integer distCode) {
-        this.distCode = distCode;
-    }
+	@Column(name = "email")
+	private String email;
 
-    public String getDetailAddress() {
-        return detailAddress;
-    }
-    public void setDetailAddress(String detailAddress) {
-        this.detailAddress = detailAddress;
-    }
+	@Column(name = "password")
+	private String password;
 
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@Column(name = "name")
+	private String name;
 
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@Column(name = "reset_code")
+	private String resetCode;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+	@Column(name = "phone")
+	private String phone;
 
-    public String getResetCode() {
-        return resetCode;
-    }
-    public void setResetCode(String resetCode) {
-        this.resetCode = resetCode;
-    }
+	@Column(name = "avatar_url")
+	private String avatarUrl;
 
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	@Column(name = "is_banned")
+	private boolean isBanned;
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+	@Column(name = "birthday")
+	private Date birthday;
 
-    public Boolean getIsBanned() {
-        return isBanned;
-    }
-    public void setIsBanned(Boolean isBanned) {
-        this.isBanned = isBanned;
-    }
+	@Column(name = "gender")
+	private String gender;
 
-    public Date getBirthday() {
-        return birthday;
-    }
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	@Column(name = "created_at")
+	private Timestamp createdAt;
 
-    public String getGender() {
-        return gender;
-    }
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    // === toString() ===
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", cntCode=" + cntCode +
-                ", distCode=" + distCode +
-                ", detailAddress='" + detailAddress + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", resetCode='" + resetCode + '\'' +
-                ", phone='" + phone + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", isBanned=" + isBanned +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }
