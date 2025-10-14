@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import com.mysql.cj.xdevapi.PreparableStatement;
 
 import web.chat.dao.ChatDao;
+import web.chat.pojo.ChatDTO;
 import web.chat.pojo.Chats;
 import web.chat.pojo.SessionUsers;
 
@@ -40,8 +41,9 @@ public class ChatDaoImpl implements ChatDao {
 		return -1;
 	}
 
+	
 	@Override
-	public List<Chats> selctChatsByCourseId(Integer courseId) {
+	public List<Chats> selectChatsByCourseId(Integer courseId) {
 		String sql = "select * from CHATS where COURSE_ID = ?";
 		List<Chats> chatList = new ArrayList<>();
 
@@ -66,38 +68,61 @@ public class ChatDaoImpl implements ChatDao {
 		}
 		return chatList;
 	}
+	
 
+	// 為了user_id要對應到name而製作的，屬非必要
+	@Override
+	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
+	    String sql = "select c.CHAT_ID, c.COURSE_ID, c.USER_ID, c.CONTENT, c.CREATED_AT, u.NAME, u.NAME FROM CHATS c JOIN USER u ON u.USER_ID = c.USER_ID WHERE c.COURSE_ID = ? ORDER BY c.CREATED_AT";
+	    List<ChatDTO> list = new ArrayList<>();
+	    try (Connection conn = ds.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, courseId);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                ChatDTO dto = new ChatDTO();
+	                dto.setChatId(rs.getInt("chat_id"));
+	                dto.setCourseId(rs.getInt("course_id"));
+	                dto.setUserId(rs.getInt("user_id"));
+	                // 顯示對應的 name
+	                dto.setName(rs.getString("name")); 
+	                dto.setContent(rs.getString("content"));
+	                dto.setCreatedAt(rs.getTimestamp("created_at"));
+	                list.add(dto);
+	            }
+	        }
+	    } catch (Exception e) { e.printStackTrace(); }
+	    return list;
+	}
+
+	
 	@Override
 	public Set<SessionUsers> selectUserCourseId(Integer userId) {
 		String sql = "select * from SESSION_USERS where USER_ID = ?";
-		
-		//因為一個使用者有很多courseId,要用不重複的Set接住
-		Set<SessionUsers> courselist = new HashSet<>(); //有錯嗎? 有hash用hash
-		
-		try (Connection conn = ds.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);	
-			){
-			pstmt.setInt(1, userId); //有寫錯嗎?
-			
-			try(ResultSet rs = pstmt.executeQuery();) {
+
+		// 因為一個使用者有很多courseId,要用不重複的Set接住
+		Set<SessionUsers> courselist = new HashSet<>(); // 有錯嗎? 有hash用hash
+
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, userId); // 有寫錯嗎?
+
+			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					SessionUsers sessionusers = new SessionUsers();
-					//待續
+					// 待續
 					sessionusers.setCourseId(rs.getInt("COURSE_ID"));
 					sessionusers.setSessionId(rs.getInt("SESSION_ID"));
 					sessionusers.setUserId(rs.getInt("USER_ID"));
 					courselist.add(sessionusers);
 				}
 			}
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return courselist; //return 什麼?
-		
+		return courselist;
 	}
-	
-	
-	
+
+
 
 }

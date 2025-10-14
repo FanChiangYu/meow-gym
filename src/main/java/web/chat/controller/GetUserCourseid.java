@@ -1,6 +1,7 @@
 package web.chat.controller;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import web.chat.dao.ChatDao;
 import web.chat.dao.impl.ChatDaoImpl;
+import web.chat.pojo.SessionUsers;
 import web.user.pojo.User;
 
 @WebServlet("/chat/getusercourseid")
@@ -37,20 +40,23 @@ public class GetUserCourseid extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		System.out.println("GetUserCourseidServlet" + session);
 
-		if (session != null || session.getAttribute("user") == null) {
+		// if (session != null || session.getAttribute("user") == null) {
+		if (session != null) {
 			// 從 session 取出登入者資訊,一定只有一筆!
 			User loginUser = (User) session.getAttribute("user");
 			int userid = loginUser.getUserId();
 			System.out.println("GetUserCourseid loginUserID" + loginUser.getUserId());
 
 			// selectUserCourseId方法
-			// 將登入者的userid，查詢seesion_users表格的courseid
-			chatDao.selectUserCourseId(userid);
+			// 將登入者的userid，查詢session_users表格的courseid
+			Set<SessionUsers> usercourseid = chatDao.selectUserCourseId(userid);
+			System.out.println("usercourseid to String" + usercourseid.toString());
 
 			Gson gson = new Gson();
 
 			JsonObject respBody = new JsonObject();
-			respBody.add("loginUser", gson.toJsonTree(loginUser)); // 改
+			respBody.addProperty("ok", true);
+			respBody.add("usercourseid", gson.toJsonTree(usercourseid)); // toJsonTree:將Java物件序列化成JsonElement物件
 
 			// 寫出到前端
 			String json = gson.toJson(respBody);

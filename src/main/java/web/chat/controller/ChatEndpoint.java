@@ -52,6 +52,8 @@ public class ChatEndpoint {
 		for (Session session1 : SESSION_SET) {
 			if (session1.isOpen()) {
 				session1.getAsyncRemote().sendText(getUsername()+":" + message);
+				//加上trigger others frontend
+				
 			} else {
 				SESSION_SET.remove(session1); //自動清理無效連線(次要)
 			}
