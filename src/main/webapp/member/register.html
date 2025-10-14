@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="" />
+	<link rel="stylesheet" href="" />
+	<title>Meow-register.html</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+
+<body>
+	<div>
+		<div>
+			<label for="username">使用者名稱: </label>
+			<input type="text" name="username" id="username">
+		</div>
+		<div>
+			<label for="password">密碼: </label>
+			<input type="password" name="password" id="password">
+		</div>
+		<div>
+			<label for="confirmPassword">確認密碼: </label>
+			<input type="password" name="confirmPassword" id="confirmPassword">
+		</div>
+		<div>
+			<label for="nickname">暱稱: </label>
+			<input type="text" name="nickname" id="nickname">
+		</div>
+		<div>
+			<button id="btn1" type="button" class="btn btn-primary">註冊</button>
+		</div>
+	</div>
+	<div id="msg" class="error"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+<script>
+(() => {
+	const btn1 = document.querySelector('#btn1');
+	const msg = document.querySelector('#msg');
+	const username = document.querySelector('#username');
+	const password = document.querySelector('#password');
+	const confirmPassword = document.querySelector('#confirmPassword');
+	const nickname = document.querySelector('#nickname');
+	const inputs = document.querySelectorAll('input');
+	btn1.addEventListener('click', () => {
+		const accLength = username.value.length;
+		if (accLength < 5 || accLength > 50) {
+			msg.textContent = '使用者名稱長度須介於5~50字元';
+			return;
+		}
+
+		const pwdLength = password.value.length;
+		if (pwdLength < 6 || pwdLength > 12) {
+			msg.textContent = '密碼長度須介於6~12字元';
+			return;
+		}
+
+		if (confirmPassword.value !== password.value) {
+			msg.textContent = '密碼與確認密碼不相符';
+			return;
+		}
+
+
+		const nicknameLength = nickname.value.length;
+		if (nicknameLength < 1 || nicknameLength > 20) {
+			msg.textContent = '暱稱長度須介於1~20字元';
+			return;
+		}
+
+		msg.textContent = '';
+		fetch('register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: username.value,
+				password: password.value,
+				nickname: nickname.value,
+			}),
+		})
+			.then(resp => resp.json())
+			.then(body => {
+				const { successful } = body;
+				if (successful) {
+					for (let input of inputs) {
+						input.disabled = true;
+					}
+					btn1.disabled = true;
+					msg.className = 'info';
+					msg.textContent = '註冊成功';
+				} else {
+					msg.className = 'error';
+					msg.textContent = '註冊失敗';
+				}
+			});
+	});
+
+})();
+
+</script>
+</html>

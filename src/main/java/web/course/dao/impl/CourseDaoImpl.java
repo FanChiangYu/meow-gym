@@ -11,12 +11,21 @@ import javax.sql.DataSource;
 import org.hibernate.Session;
 import web.course.dao.CourseDao;
 import web.course.pojo.Course;
+import web.course.pojo.CourseRecurringRules;
 
 public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public int insert(Course course) {
 		getSession().persist(course);
+		getSession().flush(); // 先insert，插入副表時Hibernate看得到course_id(fk)
+		return 1;
+	}
+	
+	@Override
+	public int insert(CourseRecurringRules courseRecurringRules) {
+//		courseRecurringRules.setRuleId(null); // 回到暫態
+		getSession().persist(courseRecurringRules);
 		return 1;
 	}
 

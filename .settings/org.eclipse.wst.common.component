@@ -7,8 +7,11 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+=======
+>>>>>>> 3dba897476844d94506be986c5b5cc3b657baef8
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
                 
         <property name="context-root" value="meow-gym"/>

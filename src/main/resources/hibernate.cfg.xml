@@ -26,5 +26,6 @@
   
   <mapping class="web.member.pojo.Member" />
   <mapping class="web.course.pojo.Course" />
+  <mapping class="web.course.pojo.CourseRecurringRules" />
  </session-factory>
 </hibernate-configuration>
