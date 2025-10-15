@@ -1,2285 +1,868 @@
 <!doctype html>
 
-<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact" dir="ltr" data-skin="default"
-  data-bs-theme="light" data-assets-path="../assets/" data-template="vertical-menu-template">
+<html
+  lang="en"
+  class="layout-navbar-fixed layout-wide"
+  dir="ltr"
+  data-skin="default"
+  data-bs-theme="light"
+  data-assets-path="../assets/"
+  data-template="front-pages-no-customizer">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Meow-gym court</title>
+    <meta name="description" content="" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>Meow-gym court</title>
+    <!-- 網站圖示 -->
+    <link rel="icon" type="image/png" href="./images/logo.png" />
 
-  <meta name="description" content="" />
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <!-- Core CSS -->
+    <!-- build:css assets/vendor/css/theme.css  -->
+    <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/pickr/pickr-themes.css" />
+    <link rel="stylesheet" href="./css/front-page.css" />
+    
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
-    rel="stylesheet" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-  <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/raty-js/raty-js.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
 
-  <!-- Core CSS -->
-  <!-- build:css assets/vendor/css/theme.css  -->
+    <!-- Page CSS -->
 
-  <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../assets/vendor/css/pages/wizard-ex-checkout.css" />
 
-  <link rel="stylesheet" href="../assets/vendor/libs/pickr/pickr-themes.css" />
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../assets/js/front-config.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->   
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../assets/vendor/js/template-customizer.js"></script>
+    
+  </head>
 
-  <link rel="stylesheet" href="../assets/vendor/css/core.css" />
-  <link rel="stylesheet" href="../assets/css/demo.css" />
+  <body>
+    <script src="../assets/vendor/js/dropdown-hover.js"></script>
+    <script src="../assets/vendor/js/mega-dropdown.js"></script>
+    <div class="layout-wrapper layout-content-navbar">    
+	    <div class="layout-container">    
+		    <!-- Menu -->
+		    <aside id="layout-menu" class="layout-menu menu-vertical menu">
+		      <div class="app-brand demo">
+		        <a href="index.html" class="app-brand-link">
+		          <span class="app-brand-logo demo">
+		            <span class="text-primary">
+		              <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+		                <path
+		                  fill-rule="evenodd"
+		                  clip-rule="evenodd"
+		                  d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+		                  fill="currentColor" />
+		                <path
+		                  opacity="0.06"
+		                  fill-rule="evenodd"
+		                  clip-rule="evenodd"
+		                  d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+		                  fill="#161616" />
+		                <path
+		                  opacity="0.06"
+		                  fill-rule="evenodd"
+		                  clip-rule="evenodd"
+		                  d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+		                  fill="#161616" />
+		                <path
+		                  fill-rule="evenodd"
+		                  clip-rule="evenodd"
+		                  d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+		                  fill="currentColor" />
+		              </svg>
+		            </span>
+		          </span>
+		          <span class="app-brand-text demo menu-text fw-bold ms-3">Fitness club project</span>
+		        </a>
+		      </div>
 
-  <!-- Vendors CSS -->
-
-  <!-- endbuild -->
-
-  <!-- Page CSS -->
-
-  <!-- Helpers -->
-  <script src="../assets/vendor/js/helpers.js"></script>
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-
-  <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  <script src="../assets/vendor/js/template-customizer.js"></script>
-
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-
-  <script src="../assets/js/config.js"></script>
-</head>
-
-<body>
-  <!-- Layout wrapper -->
-  <div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-      <!-- Menu -->
-
-      <aside id="layout-menu" class="layout-menu menu-vertical menu">
-        <div class="app-brand demo">
-          <a href="index.html" class="app-brand-link">
-            <span class="app-brand-logo demo">
-              <span class="text-primary">
-                <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-                    fill="currentColor" />
-                  <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
-                    d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z" fill="#161616" />
-                  <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
-                    d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z" fill="#161616" />
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-                    fill="currentColor" />
-                </svg>
-              </span>
-            </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-3">Vuexy</span>
-          </a>
-
-          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-            <i class="icon-base ti menu-toggle-icon d-none d-xl-block"></i>
-            <i class="icon-base ti tabler-x d-block d-xl-none"></i>
-          </a>
-        </div>
-
-        <div class="menu-inner-shadow"></div>
-
-        <ul class="menu-inner py-1">
-          <!-- Dashboards -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-smart-home"></i>
-              <div data-i18n="Dashboards">Dashboards</div>
-              <div class="badge text-bg-danger rounded-pill ms-auto">5</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="index.html" class="menu-link">
-                  <div data-i18n="Analytics">Analytics</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="dashboards-crm.html" class="menu-link">
-                  <div data-i18n="CRM">CRM</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-ecommerce-dashboard.html" class="menu-link">
-                  <div data-i18n="eCommerce">eCommerce</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-logistics-dashboard.html" class="menu-link">
-                  <div data-i18n="Logistics">Logistics</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-academy-dashboard.html" class="menu-link">
-                  <div data-i18n="Academy">Academy</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Layouts -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-layout-sidebar"></i>
-              <div data-i18n="Layouts">Layouts</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="layouts-collapsed-menu.html" class="menu-link">
-                  <div data-i18n="Collapsed menu">Collapsed menu</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-content-navbar.html" class="menu-link">
-                  <div data-i18n="Content navbar">Content navbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-                  <div data-i18n="Content nav + Sidebar">Content nav + Sidebar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../horizontal-menu-template/" class="menu-link" target="_blank">
-                  <div data-i18n="Horizontal">Horizontal</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-without-menu.html" class="menu-link">
-                  <div data-i18n="Without menu">Without menu</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-without-navbar.html" class="menu-link">
-                  <div data-i18n="Without navbar">Without navbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-fluid.html" class="menu-link">
-                  <div data-i18n="Fluid">Fluid</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-container.html" class="menu-link">
-                  <div data-i18n="Container">Container</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-blank.html" class="menu-link">
-                  <div data-i18n="Blank">Blank</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Front Pages -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-files"></i>
-              <div data-i18n="Front Pages">Front Pages</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-                  <div data-i18n="Landing">Landing</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
-                  <div data-i18n="Pricing">Pricing</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../front-pages/payment-page.html" class="menu-link" target="_blank">
-                  <div data-i18n="Payment">Payment</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../front-pages/checkout-page.html" class="menu-link" target="_blank">
-                  <div data-i18n="Checkout">Checkout</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
-                  <div data-i18n="Help Center">Help Center</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Apps & Pages -->
-          <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
-          </li>
-          <li class="menu-item">
-            <a href="app-email.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-mail"></i>
-              <div data-i18n="Email">Email</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-chat.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-messages"></i>
-              <div data-i18n="Chat">Chat</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-calendar.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-calendar"></i>
-              <div data-i18n="Calendar">Calendar</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="app-kanban.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-layout-kanban"></i>
-              <div data-i18n="Kanban">Kanban</div>
-            </a>
-          </li>
-          <!-- e-commerce-app menu start -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-shopping-cart"></i>
-              <div data-i18n="eCommerce">eCommerce</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-ecommerce-dashboard.html" class="menu-link">
-                  <div data-i18n="Dashboard">Dashboard</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Products">Products</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="app-ecommerce-product-list.html" class="menu-link">
-                      <div data-i18n="Product List">Product List</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-product-add.html" class="menu-link">
-                      <div data-i18n="Add Product">Add Product</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-category-list.html" class="menu-link">
-                      <div data-i18n="Category List">Category List</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Order">Order</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="app-ecommerce-order-list.html" class="menu-link">
-                      <div data-i18n="Order List">Order List</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-order-details.html" class="menu-link">
-                      <div data-i18n="Order Details">Order Details</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Customer">Customer</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="app-ecommerce-customer-all.html" class="menu-link">
-                      <div data-i18n="All Customers">All Customers</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <div data-i18n="Customer Details">Customer Details</div>
-                    </a>
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a href="app-ecommerce-customer-details-overview.html" class="menu-link">
-                          <div data-i18n="Overview">Overview</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="app-ecommerce-customer-details-security.html" class="menu-link">
-                          <div data-i18n="Security">Security</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
-                          <div data-i18n="Address & Billing">Address & Billing</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="app-ecommerce-customer-details-notifications.html" class="menu-link">
-                          <div data-i18n="Notifications">Notifications</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
-                  <div data-i18n="Manage Reviews">Manage Reviews</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-ecommerce-referral.html" class="menu-link">
-                  <div data-i18n="Referrals">Referrals</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Settings">Settings</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-detail.html" class="menu-link">
-                      <div data-i18n="Store Details">Store Details</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-payments.html" class="menu-link">
-                      <div data-i18n="Payments">Payments</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-checkout.html" class="menu-link">
-                      <div data-i18n="Checkout">Checkout</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-shipping.html" class="menu-link">
-                      <div data-i18n="Shipping & Delivery">Shipping & Delivery</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-locations.html" class="menu-link">
-                      <div data-i18n="Locations">Locations</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-ecommerce-settings-notifications.html" class="menu-link">
-                      <div data-i18n="Notifications">Notifications</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <!-- e-commerce-app menu end -->
-          <!-- Academy menu start -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-book"></i>
-              <div data-i18n="Academy">Academy</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-academy-dashboard.html" class="menu-link">
-                  <div data-i18n="Dashboard">Dashboard</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-academy-course.html" class="menu-link">
-                  <div data-i18n="My Course">My Course</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-academy-course-details.html" class="menu-link">
-                  <div data-i18n="Course Details">Course Details</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!-- Academy menu end -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-truck"></i>
-              <div data-i18n="Logistics">Logistics</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-logistics-dashboard.html" class="menu-link">
-                  <div data-i18n="Dashboard">Dashboard</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-logistics-fleet.html" class="menu-link">
-                  <div data-i18n="Fleet">Fleet</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-file-dollar"></i>
-              <div data-i18n="Invoice">Invoice</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-invoice-list.html" class="menu-link">
-                  <div data-i18n="List">List</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-invoice-preview.html" class="menu-link">
-                  <div data-i18n="Preview">Preview</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-invoice-edit.html" class="menu-link">
-                  <div data-i18n="Edit">Edit</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-invoice-add.html" class="menu-link">
-                  <div data-i18n="Add">Add</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-users"></i>
-              <div data-i18n="Users">Users</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-user-list.html" class="menu-link">
-                  <div data-i18n="List">List</div>
-                </a>
-              </li>
-
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="View">View</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="app-user-view-account.html" class="menu-link">
-                      <div data-i18n="Account">Account</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-user-view-security.html" class="menu-link">
-                      <div data-i18n="Security">Security</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-user-view-billing.html" class="menu-link">
-                      <div data-i18n="Billing & Plans">Billing & Plans</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-user-view-notifications.html" class="menu-link">
-                      <div data-i18n="Notifications">Notifications</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="app-user-view-connections.html" class="menu-link">
-                      <div data-i18n="Connections">Connections</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-settings"></i>
-              <div data-i18n="Roles & Permissions">Roles & Permissions</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="app-access-roles.html" class="menu-link">
-                  <div data-i18n="Roles">Roles</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="app-access-permission.html" class="menu-link">
-                  <div data-i18n="Permission">Permission</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-file"></i>
-              <div data-i18n="Pages">Pages</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="User Profile">User Profile</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="pages-profile-user.html" class="menu-link">
-                      <div data-i18n="Profile">Profile</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-profile-teams.html" class="menu-link">
-                      <div data-i18n="Teams">Teams</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-profile-projects.html" class="menu-link">
-                      <div data-i18n="Projects">Projects</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-profile-connections.html" class="menu-link">
-                      <div data-i18n="Connections">Connections</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Account Settings">Account Settings</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
-                      <div data-i18n="Account">Account</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-account-settings-security.html" class="menu-link">
-                      <div data-i18n="Security">Security</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-account-settings-billing.html" class="menu-link">
-                      <div data-i18n="Billing & Plans">Billing & Plans</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
-                      <div data-i18n="Notifications">Notifications</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
-                      <div data-i18n="Connections">Connections</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="pages-faq.html" class="menu-link">
-                  <div data-i18n="FAQ">FAQ</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="pages-pricing.html" class="menu-link">
-                  <div data-i18n="Pricing">Pricing</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Misc">Misc</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="pages-misc-error.html" class="menu-link" target="_blank">
-                      <div data-i18n="Error">Error</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-misc-under-maintenance.html" class="menu-link" target="_blank">
-                      <div data-i18n="Under Maintenance">Under Maintenance</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-misc-comingsoon.html" class="menu-link" target="_blank">
-                      <div data-i18n="Coming Soon">Coming Soon</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-misc-not-authorized.html" class="menu-link" target="_blank">
-                      <div data-i18n="Not Authorized">Not Authorized</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-lock"></i>
-              <div data-i18n="Authentications">Authentications</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Login">Login</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-login-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Register">Register</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-register-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-register-multisteps.html" class="menu-link" target="_blank">
-                      <div data-i18n="Multi-steps">Multi-steps</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Verify Email">Verify Email</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-verify-email-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-verify-email-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Reset Password">Reset Password</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-reset-password-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-reset-password-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Forgot Password">Forgot Password</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-forgot-password-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Two Steps">Two Steps</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="auth-two-steps-basic.html" class="menu-link" target="_blank">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="auth-two-steps-cover.html" class="menu-link" target="_blank">
-                      <div data-i18n="Cover">Cover</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-forms"></i>
-              <div data-i18n="Wizard Examples">Wizard Examples</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="wizard-ex-checkout.html" class="menu-link">
-                  <div data-i18n="Checkout">Checkout</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="wizard-ex-property-listing.html" class="menu-link">
-                  <div data-i18n="Property Listing">Property Listing</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="wizard-ex-create-deal.html" class="menu-link">
-                  <div data-i18n="Create Deal">Create Deal</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="modal-examples.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-square"></i>
-              <div data-i18n="Modal Examples">Modal Examples</div>
-            </a>
-          </li>
-
-          <!-- Components -->
-          <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Components">Components</span>
-          </li>
-          <!-- Cards -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-id"></i>
-              <div data-i18n="Cards">Cards</div>
-              <div class="badge text-bg-primary rounded-pill ms-auto">5</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="cards-basic.html" class="menu-link">
-                  <div data-i18n="Basic">Basic</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="cards-advance.html" class="menu-link">
-                  <div data-i18n="Advance">Advance</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="cards-statistics.html" class="menu-link">
-                  <div data-i18n="Statistics">Statistics</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="cards-analytics.html" class="menu-link">
-                  <div data-i18n="Analytics">Analytics</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="cards-actions.html" class="menu-link">
-                  <div data-i18n="Actions">Actions</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!-- User interface -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-color-swatch"></i>
-              <div data-i18n="User interface">User interface</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="ui-accordion.html" class="menu-link">
-                  <div data-i18n="Accordion">Accordion</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-alerts.html" class="menu-link">
-                  <div data-i18n="Alerts">Alerts</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-badges.html" class="menu-link">
-                  <div data-i18n="Badges">Badges</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-buttons.html" class="menu-link">
-                  <div data-i18n="Buttons">Buttons</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-carousel.html" class="menu-link">
-                  <div data-i18n="Carousel">Carousel</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-collapse.html" class="menu-link">
-                  <div data-i18n="Collapse">Collapse</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-dropdowns.html" class="menu-link">
-                  <div data-i18n="Dropdowns">Dropdowns</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-footer.html" class="menu-link">
-                  <div data-i18n="Footer">Footer</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-list-groups.html" class="menu-link">
-                  <div data-i18n="List Groups">List groups</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-modals.html" class="menu-link">
-                  <div data-i18n="Modals">Modals</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-navbar.html" class="menu-link">
-                  <div data-i18n="Navbar">Navbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-offcanvas.html" class="menu-link">
-                  <div data-i18n="Offcanvas">Offcanvas</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-pagination-breadcrumbs.html" class="menu-link">
-                  <div data-i18n="Pagination & Breadcrumbs">Pagination &amp; Breadcrumbs</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-progress.html" class="menu-link">
-                  <div data-i18n="Progress">Progress</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-spinners.html" class="menu-link">
-                  <div data-i18n="Spinners">Spinners</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-tabs-pills.html" class="menu-link">
-                  <div data-i18n="Tabs & Pills">Tabs &amp; Pills</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-toasts.html" class="menu-link">
-                  <div data-i18n="Toasts">Toasts</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-tooltips-popovers.html" class="menu-link">
-                  <div data-i18n="Tooltips & Popovers">Tooltips &amp; Popovers</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="ui-typography.html" class="menu-link">
-                  <div data-i18n="Typography">Typography</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Extended components -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-components"></i>
-              <div data-i18n="Extended UI">Extended UI</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="extended-ui-avatar.html" class="menu-link">
-                  <div data-i18n="Avatar">Avatar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-blockui.html" class="menu-link">
-                  <div data-i18n="BlockUI">BlockUI</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-drag-and-drop.html" class="menu-link">
-                  <div data-i18n="Drag & Drop">Drag &amp; Drop</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-media-player.html" class="menu-link">
-                  <div data-i18n="Media Player">Media Player</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-                  <div data-i18n="Perfect Scrollbar">Perfect Scrollbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-star-ratings.html" class="menu-link">
-                  <div data-i18n="Star Ratings">Star Ratings</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-sweetalert2.html" class="menu-link">
-                  <div data-i18n="SweetAlert2">SweetAlert2</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-text-divider.html" class="menu-link">
-                  <div data-i18n="Text Divider">Text Divider</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <div data-i18n="Timeline">Timeline</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="extended-ui-timeline-basic.html" class="menu-link">
-                      <div data-i18n="Basic">Basic</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="extended-ui-timeline-fullscreen.html" class="menu-link">
-                      <div data-i18n="Fullscreen">Fullscreen</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-tour.html" class="menu-link">
-                  <div data-i18n="Tour">Tour</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-treeview.html" class="menu-link">
-                  <div data-i18n="Treeview">Treeview</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-misc.html" class="menu-link">
-                  <div data-i18n="Miscellaneous">Miscellaneous</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Icons -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-brand-tabler"></i>
-              <div data-i18n="Icons">Icons</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="icons-tabler.html" class="menu-link">
-                  <div data-i18n="Tabler">Tabler</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="icons-font-awesome.html" class="menu-link">
-                  <div data-i18n="Font Awesome">Font Awesome</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Forms & Tables -->
-          <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Forms & Tables">Forms &amp; Tables</span>
-          </li>
-          <!-- Forms -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-toggle-left"></i>
-              <div data-i18n="Form Elements">Form Elements</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="forms-basic-inputs.html" class="menu-link">
-                  <div data-i18n="Basic Inputs">Basic Inputs</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-input-groups.html" class="menu-link">
-                  <div data-i18n="Input groups">Input groups</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-custom-options.html" class="menu-link">
-                  <div data-i18n="Custom Options">Custom Options</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-editors.html" class="menu-link">
-                  <div data-i18n="Editors">Editors</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-file-upload.html" class="menu-link">
-                  <div data-i18n="File Upload">File Upload</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-pickers.html" class="menu-link">
-                  <div data-i18n="Pickers">Pickers</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-selects.html" class="menu-link">
-                  <div data-i18n="Select & Tags">Select &amp; Tags</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-sliders.html" class="menu-link">
-                  <div data-i18n="Sliders">Sliders</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-switches.html" class="menu-link">
-                  <div data-i18n="Switches">Switches</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="forms-extras.html" class="menu-link">
-                  <div data-i18n="Extras">Extras</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item active open">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-layout-navbar"></i>
-              <div data-i18n="Form Layouts">Form Layouts</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item active">
-                <a href="newCourse.html" class="menu-link">
-                  <div>上架課程</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="form-layouts-horizontal.html" class="menu-link">
-                  <div data-i18n="Horizontal Form">Horizontal Form</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="form-layouts-sticky.html" class="menu-link">
-                  <div data-i18n="Sticky Actions">Sticky Actions</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-text-wrap-disabled"></i>
-              <div data-i18n="Form Wizard">Form Wizard</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="form-wizard-numbered.html" class="menu-link">
-                  <div data-i18n="Numbered">Numbered</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="form-wizard-icons.html" class="menu-link">
-                  <div data-i18n="Icons">Icons</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="form-validation.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-checkbox"></i>
-              <div data-i18n="Form Validation">Form Validation</div>
-            </a>
-          </li>
-          <!-- Tables -->
-          <li class="menu-item">
-            <a href="tables-basic.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-table"></i>
-              <div data-i18n="Tables">Tables</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-layout-grid"></i>
-              <div data-i18n="Datatables">Datatables</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="tables-datatables-basic.html" class="menu-link">
-                  <div data-i18n="Basic">Basic</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="tables-datatables-advanced.html" class="menu-link">
-                  <div data-i18n="Advanced">Advanced</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="tables-datatables-extensions.html" class="menu-link">
-                  <div data-i18n="Extensions">Extensions</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Charts & Maps -->
-          <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Charts & Maps">Charts &amp; Maps</span>
-          </li>
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-chart-pie"></i>
-              <div data-i18n="Charts">Charts</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="charts-apex.html" class="menu-link">
-                  <div data-i18n="Apex Charts">Apex Charts</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="charts-chartjs.html" class="menu-link">
-                  <div data-i18n="ChartJS">ChartJS</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="maps-leaflet.html" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-map"></i>
-              <div data-i18n="Leaflet Maps">Leaflet Maps</div>
-            </a>
-          </li>
-
-          <!-- Misc -->
-          <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Misc">Misc</span>
-          </li>
-
-          <!-- Multi Level Menu -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-layout-board"></i>
-              <div data-i18n="Multi Level">Multi Level</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                  <div data-i18n="Level 2">Level 2</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
-                      <div data-i18n="Level 3">Level 3</div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="menu-item">
-            <a href="https://pixinvent.ticksy.com/" target="_blank" class="menu-link">
-              <i class="menu-icon icon-base ti tabler-lifebuoy"></i>
-              <div data-i18n="Support">Support</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/" target="_blank"
-              class="menu-link">
-              <i class="menu-icon icon-base ti tabler-file-description"></i>
-              <div data-i18n="Documentation">Documentation</div>
-            </a>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="menu-mobile-toggler d-xl-none rounded-1">
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large text-bg-secondary p-2 rounded-1">
-          <i class="ti tabler-menu icon-base"></i>
-          <i class="ti tabler-chevron-right icon-base"></i>
-        </a>
-      </div>
-      <!-- / Menu -->
-
-      <!-- Layout container -->
-      <div class="layout-page">
-        <!-- Navbar -->
-
-        <nav
-          class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme"
-          id="layout-navbar">
-          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-            <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-              <i class="icon-base ti tabler-menu-2 icon-md"></i>
-            </a>
-          </div>
-
-          <div class="navbar-nav-right d-flex align-items-center justify-content-end" id="navbar-collapse">
-            <!-- Search -->
-            <div class="navbar-nav align-items-center">
-              <div class="nav-item navbar-search-wrapper px-md-0 px-2 mb-0">
-                <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
-                  <span class="d-inline-block text-body-secondary fw-normal" id="autocomplete"></span>
-                </a>
-              </div>
-            </div>
-
-            <!-- /Search -->
-
-            <ul class="navbar-nav flex-row align-items-center ms-md-auto">
-              <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <i class="icon-base ti tabler-language icon-22px text-heading"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="en" data-text-direction="ltr">
-                      <span>English</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="fr" data-text-direction="ltr">
-                      <span>French</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="ar" data-text-direction="rtl">
-                      <span>Arabic</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="de" data-text-direction="ltr">
-                      <span>German</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <!--/ Language -->
-
-              <!-- Style Switcher -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                  id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <i class="icon-base ti tabler-sun icon-22px theme-icon-active text-heading"></i>
-                  <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
-                  <li>
-                    <button type="button" class="dropdown-item align-items-center active" data-bs-theme-value="light"
-                      aria-pressed="false">
-                      <span><i class="icon-base ti tabler-sun icon-22px me-3" data-icon="sun"></i>Light</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="dark"
-                      aria-pressed="true">
-                      <span><i class="icon-base ti tabler-moon-stars icon-22px me-3"
-                          data-icon="moon-stars"></i>Dark</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="system"
-                      aria-pressed="false">
-                      <span><i class="icon-base ti tabler-device-desktop-analytics icon-22px me-3"
-                          data-icon="device-desktop-analytics"></i>System</span>
-                    </button>
-                  </li>
-                </ul>
-              </li>
-              <!-- / Style Switcher-->
-
-              <!-- Quick links  -->
-              <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                  href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                  aria-expanded="false">
-                  <i class="icon-base ti tabler-layout-grid-add icon-22px text-heading"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-0">
-                  <div class="dropdown-menu-header border-bottom">
-                    <div class="dropdown-header d-flex align-items-center py-3">
-                      <h6 class="mb-0 me-auto">Shortcuts</h6>
-                      <a href="javascript:void(0)"
-                        class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i
-                          class="icon-base ti tabler-plus icon-20px text-heading"></i></a>
-                    </div>
-                  </div>
-                  <div class="dropdown-shortcuts-list scrollable-container">
-                    <div class="row row-bordered overflow-visible g-0">
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-calendar icon-26px text-heading"></i>
-                        </span>
-                        <a href="app-calendar.html" class="stretched-link">Calendar</a>
-                        <small>Appointments</small>
-                      </div>
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-file-dollar icon-26px text-heading"></i>
-                        </span>
-                        <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
-                        <small>Manage Accounts</small>
-                      </div>
-                    </div>
-                    <div class="row row-bordered overflow-visible g-0">
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-user icon-26px text-heading"></i>
-                        </span>
-                        <a href="app-user-list.html" class="stretched-link">User App</a>
-                        <small>Manage Users</small>
-                      </div>
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-users icon-26px text-heading"></i>
-                        </span>
-                        <a href="app-access-roles.html" class="stretched-link">Role Management</a>
-                        <small>Permission</small>
-                      </div>
-                    </div>
-                    <div class="row row-bordered overflow-visible g-0">
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-device-desktop-analytics icon-26px text-heading"></i>
-                        </span>
-                        <a href="index.html" class="stretched-link">Dashboard</a>
-                        <small>User Dashboard</small>
-                      </div>
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-settings icon-26px text-heading"></i>
-                        </span>
-                        <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
-                        <small>Account Settings</small>
-                      </div>
-                    </div>
-                    <div class="row row-bordered overflow-visible g-0">
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-help-circle icon-26px text-heading"></i>
-                        </span>
-                        <a href="pages-faq.html" class="stretched-link">FAQs</a>
-                        <small>FAQs & Articles</small>
-                      </div>
-                      <div class="dropdown-shortcuts-item col">
-                        <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                          <i class="icon-base ti tabler-square icon-26px text-heading"></i>
-                        </span>
-                        <a href="modal-examples.html" class="stretched-link">Modals</a>
-                        <small>Useful Popups</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- Quick links -->
-
-              <!-- Notification -->
-              <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                  href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                  aria-expanded="false">
-                  <span class="position-relative">
-                    <i class="icon-base ti tabler-bell icon-22px text-heading"></i>
-                    <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
-                  </span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-0">
-                  <li class="dropdown-menu-header border-bottom">
-                    <div class="dropdown-header d-flex align-items-center py-3">
-                      <h6 class="mb-0 me-auto">Notification</h6>
-                      <div class="d-flex align-items-center h6 mb-0">
-                        <span class="badge bg-label-primary me-2">8 New</span>
-                        <a href="javascript:void(0)" class="dropdown-notifications-all p-2 btn btn-icon"
-                          data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
-                            class="icon-base ti tabler-mail-opened text-heading"></i></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="dropdown-notifications-list scrollable-container">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <img src="../assets/img/avatars/1.png" alt class="rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="small mb-1">Congratulation Lettie 🎉</h6>
-                            <small class="mb-1 d-block text-body">Won the monthly best seller gold badge</small>
-                            <small class="text-body-secondary">1h ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">Charles Franklin</h6>
-                            <small class="mb-1 d-block text-body">Accepted your connection</small>
-                            <small class="text-body-secondary">12hr ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <img src="../assets/img/avatars/2.png" alt class="rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">New Message ✉️</h6>
-                            <small class="mb-1 d-block text-body">You have new message from Natalie</small>
-                            <small class="text-body-secondary">1h ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <span class="avatar-initial rounded-circle bg-label-success"><i
-                                  class="icon-base ti tabler-shopping-cart"></i></span>
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">Whoo! You have new order 🛒</h6>
-                            <small class="mb-1 d-block text-body">ACME Inc. made new order $1,154</small>
-                            <small class="text-body-secondary">1 day ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <img src="../assets/img/avatars/9.png" alt class="rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">Application has been approved 🚀</h6>
-                            <small class="mb-1 d-block text-body">Your ABC project application has been
-                              approved.</small>
-                            <small class="text-body-secondary">2 days ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <span class="avatar-initial rounded-circle bg-label-success"><i
-                                  class="icon-base ti tabler-chart-pie"></i></span>
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">Monthly report is generated</h6>
-                            <small class="mb-1 d-block text-body">July monthly financial report is generated </small>
-                            <small class="text-body-secondary">3 days ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <img src="../assets/img/avatars/5.png" alt class="rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">Send connection request</h6>
-                            <small class="mb-1 d-block text-body">Peter sent you connection request</small>
-                            <small class="text-body-secondary">4 days ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <img src="../assets/img/avatars/6.png" alt class="rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">New message from Jane</h6>
-                            <small class="mb-1 d-block text-body">Your have new message from Jane</small>
-                            <small class="text-body-secondary">5 days ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar">
-                              <span class="avatar-initial rounded-circle bg-label-warning"><i
-                                  class="icon-base ti tabler-alert-triangle"></i></span>
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-1 small">CPU is running high</h6>
-                            <small class="mb-1 d-block text-body">CPU Utilization Percent is currently at
-                              88.63%,</small>
-                            <small class="text-body-secondary">5 days ago</small>
-                          </div>
-                          <div class="flex-shrink-0 dropdown-notifications-actions">
-                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                class="badge badge-dot"></span></a>
-                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                class="icon-base ti tabler-x"></span></a>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="border-top">
-                    <div class="d-grid p-4">
-                      <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
-                        <small class="align-middle">View all notifications</small>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <!--/ Notification -->
-
-              <!-- User -->
-              <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
-                    <img src="../assets/img/avatars/1.png" alt class="rounded-circle" />
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item mt-0" href="pages-account-settings-account.html">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 me-2">
-                          <div class="avatar avatar-online">
-                            <img src="../assets/img/avatars/1.png" alt class="rounded-circle" />
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-0">John Doe</h6>
-                          <small class="text-body-secondary">Admin</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider my-1 mx-n2"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-profile-user.html">
-                      <i class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-account-settings-account.html">
-                      <i class="icon-base ti tabler-settings me-3 icon-md"></i><span
-                        class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-account-settings-billing.html">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i><span
-                          class="flex-grow-1 align-middle">Billing</span>
-                        <span
-                          class="flex-shrink-0 badge bg-danger d-flex align-items-center justify-content-center">4</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider my-1 mx-n2"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-pricing.html">
-                      <i class="icon-base ti tabler-currency-dollar me-3 icon-md"></i><span
-                        class="align-middle">Pricing</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-faq.html">
-                      <i class="icon-base ti tabler-question-mark me-3 icon-md"></i><span
-                        class="align-middle">FAQ</span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="d-grid px-2 pt-2 pb-1">
-                      <a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank">
-                        <small class="align-middle">Logout</small>
-                        <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <!--/ User -->
-            </ul>
-          </div>
-        </nav>
-
-        <!-- / Navbar -->
-
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
-          <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- 購物車 -->
-            <div class="row mb-6 gy-6">
-              <div class="col-xl">
-                <div class="card">
-                  <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">購物車</h5>
-                  </div>
-                  <div class="card-body">
-                    <form>
-				       <div class="container">
-				        <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-8">
-				          <!-- Menu logo wrapper: Start -->
-				          <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8 ms-0">
-				            <!-- Mobile menu toggle: Start-->
-				            <button
-				              class="navbar-toggler border-0 px-0 me-4"
-				              type="button"
-				              data-bs-toggle="collapse"
-				              data-bs-target="#navbarSupportedContent"
-				              aria-controls="navbarSupportedContent"
-				              aria-expanded="false"
-				              aria-label="Toggle navigation">
-				              <i class="icon-base ti tabler-menu-2 icon-lg align-middle text-heading fw-medium"></i>
-				            </button>
-				            <!-- Mobile menu toggle: End-->
-				            <a href="landing-page.html" class="app-brand-link">
-				              <span class="app-brand-logo demo">
-				                <span class="text-primary">
-				                  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-				                    <path
-				                      fill-rule="evenodd"
-				                      clip-rule="evenodd"
-				                      d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-				                      fill="currentColor" />
-				                    <path
-				                      opacity="0.06"
-				                      fill-rule="evenodd"
-				                      clip-rule="evenodd"
-				                      d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
-				                      fill="#161616" />
-				                    <path
-				                      opacity="0.06"
-				                      fill-rule="evenodd"
-				                      clip-rule="evenodd"
-				                      d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
-				                      fill="#161616" />
-				                    <path
-				                      fill-rule="evenodd"
-				                      clip-rule="evenodd"
-				                      d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-				                      fill="currentColor" />
-				                  </svg>
-				                </span>
-				              </span>
-				              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">Vuexy</span>
-				            </a>
-				          </div>
-				          <!-- Menu logo wrapper: End -->
-				          <!-- Menu wrapper: Start -->
-				          <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
-				            <button
-				              class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2"
-				              type="button"
-				              data-bs-toggle="collapse"
-				              data-bs-target="#navbarSupportedContent"
-				              aria-controls="navbarSupportedContent"
-				              aria-expanded="false"
-				              aria-label="Toggle navigation">
-				              <i class="icon-base ti tabler-x icon-lg"></i>
-				            </button>
-				            <ul class="navbar-nav me-auto">
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Home</a>
-				              </li>
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" href="landing-page.html#landingFeatures">Features</a>
-				              </li>
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" href="landing-page.html#landingTeam">Team</a>
-				              </li>
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" href="landing-page.html#landingFAQ">FAQ</a>
-				              </li>
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" href="landing-page.html#landingContact">Contact us</a>
-				              </li>
-				              <li class="nav-item mega-dropdown active">
-				                <a
-				                  href="javascript:void(0);"
-				                  class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium"
-				                  aria-expanded="false"
-				                  data-bs-toggle="mega-dropdown"
-				                  data-trigger="hover">
-				                  <span data-i18n="Pages">Pages</span>
-				                </a>
-				                <div class="dropdown-menu p-4 p-xl-8">
-				                  <div class="row gy-4">
-				                    <div class="col-12 col-lg">
-				                      <div class="h6 d-flex align-items-center mb-3 mb-lg-5">
-				                        <div class="avatar flex-shrink-0 me-3">
-				                          <span class="avatar-initial rounded bg-label-primary"
-				                            ><i class="icon-base ti tabler-layout-grid icon-lg"></i
-				                          ></span>
-				                        </div>
-				                        <span class="ps-1">Other</span>
-				                      </div>
-				                      <ul class="nav flex-column">
-				                        <li class="nav-item">
-				                          <a class="nav-link mega-dropdown-link" href="pricing-page.html">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            <span data-i18n="Pricing">Pricing</span>
-				                          </a>
-				                        </li>
-				                        <li class="nav-item active">
-				                          <a class="nav-link mega-dropdown-link" href="payment-page.html">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            <span data-i18n="Payment">Payment</span>
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a class="nav-link mega-dropdown-link" href="checkout-page.html">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            <span data-i18n="Checkout">Checkout</span>
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a class="nav-link mega-dropdown-link" href="help-center-landing.html">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            <span data-i18n="Help Center">Help Center</span>
-				                          </a>
-				                        </li>
-				                      </ul>
-				                    </div>
-				                    <div class="col-12 col-lg">
-				                      <div class="h6 d-flex align-items-center mb-3 mb-lg-5">
-				                        <div class="avatar flex-shrink-0 me-3">
-				                          <span class="avatar-initial rounded bg-label-primary"
-				                            ><i class="icon-base ti tabler-lock-open icon-lg"></i
-				                          ></span>
-				                        </div>
-				                        <span class="ps-1">Auth Demo</span>
-				                      </div>
-				                      <ul class="nav flex-column">
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-login-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Login (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-login-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Login (Cover)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-register-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Register (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-register-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Register (Cover)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-register-multisteps.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Register (Multi-steps)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-forgot-password-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Forgot Password (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-forgot-password-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Forgot Password (Cover)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-reset-password-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Reset Password (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-reset-password-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Reset Password (Cover)
-				                          </a>
-				                        </li>
-				                      </ul>
-				                    </div>
-				                    <div class="col-12 col-lg">
-				                      <div class="h6 d-flex align-items-center mb-3 mb-lg-5">
-				                        <div class="avatar flex-shrink-0 me-3">
-				                          <span class="avatar-initial rounded bg-label-primary"
-				                            ><i class="icon-base ti tabler-file-analytics icon-lg"></i
-				                          ></span>
-				                        </div>
-				                        <span class="ps-1">Other</span>
-				                      </div>
-				                      <ul class="nav flex-column">
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/pages-misc-error.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Error
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/pages-misc-under-maintenance.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Under Maintenance
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/pages-misc-comingsoon.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Coming Soon
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/pages-misc-not-authorized.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Not Authorized
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-verify-email-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Verify Email (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-verify-email-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Verify Email (Cover)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-two-steps-basic.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Two Steps (Basic)
-				                          </a>
-				                        </li>
-				                        <li class="nav-item">
-				                          <a
-				                            class="nav-link mega-dropdown-link"
-				                            href="../vertical-menu-template/auth-two-steps-cover.html"
-				                            target="_blank">
-				                            <i class="icon-base ti tabler-circle me-1 icon-12px"></i>
-				                            Two Steps (Cover)
-				                          </a>
-				                        </li>
-				                      </ul>
-				                    </div>
-				                    <div class="col-lg-4 d-none d-lg-block">
-				                      <div class="bg-body nav-img-col p-2">
-				                        <img
-				                          src="../../assets/img/front-pages/misc/nav-item-col-img.png"
-				                          alt="nav item col image"
-				                          class="w-100" />
-				                      </div>
-				                    </div>
-				                  </div>
-				                </div>
-				              </li>
-				              <li class="nav-item">
-				                <a class="nav-link fw-medium" href="../vertical-menu-template/index.html" target="_blank">Admin</a>
-				              </li>
-				            </ul>
-				          </div>
-				          <div class="landing-menu-overlay d-lg-none"></div>
-				          <!-- Menu wrapper: End -->
-				          <!-- Toolbar: Start -->
-				          <ul class="navbar-nav flex-row align-items-center ms-auto">
-				            <!-- Style Switcher -->
-				            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
-				              <a
-				                class="nav-link dropdown-toggle hide-arrow"
-				                id="nav-theme"
-				                href="javascript:void(0);"
-				                data-bs-toggle="dropdown">
-				                <i class="icon-base ti tabler-sun icon-lg theme-icon-active"></i>
-				                <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
-				              </a>
-				              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
-				                <li>
-				                  <button
-				                    type="button"
-				                    class="dropdown-item align-items-center active"
-				                    data-bs-theme-value="light"
-				                    aria-pressed="false">
-				                    <span><i class="icon-base ti tabler-sun icon-md me-3" data-icon="sun"></i>Light</span>
-				                  </button>
-				                </li>
-				                <li>
-				                  <button
-				                    type="button"
-				                    class="dropdown-item align-items-center"
-				                    data-bs-theme-value="dark"
-				                    aria-pressed="true">
-				                    <span><i class="icon-base ti tabler-moon-stars icon-md me-3" data-icon="moon-stars"></i>Dark</span>
-				                  </button>
-				                </li>
-				                <li>
-				                  <button
-				                    type="button"
-				                    class="dropdown-item align-items-center"
-				                    data-bs-theme-value="system"
-				                    aria-pressed="false">
-				                    <span
-				                      ><i
-				                        class="icon-base ti tabler-device-desktop-analytics icon-md me-3"
-				                        data-icon="device-desktop-analytics"></i
-				                      >System</span
-				                    >
-				                  </button>
-				                </li>
-				              </ul>
-				            </li>
-				            <!-- / Style Switcher-->
+		      <div class="menu-inner-shadow"></div>		
+		      <ul class="menu-inner py-1">
+		        <li class="menu-header small">
+		         <a href="javascript:void(0);" class="menu-title">
+		          <span class="menu-header-text" data-i18n="Dashboards">會員專區</span>
+		         </a>
+		        </li>
+		        <!-- 基本資料 menu start -->
+		        <li class="menu-item">
+		          <a href="app-info.html" class="menu-link menu-toggle">
+		            <i class="menu-icon icon-base ti tabler-file"></i>
+		            <div data-i18n="Pages">基本資料</div>
+		          </a>	
+		        </li>
+		        <!-- 課表瀏覽 menu start -->
+		        <li class="menu-item">
+		          <a href="app-calendar.html" class="menu-link">
+		            <i class="menu-icon icon-base ti tabler-calendar"></i>
+		            <div data-i18n="Calendar">課表瀏覽</div>
+		          </a>
+		        </li>
+		        <!-- 預約上課 menu start -->
+		        <li class="menu-item">
+		          <a href="app-chat.html" class="menu-link menu-toggle">
+		            <i class="menu-icon icon-base ti tabler-messages"></i>
+		            <div data-i18n="Chat">預約上課</div>
+		          </a>
+		        </li>
+		        <!-- 上課紀錄 menu start -->
+		        <li class="menu-item">
+		          <a href="javascript:void(0);" class="menu-link">
+		            <i class="menu-icon icon-base ti tabler-book"></i>
+		            <div data-i18n="Academy">上課紀錄</div>
+		          </a>
+		        </li>
+		        <!-- 購買紀錄 menu start -->
+		        <li class="menu-item">
+		          <a href="http://localhost:8080/meow-gym/order/shoppingrecord.html" class="menu-link">
+		            <i class="menu-icon icon-base ti tabler-file-dollar"></i>
+		            <div data-i18n="Invoice">購買紀錄</div>
+		          </a>
+		        </li>
+		        <!-- 購物車 menu start -->
+		        <li class="menu-item active open">
+		          <a href="http://localhost:8080/meow-gym/order/newOrder.html" class="menu-link">
+		            <i class="menu-icon icon-base ti tabler-shopping-cart"></i>
+		            <div data-i18n="eCommerce">購物車</div>
+		          </a>
+		    </aside>
+		
+		    <div class="menu-mobile-toggler d-xl-none rounded-1">
+		      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large text-bg-secondary p-2 rounded-1">
+		        <i class="ti tabler-menu icon-base"></i>
+		        <i class="ti tabler-chevron-right icon-base"></i>
+		      </a>
+		    </div>
+		    <!-- / Menu -->
+	
+		    <!-- 導覽列Navbar: Start -->
+		    <nav class="layout-navbar shadow-none py-0">
+		      <div class="container">
+		        <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-8">
+		          <!-- Menu logo wrapper: Start -->
+		          <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8 ms-0">
+		            <a href="landing-page.html" class="app-brand-link">
+			            <span class="app-brand-logo demo">
+		                <span class="text-primary">
+		                  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+		                    <path
+		                      fill-rule="evenodd"
+		                      clip-rule="evenodd"
+		                      d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+		                      fill="currentColor" />
+		                    <path
+		                      opacity="0.06"
+		                      fill-rule="evenodd"
+		                      clip-rule="evenodd"
+		                      d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+		                      fill="#161616" />
+		                    <path
+		                      opacity="0.06"
+		                      fill-rule="evenodd"
+		                      clip-rule="evenodd"
+		                      d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+		                      fill="#161616" />
+		                    <path
+		                      fill-rule="evenodd"
+		                      clip-rule="evenodd"
+		                      d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+		                      fill="currentColor" />
+		                  </svg>
+		                </span>
+		              </span>
+		              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">Fitness club project</span>
+		            </a>
+		          </div>
+		          <!-- 返回課程導覽 Toolbar: Start -->
+		          <ul class="navbar-nav flex-row align-items-center ms-auto">
+		            <!-- navbar button: Start -->
+		            <li>
+		              <a href="../vertical-menu-template/auth-login-cover.html" class="btn btn-primary" target="_blank">
+		                <span class="d-none d-md-block">課程導覽</span>
+		              </a>
+		            </li>
+		            <!-- navbar button: End -->
+		          </ul>
+		          <!-- Toolbar: End -->
+		          <!-- 登入/登出 Toolbar: Start -->
+		          <ul class="navbar-nav flex-row align-items-center ms-auto">
+		            <!-- navbar button: Start -->
+		            <li>
+		              <a href="../vertical-menu-template/auth-login-cover.html" class="btn btn-primary" target="_blank">
+		                <span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span>
+		                <span class="d-none d-md-block">登入/登出</span>
+		              </a>
+		            </li>
+		            <!-- navbar button: End -->
+		          </ul>
+		          <!-- Toolbar: End -->
+		        </div>
+		      </div>
+		    </nav>
+		    <!-- Navbar: End -->
+		
+		    <!-- Sections:Start -->	
+		    <section class="section-py bg-body first-section-pt">
+		      <div class="container">
+		        <!--/ Checkout Wizard -->
+		        <!-- 結帳嚮導 Checkout Wizard -->
+		        <div id="wizard-checkout" class="bs-stepper wizard-icons wizard-icons-example">
+		          <div class="bs-stepper-header m-lg-auto border-0">
+		            <div class="step" data-target="#checkout-cart">
+		              <button type="button" class="step-trigger">
+		                <span class="bs-stepper-icon">
+		                  <svg viewBox="0 0 60 60">
+		                    <use xlink:href="../assets/svg/icons/wizard-checkout-cart.svg#wizardCart"></use>
+		                  </svg>
+		                </span>
+		                <span class="bs-stepper-label">Cart</span>
+		              </button>
+		            </div>
+		            <!-- Payment -->
+		            <div class="line">
+		              <i class="icon-base ti tabler-chevron-right"></i>
+		            </div>
+		            <div class="step" data-target="#checkout-payment">
+		              <button type="button" class="step-trigger">
+		                <span class="bs-stepper-icon">
+		                  <svg viewBox="0 0 60 60">
+		                    <use xlink:href="../assets/svg/icons/wizard-checkout-payment.svg#wizardPayment"></use>
+		                  </svg>
+		                </span>
+		                <span class="bs-stepper-label">Payment</span>
+		              </button>
+		            </div>
+		            <!-- Confirmation -->
+		            <div class="line">
+		              <i class="icon-base ti tabler-chevron-right"></i>
+		            </div>
+		            <div class="step" data-target="#checkout-confirmation">
+		              <button type="button" class="step-trigger">
+		                <span class="bs-stepper-icon">
+		                  <svg viewBox="0 0 60 60">
+		                    <use xlink:href="../assets/svg/icons/wizard-checkout-confirmation.svg#wizardConfirm"></use>
+		                  </svg>
+		                </span>
+		                <span class="bs-stepper-label">Confirmation</span>
+		              </button>
+		            </div>
+		          </div>
+		          <div class="bs-stepper-content border-top">
+		            <form id="wizard-checkout-form" onSubmit="return false">
+		              <!-- 購物車 Cart -->
+		              <div id="checkout-cart" class="content">
+		                <div class="row">
+		                  <!-- Cart left -->
+		                  <div class="col-xl-8 mb-6 mb-xl-0">
+		
+		                    <!-- 購物清單 -->
+		                    <h5>我的購物清單</h5>
+		                    <ul class="list-group mb-4">
+		                      <li class="list-group-item p-6">
+		                        <div class="d-flex gap-4">
+		                          <div class="flex-shrink-0 d-flex align-items-center">
+		                            <img src="./images/test.png" alt="images" class="w-px-100" />
+		                          </div>
+		                          <div class="flex-grow-1">
+		                            <div class="row">
+		                              <div class="col-md-8">
+		                                <p class="me-3 mb-2">
+		                                  <a href="javascript:void(0)" class="fw-medium">
+		                                    <span class="text-heading" id="title">瑜珈課</span></a
+		                                  >
+		                                </p>
+		                                <div
+		                                  class="read-only-ratings raty mb-2"
+		                                  data-read-only="true"
+		                                  data-score="4"
+		                                  data-number="5"></div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">教練:</span>
+		                                  <a href="javascript:void(0)" class="me-4" id="name">Apple</a>
+		                                </div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">使用期限:</span>
+		                                  <a href="javascript:void(0)" class="me-4" id="date">2025/6/15~2025/12/15</a>
+		                                </div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">課堂額度:</span>
+		                                  <a href="javascript:void(0)" class="me-4" id="capacity-max">12</a>
+		                                </div>
+		                                <input
+		                                  type="number"
+		                                  class="form-control form-control-sm w-px-100"
+		                                  value="1"
+		                                  min="1"
+		                                  max="5" />
+		                              </div>
+		                              
+		                              <div class="col-md-4">
+		                                <div class="text-md-end">
+		                                  <button type="button" class="btn-close btn-pinned" aria-label="Close"></button>
+		                                  <div class="my-2 mt-md-6 mb-md-4">
+		                                    <span class="text-primary">$299</span>
+		                                  </div>
+		                                </div>
+		                              </div>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      <li class="list-group-item p-6">
+		                        <div class="d-flex gap-4">
+		                          <div class="flex-shrink-0 d-flex align-items-center">
+		                            <img src="./images/test.png" alt="images" class="w-px-100" />
+		                          </div>
+		                          <div class="flex-grow-1">
+		                            <div class="row">
+		                              <div class="col-md-8">
+		                                <p class="me-3 mb-2">
+		                                  <a href="javascript:void(0)" class="fw-medium"
+		                                    ><span class="text-heading">飛輪課</span></a
+		                                  >
+		                                </p>
+		                                <div
+		                                  class="read-only-ratings raty mb-2"
+		                                  data-read-only="true"
+		                                  data-score="4"
+		                                  data-number="5"></div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">教練:</span>
+		                                  <a href="javascript:void(0)" class="me-4">Apple</a>
+		                                </div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">使用期限:</span>
+		                                  <a href="javascript:void(0)" class="me-4">2025/6/15~2025/12/15</a>
+		                                </div>
+		                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">課堂額度:</span>
+		                                  <a href="javascript:void(0)" class="me-4">12</a>
+		                                </div>
+		                                <input
+		                                  type="number"
+		                                  class="form-control form-control-sm w-px-100"
+		                                  value="1"
+		                                  min="1"
+		                                  max="5" />
+		                              </div>
+		                              <div class="col-md-4">
+		                                <div class="text-md-end">
+		                                  <button type="button" class="btn-close btn-pinned" aria-label="Close"></button>
+		                                  <div class="my-2 mt-md-6 mb-md-4">
+		                                    <span class="text-primary">$299</span>
+		                                  </div>
+		                                </div>
+		                              </div>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </li>
+		                    </ul>
+		                  </div>
+		
+		                  <!-- Cart right -->
+		                  <div class="col-xl-4">
+		                    <div class="border rounded p-6 mb-4">
+		                      <!-- Price Details -->
+		                      <h6>Price Details</h6>
+		                      <dl class="row mb-0 text-heading">
+		                        <dt class="col-6 fw-normal">Bag Total</dt>
+		                        <dd class="col-6 text-end">$1198.00</dd>
+		
+		                        <dt class="col-6 fw-normal">Coupon Discount</dt>
+		                        <dd class="col-6 text-end"><a href="javascript:void(0)">Apply Coupon</a></dd>
+		
+		                        <dt class="col-6 fw-normal">Order Total</dt>
+		                        <dd class="col-6 text-end">$1198.00</dd>
+		                      </dl>
+		                      <hr class="mx-n6 my-6" />
+		                      <dl class="row mb-0">
+		                        <dt class="col-6 text-heading">Total</dt>
+		                        <dd class="col-6 fw-medium text-end text-heading mb-0" id="pay_amount">$1198.00</dd>
+		                      </dl>
+		                    </div>
+		                    <div class="d-grid">
+		                      <button class="btn btn-primary btn-next">Next step：確認付款內容</button>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
 				
-				            <!-- navbar button: Start -->
-				            <li>
-				              <a href="../vertical-menu-template/auth-login-cover.html" class="btn btn-primary" target="_blank"
-				                ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-				                ><span class="d-none d-md-block">Login/Register</span></a
-				              >
-				            </li>
-				            <!-- navbar button: End -->
-				          </ul>
-				          <!-- Toolbar: End -->
-				        </div>
-				      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <!-- <div class="col-xl">
-                  <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Basic with Icons</h5>
-                      <small class="text-body-secondary float-end">Merged input group</small>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="mb-6">
-                          <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="icon-base ti tabler-user"></i
-                            ></span>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="basic-icon-default-fullname"
-                              placeholder="John Doe"
-                              aria-label="John Doe"
-                              aria-describedby="basic-icon-default-fullname2" />
-                          </div>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="basic-icon-default-company">Company</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                              ><i class="icon-base ti tabler-building"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-company"
-                              class="form-control"
-                              placeholder="ACME Inc."
-                              aria-label="ACME Inc."
-                              aria-describedby="basic-icon-default-company2" />
-                          </div>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="basic-icon-default-email">Email</label>
-                          <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="icon-base ti tabler-mail"></i></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-email"
-                              class="form-control"
-                              placeholder="john.doe"
-                              aria-label="john.doe"
-                              aria-describedby="basic-icon-default-email2" />
-                            <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                          </div>
-                          <div class="form-text">You can use letters, numbers & periods</div>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="basic-icon-default-phone">Phone No</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-phone2" class="input-group-text"
-                              ><i class="icon-base ti tabler-phone"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-phone"
-                              class="form-control phone-mask"
-                              placeholder="658 799 8941"
-                              aria-label="658 799 8941"
-                              aria-describedby="basic-icon-default-phone2" />
-                          </div>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="basic-icon-default-message">Message</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-message2" class="input-group-text"
-                              ><i class="icon-base ti tabler-message-dots"></i
-                            ></span>
-                            <textarea
-                              id="basic-icon-default-message"
-                              class="form-control"
-                              placeholder="Hi, Do you have a moment to talk Joe?"
-                              aria-label="Hi, Do you have a moment to talk Joe?"
-                              aria-describedby="basic-icon-default-message2"></textarea>
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                      </form>
-                    </div>
-                  </div>
-                </div> -->
+		              <!-- 確認付款內容 Payment -->
+		              <div id="checkout-payment" class="content">
+		                <div class="row">
+		                  <!-- Payment left -->
+		                  <div class="col-xl-8 mb-6 mb-xl-0">
+		
+		                    <!-- Payment Tabs -->
+		                    <div class="col-xxl-6 col-lg-8">
+		                      <div class="nav-align-top">
+		                        <ul class="nav nav-pills card-header-pills row-gap-2 flex-wrap" id="paymentTabs" role="tablist">
+		                          <li class="nav-item" role="presentation">
+		                            <button
+		                              class="nav-link active"
+		                              id="pills-cc-tab"
+		                              data-bs-toggle="pill"
+		                              data-bs-target="#pills-cc"
+		                              type="button"
+		                              role="tab"
+		                              aria-controls="pills-cc"
+		                              aria-selected="true">
+		                              Card
+		                            </button>
+		                          </li>
+		                          <li class="nav-item" role="presentation">
+		                            <button
+		                              class="nav-link"
+		                              id="pills-cod-tab"
+		                              data-bs-toggle="pill"
+		                              data-bs-target="#pills-cod"
+		                              type="button"
+		                              role="tab"
+		                              aria-controls="pills-cod"
+		                              aria-selected="false">
+		                              Cash On Delivery
+		                            </button>
+		                          </li>
+		                        </ul>
+		                      </div>
+		                      <div class="tab-content px-0 pb-0" id="paymentTabsContent">
+		                        <!-- Credit card -->
+		                        <div
+		                          class="tab-pane fade show active"
+		                          id="pills-cc"
+		                          role="tabpanel"
+		                          aria-labelledby="pills-cc-tab">
+		                          <div class="row g-6">
+		                            <div class="col-12">
+		                              <label class="form-label w-100" for="paymentCard">Card Number</label>
+		                              <div class="input-group input-group-merge">
+		                                <input
+		                                  id="paymentCard"
+		                                  name="paymentCard"
+		                                  class="form-control credit-card-mask"
+		                                  type="text"
+		                                  placeholder="1356 3215 6548 7898"
+		                                  aria-describedby="paymentCard2" />
+		                                <span class="input-group-text cursor-pointer p-1" id="paymentCard2"
+		                                  ><span class="card-type"></span
+		                                ></span>
+		                              </div>
+		                            </div>
+		                            <div class="col-12 col-md-4">
+		                              <label class="form-label" for="paymentCardName">Name</label>
+		                              <input type="text" id="paymentCardName" class="form-control" placeholder="John Doe" />
+		                            </div>
+		                            <div class="col-6 col-md-4">
+		                              <label class="form-label" for="paymentCardExpiryDate">Exp. Date</label>
+		                              <input
+		                                type="text"
+		                                id="paymentCardExpiryDate"
+		                                class="form-control expiry-date-mask"
+		                                placeholder="MM/YY" />
+		                            </div>
+		                            <div class="col-6 col-md-4">
+		                              <label class="form-label" for="paymentCardCvv">CVV Code</label>
+		                              <div class="input-group input-group-merge">
+		                                <input
+		                                  type="text"
+		                                  id="paymentCardCvv"
+		                                  class="form-control cvv-code-mask"
+		                                  maxlength="3"
+		                                  placeholder="654" />
+		                                <span class="input-group-text cursor-pointer" id="paymentCardCvv2"
+		                                  ><i
+		                                    class="icon-base ti tabler-help text-body-secondary"
+		                                    data-bs-toggle="tooltip"
+		                                    data-bs-placement="top"
+		                                    title="Card Verification Value"></i
+		                                ></span>
+		                              </div>
+		                            </div>
+		                            <div class="col-12">
+		                              <div class="form-check form-switch mt-2">
+		                                <input type="checkbox" class="form-check-input" id="cardFutureBilling" />
+		                                <label for="cardFutureBilling" class="form-check-label"
+		                                  >Save card for future billing?</label
+		                                >
+		                              </div>
+		                            </div>
+		                            <div class="col-12">
+		                              <button type="button" class="btn btn-primary btn-next me-3" id="payOnCard">結帳：信用卡付款</button>
+		                              <button type="reset" class="btn btn-label-secondary">清除重填</button>
+		                            </div>
+		                          </div>
+		                        </div>
+		
+		                        <!-- COD -->
+		                        <div class="tab-pane fade" id="pills-cod" role="tabpanel" aria-labelledby="pills-cod-tab">
+		                          <p>
+		                          請點選下方按鈕至櫃檯現金付款，謝謝!
+		                          </p>
+		                          <button type="button" class="btn btn-primary btn-next" id="payOnCash">櫃台結帳</button>
+		                        </div>
+		                      </div>
+		                    </div>
+		                  </div>
+		                  <!-- Address right -->
+		                  <div class="col-xl-4">
+		                    <div class="border rounded p-6">
+		                      <!-- Price Details -->
+		                      <h6>Price Details</h6>
+		                      <dl class="row text-heading">
+		                        <dt class="col-6 fw-normal">Bag Total</dt>
+		                        <dd class="col-6 text-end">$1198.00</dd>
+		
+		                        <dt class="col-6 fw-normal">Coupon Discount</dt>
+		                        <dd class="col-6 text-end"><a href="javascript:void(0)">Apply Coupon</a></dd>
+		                        
+		                        <dt class="col-6 fw-normal">Order Total</dt>
+		                        <dd class="col-6 text-end">$1198.00</dd>
+		                        
+		                      </dl>
+		                      <hr class="mx-n6 my-6" />
+		                      <dl class="row">
+		                        <dt class="col-6 text-heading mb-3">Total</dt>
+		                        <dd class="col-6 fw-medium text-end text-heading mb-0">$1198.00</dd>
+		                      </dl>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		
+		              <!-- 結帳確認 Confirmation -->
+		              <div id="checkout-confirmation" class="content">
+		                <div class="row mb-6">
+		                  <div class="col-12 col-lg-8 mx-auto text-center mb-2">
+		                    <h4>Thank You!</h4>
+		                    <p>
+		                      Your order <a href="javascript:void(0)" class="text-heading fw-medium">#1536548131</a> has been
+		                      placed!
+		                    </p>
+		                    <p>
+		                      We sent an email to
+		                      <a href="mailto:john.doe@example.com" class="text-heading fw-medium">john.doe@example.com</a> with
+		                      your order confirmation and receipt. If the email hasn't arrived within two minutes, please check
+		                      your spam folder to see if the email was routed there.
+		                    </p>
+		                    <p>
+		                      <span><i class="icon-base ti tabler-clock me-1 text-heading"></i> Time placed:&nbsp;</span>
+		                      25/05/2020 13:35pm
+		                    </p>
+		                  </div>
+
+		                </div>
+		
+		                <div class="row">
+		                  <!-- Confirmation items -->
+		                  <div class="col-xl-9 mb-6 mb-xl-0">
+		                    <ul class="list-group">
+		                      <li class="list-group-item p-6">
+		                        <div class="d-flex gap-4">
+		                          <div class="flex-shrink-0">
+		                            <img src="./images/test.png" alt="images" class="w-px-80" />
+		                          </div>
+		                          <div class="flex-grow-1">
+		                            <div class="row">
+		                              <div class="col-md-8">
+		                                <a href="javascript:void(0)" class="fw-medium">
+		                                    <h6 class="mb-2">瑜珈課</h6>
+		                                </a>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">教練:</span>
+		                                  <a href="javascript:void(0)" class="me-3">Apple</a>
+		                                </div>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">使用期限:</span>
+		                                  <a href="javascript:void(0)" class="me-3">2025/6/15~2025/12/15</a>
+		                                </div>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">課堂額度:</span>
+		                                  <a href="javascript:void(0)" class="me-3">12</a>
+		                                </div>
+		                             </div>
+		                              <div class="col-md-4">
+		                                <div class="text-md-end">
+		                                  <div class="my-2 my-lg-6">
+		                                    <span class="text-primary">$299</span>
+		                                  </div>
+		                                </div>
+		                              </div>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      <li class="list-group-item p-6">
+		                        <div class="d-flex gap-4">
+		                          <div class="flex-shrink-0">
+		                            <img src="./images/test.png" alt="images" class="w-px-80" />
+		                          </div>
+		                          <div class="flex-grow-1">
+		                            <div class="row">
+		                              <div class="col-md-8">
+		                                <a href="javascript:void(0)" class="fw-medium">
+		                                    <h6 class="mb-2">飛輪課</h6>
+		                                </a>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">教練:</span>
+		                                  <a href="javascript:void(0)" class="me-3">Apple</a>
+		                                </div>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">使用期限:</span>
+		                                  <a href="javascript:void(0)" class="me-3">2025/6/15~2025/12/15</a>
+		                                </div>
+		                                <div class="text-body mb-2 d-flex flex-wrap">
+		                                  <span class="me-1">課堂額度:</span>
+		                                  <a href="javascript:void(0)" class="me-3">12</a>
+		                                </div>
+		                             </div>
+		                              <div class="col-md-4">
+		                                <div class="text-md-end">
+		                                  <div class="my-2 my-lg-6">
+		                                    <span class="text-primary">$299</span>
+		                                  </div>
+		                                </div>
+		                              </div>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </li>
+		                    </ul>
+		                  </div>
+		                  <!-- Confirmation total -->
+		                  <div class="col-xl-3">
+		                    <div class="border rounded p-6">
+		                      <!-- Price Details -->
+		                      <h6>Price Details</h6>
+		                      <dl class="row mb-0 text-heading">
+		                        <dt class="col-6 fw-normal">Order Total</dt>
+		                        <dd class="col-6 text-end">$1198.00</dd>
+		
+		                        <dt class="col-sm-6 text-heading fw-normal">Charges</dt>
+		                        <dd class="col-sm-6 text-end text-body-secondary">
+		                          $5.00<span class="badge bg-label-success ms-2">FREE</span>
+		                        </dd>
+		                      </dl>
+		                      <hr class="mx-n6 mb-6" />
+		                      <dl class="row mb-0">
+		                        <dt class="col-6 text-heading">Total</dt>
+		                        <dd class="col-6 fw-medium text-end text-heading mb-0">$1198.00</dd>
+		                      </dl>
+		                    </div>
+		                    
+		                    <!-- 返回首頁 -->
+		                    <div class="d-grid">
+		                      <button class="btn btn-primary btn-next">返回首頁</button>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		            </form>
+		          </div>
+		        </div>
+		        <!--/ Checkout Wizard -->
+		      </div>
+		    </section>
+		
+		    <!-- / Sections:End -->
+	    <!-- / Layout page -->
+	    </div>
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Footer: Start -->
+    <footer class="landing-footer bg-body footer-text">
+      <div class="footer-top position-relative overflow-hidden z-1">
+        <img
+          src="../assets/img/front-pages/backgrounds/footer-bg.png"
+          alt="footer bg"
+          class="footer-bg banner-bg-img z-n1" />
+        <div class="container">
+          <div class="row gx-0 gy-6 g-lg-10">
+            <div class="col-lg-5">
+              <a href="landing-page.html" class="app-brand-link mb-6">
+                <span class="app-brand-logo demo">
+                  <span class="text-primary">
+                    <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                       fill-rule="evenodd"
+                       clip-rule="evenodd"
+                       d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+                       fill="currentColor" />
+                     <path
+                       opacity="0.06"
+                       fill-rule="evenodd"
+                       clip-rule="evenodd"
+                       d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+                       fill="#161616" />
+                     <path
+                       opacity="0.06"
+                       fill-rule="evenodd"
+                       clip-rule="evenodd"
+                       d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+                       fill="#161616" />
+                     <path
+                       fill-rule="evenodd"
+                       clip-rule="evenodd"
+                       d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+                       fill="currentColor" />
+                    </svg>
+                  </span>
+                </span>
+                <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">Fitness club project</span>
+              </a>
+              
+              <p class="footer-text footer-logo-description mb-6">
+              Meow-gym 台北店
+              <br>
+              連絡電話|02-XXXX-XXXX
+              <br>
+              場館地址|新北市XX區XX路XX號XX樓
+              <br>
+              公司信箱|fitnessclub@gmail.com
+              <br>
+              營業時間|06:00-23:00
+              </p>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <h6 class="footer-title mb-6">其他資訊內容</h6>
             </div>
           </div>
-          <!-- / Content -->
-
-          <!-- Footer -->
-          <footer class="content-footer footer bg-footer-theme">
-            <div class="container-xxl">
-              <div
-                class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
-                <div class="text-body">
-                  &#169;
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="footer-link">Pixinvent</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeforest.net/licenses/standard" class="footer-link me-4"
-                    target="_blank">License</a>
-                  <a href="https://themeforest.net/user/pixinvent/portfolio" target="_blank"
-                    class="footer-link me-4">More Themes</a>
-
-                  <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/" target="_blank"
-                    class="footer-link me-4">Documentation</a>
-
-                  <a href="https://pixinvent.ticksy.com/" target="_blank"
-                    class="footer-link d-none d-sm-inline-block">Support</a>
-                </div>
-              </div>
-            </div>
-          </footer>
-          <!-- / Footer -->
-
-          <div class="content-backdrop fade"></div>
         </div>
-        <!-- Content wrapper -->
       </div>
-      <!-- / Layout page -->
-    </div>
+      <div class="footer-bottom py-3 py-md-5">
+        <div
+          class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
+          <div class="mb-2 mb-md-0">
+            <span class="footer-bottom-text"
+              >©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+            </span>
+            <a href="https://pixinvent.com" target="_blank" class="fw-medium text-white">Meow-gym</a>
+            <span class="footer-bottom-text"> ｜隱私權政策｜網站使用條款｜</span>
+          </div>
+          <div>
+            <a href="https://github.com/pixinvent" class="me-1 text-white" target="_blank">
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.7184 2.19556C6.12757 2.19556 2.40674 5.91639 2.40674 10.5072C2.40674 14.1789 4.78757 17.2947 8.0909 18.3947C8.50674 18.4697 8.65674 18.2139 8.65674 17.9939C8.65674 17.7964 8.65007 17.2731 8.64757 16.5806C6.33507 17.0822 5.84674 15.4656 5.84674 15.4656C5.47007 14.5056 4.92424 14.2497 4.92424 14.2497C4.17007 13.7339 4.98174 13.7456 4.98174 13.7456C5.81674 13.8039 6.25424 14.6022 6.25424 14.6022C6.9959 15.8722 8.2009 15.5056 8.67257 15.2931C8.7484 14.7556 8.96507 14.3889 9.20174 14.1814C7.35674 13.9722 5.41674 13.2589 5.41674 10.0731C5.41674 9.16722 5.74091 8.42389 6.27007 7.84389C6.1859 7.63306 5.89841 6.78722 6.35257 5.64389C6.35257 5.64389 7.05007 5.41972 8.63757 6.49472C9.31557 6.31028 10.0149 6.21614 10.7176 6.21472C11.4202 6.21586 12.1196 6.31001 12.7976 6.49472C14.3859 5.41889 15.0826 5.64389 15.0826 5.64389C15.5367 6.78722 15.2517 7.63306 15.1651 7.84389C15.6984 8.42389 16.0184 9.16639 16.0184 10.0731C16.0184 13.2672 14.0767 13.9689 12.2251 14.1747C12.5209 14.4314 12.7876 14.9381 12.7876 15.7131C12.7876 16.8247 12.7776 17.7214 12.7776 17.9939C12.7776 18.2164 12.9259 18.4747 13.3501 18.3931C16.6517 17.2914 19.0301 14.1781 19.0301 10.5072C19.0301 5.91639 15.3092 2.19556 10.7184 2.19556Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/pixinvents/" class="me-1 text-white" target="_blank">
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.8609 18.0262V11.1962H14.1651L14.5076 8.52204H11.8609V6.81871C11.8609 6.04704 12.0759 5.51871 13.1834 5.51871H14.5868V3.13454C13.904 3.06136 13.2176 3.02603 12.5309 3.02871C10.4943 3.02871 9.09593 4.27204 9.09593 6.55454V8.51704H6.80676V11.1912H9.10093V18.0262H11.8609Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a href="https://x.com/pixinvents" class="me-1 text-white" target="_blank">
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.0576 7.19293C17.0684 7.33876 17.0684 7.48376 17.0684 7.62876C17.0684 12.0663 13.6909 17.1796 7.5184 17.1796C5.61674 17.1796 3.85007 16.6288 2.3634 15.6721C2.6334 15.7029 2.8934 15.7138 3.17424 15.7138C4.68506 15.7174 6.15311 15.2122 7.34174 14.2796C6.64125 14.2669 5.96222 14.0358 5.39943 13.6185C4.83665 13.2013 4.41822 12.6187 4.20257 11.9521C4.41007 11.9829 4.6184 12.0038 4.83674 12.0038C5.13757 12.0038 5.44007 11.9621 5.7209 11.8896C4.9607 11.7361 4.27713 11.3241 3.78642 10.7235C3.29571 10.1229 3.02815 9.37097 3.02924 8.59543V8.55376C3.47674 8.80293 3.9959 8.95876 4.5459 8.9796C4.08514 8.67342 3.70734 8.25795 3.44619 7.77026C3.18504 7.28256 3.04866 6.73781 3.04924 6.1846C3.04924 5.56126 3.21507 4.9896 3.5059 4.49126C4.34935 5.52878 5.40132 6.37756 6.59368 6.98265C7.78604 7.58773 9.0922 7.93561 10.4276 8.00376C10.3759 7.75376 10.3442 7.4946 10.3442 7.2346C10.344 6.79373 10.4307 6.35715 10.5993 5.9498C10.7679 5.54245 11.0152 5.17233 11.3269 4.86059C11.6386 4.54885 12.0088 4.30161 12.4161 4.133C12.8235 3.96438 13.26 3.87771 13.7009 3.87793C14.6676 3.87793 15.5401 4.28293 16.1534 4.93793C16.9049 4.79261 17.6255 4.51828 18.2834 4.1271C18.0329 4.90278 17.5082 5.56052 16.8076 5.9771C17.4741 5.90108 18.1254 5.72581 18.7401 5.4571C18.281 6.12635 17.7122 6.71322 17.0576 7.19293Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/pixinvents/" class="text-white" target="_blank">
+              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1833_185630)">
+                  <path
+                    d="M17.5869 6.33973C17.5774 5.62706 17.444 4.9215 17.1926 4.25456C16.9747 3.69202 16.6418 3.18112 16.2152 2.75453C15.7886 2.32793 15.2776 1.995 14.7151 1.77703C14.0568 1.5299 13.3613 1.39627 12.6582 1.38183C11.753 1.34137 11.466 1.33008 9.16819 1.33008C6.87039 1.33008 6.57586 1.33008 5.67725 1.38183C4.97451 1.39637 4.27932 1.53 3.62127 1.77703C3.05863 1.99485 2.54765 2.32772 2.12103 2.75434C1.69442 3.18096 1.36155 3.69193 1.14373 4.25456C0.896101 4.91242 0.76276 5.60776 0.749471 6.31056C0.70901 7.2167 0.696777 7.50368 0.696777 9.8015C0.696777 12.0993 0.696777 12.3928 0.749471 13.2924C0.763585 13.9963 0.89626 14.6907 1.14373 15.3503C1.36192 15.9128 1.69503 16.4236 2.1218 16.85C2.54855 17.2765 3.05957 17.6091 3.6222 17.8269C4.27846 18.084 4.97377 18.2272 5.67819 18.2504C6.58433 18.2908 6.87133 18.303 9.16913 18.303C11.4669 18.303 11.7615 18.303 12.6601 18.2504C13.3632 18.2365 14.0587 18.1032 14.717 17.8561C15.2794 17.6378 15.7902 17.3048 16.2167 16.8782C16.6433 16.4517 16.9763 15.941 17.1945 15.3785C17.442 14.7198 17.5746 14.0254 17.5888 13.3207C17.6293 12.4155 17.6414 12.1285 17.6414 9.82973C17.6396 7.53191 17.6396 7.24021 17.5869 6.33973ZM9.16255 14.1468C6.75935 14.1468 4.81251 12.2 4.81251 9.79679C4.81251 7.39359 6.75935 5.44676 9.16255 5.44676C10.3163 5.44676 11.4227 5.90506 12.2385 6.72085C13.0543 7.53664 13.5126 8.64309 13.5126 9.79679C13.5126 10.9505 13.0543 12.057 12.2385 12.8727C11.4227 13.6885 10.3163 14.1468 9.16255 14.1468ZM13.6857 6.3002C13.5525 6.30033 13.4206 6.27417 13.2974 6.22325C13.1743 6.17231 13.0624 6.09759 12.9682 6.00338C12.874 5.90917 12.7992 5.79729 12.7483 5.67417C12.6974 5.55105 12.6712 5.41909 12.6713 5.28585C12.6713 5.15271 12.6976 5.02087 12.7485 4.89786C12.7994 4.77485 12.8742 4.66308 12.9683 4.56893C13.0625 4.47479 13.1743 4.4001 13.2973 4.34915C13.4202 4.2982 13.5521 4.27197 13.6853 4.27197C13.8184 4.27197 13.9503 4.2982 14.0732 4.34915C14.1962 4.4001 14.3081 4.47479 14.4022 4.56893C14.4963 4.66308 14.571 4.77485 14.622 4.89786C14.6729 5.02087 14.6991 5.15271 14.6991 5.28585C14.6991 5.84666 14.2456 6.3002 13.6857 6.3002Z"
+                    fill="currentColor" />
+                  <path
+                    d="M9.16296 12.6226C10.7236 12.6226 11.9887 11.3575 11.9887 9.79688C11.9887 8.23629 10.7236 6.97119 9.16296 6.97119C7.60238 6.97119 6.33728 8.23629 6.33728 9.79688C6.33728 11.3575 7.60238 12.6226 9.16296 12.6226Z"
+                    fill="currentColor" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1833_185630">
+                    <rect width="16.9412" height="18" fill="currentColor" transform="translate(0.696777 0.528809)" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer: End -->
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
 
-    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-    <div class="drag-target"></div>
-  </div>
-  <!-- / Layout wrapper -->
 
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/theme.js  -->
 
-  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/theme.js  -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
+    
+    <script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script>
 
-  <script src="../assets/vendor/libs/popper/popper.js"></script>
-  <script src="../assets/vendor/js/bootstrap.js"></script>
-  <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../assets/vendor/libs/pickr/pickr.js"></script>
 
-  <script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-  <script src="../assets/vendor/libs/pickr/pickr.js"></script>
+    <script src="../assets/vendor/libs/hammer/hammer.js"></script>
 
-  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/vendor/libs/i18n/i18n.js"></script>
 
-  <script src="../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
 
-  <script src="../assets/vendor/libs/i18n/i18n.js"></script>
+    <!-- endbuild -->
 
-  <script src="../assets/vendor/js/menu.js"></script>
+    <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+    <script src="../assets/vendor/libs/raty-js/raty-js.js"></script>
+    <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
-  <!-- endbuild -->
+    <!-- Main JS -->
+    <script src="../assets/js/front-main.js"></script>
 
-  <!-- Vendors JS -->
-  <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
-  <script src="../assets/vendor/libs/moment/moment.js"></script>
-  <script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-  <script src="../assets/vendor/libs/select2/select2.js"></script>
-  <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
-
-  <!-- Main JS -->
-
-  <script src="../assets/js/main.js"></script>
-
-  <!-- Page JS -->
-  <script src="js/form-layouts.js"></script>
-
-  <script src="js/newCourse.js"></script>
-  
-</body>
-
+    <!-- Page JS -->
+    <script src="./js/modal-add-new-address.js"></script>
+    <script src="./js/wizard-ex-checkout.js"></script>
+    <script src="./js/app-ecommerce-order-list.js"></script>
+    <script src="./js/newOrder.js"></script>
+  </body>
 </html>
