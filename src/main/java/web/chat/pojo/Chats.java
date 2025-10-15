@@ -1,10 +1,11 @@
 package web.chat.pojo;
 
+
 import java.sql.Timestamp;
 
 import core.pojo.Core;
 
-public class Bhats extends Core {
+public class Chats extends Core {
 	private static final long serialVersionUID = 1L;
 
 	private Integer chatId; // chat_id
