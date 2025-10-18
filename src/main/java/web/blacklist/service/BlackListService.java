@@ -1,7 +1,9 @@
 package web.blacklist.service;
 
-import web.blacklist.pojo.User;
+import java.util.List;
+
+import web.user.pojo.User;
 
 public interface BlackListService {
-	User insert();
+	List<User> findAll();
 }
