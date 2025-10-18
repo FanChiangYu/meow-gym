@@ -15,19 +15,15 @@ document.querySelector("button").addEventListener("click", () => {
 
 	fetch('login', {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
+		headers: {'Content-Type': 'application/json' },
 		body: JSON.stringify({
 			email: email.value,
 			password: password.value,
-		})
+		}),
 	})
-
-
 		.then(resp => resp.json())
 		.then(body => {
-			if (body.success) {
+			if (body.successful) {
 				location.href = "userDetial.html"
 			} else {
 				alert("使用者名稱或密碼錯誤");
