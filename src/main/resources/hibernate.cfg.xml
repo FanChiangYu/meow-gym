@@ -13,5 +13,13 @@
 		<mapping class="web.member.pojo.Member" />
 		<mapping class="web.course.pojo.Course" />
 		<mapping class="web.course.pojo.CourseRecurringRules" />
+		<mapping class="web.course.pojo.Rooms" />
+		<mapping class="web.course.pojo.SessionUsers" />
+		<mapping class="web.course.pojo.ClassSessions" />
+		<mapping class="web.coach.pojo.CoachProfiles" />
+		<mapping class="web.coach.pojo.CoachCertificates" />
+		<mapping class="web.coach.pojo.CoachEducations" />
+		<mapping class="web.coach.pojo.CoachExperiences" />
+		<mapping class="web.order.pojo.Orders" />
 	</session-factory>
 </hibernate-configuration>
