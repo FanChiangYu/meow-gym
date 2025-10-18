@@ -43,6 +43,7 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
 
@@ -1817,66 +1818,47 @@
                   <table class="datatables-users table">
                     <thead class="border-top">
                       <tr>
-                        <!-- <th></th>
-                        <th></th> -->
+                        <th>課程ID</th>
                         <th>課程名稱</th>
                         <th>教練</th>
+                        <th>類別</th>
                         <th>堂數</th>
                         <th>課程訂價</th>
                         <th>審核狀態</th>
                         <th>動作</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <!-- <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                        <td class="dt-select">
-                          <input aria-label="Select row" class="form-check-input" type="checkbox">
-                        </td> -->
-                        <td class="sorting_1">
-                          <div class="d-flex justify-content-start align-items-center user-name">
-                            <!-- <div class="avatar-wrapper">
-                              <div class="avatar avatar-sm me-4">
-                               <img src="../assets/img/avatars/2.png" alt="Avatar" class="rounded-circle">
-                              </div>
-                           </div> -->
-                             <div class="d-flex flex-column">
-                             <a href="app-user-view-account.html" class="text-heading text-truncate">
-                              <span class="fw-medium">瑜伽課</span>
-                             </a>
-                             <!-- <small>zmcclevertye@soundcloud.com</small> -->
-                           </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span class="text-truncate d-flex align-items-center text-heading"><i class="icon-base ti tabler-user icon-md text-success me-2"></i>Maintainer</span>
-                        </td>
-                        <td>
-                          <span class="text-heading">Enterprise</span>
-                        </td>
-                        <td>Auto Debit</td>
-                        <td>
-                          <span class="badge bg-label-success" text-capitalized="">Active</span>
-                        </td>
-                        <td>
-                        <div class="d-flex align-items-center">
-                          <a href="javascript:;" class="btn btn-text-secondary rounded-pill waves-effect btn-icon delete-record">
-                            <i class="icon-base ti tabler-trash icon-22px"></i>
-                          </a>
-                          <!-- <a href="app-user-view-account.html" class="btn btn-text-secondary rounded-pill waves-effect btn-icon">
-                            <i class="icon-base ti tabler-eye icon-22px"></i>
-                          </a>
-                          <a href="javascript:;" class="btn btn-text-secondary rounded-pill waves-effect btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-end m-0">
-                            <a href="javascript:;" class="dropdown-item">Edit</a>
-                            <a href="javascript:;" class="dropdown-item">Suspend</a>
-                          </div> -->
-                        </div>
-                       </td>
-                     </tr>
-                    </tbody>
+                    <tbody id="course-table-body">
+                     <!-- <tr>
+                      <td>
+                        <span class="text-heading">123</span>
+                      </td>
+                      <td>
+                        <span class="text-heading">快樂瑜伽</span>
+                      </td>
+                      <td>
+                        <span class="text-truncate d-flex align-items-center text-heading">
+                          <i class="icon-base ti tabler-user icon-md text-success me-2"></i>
+                          小美
+                        </span>
+                      </td>
+                      <td>
+                        <span class="text-heading">瑜伽</span>
+                      </td>
+                      <td>
+                        <span class="text-heading">12堂</span>
+                      </td>
+                      <td>
+                        <span class="text-heading">5000</span>
+                      </td>
+                      <td>
+                        <span class="badge bg-label-info">待審核</span>
+                      </td>
+                      <td>
+                        <button type="button" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>
+                      </td>
+                     </tr> -->
+                    </tbody>   
                   </table>
                 </div>
                 <!-- Offcanvas to add new user -->
@@ -2075,6 +2057,7 @@
     <script src="../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
     <script src="../assets/vendor/libs/@form-validation/auto-focus.js"></script>
     <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
@@ -2082,5 +2065,6 @@
 
     <!-- Page JS -->
     <!-- <script src="../assets/js/app-user-list.js"></script> -->
+     <script src="js/reviewCourseList.js"></script>
   </body>
 </html>

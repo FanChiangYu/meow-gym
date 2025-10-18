@@ -16,6 +16,7 @@ import web.course.dao.impl.CourseDaoImpl;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.service.CourseService;
+import web.member.pojo.Member;
 
 public class CourseServiceImpl implements CourseService {
 	private CourseDao dao;
@@ -104,7 +105,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		course.setCoachId(1); // 暫定
-		course.setApprovalStatus("PENDING");
+		course.setApprovalStatus("待審核");
 //		beginTx();
 		int count = dao.insert(course);
 		if(count == 1) {
@@ -137,20 +138,20 @@ public class CourseServiceImpl implements CourseService {
 			rule.setCourseId(id);
 			if(rule.getWeekday() == null) {
 				result.addProperty("successful", false);
-				result.addProperty("Message", "未選擇星期");
+				result.addProperty("message", "未選擇星期");
 				return result;
 			}
 			
 			if(rule.getTimeSlot() == null) {
 				result.addProperty("successful", false);
-				result.addProperty("Message", "未選擇時段");
+				result.addProperty("message", "未選擇時段");
 				return result;
 			}
 			System.out.println(id);
 			int count = dao.insert(rule);
 			if(count != 1) {
 				result.addProperty("successful", false);
-				result.addProperty("Message", "送出失敗");
+				result.addProperty("message", "送出失敗");
 //				rollback();
 				return result;
 			}
@@ -160,5 +161,37 @@ public class CourseServiceImpl implements CourseService {
 //		commit();
 		return result;
 	}
+
+	@Override
+	public JsonObject removeById(Integer id) {
+		
+
+		return null;
+	}
+
+	@Override
+	public List<Course> findAll() {
+		return dao.selectAll();
+	}
+
+	@Override
+	public Course find(Course cousre) {
+		System.out.println(cousre.getCourseId());
+		if(cousre.getCourseId() == null) {
+			cousre.setSuccessful(false);
+			return cousre;
+		}
+		cousre = dao.selectById(cousre.getCourseId());
+		cousre.setSuccessful(true);
+		return cousre;
+	}
+
+	@Override
+	public String modify(Course cousre) {
+		int count = dao.update(cousre);
+		return count > 0 ? "更新成功" : "更新失敗";
+	}
+
+	
 
 }

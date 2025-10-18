@@ -44,8 +44,8 @@ public class UploadFileServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Gson gson = new Gson();
-//		fileRootPath = getServletContext().getRealPath("/img/");
-		fileRootPath = "/Users/fanjiangyu/sts3-workspace/meow-gym/src/main/webapp/img/course/";
+		fileRootPath = getServletContext().getRealPath("/img/");
+//		fileRootPath = "/Users/fanjiangyu/sts3-workspace/meow-gym/src/main/webapp/img/course/";
 		System.out.println(fileRootPath);
 		JsonObject respbody = new JsonObject();
 		Part part = req.getPart("file");
@@ -66,7 +66,9 @@ public class UploadFileServlet extends HttpServlet{
 //			}
 			
 			Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
-			fileRootPath = fileRootPath + service.getFileName(part);
+//			fileRootPath = fileRootPath + service.getFileName(part);
+//			fileRootPath = System.getProperty("catalina.home") +"/img/" + service.getFileName(part);
+			fileRootPath = req.getContextPath() +"/img/" + service.getFileName(part);
 			respbody.addProperty("success", true);
 			respbody.addProperty("url", fileRootPath);
 			
