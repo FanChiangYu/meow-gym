@@ -60,12 +60,12 @@ public class OrderServiceImpl implements OrderService{
 		System.out.println(orders.getPaymentMethod());
 		
 		//需寫入DB資料
-		orders.setOrderId(3); //暫定
+//		orders.setOrderId(3); //暫定
 		orders.setUserId(1); //暫定
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		orders.setCreatedAt(timestamp);
 
-		beginTx();
+//		beginTx();
 		int count = orderdao.insert(orders);
 		if(count == 1) {
 			orders.setMessage("送出成功");
@@ -73,9 +73,9 @@ public class OrderServiceImpl implements OrderService{
 		} else {
 			orders.setMessage("送出失敗");
 			orders.setSuccessful(false);
-			rollback();
+//			rollback();
 		}
-		commit();
+//		commit();
 		return orders;
 	}
 
