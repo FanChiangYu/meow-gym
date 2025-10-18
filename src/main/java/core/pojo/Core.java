@@ -1,33 +1,59 @@
 package core.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
+import lombok.Data;
+import web.user.pojo.User;
+
+@Data
 public class Core implements Serializable {
 	private static final long serialVersionUID = 1457755989409740329L;
 	private boolean successful;
 	private String message;
-	
-	public Core() {
+
+	public User selectUserById(Integer userId) {
+		return null;
 	}
 
-	public Core(boolean successful, String message) {
-		this.successful = successful;
-		this.message = message;
+	public int insert(User pojo) {
+		return 0;
 	}
 
-	public boolean isSuccessful() {
-		return successful;
+	public int deleteById(Integer id) {
+		return 0;
 	}
 
-	public void setSuccessful(boolean successful) {
-		this.successful = successful;
+	public int update(User pojo) {
+		return 0;
 	}
 
-	public String getMessage() {
-		return message;
+	public User selectById(Integer id) {
+		return null;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public List<User> selectAll() {
+		return null;
 	}
+
+	public User selectForLogin(String useremail, String password) {
+		return null;
+	}
+
+	public int insert(Object pojo) {
+		return 0;
+	}
+
+	public int deleteById(Object id) {
+		return 0;
+	}
+
+	public int update(Object pojo) {
+		return 0;
+	}
+
+	public Object selectById(Object id) {
+		return null;
+	}
+
 }

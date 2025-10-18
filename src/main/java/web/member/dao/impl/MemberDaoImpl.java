@@ -15,7 +15,7 @@ public class MemberDaoImpl implements MemberDao {
 	private DataSource ds;
 	
 	public MemberDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/javaFramework");
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/group1project");
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class MemberDaoImpl implements MemberDao {
 			try (
 				ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					member = new Member();
+					member = new Member(); //不再讓 member 指向原本傳進來的物件，而是讓它指向一個全新的 Member 物件。
 					member.setId(rs.getInt("ID"));
 					member.setUsername(rs.getString("USERNAME"));
 					member.setPassword(rs.getString("PASSWORD"));

@@ -1,5 +1,12 @@
 package web.user.dao;
 
-public interface UserDao {
+import core.dao.CoreDao;
+import web.user.pojo.User;
+
+public interface UserDao extends CoreDao<User, Integer>{
+
+	User selectUserById(Integer userId);
+
+	User selectForLogin(String useremail, String password);
 
 }
