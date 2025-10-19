@@ -7,6 +7,6 @@ public interface UserDao extends CoreDao<User, Integer>{
 
 	User selectUserById(Integer userId);
 
-	User selectForLogin(String useremail, String password);
+	User selectForLogin(String email, String password);
 
 }

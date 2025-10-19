@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.google.gson.Gson;
-//import com.google.gson.JsonObject;
 
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
@@ -53,7 +51,7 @@ public class NewOrderServlet extends HttpServlet{
 //		response.getWriter().write(json);
 		
 
-		//import static 套件寫法
+		//import static 套件寫法		
 		Orders orders = json2Pojo(request, Orders.class);
 		orders = orderservice.payment(orders);
 		writePojo2Json(response, orders);
