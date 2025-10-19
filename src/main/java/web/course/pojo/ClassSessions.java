@@ -1,5 +1,39 @@
 package web.course.pojo;
 
-public class ClassSessions {
+import java.time.LocalDateTime;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "CLASS_SESSIONS")
+public class ClassSessions {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SESSION_ID")
+	private Integer sessionId;
+	@Column(name = "COURSE_ID")
+	private Integer courseId;
+	@Column(name = "SESSION_DATE")
+	private Date session_date; 
+	@Column(name = "TIME_SLOT")
+	private Integer timeSlot;
+	@Column(name = "CHECKIN_AT")
+	private LocalDateTime checkinAt;
+	@Column(name = "CHECKIN_OUT")
+	private LocalDateTime checkinOut;
 }

@@ -1,5 +1,10 @@
 package web.order.service;
 
-public interface OrderService {
+import core.service.CoreService;
+import web.order.pojo.Orders;
+
+public interface OrderService extends CoreService{
+	
+	Orders payment(Orders orders);
 
 }
