@@ -9,9 +9,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import web.course.dao.CourseDao;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.member.pojo.Member;
 
 public class CourseDaoImpl implements CourseDao {
 
@@ -36,21 +39,32 @@ public class CourseDaoImpl implements CourseDao {
 	}
 
 	@Override
-	public int update(Course pojo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Course course) {
+		final StringBuilder hql = new StringBuilder()
+				.append("update Course set ")
+				.append("approvalStatus = :approvalStatus ")
+				.append("where courseId = :courseId");
+		
+		Session session = getSession();
+		Query<?> query = session.createQuery(hql.toString());
+		
+		return query
+				.setParameter("approvalStatus", course.getApprovalStatus())
+				.setParameter("courseId", course.getCourseId())
+				.executeUpdate();
 	}
 
 	@Override
 	public Course selectById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().get(Course.class, id);
 	}
 
 	@Override
 	public List<Course> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		final String hql = "FROM Course ORDER BY courseId";
+		return getSession()
+				.createQuery(hql, Course.class)
+				.getResultList();
 	}
 	
 	
