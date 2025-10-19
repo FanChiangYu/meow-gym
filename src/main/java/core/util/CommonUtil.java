@@ -11,12 +11,21 @@ import java.sql.SQLException;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 public class CommonUtil {
-	
+
+	public static <T> T getBean(ServletContext sc, Class<T> clazz) {
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(sc);
+		return context.getBean(clazz);
+	}
+
 	public static Connection getConnection() throws NamingException, SQLException {
 		if (DATASOURCE == null) {
 			DATASOURCE = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/GROUP1_PROJECT");
