@@ -19,7 +19,7 @@ import web.blacklist.service.impl.BlackListServiceImpl;
 import web.user.pojo.User;
 
 
-@WebServlet("/blacklist/webBlock")
+@WebServlet("/blacklist/showList")
 public class ShowListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BlackListService blackListService;

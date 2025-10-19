@@ -4,9 +4,8 @@ import java.util.List;
 
 import web.user.pojo.User;
 
-public interface BlackListDao {
-//	int insert(User user);
 
+public interface BlackLiskDao {
 	List<User> selectAll();
 
 	int update(User user);

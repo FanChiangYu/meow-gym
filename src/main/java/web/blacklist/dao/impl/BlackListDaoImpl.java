@@ -10,10 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import web.blacklist.dao.BlackListDao;
+import web.blacklist.dao.BlackLiskDao;
 import web.user.pojo.User;
 
-public class BlackListDaoImpl implements BlackListDao {
+public class BlackListDaoImpl implements BlackLiskDao {
 	private DataSource ds;
 
 	public BlackListDaoImpl() throws NamingException {
@@ -72,5 +72,4 @@ public class BlackListDaoImpl implements BlackListDao {
 		}
 		return -1;
 	}
-
 }
