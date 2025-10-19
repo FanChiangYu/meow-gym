@@ -1,6 +1,7 @@
-package web.user.controller;
+package web.course.controller;
 
 import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 
 import java.io.IOException;
 
@@ -13,29 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import web.user.pojo.User;
-import web.user.service.UserService;
-import web.user.service.impl.UserServiceImpl;
+import netscape.javascript.JSObject;
+import web.course.pojo.Course;
+import web.course.service.CourseService;
+import web.course.service.impl.CourseServiceImpl;
 
-@WebServlet("/user/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/course/auditCourse")
+public class auditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserService userService;
-
+private CourseService service;
+	
 	@Override
 	public void init() throws ServletException {
 		try {
-			userService = new UserServiceImpl();
+			service = new CourseServiceImpl();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = json2Pojo(req, User.class);
+		Course course = json2Pojo(req, Course.class);
 		JsonObject obj = new JsonObject();
-		User message = userService.login(user);
-		obj.add("", obj);
+		String message = service.modify(course);
+		obj.addProperty("message", message);
+		writePojo2Json(resp, obj);
 	}
+
 }

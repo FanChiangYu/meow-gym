@@ -17,5 +17,13 @@ public interface CourseService extends CoreService {
 	
 	JsonObject apply(List<CourseRecurringRules> rules, Integer id);
 	
+	JsonObject removeById(Integer id);
+	
 	String getFileName(Part part);
+	
+	List<Course> findAll();
+	
+	Course find(Course cousre);
+	
+	String modify(Course cousre);
 }
