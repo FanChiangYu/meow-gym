@@ -43,8 +43,6 @@ public class getChat extends HttpServlet {
 
 		Integer courseidinteger = Integer.valueOf(result);
 
-		System.out.println("courseId to chats" + " " + courseidinteger); // 檢查 >> null >> 有誤
-
 		//List<Chats> allchats = chatDao.selectChatsByCourseId(courseidinteger); // 已將courseId字串轉為Integer
 		
 		//取出對應的聊天

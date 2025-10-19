@@ -38,14 +38,13 @@ public class GetUserCourseid extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// session原本就有，用舊的就好
 		HttpSession session = req.getSession(false);
-		System.out.println("GetUserCourseidServlet" + session);
-
+	
 		// if (session != null || session.getAttribute("user") == null) {
 		if (session != null) {
 			// 從 session 取出登入者資訊,一定只有一筆!
 			User loginUser = (User) session.getAttribute("user");
 			int userid = loginUser.getUserId();
-			System.out.println("GetUserCourseid loginUserID" + loginUser.getUserId());
+			
 
 			// selectUserCourseId方法
 			// 將登入者的userid，查詢session_users表格的courseid

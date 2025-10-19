@@ -37,8 +37,7 @@ public class ChatEndpoint {
 		System.out.println("Client connected: " + session.getId());
 		this.config = config;
 		SESSION_SET.add(session); // A會員登入，add。B會員登入，add
-		System.out.println("SESSION_SET" + SESSION_SET);
-		System.out.println(getUsername() + "已連線");
+		
 
 	}
 
@@ -46,8 +45,6 @@ public class ChatEndpoint {
 	public void onMessage(String message, Session session) throws IOException {
 		System.out.println("onMessage session" + session);
 		System.out.println("Received message: " + message);
-		// session.getBasicRemote().sendText("Echo: " + message);
-		//session.getAsyncRemote().sendText("Echo: " + message);
 
 		for (Session session1 : SESSION_SET) {
 			if (session1.isOpen()) {
