@@ -45,10 +45,10 @@ public class UploadFileServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Gson gson = new Gson();
 //		fileRootPath = getServletContext().getRealPath("/img/");
-		fileRootPath = System.getProperty("catalina.home") + "/webapps/meow-gym/img/";
+		fileRootPath = System.getProperty("catalina.home") + "/img/";
 //		fileRootPath = "/Users/fanjiangyu/sts3-workspace/meow-gym/src/main/webapp/img/course/";
-		System.out.println(getServletContext().getRealPath("/img/"));
-		System.out.println(fileRootPath);
+//		System.out.println(getServletContext().getRealPath("/img/"));
+//		System.out.println(fileRootPath);
 		JsonObject respbody = new JsonObject();
 		Part part = req.getPart("file");
 		
@@ -69,8 +69,8 @@ public class UploadFileServlet extends HttpServlet{
 			
 			Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
 //			fileRootPath = fileRootPath + service.getFileName(part);
-//			fileRootPath = System.getProperty("catalina.home") +"/img/" + service.getFileName(part);
-			fileRootPath = req.getContextPath() +"/img/" + service.getFileName(part);
+			fileRootPath = System.getProperty("catalina.home") +"/img/" + service.getFileName(part);
+//			fileRootPath = req.getContextPath() +"/img/" + service.getFileName(part);
 			respbody.addProperty("success", true);
 			respbody.addProperty("url", fileRootPath);
 			
@@ -88,12 +88,5 @@ public class UploadFileServlet extends HttpServlet{
 			writePojo2Json(resp, respbody);
 		}
 	}
-	
-//	private String getFilename(Part part) {
-//		String fileDesc = part.getHeader("Content-Disposition");
-//		int index = fileDesc.indexOf("filename=\"");
-//		String fileName = fileDesc.substring(index + 10, fileDesc.length() - 1);
-//		return FilenameUtils.getName(fileName);
-//	}
 
 }
