@@ -1,16 +1,26 @@
 package web.user.service.impl;
 
+import javax.naming.NamingException;
+
+import web.user.dao.UserDao;
+import web.user.dao.impl.UserDaoImpl;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
+	private UserDao dao;
+
+	public UserServiceImpl() throws NamingException {
+		dao = new UserDaoImpl();
+	}
+
 	@Override
 	public User login(User user) {
-		final String useremail = user.getEmail();
+		final String email = user.getEmail();
 		final String password = user.getPassword();
 
-		if (useremail == null) {
+		if (email == null) {
 			user.setMessage("使用者名稱未輸入");
 			user.setSuccessful(false);
 			return user;
@@ -21,6 +31,8 @@ public class UserServiceImpl implements UserService {
 			user.setSuccessful(false);
 			return user;
 		}
+
+		dao.selectForLogin(email, password);
 
 		user.setMessage("登入成功");
 		user.setSuccessful(true);
