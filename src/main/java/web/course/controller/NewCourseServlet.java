@@ -38,10 +38,6 @@ public class NewCourseServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Gson gson = new Gson();
-//		Course course = gson.fromJson(request.getReader(), Course.class);
-		
-//		Course course = json2Pojo(request, Course.class);
 		JsonObject respbody = new JsonObject();
 		NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
 		Course course = newCourseRequest.getCourse();
@@ -55,21 +51,6 @@ public class NewCourseServlet extends HttpServlet{
 		} else {
 			writePojo2Json(response, course);
 		}
-////		JsonObject jsonObject = new JsonObject();
-		
-//		if(errorMessage != null) {
-//			jsonObject.addProperty("success", false);
-//			jsonObject.addProperty("errorMessage", errorMessage);
-//		} else {
-//			jsonObject.addProperty("success", true);
-//			jsonObject.addProperty("title", course.getTitle());
-//		}
-		
-		
-//		String json = gson.toJson(course);
-//		response.setContentType("application/json");
-//		response.getWriter().write(json);
-//		writePojo2Json(response, course);
 	}
 	
 

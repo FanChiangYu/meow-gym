@@ -95,9 +95,6 @@ public class CourseServiceImpl implements CourseService {
 		
 		long dateDiff = (dateEnd.getTime() - dateStart.getTime()) / (1000 * 60 * 60 * 24);
 		
-//		System.out.println(dateStart);
-//		System.out.println(dateEnd);
-//		System.out.println(dateDiff);
 		if(dateDiff < 30) {
 			course.setMessage("結束日期需大於開始日期30天");
 			course.setSuccessful(false);
@@ -106,35 +103,22 @@ public class CourseServiceImpl implements CourseService {
 		
 		course.setCoachId(1); // 暫定
 		course.setApprovalStatus("待審核");
-//		beginTx();
 		int count = dao.insert(course);
 		if(count == 1) {
 			course.setMessage("送出成功");
 			course.setSuccessful(true);
-//			commit();
 		} else {
 			course.setMessage("送出失敗");
 			course.setSuccessful(false);
-//			rollback();
 		}
 		
 		return course;
 	}
 
 	@Override
-	public String getFileName(Part part) {
-		String fileDesc = part.getHeader("Content-Disposition");
-		int index = fileDesc.indexOf("filename=\"");
-		String fileName = fileDesc.substring(index + 10, fileDesc.length() - 1);
-		return FilenameUtils.getName(fileName);
-	}
-
-	@Override
 	public JsonObject apply(List<CourseRecurringRules> rules, Integer id) {
 		JsonObject result = new JsonObject();
-//		beginTx();
 		for (CourseRecurringRules rule : rules) {
-//			rule.setRuleId(id);
 			rule.setCourseId(id);
 			if(rule.getWeekday() == null) {
 				result.addProperty("successful", false);
@@ -152,20 +136,16 @@ public class CourseServiceImpl implements CourseService {
 			if(count != 1) {
 				result.addProperty("successful", false);
 				result.addProperty("message", "送出失敗");
-//				rollback();
 				return result;
 			}
 		}
 		result.addProperty("successful", true);
 		result.addProperty("Message", "送出成功");
-//		commit();
 		return result;
 	}
 
 	@Override
 	public JsonObject removeById(Integer id) {
-		
-
 		return null;
 	}
 

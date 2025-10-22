@@ -39,24 +39,6 @@ fetch('reviewCourseList')
 	.then(courses => {
 
 		for (let course of courses) {
-      // let approvalLabel;
-
-      // switch(course.approvalStatus){
-      //   case "待審核":
-      //     approvalLabel = "bg-label-info";
-      //     break;
-
-      //   case "通過":
-      //     approvalLabel = "bg-label-success";
-      //     break;  
-
-      //   case "不通過":
-      //     approvalLabel = "bg-label-danger";
-      //     break;
-
-      //   default:
-      //     approvalLabel = "bg-label-secondary"
-      // }
 
 			tbody.innerHTML += `
       <tr>
@@ -108,7 +90,7 @@ fetch('reviewCourseList')
         if(course.successful){
 
           Swal.fire({
-            title: '快樂瑜伽',
+            title: course.title,
             html: `
               <div style="text-align:left">
                 <p>課程ID: ${course.courseId}</p>
@@ -126,8 +108,7 @@ fetch('reviewCourseList')
                 <p>課程定價: <strong>${course.coursePrice}</strong></p>
               </div>
             `,
-            // imageUrl: '../img/result.png',
-            // imageUrl: 'http://localhost:8080/meow-gym/img/result.png',
+            // imageUrl: '/meow-gym/getImg?file=' + course.imgUrl,
             imageUrl: course.imgUrl,
             imageWidth: 500,
             // imageHeight: 500,
@@ -156,7 +137,7 @@ fetch('reviewCourseList')
                   approvalStatus: '通過'
                 }),
               })
-              .then(resp => location.reload());
+              .then(() => location.reload());
             } else if(result.isDenied) {
               console.log('不通過');
               fetch('auditCourse', {
@@ -167,7 +148,7 @@ fetch('reviewCourseList')
                   approvalStatus: '不通過'
                 }),
               })
-              .then(resp => location.reload());
+              .then(() => location.reload());
             } else {
               console.log('取消');
             }
@@ -185,7 +166,6 @@ fetch('reviewCourseList')
 
         }
         
-
       });
 
   }

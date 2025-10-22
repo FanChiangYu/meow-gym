@@ -19,8 +19,6 @@ public interface CourseService extends CoreService {
 	
 	JsonObject removeById(Integer id);
 	
-	String getFileName(Part part);
-	
 	List<Course> findAll();
 	
 	Course find(Course cousre);
