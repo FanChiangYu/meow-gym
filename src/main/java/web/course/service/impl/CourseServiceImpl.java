@@ -1,29 +1,36 @@
 package web.course.service.impl;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import core.util.FileUtil;
 
 import javax.naming.NamingException;
 import javax.servlet.http.Part;
 
-import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
 
+import web.coach.pojo.CoachProfiles;
 import web.course.dao.CourseDao;
 import web.course.dao.impl.CourseDaoImpl;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.service.CourseService;
-import web.member.pojo.Member;
 
+import web.user.pojo.User;
+
+@Service
+@Transactional
 public class CourseServiceImpl implements CourseService {
+	@Autowired
 	private CourseDao dao;
-	
-	public CourseServiceImpl() throws NamingException{
-		dao = new CourseDaoImpl();
-	}
 
 	@Override
 	public Course apply(Course course) {
@@ -151,7 +158,12 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public List<Course> findAll() {
-		return dao.selectAll();
+		List<Course> courses = dao.selectAll();
+		for (Course course : courses) {
+			String userName = findName(course);
+			course.setCoachName(userName);
+		}
+		return courses;
 	}
 
 	@Override
@@ -170,6 +182,45 @@ public class CourseServiceImpl implements CourseService {
 	public String modify(Course cousre) {
 		int count = dao.update(cousre);
 		return count > 0 ? "更新成功" : "更新失敗";
+	}
+	
+	@Override
+	public String addTimestampToFileName(String fileName) {
+		int dotIndex = fileName.lastIndexOf(".");
+		String extension = fileName.substring(dotIndex);
+		String baseName = fileName.substring(0, dotIndex);
+		String timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
+                			.format(new java.util.Date());
+
+		return baseName + "_" + timestamp + extension;
+	}
+
+	@Override
+	public boolean writeToImgPath(Part part) {
+		try {
+			String filename = FileUtil.getFileName(part);
+			filename = addTimestampToFileName(filename);
+			Path path = Paths.get(FileUtil.IMG_ROOT_PATH, filename);
+			byte[] bytes = part.getInputStream().readAllBytes();
+			Files.write(path, bytes);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public String findName(Course cousre) {
+		cousre = dao.selectById(cousre.getCourseId());
+		CoachProfiles coachProfiles = dao.selectByCoachId(cousre.getCoachId());
+		User user = dao.selectByUserId(coachProfiles.getUserId());
+		return user.getName();
+	}
+
+	@Override
+	public List<CourseRecurringRules> findRules(Course cousre) {
+		return dao.selectByCourseId(cousre.getCourseId());
 	}
 
 	

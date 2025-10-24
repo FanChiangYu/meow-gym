@@ -23,5 +23,13 @@ public interface CourseService extends CoreService {
 	
 	Course find(Course cousre);
 	
+	String findName(Course cousre);
+	
 	String modify(Course cousre);
+	
+	String addTimestampToFileName (String fileName);
+	
+	boolean writeToImgPath(Part part);
+	
+	List<CourseRecurringRules> findRules (Course cousre);
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
+import core.util.CommonUtil;
 import web.course.pojo.Course;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
@@ -24,12 +25,8 @@ public class AuditCourseServlet extends HttpServlet {
 	private CourseService service;
 
 	@Override
-	public void init() throws ServletException {
-		try {
-			service = new CourseServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public void init() throws ServletException {		
+		service = CommonUtil.getBean(getServletContext(), CourseService.class);
 	}
 
 	@Override

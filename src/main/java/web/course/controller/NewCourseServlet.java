@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import core.util.CommonUtil;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.NewCourseRequest;
@@ -29,11 +30,7 @@ public class NewCourseServlet extends HttpServlet{
 	
 	@Override
 	public void init() throws ServletException {
-		try {
-			service = new CourseServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		service = CommonUtil.getBean(getServletContext(), CourseService.class);
 	}
 	
 	@Override

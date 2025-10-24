@@ -15,10 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.util.CommonUtil;
 import web.course.pojo.Course;
+import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.CourseResponse;
 import web.course.pojo.NewCourseRequest;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
+import web.member.service.MemberService;
 
 @WebServlet("/course/reviewCourseList")
 public class ReviewCourseListServlet extends HttpServlet{
@@ -27,11 +31,7 @@ public class ReviewCourseListServlet extends HttpServlet{
 	
 	@Override
 	public void init() throws ServletException {
-		try {
-			service = new CourseServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		service = CommonUtil.getBean(getServletContext(), CourseService.class);	
 	}
 	
 	@Override
@@ -43,8 +43,14 @@ public class ReviewCourseListServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		CourseResponse courseResponse = new CourseResponse();
 		Course course = json2Pojo(req, Course.class);
 		course = service.find(course);
-		writePojo2Json(resp, course);
+		String userName = service.findName(course);
+		List<CourseRecurringRules> rules = service.findRules(course);
+		courseResponse.setCourse(course);
+		courseResponse.setUserName(userName);
+		courseResponse.setRules(rules);
+		writePojo2Json(resp, courseResponse);
 	}
 }
