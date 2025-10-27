@@ -26,13 +26,15 @@ public class GetUserCourseid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ChatDao chatDao;
 
+	
 	@Override
 	public void init() throws ServletException {
-		try {
-			chatDao = new ChatDaoImpl();
-		} catch (Exception e) {
-			throw new ServletException("DAO init failed", e);
-		}
+//		try {
+//			chatDao = new ChatDaoImpl();
+//		} catch (Exception e) {
+//			throw new ServletException("DAO init failed", e);
+//		}
+				
 	}
 
 	@Override
