@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import core.util.FileUtil;
@@ -20,10 +22,12 @@ import com.google.gson.JsonObject;
 import web.coach.pojo.CoachProfiles;
 import web.course.dao.CourseDao;
 import web.course.dao.impl.CourseDaoImpl;
+import web.course.pojo.ClassResponse;
+import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.service.CourseService;
-
+import web.order.pojo.Orders;
 import web.user.pojo.User;
 
 @Service
@@ -123,10 +127,12 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public JsonObject apply(List<CourseRecurringRules> rules, Integer id) {
+	public JsonObject apply(List<CourseRecurringRules> rules, Course course) {
 		JsonObject result = new JsonObject();
+		List<Date> dates = new ArrayList<>();
+		
 		for (CourseRecurringRules rule : rules) {
-			rule.setCourseId(id);
+			rule.setCourseId(course.getCourseId());
 			if(rule.getWeekday() == null) {
 				result.addProperty("successful", false);
 				result.addProperty("message", "未選擇星期");
@@ -138,13 +144,35 @@ public class CourseServiceImpl implements CourseService {
 				result.addProperty("message", "未選擇時段");
 				return result;
 			}
-			System.out.println(id);
+//			System.out.println(course.getCourseId());
 			int count = dao.insert(rule);
 			if(count != 1) {
 				result.addProperty("successful", false);
 				result.addProperty("message", "送出失敗");
 				return result;
 			}
+			
+			// insert class_session表格處理
+			dates = findDateOfWeekday(course, rule);
+			if(dates == null) {
+				result.addProperty("successful", false);
+				result.addProperty("message", "送出失敗");
+				return result;
+			}
+			
+			for (Date date : dates) {
+				ClassSessions classSessions = new ClassSessions();
+				classSessions.setCourseId(course.getCourseId());
+				classSessions.setSessionDate(date);
+				classSessions.setTimeSlot(rule.getTimeSlot());
+				int cCount = dao.insert(classSessions);
+				if(cCount != 1) {
+					result.addProperty("successful", false);
+					result.addProperty("message", "送出失敗");
+					return result;
+				}
+			}
+			
 		}
 		result.addProperty("successful", true);
 		result.addProperty("Message", "送出成功");
@@ -223,6 +251,77 @@ public class CourseServiceImpl implements CourseService {
 		return dao.selectByCourseId(cousre.getCourseId());
 	}
 
+	@Override
+	public List<Date> findDateOfWeekday(Course course, CourseRecurringRules rule) {
+		List<Date> result = new ArrayList<>();
+		int diff;
+		
+		Calendar calendar = Calendar.getInstance();  // 實例化
+		calendar.setTime(course.getDateStart()); // 設定起始日期
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);  // 起始日期在星期幾
+		
+		switch (rule.getWeekday()) {
+			case 1:
+				diff = Calendar.MONDAY - dayOfWeek;
+				break;
+			case 2:
+				diff = Calendar.TUESDAY - dayOfWeek;
+				break;
+			case 3:
+				diff = Calendar.WEDNESDAY - dayOfWeek;
+				break;
+			case 4:
+				diff = Calendar.THURSDAY - dayOfWeek;
+				break;
+			case 5:
+				diff = Calendar.FRIDAY - dayOfWeek;
+				break;
+			case 6:
+				diff = Calendar.SATURDAY - dayOfWeek;
+				break;
+			case 7:
+				diff = Calendar.SUNDAY - dayOfWeek;
+				break;
+			default:
+				return null;
+		}
+		
+		if (diff < 0) {
+			diff += 7; // 若起始日期已超過這週，跳到下週
+		}
+		calendar.add(Calendar.DAY_OF_MONTH, diff);
+		
+		// 逐週增加直到超過結束日
+		while (!calendar.getTime().after(course.getDateEnd())) {
+			result.add(calendar.getTime());
+			calendar.add(Calendar.DAY_OF_MONTH, 7); // 加一週
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<ClassResponse> findClass(Integer id) {
+		List<Orders> orders = new ArrayList<>();
+		List<ClassResponse> classResponses = new ArrayList<>();
+		// 尋找訂單是否有已購買課程
+		orders = dao.selectOrderByUserId(id);
+		for (Orders order : orders) {
+			List<Integer> courseIds = dao.selectCourseIdByOrderId(order.getOrderId()); // 從Orderitems找CourseId
+			for (Integer couseId : courseIds) {
+				ClassResponse classResponse = new ClassResponse(); 
+				Course course = dao.selectById(couseId); // 找課程
+				List<ClassSessions> classSessions = dao.selectClassSessionBycourseID(couseId); // 找班次
+				// 全部放到ClassResponse物件
+				classResponse.setCourse(course);
+				classResponse.setCoachName(findName(course)); // 找教練名
+				classResponse.setClassSessions(classSessions);
+				classResponses.add(classResponse); // 放到List
+			}
+		}
+		
+		return classResponses;
+	}
 	
 
 }

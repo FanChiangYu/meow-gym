@@ -1,5 +1,8 @@
 package web.course.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -10,8 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import web.coach.pojo.CoachProfiles;
 import web.course.dao.CourseDao;
+import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.order.pojo.Orderitems;
+import web.order.pojo.Orders;
 import web.user.pojo.User;
 
 @Repository
@@ -30,6 +36,12 @@ public class CourseDaoImpl implements CourseDao {
 	public int insert(CourseRecurringRules courseRecurringRules) {
 //		courseRecurringRules.setRuleId(null); // 回到暫態
 		session.persist(courseRecurringRules);
+		return 1;
+	}
+	
+	@Override
+	public int insert(ClassSessions classSessions) {
+		session.persist(classSessions);
 		return 1;
 	}
 
@@ -82,6 +94,48 @@ public class CourseDaoImpl implements CourseDao {
 		final String hql = "FROM CourseRecurringRules WHERE courseId = :courseId ORDER BY ruleId";
 		return session
 				.createQuery(hql, CourseRecurringRules.class)
+				.setParameter("courseId", id)
+				.getResultList();
+	}
+
+	@Override
+	public List<Orders> selectOrderByUserId(Integer id) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Orders WHERE ")
+				.append("userId = :userId ")
+				.append("AND status = :status ")
+				.append("ORDER BY orderId");
+		
+		return session
+				.createQuery(hql.toString(), Orders.class)
+				.setParameter("userId", id)
+				.setParameter("status", "PAID")
+				.getResultList();
+	}
+
+	@Override
+	public List<Integer> selectCourseIdByOrderId(Integer id) {
+		final StringBuilder hql = new StringBuilder()
+				.append("SELECT courseId ")
+				.append("FROM Orderitems ")
+				.append("WHERE orderId = :orderId ")
+				.append("ORDER BY courseId");
+		
+		return session
+				.createQuery(hql.toString(), Integer.class)
+				.setParameter("orderId", id)
+				.getResultList();
+	}
+
+	@Override
+	public List<ClassSessions> selectClassSessionBycourseID(Integer id) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM ClassSessions ")
+				.append("WHERE courseId = :courseId ")
+				.append("ORDER BY sessionId");
+		
+		return session
+				.createQuery(hql.toString(), ClassSessions.class)
 				.setParameter("courseId", id)
 				.getResultList();
 	}

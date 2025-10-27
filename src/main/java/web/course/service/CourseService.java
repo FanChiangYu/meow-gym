@@ -1,5 +1,6 @@
 package web.course.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Part;
@@ -8,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import core.service.CoreService;
 import netscape.javascript.JSObject;
+import web.course.pojo.ClassResponse;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 
@@ -15,7 +17,7 @@ public interface CourseService extends CoreService {
 	
 	Course apply(Course course);
 	
-	JsonObject apply(List<CourseRecurringRules> rules, Integer id);
+	JsonObject apply(List<CourseRecurringRules> rules, Course course);
 	
 	JsonObject removeById(Integer id);
 	
@@ -32,4 +34,8 @@ public interface CourseService extends CoreService {
 	boolean writeToImgPath(Part part);
 	
 	List<CourseRecurringRules> findRules (Course cousre);
+	
+	List<Date> findDateOfWeekday (Course course, CourseRecurringRules rule);
+	
+	List<ClassResponse> findClass (Integer id);
 }
