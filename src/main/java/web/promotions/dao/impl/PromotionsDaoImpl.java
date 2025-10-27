@@ -1,7 +1,32 @@
 package web.promotions.dao.impl;
 
-import web.promotions.dao.PromotionsDao;
+import java.util.List;
+import javax.persistence.PersistenceContext;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-public class PromotionsDaoImpl implements PromotionsDao{
+import web.promotions.dao.PromotionsDao;
+import web.promotions.pojo.CoursePromo;
+
+@Repository
+public class PromotionsDaoImpl implements PromotionsDao {
+	
+	@PersistenceContext
+	private Session session;
+	
+	@Override
+	public List<CoursePromo> selectPromo() {
+		final String hql = "FROM CoursePromo";
+		return session
+				.createQuery(hql, CoursePromo.class)
+				.getResultList();
+	}
+
+	@Override
+	public int insert(CoursePromo coursePromo) {
+		session.persist(coursePromo);
+		return 1;
+	}
+	
 
 }
