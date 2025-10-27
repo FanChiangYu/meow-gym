@@ -1,5 +1,54 @@
 // document.addEventListener("DOMContentLoaded", function(){
 const tbody = document.querySelector('#course-table-body');
+const userMenu = document.querySelector('#user-menu');
+const coachMenu = document.querySelector('#coach-menu');
+const adminMenu = document.querySelector('#admin-menu');
+const userName = document.querySelector('#user-name');
+const avatarImg = document.querySelector('#user-avatar');
+const shoppingCart = document.querySelector('#shopping-cart');
+
+// 1a. 用fetch向後端取得roleId(角色ID)
+// 1b. 或從瀏覽器的sessionStorage取得roleId (如果登入時有存的話)
+// 2. 呼叫switchMenu(); 切換側邊欄顯示
+
+// roldId = 1 -> 一般會員
+// roldId = 2 -> 教練
+// roldId = 3 -> 管理者
+
+// 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
+let Id = 3;
+
+function switchMenu (roleId) {
+  switch (roleId) {
+    // 顯示會員列表
+    case 1: 
+      userMenu.classList.remove('d-none'); 
+      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+      break;
+  
+    // 顯示教練列表  
+    case 2:
+      coachMenu.classList.remove('d-none'); 
+      break;
+  
+    // 顯示管理者列表  
+    case 3:
+      adminMenu.classList.remove('d-none'); 
+      break;
+  
+    // 預設顯示會員列表
+    default:
+      userMenu.classList.remove('d-none'); 
+      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+      break;
+  }
+}
+
+switchMenu(Id); // 呼叫function切換側邊欄
+
+// 使用者名稱顯示同理，如果還無法向後端取得user table的name，一樣先寫死，改標籤內的顯示文字
+let uName = '金城武'; 
+userName.textContent = uName; // 修改標籤內使用者名稱文字
 
 function approvalLabel (status) {
   switch(status){
@@ -33,62 +82,119 @@ function roomName (number){
   }
 }
 
+function showWeekDay (weekday) {
+  switch (weekday) {
+    case 1:
+      return "星期一";
+
+    case 2:
+      return "星期二";
+    
+    case 3:
+      return "星期三";
+    
+    case 4:
+      return "星期四";
+    
+    case 5:
+      return "星期五";
+
+    case 6:
+      return "星期六";
+
+    case 7:
+      return "星期日";
+
+    default:
+      return "";
+  }
+}
+
+function showTimeSlot (timeSlot) {
+  switch (timeSlot) {
+    case 1:
+      return "8:00 ~ 9:00";
+
+    case 2:
+      return "9:00 ~ 10:00";
+    
+    case 3:
+      return "10:00 ~ 11:00";
+    
+    case 4:
+      return "11:00 ~ 12:00";
+    
+    case 5:
+      return "12:00 ~ 13:00";
+
+    case 6:
+      return "13:00 ~ 14:00";
+
+    case 7:
+      return "14:00 ~ 15:00";
+
+    case 8:
+      return "15:00 ~ 16:00";
+
+    case 9:
+      return "16:00 ~ 17:00";
+    
+    case 10:
+      return "17:00 ~ 18:00";
+    
+    case 11:
+      return "18:00 ~ 19:00";
+    
+    case 12:
+      return "19:00 ~ 20:00";
+
+    case 13:
+      return "20:00 ~ 21:00";
+
+    default:
+      return "";
+  }
+}
+
 // ------------ 載入課程審核表單 -----------------
 fetch('reviewCourseList')
 	.then(resp => resp.json())
 	.then(courses => {
 
 		for (let course of courses) {
-      // let approvalLabel;
+    
+      tbody.innerHTML += `
+        <tr>
+          <td>
+            <span class="text-heading">${course.courseId}</span>
+          </td>
+          <td>
+            <span class="text-heading">${course.title}</span>
+          </td>
+          <td>
+            <span class="text-truncate d-flex align-items-center text-heading">
+              <i class="icon-base ti tabler-user icon-md text-success me-2"></i>
+              ${course.coachName}
+            </span>
+          </td>
+          <td>
+            <span class="text-heading">${course.category}</span>
+          </td>
+          <td>
+            <span class="text-heading">${course.sessionQuota}堂</span>
+          </td>
+          <td>
+            <span class="text-heading">${course.coursePrice}</span>
+          </td>
+          <td>
+            <span class="badge ${approvalLabel(course.approvalStatus)}">${course.approvalStatus}</span>
+          </td>
+          <td>
+            <button onclick="auditById(${course.courseId})" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>
+          </td>
+        </tr>
+        `;
 
-      // switch(course.approvalStatus){
-      //   case "待審核":
-      //     approvalLabel = "bg-label-info";
-      //     break;
-
-      //   case "通過":
-      //     approvalLabel = "bg-label-success";
-      //     break;  
-
-      //   case "不通過":
-      //     approvalLabel = "bg-label-danger";
-      //     break;
-
-      //   default:
-      //     approvalLabel = "bg-label-secondary"
-      // }
-
-			tbody.innerHTML += `
-      <tr>
-        <td>
-          <span class="text-heading">${course.courseId}</span>
-        </td>
-        <td>
-          <span class="text-heading">${course.title}</span>
-        </td>
-        <td>
-          <span class="text-truncate d-flex align-items-center text-heading">
-            <i class="icon-base ti tabler-user icon-md text-success me-2"></i>
-            Maintainer
-          </span>
-        </td>
-        <td>
-          <span class="text-heading">${course.category}</span>
-        </td>
-        <td>
-          <span class="text-heading">${course.sessionQuota}堂</span>
-        </td>
-        <td>
-          <span class="text-heading">${course.coursePrice}</span>
-        </td>
-        <td>
-          <span class="badge ${approvalLabel(course.approvalStatus)}">${course.approvalStatus}</span>
-        </td>
-        <td>
-          <button onclick="auditById(${course.courseId})" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>
-        </td>
-      </tr>
-			`;
 		}
 	});
 
@@ -103,32 +209,39 @@ fetch('reviewCourseList')
         }),
       })
       .then(resp => resp.json())
-      .then(course => {
+      .then(courseResponse => {
+        
+        if(courseResponse.course.successful){
 
-        if(course.successful){
+          let rulesHtml = '';
+
+          courseResponse.rules.forEach((rule, index) => {
+            rulesHtml += `
+              <p>課程規則${index + 1}: ${showWeekDay(rule.weekday)} ${showTimeSlot(rule.timeSlot)}</p>
+            `;
+          });
 
           Swal.fire({
-            title: '快樂瑜伽',
+            title: courseResponse.course.title,
             html: `
               <div style="text-align:left">
-                <p>課程ID: ${course.courseId}</p>
-                <p>教練: 王小美</p>
-                <p>類別: ${course.category}</p>
-                <p>堂數: ${course.sessionQuota}堂</p>
-                <p>教室: ${roomName(course.roomId)}</p>
-                <p>開始日期: ${new Date(course.dateStart).toLocaleDateString('zh-TW')}</p>
-                <p>結束日期: ${new Date(course.dateEnd).toLocaleDateString('zh-TW')}</p>
+                <p>課程ID: ${courseResponse.course.courseId}</p>
+                <p>教練: ${courseResponse.userName}</p>
+                <p>類別: ${courseResponse.course.category}</p>
+                <p>堂數: ${courseResponse.course.sessionQuota}堂</p>
+                <p>上課人數上限: ${courseResponse.course.capacityMax}人</p>
+                <p>教室: ${roomName(courseResponse.course.roomId)}</p>
+                <p>開始日期: ${new Date(courseResponse.course.dateStart).toLocaleDateString('zh-TW')}</p>
+                <p>結束日期: ${new Date(courseResponse.course.dateEnd).toLocaleDateString('zh-TW')}</p>
                 <p>課程介紹:</p>
-                <p>${course.description}</p>
-                <p>課程規則1: 星期一 9:00 ~ 10:00</p>
-                <p>課程規則2: 星期三 17:00 ~ 18:00</p>
-                <p>審核狀態: <span class="badge ${approvalLabel(course.approvalStatus)}">${course.approvalStatus}</span></p>
-                <p>課程定價: <strong>${course.coursePrice}</strong></p>
+                <p>${courseResponse.course.description}</p>
+                ${rulesHtml}
+                <p>審核狀態: <span class="badge ${approvalLabel(courseResponse.course.approvalStatus)}">${courseResponse.course.approvalStatus}</span></p>
+                <p>課程定價: <strong>${courseResponse.course.coursePrice}</strong></p>
               </div>
             `,
-            // imageUrl: '../img/result.png',
-            // imageUrl: 'http://localhost:8080/meow-gym/img/result.png',
-            imageUrl: course.imgUrl,
+            // imageUrl: '/meow-gym/getImg?file=' + course.imgUrl,
+            imageUrl: courseResponse.course.imgUrl,
             imageWidth: 500,
             // imageHeight: 500,
             imageAlt: '課程圖片',
@@ -156,7 +269,7 @@ fetch('reviewCourseList')
                   approvalStatus: '通過'
                 }),
               })
-              .then(resp => location.reload());
+              .then(() => location.reload());
             } else if(result.isDenied) {
               console.log('不通過');
               fetch('auditCourse', {
@@ -167,7 +280,7 @@ fetch('reviewCourseList')
                   approvalStatus: '不通過'
                 }),
               })
-              .then(resp => location.reload());
+              .then(() => location.reload());
             } else {
               console.log('取消');
             }
@@ -185,7 +298,6 @@ fetch('reviewCourseList')
 
         }
         
-
       });
 
   }

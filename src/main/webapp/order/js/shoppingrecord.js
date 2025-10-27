@@ -1,7 +1,3 @@
-/**
- * app-ecommerce-order-list Script
- */
-
 'use strict';
 
 // Datatable (js)
@@ -13,26 +9,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
   bodyBg = config.colors.bodyBg;
   headingColor = config.colors.headingColor;
 
-  // Variable declaration for table
-
-  const dt_order_table = document.querySelector('.datatables-order'),
-    statusObj = {
-      1: { title: 'Dispatched', class: 'bg-label-warning' },
-      2: { title: 'Delivered', class: 'bg-label-success' },
-      3: { title: 'Out for Delivery', class: 'bg-label-primary' },
-      4: { title: 'Ready to Pickup', class: 'bg-label-info' }
-    },
-    paymentObj = {
-      1: { title: 'Paid', class: 'text-success' },
-      2: { title: 'Pending', class: 'text-warning' },
-      3: { title: 'Failed', class: 'text-danger' },
-      4: { title: 'Cancelled', class: 'text-secondary' }
-    };
-
-  // E-commerce Products datatable
+  // shoppingrecord
 
   if (dt_order_table) {
     const dt_products = new DataTable(dt_order_table, {
+      //改這裡
       ajax: assetsPath + 'json/ecommerce-customer-order.json', // JSON file to add data
       columns: [
         // columns according to JSON

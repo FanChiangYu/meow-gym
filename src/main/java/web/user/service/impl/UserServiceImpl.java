@@ -1,20 +1,20 @@
 package web.user.service.impl;
 
-import javax.naming.NamingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import web.user.dao.UserDao;
-import web.user.dao.impl.UserDaoImpl;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
 	private UserDao dao;
 
-	public UserServiceImpl() throws NamingException {
-		dao = new UserDaoImpl();
-	}
-
+	@Transactional
 	@Override
 	public User login(User user) {
 		final String email = user.getEmail();

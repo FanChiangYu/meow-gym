@@ -2,11 +2,8 @@ package core.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
-import core.util.HibernateUtil;
-
 public interface CoreDao<P, I> {
+	
 	int insert(P pojo);
 
 	int deleteById(I id);
@@ -16,8 +13,4 @@ public interface CoreDao<P, I> {
 	P selectById(I id);
 
 	List<P> selectAll();
-	
-	default Session getSession() {
-		return HibernateUtil.getSessionFactory().getCurrentSession();
-	}
 }
