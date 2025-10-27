@@ -1,6 +1,7 @@
 package web.user.controller;
 
 import static core.util.CommonUtil.json2Pojo;
+import static core.util.CommonUtil.writePojo2Json;
 
 import java.io.IOException;
 
@@ -34,8 +35,13 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User user = json2Pojo(req, User.class);
-		JsonObject obj = new JsonObject();
-		User message = userService.login(user);
-		obj.add("", obj);
+		User respbody = userService.login(user);
+
+		if (respbody.isSuccessful()) {
+			writePojo2Json(resp, respbody);
+		} else {
+			System.out.println("error");
+		}
+
 	}
 }

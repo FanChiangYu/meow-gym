@@ -24,7 +24,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
 	crossorigin="anonymous"></script>
-<script>
+
+<!-- <script>
 
 	//not concern for websocket
 	const input = document.querySelector(".chat-message");
@@ -40,16 +41,17 @@
 	let loginUser = null;//提前宣告，載入資料後，要把會員資料儲存在這裡
 	let currentCourseId = null;
 	let recentchats = null; //add
+	let ws = null; //add
 
 	// console.log(loginUser);
 
 	//不可用相對路徑
-	const ws = new WebSocket("ws://localhost:8080/meow-gym/chat");
-	//ws.onopen = () => ws.send("Hello from browser!");
+	//const ws = new WebSocket("ws://localhost:8080/meow-gym/chat");
 
-	ws.addEventListener("open", function () {
-		ws.send("Hello from browser!");
-	})
+	// ws.addEventListener("open", function () {
+	// 	//自己送一個訊息到後端
+	// 	ws.send("Hello from browser!");
+	// })
 
 	//把匿名函式指派給 ws 的 onmessage 屬性
 	//ws.onmessage = function(e){
@@ -57,50 +59,15 @@
 	//};
 
 	//也可以寫成
-	ws.addEventListener("message", function (e) {
-		console.log("Server:", e.data);
-		//chatplace.innerText = e.data; //????
+	// ws.addEventListener("message", function (e) {
+	// 	console.log("Server:", e.data);
+	// });
 
-		//add 
-		// 發出 fetch 請求抓聊天紀錄
-		// fetch(`/meow-gym/chat/getchat?courseId=${currentCourseId}`)
-		// 	.then(resp => resp.json())
-		// 	.then(body => {
-		// 		console.log(body);
-		// 		chatplace.innerHTML = ""; // 清空輸入過的內容
-		// 		console.log(body.chats);
+	// ws.addEventListener('close', e => alert('連線已關閉'));
+	// ws.addEventListener('error', e => alert('連線發生錯誤'));
 
-		// 		// 假設 body 是聊天紀錄陣列
-		// 		body.chats.forEach(chat => {
-		// 			chatplace.innerHTML += `
-		//             <div class="border p-2 mb-2">
-		//               <strong>${chat.name}</strong>：${chat.content}<br>
-		//               <small>${chat.createdAt}</small>
-		//             </div>`;
-		// 		});
-		// 	}).catch(err => console.error("載入聊天紀錄錯誤:", err));
-		//add end
-
-		recentchats.forEach(chat => {
-			chatplace.innerHTML += `
-		            <div class="border p-2 mb-2">
-		              <strong>${chat.name}</strong>：${chat.content}<br>
-		              <small>${chat.createdAt}</small>
-		            </div>`;
-		});
-
-		// chatplace.innerHTML += `
-		// 	    <div class="border p-2 mb-2">${e.data}</div>`;
-
-		
-	});
-
-	ws.addEventListener('close', e => alert('連線已關閉'));
-	ws.addEventListener('error', e => alert('連線發生錯誤'));
 
 	//載入頁面就開始從後端servlet抓資料
-	//路徑要搞清楚!!
-
 
 	//取得login資料
 	fetch('/meow-gym/user/info', {
@@ -114,6 +81,7 @@
 
 
 	//取得該user所有的courseId >> 搜尋session_users表格 >> 待改
+	//應該要放在ws onopen內做
 	fetch('/meow-gym/chat/getusercourseid', {
 		method: 'GET'
 	}).then(resp => resp.json())
@@ -135,6 +103,7 @@
 
 		});
 
+	// 分房間發fetch
 	classlist.addEventListener("click", function (e) {
 		if (e.target.classList.contains("course-link")) {
 			e.preventDefault(); // 阻止 a 連結的跳轉
@@ -142,32 +111,110 @@
 			const courseId = e.target.dataset.courseid;
 			currentCourseId = Number(courseId); // [CHANGED] 更新目前選擇的課程 ID	
 			console.log("載入課程:", courseId);
+			connectChat(courseId);
 
 			// 發出 fetch 請求抓聊天紀錄
-			fetch(`/meow-gym/chat/getchat?courseId=${courseId}`)
-				.then(resp => resp.json())
-				.then(body => {
-					console.log(body);
-					chatplace.innerHTML = ""; // 清空輸入過的內容
-					console.log(body.chats);
+			// fetch(`/meow-gym/chat/chat?courseId=${courseId}`)
+			// 	//下面5改用ws處理
+			// 	.then(resp => resp.json())
+			// 	.then(body => {
+			// 		console.log(body);
+			// 		chatplace.innerHTML = ""; // 清空輸入過的內容
+			// 		console.log(body.chats);
+			// 	}).catch(err => console.error("載入聊天紀錄錯誤:", err));
 
-					recentchats = body.chats; //將取出的陣列新增到全域變數
-
-					// 假設 body 是聊天紀錄陣列
-					body.chats.forEach(chat => {
-						chatplace.innerHTML += `
-		            <div class="border p-2 mb-2">
-		              <strong>${chat.name}</strong>：${chat.content}<br>
-		              <small>${chat.createdAt}</small>
-		            </div>`;
-					});
-				}).catch(err => console.error("載入聊天紀錄錯誤:", err));
 		}
 	});
 
-	console.log(currentCourseId); //undefined
+	//websocket 處理點擊 courseId 後的聊天紀錄載入
+	function connectChat(courseId) {
+		if (ws) {
+			ws.close();
+		};
+		chatplace.innerHTML = '';
+		currentCourseId = courseId; // global to store the currentCourseId.
+		console.log(currentCourseId); // show correctly
 
+		ws = new WebSocket(`ws://localhost:8080/meow-gym/chat?courseId=${courseId}`);
+
+		ws.addEventListener("open", function () {
+			//送一個訊息到後端 >> 不送了，免得又說不是JSON炸掉
+			//ws.send("Hello from browser!");
+		})
+
+		ws.onmessage = function (e) {
+			console.log("Server:", e);
+			let data;
+			//chatplace.innerHTML = "";
+			//console.log(JSON.parse(e.data));
+			const allMessages = JSON.parse(e.data);
+			console.log(allMessages);
+
+			for (let i = 0; i < allMessages.length; i++) {
+				chatplace.innerHTML += `
+				<div>
+				<span data-userid="${allMessages[i].userId}" data-name="${allMessages[i].name}"
+			       class="m-4 px-4 border">
+			       ${allMessages[i].name}:
+			    </span>
+			    <span data-courseid="${allMessages.courseId}" 
+			       class="m-4 px-4 border">
+			     ${allMessages[i].text}
+			    </span></div>`;
+			}
+		};
+
+		ws.addEventListener('close', e => alert('連線已關閉'));
+		ws.addEventListener('error', e => alert('連線發生錯誤'));
+
+	}
+
+	// ===== 發送訊息 =====
 	sendbutton.addEventListener("click", function () {
+
+		if (!loginUser) return alert('尚未登入，請重新登入');
+		if (!currentCourseId) return alert('請先選擇課程');
+
+		if (!ws || ws.readyState !== WebSocket.OPEN) {
+			alert('尚未連線聊天室');
+			return;
+		}
+
+		const text = input.value.trim();
+		if (!text) return;
+
+		 // 後端 @OnMessage 會解析並存 DB、廣播
+		ws.send(JSON.stringify({ type: 'chat', text:text }));// 送訊息到後端 ChatEndpoint.java
+		input.value = '';
+
+	});
+
+
+
+	// classlist.addEventListener("click", function (e) {
+	// 	if (e.target.classList.contains("course-link")) {
+	// 		e.preventDefault(); // 阻止 a 連結的跳轉
+
+	// 		const courseId = e.target.dataset.courseid;
+	// 		currentCourseId = Number(courseId); // [CHANGED] 更新目前選擇的課程 ID	
+	// 		console.log("載入課程:", courseId);
+
+	// 		// 發出 fetch 請求抓聊天紀錄
+	// 		fetch(`/meow-gym/chat/getchat?courseId=${courseId}`)
+	// 			.then(resp => resp.json())
+	// 			.then(body => {
+	// 				console.log(body);
+	// 				chatplace.innerHTML = ""; // 清空輸入過的內容
+	// 				console.log(body.chats);
+	// 				//這裡讓ws servlet去處理
+
+
+	// 			}).catch(err => console.error("載入聊天紀錄錯誤:", err));
+	// 	}
+	// });
+
+
+	/*sendbutton.addEventListener("click", function () {
 		ws.send(input.value);//改成下面
 
 		if (!loginUser) {
@@ -187,31 +234,33 @@
 		//add
 		// 立刻把這則訊息加到畫面最後（不用等後端回應）
 		// const now = new Date().toLocaleString();
-		chatplace.innerHTML += `
-			<div class="border p-2 mb-2">
-				<strong>${loginUser.name}</strong>：${input.value}<br>
-			</div>`;
+		// chatplace.innerHTML += `
+		// 	<div class="border p-2 mb-2">
+		// 		<strong>${loginUser.name}</strong>：${input.value}<br>
+		// 	</div>`;
 		//add end
 
 
 		//send the message to the controller
-		fetch('sendchat', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				//這四個欄位是準備送到後端的「留言資料」。而每一個欄位的值應該從哪裡來，取決於你的後端資料結構和登入邏輯。
-				//courseId: 10, //body.courseId >> Dao >> 資料庫
-				courseId: currentCourseId,
-				userId: loginUser.userId,//loginUser.userId, //body.userid? 3
-				coachId: 1, //body.coachId >> Dao >> 資料庫
-				content: input.value
-			})
-		}).then(resp => resp.json())
-			.then(body => {
-				console.log(body);
-			});
-	});
+		// fetch('sendchat', {
+		// 	method: 'POST',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({
+		// 		//這四個欄位是準備送到後端的「留言資料」。而每一個欄位的值應該從哪裡來，取決於你的後端資料結構和登入邏輯。
+		// 		//courseId: 10, //body.courseId >> Dao >> 資料庫
+		// 		courseId: currentCourseId,
+		// 		userId: loginUser.userId,//loginUser.userId, //body.userid? 3
+		// 		coachId: 1, //body.coachId >> Dao >> 資料庫
+		// 		content: input.value
+		// 	})
+		// }).then(resp => resp.json())
+		// 	.then(body => {
+		// 		console.log(body);
+		// 	});
+		
+	});*/
 
-</script>
+
+</script> -->
 
 </html>
