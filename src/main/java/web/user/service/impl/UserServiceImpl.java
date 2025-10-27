@@ -32,10 +32,14 @@ public class UserServiceImpl implements UserService {
 			return user;
 		}
 
-		dao.selectForLogin(email, password);
+		user = dao.selectForLogin(email, password);
 
-		user.setMessage("登入成功");
-		user.setSuccessful(true);
+		if (user != null) {
+			user.setMessage("登入成功");
+			user.setSuccessful(true);
+		} else {
+
+		}
 
 		return user;
 
