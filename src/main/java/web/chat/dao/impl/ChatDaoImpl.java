@@ -1,11 +1,15 @@
 package web.chat.dao.impl;
 
 import java.util.ArrayList;
+
 import java.util.List;
+
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import core.util.HibernateUtil;
 import web.chat.dao.ChatDao;
@@ -15,14 +19,19 @@ import web.chat.pojo.Chats;
 import web.chat.pojo.UserCourseDTO;
 import web.user.pojo.User;
 
+@Repository
 public class ChatDaoImpl implements ChatDao {
 
 	// 外部已經傳進來的 Entity 物件 Chats chats
 	// 前端點"送出訊息" 用的
+	
+	@PersistenceContext
+	private Session session;
+	
 	@Override
 	public int insert(Chats chats) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 		try {
 			Transaction transaction = session.beginTransaction();
 			// hibernate自動對應哪個資料表、屬性對應欄位。
@@ -42,8 +51,8 @@ public class ChatDaoImpl implements ChatDao {
 	// 即時拉出DB-對話訊息的所有詳細資料
 	@Override
 	public Chats saveAndLoad(int courseId, int userId, Integer coachId, String content) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 		try {
 			Transaction tx = session.beginTransaction();
 			// 建立 entity
@@ -72,8 +81,8 @@ public class ChatDaoImpl implements ChatDao {
 	// 依照courseId 查詢歷史訊息
 	@Override
 	public List<Chats> selectChatsByCourseId(Integer courseId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 		List<Chats> chatList = new ArrayList<>();
 		try {
 			Transaction transaction = session.beginTransaction();
@@ -100,8 +109,8 @@ public class ChatDaoImpl implements ChatDao {
 	// ChatDTO為了user_id要對應到name而製作的，新增一個，有加上name的購物袋，因為本來的chats沒有name
 	@Override
 	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 		List<ChatDTO> list = new ArrayList<>();
 		try {
 			Transaction transaction = session.beginTransaction();
@@ -123,8 +132,8 @@ public class ChatDaoImpl implements ChatDao {
 	// 對應orders & order_items to find courseId
 	@Override
 	public List<UserCourseDTO> selectUserCourseId(Integer userId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 		List<UserCourseDTO> courselist = new ArrayList<>();
 
 		try {
@@ -151,8 +160,8 @@ public class ChatDaoImpl implements ChatDao {
 	// 藉由Courses 表格 courseId >> 找到coachId的方法
 	@Override
 	public Integer selectCoachIdByCourse(Integer courseId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			Transaction tx = session.beginTransaction();
