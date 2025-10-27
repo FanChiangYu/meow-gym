@@ -5,18 +5,15 @@ import static core.util.CommonUtil.writePojo2Json;
 
 import java.io.IOException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonObject;
-
+import core.util.CommonUtil;
 import web.user.pojo.User;
 import web.user.service.UserService;
-import web.user.service.impl.UserServiceImpl;
 
 @WebServlet("/user/login")
 public class LoginServlet extends HttpServlet {
@@ -25,11 +22,7 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		try {
-			userService = new UserServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		userService = CommonUtil.getBean(getServletContext(), UserService.class);
 	}
 
 	@Override

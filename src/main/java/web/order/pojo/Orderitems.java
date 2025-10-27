@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ORDERS_ITEMS")
+@Table(name = "ORDER_ITEMS")
 public class Orderitems extends Core {
 //Hibernate
 	private static final long serialVersionUID = -5775833812254098286L;
