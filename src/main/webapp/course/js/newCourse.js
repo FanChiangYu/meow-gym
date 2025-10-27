@@ -10,6 +10,56 @@ document.addEventListener('DOMContentLoaded', function(){
   const coursePrice = document.querySelector('#course-price');
   const description = document.querySelector('#description');
   const courseImg = document.querySelector('#course-img');
+  const userMenu = document.querySelector('#user-menu');
+  const coachMenu = document.querySelector('#coach-menu');
+  const adminMenu = document.querySelector('#admin-menu');
+  const userName = document.querySelector('#user-name');
+  const avatarImg = document.querySelector('#user-avatar');
+  const shoppingCart = document.querySelector('#shopping-cart');
+
+  // 1a. 用fetch向後端取得roleId(角色ID)
+  // 1b. 或從瀏覽器的sessionStorage取得roleId (如果登入時有存的話)
+  // 2. 呼叫switchMenu(); 切換側邊欄顯示
+
+  // roldId = 1 -> 一般會員
+  // roldId = 2 -> 教練
+  // roldId = 3 -> 管理者
+
+  // 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
+  let Id = 2;
+
+  function switchMenu (roleId) {
+    switch (roleId) {
+      // 顯示會員列表
+      case 1: 
+        userMenu.classList.remove('d-none'); 
+        shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+        break;
+    
+      // 顯示教練列表  
+      case 2:
+        coachMenu.classList.remove('d-none'); 
+        break;
+    
+      // 顯示管理者列表  
+      case 3:
+        adminMenu.classList.remove('d-none'); 
+        break;
+    
+      // 預設顯示會員列表
+      default:
+        userMenu.classList.remove('d-none'); 
+        shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+        break;
+    }
+  }
+
+switchMenu(Id); // 呼叫function切換側邊欄
+
+
+// 使用者名稱顯示同理，如果還無法向後端取得user table的name，一樣先寫死，改標籤內的顯示文字
+let uName = '金城武'; 
+userName.textContent = uName; // 修改標籤內使用者名稱文字
   
   function valueOrNull (value) {
     if(value === undefined || value === null || value === '' || Number.isNaN(value)){
@@ -119,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let rule_html = `
     <hr class="my-6 mx-n6">
     <div class="rule-list">
-      <h6>課程規則${ruleCount}</h6>
+      <h6>每週課程規則${ruleCount}</h6>
       <div class="mb-6">
         <label class="form-label">星期</label>
         <select class="select2 form-select" data-allow-clear="true">

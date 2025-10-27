@@ -1,4 +1,4 @@
-package web.course.pojo;
+package web.chat.pojo;
 
 import java.util.Date;
 
@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -16,13 +15,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "COURSES")
-public class Course extends Core {
+public class ChatCourses extends Core {
 	private static final long serialVersionUID = -5775833812254098286L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,4 @@ public class Course extends Core {
 	private String approvalStatus; 
 	@Column(name = "IMG_URL")
 	private String imgUrl; 
-	
-	@Transient
-	private String coachName; // 回應前端用
 }

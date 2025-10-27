@@ -1,6 +1,10 @@
 package web.chat.pojo;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
+//為了方便找出session的name而設置的，跟資料庫table無關
+//ChatDTO 不需要做hibernate Annotation映射，因為這個購物袋單純用來查閱用的，並沒有跟資料庫有關聯
 
 public class ChatDTO {
 	private Integer chatId;
@@ -9,7 +13,6 @@ public class ChatDTO {
 	private String name; // 或 nickname
 	private String content;
 	private Timestamp createdAt;
-	
 
 	public ChatDTO() {
 		super();
@@ -61,6 +64,26 @@ public class ChatDTO {
 
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt) {
+		super();
+		this.chatId = chatId;
+		this.courseId = courseId;
+		this.userId = userId;
+		this.name = name;
+		this.content = content;
+		this.createdAt = createdAt;
+	}
+
+	// ✅ Hibernate 期望的簽名（務必 public）
+	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt) {
+		this.chatId = chatId;
+		this.courseId = courseId;
+		this.userId = userId;
+		this.name = name;
+		this.content = content;
+		this.createdAt = (createdAt == null) ? null : new Timestamp(createdAt.getTime());
 	}
 
 }
