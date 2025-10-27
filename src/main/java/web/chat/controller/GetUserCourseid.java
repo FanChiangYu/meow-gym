@@ -1,7 +1,8 @@
 package web.chat.controller;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+
 import com.google.gson.JsonObject;
 
 import web.chat.dao.ChatDao;
 import web.chat.dao.impl.ChatDaoImpl;
-import web.chat.pojo.SessionUsers;
+import web.chat.pojo.UserCourseDTO;
 import web.user.pojo.User;
 
 @WebServlet("/chat/getusercourseid")
@@ -25,13 +26,15 @@ public class GetUserCourseid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ChatDao chatDao;
 
+	
 	@Override
 	public void init() throws ServletException {
-		try {
-			chatDao = new ChatDaoImpl();
-		} catch (Exception e) {
-			throw new ServletException("DAO init failed", e);
-		}
+//		try {
+//			chatDao = new ChatDaoImpl();
+//		} catch (Exception e) {
+//			throw new ServletException("DAO init failed", e);
+//		}
+				
 	}
 
 	@Override
@@ -48,7 +51,9 @@ public class GetUserCourseid extends HttpServlet {
 
 			// selectUserCourseId方法
 			// 將登入者的userid，查詢session_users表格的courseid
-			Set<SessionUsers> usercourseid = chatDao.selectUserCourseId(userid);
+			// 改用order table和order_items 取得courseId
+			List<UserCourseDTO> usercourseid = chatDao.selectUserCourseId(userid); //沒拿到courseId ，出錯
+			
 			System.out.println("usercourseid to String" + usercourseid.toString());
 
 			Gson gson = new Gson();

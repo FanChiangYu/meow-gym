@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,11 +30,15 @@ public class ClassSessions {
 	@Column(name = "COURSE_ID")
 	private Integer courseId;
 	@Column(name = "SESSION_DATE")
-	private Date session_date; 
+	private Date sessionDate; 
 	@Column(name = "TIME_SLOT")
 	private Integer timeSlot;
 	@Column(name = "CHECKIN_AT")
 	private LocalDateTime checkinAt;
 	@Column(name = "CHECKIN_OUT")
 	private LocalDateTime checkinOut;
+	
+	@Transient
+	private String bookStatus; // 用來回應前端，判斷使用者的預約狀態
+							   // "已預約"、"可預約"、"無法預約"(預設）
 }

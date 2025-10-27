@@ -14,25 +14,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import netscape.javascript.JSObject;
+import core.util.CommonUtil;
 import web.course.pojo.Course;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
 
 @WebServlet("/course/auditCourse")
-public class auditCourseServlet extends HttpServlet {
+public class AuditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-private CourseService service;
-	
+	private CourseService service;
+
 	@Override
-	public void init() throws ServletException {
-		try {
-			service = new CourseServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public void init() throws ServletException {		
+		service = CommonUtil.getBean(getServletContext(), CourseService.class);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Course course = json2Pojo(req, Course.class);
