@@ -43,9 +43,12 @@
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- endbuild -->
-    <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/fullcalendar/fullcalendar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
 
     <!-- Page CSS -->
 
@@ -308,125 +311,79 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" id="class-content" style="border: 2px solid red;">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-        
-              <div class="row mb-6 gy-6">
-                <div class="col-xl">
-                  <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">上架課程</h5>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="mb-6">
-                          <label class="form-label" for="title">課程名稱</label>
-                          <input type="text" class="form-control" id="title" placeholder="課程名稱" />
+      
+              <div class="card mb-6">
+                <div class="card-header d-flex flex-wrap justify-content-between gap-4">
+                  <div class="card-title mb-0 me-1">
+                    <h5 class="mb-0">課程名稱</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row gy-6 mb-6">
+                    <div class="col-sm-6 col-lg-12">
+                      <div class="card p-2 h-100 shadow-none border">
+                        <div class="rounded-2 text-center mb-4">
+                          <img class="img-fluid" src="../assets/img/pages/app-academy-tutor-1.png" alt="課程圖片">
                         </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="category">類別</label>
-                          <select id="category" class="select2 form-select" data-allow-clear="true">
-                            <option value="">請選擇</option>
-                            <option value="瑜伽">瑜伽</option>
-                            <option value="飛輪">飛輪</option>
-                            <option value="重訓">重訓</option>
-                          </select>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="room-id">教室</label>
-                          <select id="room-id" class="select2 form-select" data-allow-clear="true">
-                            <option value="">請選擇</option>
-                            <option value="1">教室A</option>
-                            <option value="2">教室B</option>
-                          </select>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="session-quota">課程堂數</label>
-                          <select id="session-quota" class="select2 form-select" data-allow-clear="true">
-                            <option value="">請選擇</option>
-                            <option value="6">6堂</option>
-                            <option value="12">12堂</option>
-                            <option value="18">18堂</option>
-                          </select>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="capacity-max">上課人數上限</label>
-                          <select id="capacity-max" class="select2 form-select" data-allow-clear="true">
-                            <option value="">請選擇</option>
-                            <option value="10">10人</option>
-                            <option value="20">20人</option>
-                            <option value="30">30人</option>
-                          </select>
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="date-start">開始日期</label>
-                          <input type="text" id="date-start" class="form-control dob-picker"
-                            placeholder="YYYY-MM-DD" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="date-end">結束日期</label>
-                          <input type="text" id="date-end" class="form-control dob-picker"
-                            placeholder="YYYY-MM-DD" />
-                        </div>    
-                        <div class="mb-6">
-                          <label for="course-img" class="form-label">課程圖片 (僅允許 PNG 格式圖片)</label>
-                          <input class="form-control" type="file" id="course-img" accept=".png" />
-                        </div>  
-                        <div class="mb-6">
-                          <label class="form-label" for="course-price">課程訂價</label>
-                          <input type="number" class="form-control" id="course-price" placeholder="課程訂價" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="description">課程介紹</label>
-                          <textarea id="description" class="form-control"
-                            placeholder="哈囉! 請介紹這門課程。"></textarea>
-                        </div>
-                        <hr class="my-6 mx-n6">
-                        <button id="rule-btn" type="button" class="btn btn-primary mb-6">新增規則</button>
-                        <div id="rule-container">
-                          <div class="rule-list">
-                            <h6>每週課程規則1</h6>
-                            <div class="mb-6">
-                              <label class="form-label">星期</label>
-                              <select class="select2 form-select" data-allow-clear="true">
-                                <option value="">請選擇</option>
-                                <option value="1">星期一</option>
-                                <option value="2">星期二</option>
-                                <option value="3">星期三</option>
-                                <option value="4">星期四</option>
-                                <option value="5">星期五</option>
-                                <option value="6">星期六</option>
-                                <option value="7">星期日</option>
-                              </select>
-                            </div>
-                            <div class="mb-6">
-                              <label class="form-label">時段</label>
-                              <select class="select2 form-select" data-allow-clear="true" type="time">
-                                <option value="">請選擇</option>
-                                <option value="1">8:00 ~ 9:00</option>
-                                <option value="2">9:00 ~ 10:00</option>
-                                <option value="3">10:00 ~ 11:00</option>
-                                <option value="4">11:00 ~ 12:00</option>
-                                <option value="5">12:00 ~ 13:00</option>
-                                <option value="6">13:00 ~ 14:00</option>
-                                <option value="7">14:00 ~ 15:00</option>
-                                <option value="8">15:00 ~ 16:00</option>
-                                <option value="9">16:00 ~ 17:00</option>
-                                <option value="10">17:00 ~ 18:00</option>
-                                <option value="11">18:00 ~ 19:00</option>
-                                <option value="12">19:00 ~ 20:00</option>
-                                <option value="13">20:00 ~ 21:00</option>
-                              </select>
-                            </div>
+                        <div class="card-body p-4 pt-2">
+                          <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="badge bg-label-dribbble">瑜伽</span>
+                            <p class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
+                              4.4
+                              <span class="text-warning"><i class="icon-base ti tabler-star-filled icon-lg me-1 mb-1_5"></i></span><span class="fw-normal">(1.23k)</span>
+                            </p>
                           </div>
+                          <p class="mt-1">教練 : 王曉明</p>
+                          <p class="mt-1">使用期限 : 2025/6/15 ~ 2026/12/31</p>
+                          <p class="mt-1">課堂額度 : 12堂</p>
+                          <p class="mt-1">總共使用 : 5堂</p>
                         </div>
-                        <hr class="my-6 mx-n6">
-                        <button id="apply-btn" type="button" class="btn btn-primary">送出審核</button>
-                      </form>
+                        <div class="card-datatable">
+                          <table class="datatables-users table">
+                            <thead class="border-top">
+                              <tr>
+                                <th>課程班次ID</th>
+                                <th>日期</th>
+                                <th>時段</th>
+                                <th>預約人數</th>
+                                <th>預約狀態</th>
+                                <th>動作</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span class="text-heading">12</span>
+                                </td>
+                                <td>
+                                  <span class="text-heading">2025-09-21</span>
+                                </td>
+                                <td>
+                                  <span class="text-heading">9:00 ~ 12:00</span>
+                                </td>
+                                <td>
+                                  <span class="text-heading">21/30</span>
+                                </td>
+                                <td>
+                                  <span class="text-heading">已預約</span>
+                                </td>
+                                <td>
+                                  <button class="btn rounded-pill waves-effect waves-light btn-danger">取消預約</button>
+                                </td>
+                              </tr>
+                            </tbody>   
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              
+              
 
 
               <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
@@ -535,17 +492,20 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
-    <script src="../assets/vendor/libs/moment/moment.js"></script>
-    <script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="../assets/vendor/libs/select2/select2.js"></script>
-    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="../../assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/moment/moment.js"></script>
+    <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
 
     <!-- Main JS -->
+
     <script src="../assets/js/main.js"></script>
-    
+    <script src="js/bookClass.js"></script>
+
+
     <!-- Page JS -->
-    <script src="js/form-layouts.js"></script>
-    <script src="js/newCourse.js"></script>
   </body>
 </html>
