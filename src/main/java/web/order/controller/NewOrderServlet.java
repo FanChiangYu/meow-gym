@@ -19,6 +19,7 @@ import core.util.CommonUtil;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.NewCourseRequest;
+import web.index.pojo.Courses;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
@@ -32,32 +33,28 @@ public class NewOrderServlet extends HttpServlet{
 	
 	@Override
 	public void init() throws ServletException {
-		
 		//Spring無法控管Servlet物件，透過 CommonUtil.getBean()￾取得 Service物件
 		orderservice = CommonUtil.getBean(getServletContext(), OrderService.class);
-		
-		//註解(或刪除)初始化該屬性的程式
-//		try {
-//			orderservice = new OrderServiceImpl();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 	
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		Orderitems orderitems = json2Pojo(request, Orderitems.class);
-		//先寫死
-//		Integer userId = 1;
-		//取會員資料
-//		HttpSession session = req.getSession();
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+//		//取會員資料
 //		User user = (User) session.getAttribute("user");
 //		Integer id = user.getUserId();
-//		orderitems = orderservice.addcart(orderitems, userId);
+		//先寫死
+		Integer userId = 1;
 		
+		//取課程資訊
+		Course course = (Course) session.getAttribute("course");
+		String coachname = (String)session.getAttribute("coachName");
+		Integer orderId = orderservice.addcart(course, userId);
+		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId);
 		//回傳課程資訊
-//		writePojo2Json(response, Course);
-		
+		writePojo2Json(response, courseList);
+	}
 		
 //		JsonObject respbody = new JsonObject();
 //		NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
@@ -72,32 +69,9 @@ public class NewOrderServlet extends HttpServlet{
 //		} else {
 //			writePojo2Json(response, course);
 //		}
-//	}
+
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		//GSON 反序列化寫法
-//		Gson gson = new Gson();
-//		Orders orders = gson.fromJson(request.getReader(), Orders.class);
-//		JsonObject jsonObject = new JsonObject();
-//		
-//		orders = orderservice.payment(orders);
-//		if(orders != null) {
-//			jsonObject.addProperty("success", true);
-//			jsonObject.addProperty("order ID", orders.getOrderId());
-//		} else {
-//			jsonObject.addProperty("success", false);
-//		}
-//		
-//		
-//		String json = gson.toJson(orders);
-//		response.setContentType("application/json");
-//		response.getWriter().write(json);
-		
-
-		//import static 套件寫法		
-		Orders orders = json2Pojo(request, Orders.class);
-		orders = orderservice.payment(orders);
-		writePojo2Json(response, orders);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 }
