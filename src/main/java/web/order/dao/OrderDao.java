@@ -18,4 +18,5 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Integer selectCoursePriceByCourseId(Integer courseId);
 	
+	Integer modifyStatusByUesrIdAndOrderId(Integer userId, Integer orderId);
 }

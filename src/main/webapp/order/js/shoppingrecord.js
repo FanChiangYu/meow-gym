@@ -8,6 +8,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
   borderColor = config.colors.borderColor;
   bodyBg = config.colors.bodyBg;
   headingColor = config.colors.headingColor;
+  
+  // Variable declaration for table
+
+  const dt_order_table = document.querySelector('.datatables-order'),
+    statusObj = {
+      1: { title: 'Dispatched', class: 'bg-label-warning' },
+      2: { title: 'Delivered', class: 'bg-label-success' },
+      3: { title: 'Out for Delivery', class: 'bg-label-primary' },
+      4: { title: 'Ready to Pickup', class: 'bg-label-info' }
+    },
+    paymentObj = {
+      1: { title: 'Paid', class: 'text-success' },
+      2: { title: 'Pending', class: 'text-warning' },
+      3: { title: 'Failed', class: 'text-danger' },
+      4: { title: 'Cancelled', class: 'text-secondary' }
+    };
 
   // shoppingrecord
 
