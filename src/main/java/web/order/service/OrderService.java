@@ -1,14 +1,18 @@
 package web.order.service;
 
+import java.util.List;
+
 import core.service.CoreService;
 import web.course.pojo.Course;
 import web.order.pojo.Orders;
 
 public interface OrderService extends CoreService{
 	
-	Course addcart(Course course, Integer userId);
+	Integer addcart(Course course, Integer userId);
 	
 	String deletecoursefromcart(Course course, Integer userId);
+	
+	List<Course> getAllCourseByOrderId(Integer orderId);
 	
 	Orders payment(Orders orders);
 

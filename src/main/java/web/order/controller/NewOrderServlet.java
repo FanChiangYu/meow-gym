@@ -39,21 +39,21 @@ public class NewOrderServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Integer userId = 1;
+
+		HttpSession session = request.getSession();
 //		//取會員資料
-//		HttpSession session = request.getSession();
 //		User user = (User) session.getAttribute("user");
 //		Integer id = user.getUserId();
-//		//先寫死
-//		Integer courseid = 1;
-//		String coachName = "Alice";
-//		//取課程資訊
-//		Course course = (Course) session.getAttribute("course");
-//		String coachName = (String)session.getAttribute("coachName");
-//		course = orderservice.addcart(course, userId);
-//		
-//		//回傳課程資訊
-//		writePojo2Json(response, course);
+		//先寫死
+		Integer userId = 1;
+		
+		//取課程資訊
+		Course course = (Course) session.getAttribute("course");
+		String coachname = (String)session.getAttribute("coachName");
+		Integer orderId = orderservice.addcart(course, userId);
+		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId);
+		//回傳課程資訊
+		writePojo2Json(response, courseList);
 	}
 		
 //		JsonObject respbody = new JsonObject();

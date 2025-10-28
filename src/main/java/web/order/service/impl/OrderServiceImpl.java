@@ -26,52 +26,52 @@ public class OrderServiceImpl implements OrderService{
 	//標註需要交易控制的⽅法
 	@Transactional
 	@Override
-	public Course addcart(Course course, Integer userId) {
-//		//比對訂單資訊		
-//		if(course.getCourseId() == null) {
-//			course.setMessage("未取得購買課程ID");
-//			course.setSuccessful(false);
-//			return course;
-//		}
-//		//確認Order_items內容
-//		System.out.println(course.getCourseId());
-//		
-//		//邏輯：產生Orders By userId/
-//		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-//		if (orderId == null) {
-//			Orders orders = new Orders(); 
-//			orders.setUserId(2); //暫定
-//			orders.setPayAmount(0);
-//			orders.setStatus("pending");
-//			orders.setPaymentMethod("pending");
-//			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-//			orders.setCreatedAt(timestamp);
-//			int count = orderdao.insert(orders);
-//			if(count == 1) {
-//				orders.setMessage("送出成功");
-//				orders.setSuccessful(true);
-//			} else {
-//				orders.setMessage("送出失敗");
-//				orders.setSuccessful(false);
-//			}
-//		}
-//		//邏輯：執行儲存orderitems資料交易控制
-//		Orderitems orderitems = new Orderitems();
-//		orderId = orderitems.setOrderId();
-//		Integer couseId = course.getCourseId();
-//		courseId = orderitems.setCourseId(); 
-//		Integer purchasedPrice = orderdao.selectCoursePriceByCourseId(courseId); 
-//		orderitems.setPurchasedPrice();
-//		int count1 = orderdao.insert(orderitems);
-//		if(count1 == 1) {
-//			orderitems.setMessage("儲存orderitems成功");
-//			orderitems.setSuccessful(true);
-//		} else {
-//			orderitems.setMessage("儲存orderitems失敗");
-//			orderitems.setSuccessful(false);
-//		}
-//		//邏輯回傳course info
-		return course;
+	public Integer addcart(Course course, Integer userId) {
+		//比對訂單course資訊		
+		if(course.getCourseId() == null) {
+			System.out.println("取得訂單course資訊失敗");
+			return null;
+		}
+		System.out.println(course.getCourseId());
+		
+		//邏輯：產生Orders By userId/
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		if (orderId == null) {
+			Orders orders = new Orders(); 
+			orders.setUserId(userId);
+			orders.setPayAmount(0);
+			orders.setStatus("pending");
+			orders.setPaymentMethod("pending");
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			orders.setCreatedAt(timestamp);
+			int count = orderdao.insert(orders);
+			if(count != 1) {
+				System.out.println("產生Order失敗");
+				return null;
+			}
+			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");	
+		}
+		//邏輯：執行儲存orderitems資料交易控制
+		Orderitems orderitems = new Orderitems();
+		orderitems.setOrderId(orderId);
+		orderitems.setCourseId(course.getCourseId());
+		Integer purchasedPrice = orderdao.selectCoursePriceByCourseId(course.getCourseId()); 
+		orderitems.setPurchasedPrice(purchasedPrice);
+		int count1 = orderdao.insert(orderitems);
+		if(count1 == 1) {
+			System.out.println("儲存orderitems資料成功");
+			return orderId;
+		} else {
+			System.out.println("儲存orderitems資料失敗");
+			return null;
+		}
+	}
+	
+	@Transactional	
+	@Override
+	public List<Course> getAllCourseByOrderId(Integer orderId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Transactional	
