@@ -142,12 +142,12 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch('bookClass')
     .then(resp => resp.json())
     .then(classResponses => {
-      
+
       // 顯示課程
       for (let classResponse of classResponses) {
-        let sessionHtml = '';
         
         // 顯示班次
+        let sessionHtml;
         for (let classSession of classResponse.classSessions) {
           sessionHtml +=`
             <tr>
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="text-heading">${classSession.sessionId}</span>
               </td>
               <td>
-                <span class="text-heading">${classSession.sessionDate}</span>
+                <span class="text-heading">${new Date(classSession.sessionDate).toLocaleDateString('zh-TW')}</span>
               </td>
               <td>
                 <span class="text-heading">${showTimeSlot(classSession.timeSlot)}</span>
