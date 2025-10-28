@@ -1,6 +1,6 @@
 package web.course.pojo;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,9 +34,9 @@ public class ClassSessions {
 	@Column(name = "TIME_SLOT")
 	private Integer timeSlot;
 	@Column(name = "CHECKIN_AT")
-	private LocalDateTime checkinAt;
+	private Timestamp checkinAt;
 	@Column(name = "CHECKIN_OUT")
-	private LocalDateTime checkinOut;
+	private Timestamp checkinOut;
 	
 	@Transient
 	private String bookStatus; // 用來回應前端，判斷使用者的預約狀態

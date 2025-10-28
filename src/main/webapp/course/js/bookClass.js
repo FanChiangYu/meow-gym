@@ -142,13 +142,13 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch('bookClass')
     .then(resp => resp.json())
     .then(classResponses => {
-
+      
       // 顯示課程
       for (let classResponse of classResponses) {
+        let sessionHtml = '';
         
         // 顯示班次
         for (let classSession of classResponse.classSessions) {
-          let sessionHtml;
           sessionHtml +=`
             <tr>
               <td>
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </p>
                       </div>
                       <p class="mt-1">教練 : ${classResponse.coachName}</p>
-                      <p class="mt-1">使用期限 : ${new Date(courseResponse.course.dateStart).toLocaleDateString('zh-TW')} ~ ${new Date(courseResponse.course.dateStart).toLocaleDateString('zh-TW')}</p>
+                      <p class="mt-1">使用期限 : ${new Date(classResponse.course.dateStart).toLocaleDateString('zh-TW')} ~ ${new Date(classResponse.course.dateStart).toLocaleDateString('zh-TW')}</p>
                       <p class="mt-1">課堂額度 : ${classResponse.course.sessionQuota}</p>
                       <p class="mt-1">總共使用 : 5堂</p>
                     </div>

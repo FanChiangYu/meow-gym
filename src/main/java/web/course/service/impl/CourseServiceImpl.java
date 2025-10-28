@@ -201,9 +201,14 @@ public class CourseServiceImpl implements CourseService {
 			cousre.setSuccessful(false);
 			return cousre;
 		}
-		cousre = dao.selectById(cousre.getCourseId());
-		cousre.setSuccessful(true);
-		return cousre;
+		Course findCourse = dao.selectById(cousre.getCourseId());
+		if (findCourse == null) {
+			cousre.setSuccessful(false);
+			return cousre;
+		}
+		
+		findCourse.setSuccessful(true);
+		return findCourse;
 	}
 
 	@Override
