@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import web.course.pojo.Course;
 import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
@@ -58,6 +59,11 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
+	public List<Course> selectCourseIdByOrderId(Integer orderId) {
+		return null;
+	}
+	
+	@Override
 	public Integer modifyStatusByUesrIdAndOrderId(Integer userId, Integer orderId) {
 		return 1;
 	}
@@ -79,8 +85,7 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Orders> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}	
 }
 
 

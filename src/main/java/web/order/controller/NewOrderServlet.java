@@ -43,7 +43,7 @@ public class NewOrderServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 //		//取會員資料
 //		User user = (User) session.getAttribute("user");
-//		Integer id = user.getUserId();
+//		Integer userId = user.getUserId();
 		//先寫死
 		Integer userId = 1;
 		
@@ -51,7 +51,7 @@ public class NewOrderServlet extends HttpServlet{
 		Course course = (Course) session.getAttribute("course");
 		String coachname = (String)session.getAttribute("coachName");
 		Integer orderId = orderservice.addcart(course, userId);
-		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId);
+		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId, coachname);
 		//回傳課程資訊
 		writePojo2Json(response, courseList);
 	}
@@ -73,5 +73,15 @@ public class NewOrderServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Course course = json2Pojo(request, Course.class);
+		Integer courseId = course.getCourseId();
+		HttpSession session = request.getSession();
+//		//取會員資料
+//		User user = (User) session.getAttribute("user");
+//		Integer userId = user.getUserId();
+		//先寫死
+		Integer userId = 1;
+//		String answer = orderservice.deletecoursefromcart(courseId, userId);
+//		writePojo2Json(response, answer);
 	}
 }
