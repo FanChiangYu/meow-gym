@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "SESSIONS_USERS")
+@Table(name = "SESSION_USERS")
 @IdClass(SessionUsersId.class)
 public class SessionUsers {
 	@Id
