@@ -69,9 +69,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Transactional	
 	@Override
-	public List<Course> getAllCourseByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Course> getAllCourseByOrderId(Integer orderId, String coachname) {
+		List<Course> courseList = orderdao.selectCourseIdByOrderId(orderId);
+		return courseList;
 	}
 	
 	@Transactional	
