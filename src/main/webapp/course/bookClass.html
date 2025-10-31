@@ -41,6 +41,7 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
 
@@ -121,7 +122,7 @@
             </li>
 
             <!-- 會員專區 -->
-            <li class="menu-item d-none" id="user-menu">
+            <li class="menu-item open d-none" id="user-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>會員專區</div>
@@ -137,7 +138,7 @@
                     <div>課程瀏覽</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="#" class="menu-link">
                     <div>預約上課</div>
                   </a>
@@ -311,76 +312,10 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" id="class-content" style="border: 2px solid red;">
+            <div class="container-xxl flex-grow-1 container-p-y" id="class-content">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
       
-              <div class="card mb-6">
-                <div class="card-header d-flex flex-wrap justify-content-between gap-4">
-                  <div class="card-title mb-0 me-1">
-                    <h5 class="mb-0">課程名稱</h5>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="row gy-6 mb-6">
-                    <div class="col-sm-6 col-lg-12">
-                      <div class="card p-2 h-100 shadow-none border">
-                        <div class="rounded-2 text-center mb-4">
-                          <img class="img-fluid" src="../assets/img/pages/app-academy-tutor-1.png" alt="課程圖片">
-                        </div>
-                        <div class="card-body p-4 pt-2">
-                          <div class="d-flex justify-content-between align-items-center mb-4">
-                            <span class="badge bg-label-dribbble">瑜伽</span>
-                            <p class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
-                              4.4
-                              <span class="text-warning"><i class="icon-base ti tabler-star-filled icon-lg me-1 mb-1_5"></i></span><span class="fw-normal">(1.23k)</span>
-                            </p>
-                          </div>
-                          <p class="mt-1">教練 : 王曉明</p>
-                          <p class="mt-1">使用期限 : 2025/6/15 ~ 2026/12/31</p>
-                          <p class="mt-1">課堂額度 : 12堂</p>
-                          <p class="mt-1">總共使用 : 5堂</p>
-                        </div>
-                        <div class="card-datatable">
-                          <table class="datatables-users table">
-                            <thead class="border-top">
-                              <tr>
-                                <th>課程班次ID</th>
-                                <th>日期</th>
-                                <th>時段</th>
-                                <th>預約人數</th>
-                                <th>預約狀態</th>
-                                <th>動作</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <span class="text-heading">12</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">2025-09-21</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">9:00 ~ 12:00</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">21/30</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">已預約</span>
-                                </td>
-                                <td>
-                                  <button class="btn rounded-pill waves-effect waves-light btn-danger">取消預約</button>
-                                </td>
-                              </tr>
-                            </tbody>   
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
 
               
               
@@ -499,6 +434,7 @@
     <script src="..//assets/vendor/libs/select2/select2.js"></script>
     <script src="..//assets/vendor/libs/moment/moment.js"></script>
     <script src="..//assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
