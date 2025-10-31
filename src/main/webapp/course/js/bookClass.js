@@ -255,7 +255,14 @@ function cancelById(sessionId) {
                 <span class="text-heading">${classSession.sessionId}</span>
               </td>
               <td>
-                <span class="text-heading">${new Date(classSession.sessionDate).toLocaleDateString('zh-TW')}</span>
+                <span class="text-heading">
+                  ${new Date(classSession.sessionDate).toLocaleDateString('zh-TW',{
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric'
+                  })}
+                </span>
               </td>
               <td>
                 <span class="text-heading">${showTimeSlot(classSession.timeSlot)}</span>
@@ -295,6 +302,7 @@ function cancelById(sessionId) {
                           <span class="text-warning"><i class="icon-base ti tabler-star-filled icon-lg me-1 mb-1_5"></i></span><span class="fw-normal">(1.23k)</span>
                         </p>
                       </div>
+                      <p class="mt-1">課程ID : ${classResponse.course.courseId}</p>
                       <p class="mt-1">教練 : ${classResponse.coachName}</p>
                       <p class="mt-1">使用期限 : ${new Date(classResponse.course.dateStart).toLocaleDateString('zh-TW')} ~ ${new Date(classResponse.course.dateEnd).toLocaleDateString('zh-TW')}</p>
                       <p class="mt-1">課堂額度 : ${classResponse.course.sessionQuota}堂</p>
