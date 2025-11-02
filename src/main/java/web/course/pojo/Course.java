@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,7 +63,7 @@ public class Course extends Core {
 	@Transient
 	private Integer quotaUsed; // 回應前端用, 統計使用者已使用堂數
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "course_id", referencedColumnName = "course_id", insertable = false, updatable = false)
 	private List<CoursePromo> coursePromos;
 }
