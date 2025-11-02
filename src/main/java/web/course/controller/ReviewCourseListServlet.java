@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import core.util.CommonUtil;
 import web.course.pojo.Course;
@@ -23,6 +24,7 @@ import web.course.pojo.NewCourseRequest;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
 import web.member.service.MemberService;
+import web.user.pojo.User;
 
 @WebServlet("/course/reviewCourseList")
 public class ReviewCourseListServlet extends HttpServlet{
@@ -36,6 +38,13 @@ public class ReviewCourseListServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// test
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+//		System.out.println(user.getUserId());
+//		System.out.println(user.getEmail());
+//		System.out.println(user.getName());
+		// test
 		List<Course> courses =  service.findAll();
 		writePojo2Json(resp, courses);
 		

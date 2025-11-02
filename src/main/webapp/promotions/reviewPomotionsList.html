@@ -45,12 +45,6 @@
 
     <!-- endbuild -->
 
-    <link rel="stylesheet" href="..//assets/vendor/libs/fullcalendar/fullcalendar.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/quill/editor.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/@form-validation/form-validation.css" />
-
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/css/pages/page-icons.css" />
@@ -122,7 +116,7 @@
             </li>
 
             <!-- 會員專區 -->
-            <li class="menu-item open d-none" id="user-menu">
+            <li class="menu-item d-none" id="user-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>會員專區</div>
@@ -138,7 +132,7 @@
                     <div>課程瀏覽</div>
                   </a>
                 </li>
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="#" class="menu-link">
                     <div>預約上課</div>
                   </a>
@@ -312,12 +306,146 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" id="class-content">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
       
-             
-
-              
+              <div class="card">
+                <div class="card-header border-bottom">
+                  <h5 class="card-title mb-0">促銷活動管理</h5>
+                  <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0">
+                    <div class="col-md-4 user_role"></div>
+                    <div class="col-md-4 user_plan"></div>
+                    <div class="col-md-4 user_status"></div>
+                  </div>
+                </div>
+                <div class="card-datatable">
+                  <table class="datatables-users table">
+                    <thead class="border-top">
+                      <tr>
+                      	<th>課程編號</th>
+                        <th>課程名稱</th>
+                        <th>促銷價格</th>
+                        <th>促銷時間</th>
+                        <th>原價</th>
+                        <th>刪除</th>
+                        <th>編輯</th>
+                      </tr>
+                    </thead>
+                    <tbody id="course-table-body">
+                    </tbody>   
+                  </table>
+                </div>
+                <!-- Offcanvas to add new user -->
+                <div
+                  class="offcanvas offcanvas-end"
+                  tabindex="-1"
+                  id="offcanvasAddUser"
+                  aria-labelledby="offcanvasAddUserLabel">
+                  <div class="offcanvas-header border-bottom">
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
+                    <button
+                      type="button"
+                      class="btn-close text-reset"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body mx-0 flex-grow-0 p-6 h-100">
+                    <form class="add-new-user pt-0" id="addNewUserForm" onsubmit="return false">
+                      <div class="mb-6 form-control-validation">
+                        <label class="form-label" for="add-user-fullname">Full Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="add-user-fullname"
+                          placeholder="John Doe"
+                          name="userFullname"
+                          aria-label="John Doe" />
+                      </div>
+                      <div class="mb-6 form-control-validation">
+                        <label class="form-label" for="add-user-email">Email</label>
+                        <input
+                          type="text"
+                          id="add-user-email"
+                          class="form-control"
+                          placeholder="john.doe@example.com"
+                          aria-label="john.doe@example.com"
+                          name="userEmail" />
+                      </div>
+                      <div class="mb-6">
+                        <label class="form-label" for="add-user-contact">Contact</label>
+                        <input
+                          type="text"
+                          id="add-user-contact"
+                          class="form-control phone-mask"
+                          placeholder="+1 (609) 988-44-11"
+                          aria-label="john.doe@example.com"
+                          name="userContact" />
+                      </div>
+                      <div class="mb-6">
+                        <label class="form-label" for="add-user-company">Company</label>
+                        <input
+                          type="text"
+                          id="add-user-company"
+                          class="form-control"
+                          placeholder="Web Developer"
+                          aria-label="jdoe1"
+                          name="companyName" />
+                      </div>
+                      <div class="mb-6">
+                        <label class="form-label" for="country">Country</label>
+                        <select id="country" class="select2 form-select">
+                          <option value="">Select</option>
+                          <option value="Australia">Australia</option>
+                          <option value="Bangladesh">Bangladesh</option>
+                          <option value="Belarus">Belarus</option>
+                          <option value="Brazil">Brazil</option>
+                          <option value="Canada">Canada</option>
+                          <option value="China">China</option>
+                          <option value="France">France</option>
+                          <option value="Germany">Germany</option>
+                          <option value="India">India</option>
+                          <option value="Indonesia">Indonesia</option>
+                          <option value="Israel">Israel</option>
+                          <option value="Italy">Italy</option>
+                          <option value="Japan">Japan</option>
+                          <option value="Korea">Korea, Republic of</option>
+                          <option value="Mexico">Mexico</option>
+                          <option value="Philippines">Philippines</option>
+                          <option value="Russia">Russian Federation</option>
+                          <option value="South Africa">South Africa</option>
+                          <option value="Thailand">Thailand</option>
+                          <option value="Turkey">Turkey</option>
+                          <option value="Ukraine">Ukraine</option>
+                          <option value="United Arab Emirates">United Arab Emirates</option>
+                          <option value="United Kingdom">United Kingdom</option>
+                          <option value="United States">United States</option>
+                        </select>
+                      </div>
+                      <div class="mb-6">
+                        <label class="form-label" for="user-role">User Role</label>
+                        <select id="user-role" class="form-select">
+                          <option value="subscriber">Subscriber</option>
+                          <option value="editor">Editor</option>
+                          <option value="maintainer">Maintainer</option>
+                          <option value="author">Author</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      </div>
+                      <div class="mb-6">
+                        <label class="form-label" for="user-plan">Select Plan</label>
+                        <select id="user-plan" class="form-select">
+                          <option value="basic">Basic</option>
+                          <option value="enterprise">Enterprise</option>
+                          <option value="company">Company</option>
+                          <option value="team">Team</option>
+                        </select>
+                      </div>
+                        <button id="apply-btn" type="button" class="btn btn-primary">確認</button>
+                        <button id="apply-btn" type="button" class="btn btn-primary">取消</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
               
 
 
@@ -427,20 +555,20 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="..//assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/popular.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/auto-focus.js"></script>
-    <script src="..//assets/vendor/libs/select2/select2.js"></script>
-    <script src="..//assets/vendor/libs/moment/moment.js"></script>
-    <script src="..//assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="../assets/vendor/libs/moment/moment.js"></script>
+    <script src="../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
     <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
     <script src="../assets/js/main.js"></script>
-    <script src="js/bookClass.js"></script>
-
+    <script src="./js/reviewPomotionsList.js"></script>
+  
 
     <!-- Page JS -->
   </body>

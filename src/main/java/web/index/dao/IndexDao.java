@@ -1,5 +1,8 @@
 package web.index.dao;
 
-public interface IndexDao {
+import core.dao.CoreDao;
+import web.promotions.pojo.CoursePromo;
+
+public interface IndexDao extends CoreDao<CoursePromo, Integer>{
 
 }

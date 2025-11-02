@@ -42,7 +42,6 @@ public class NewCourseServlet extends HttpServlet{
 		course = service.apply(course);
 		
 		if(course.isSuccessful()) {
-			System.out.println(course.getCourseId());
 			respbody = service.apply(Rules, course);
 			writePojo2Json(response, respbody);
 		} else {

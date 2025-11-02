@@ -1,5 +1,10 @@
 package web.index.service;
 
-public interface IndexService {
+import java.util.List;
 
+import web.promotions.pojo.CoursePromo;
+
+public interface IndexService {
+	List<CoursePromo> findAllPromo();
+	Boolean isOnSale (CoursePromo coursePromo);
 }

@@ -10,9 +10,9 @@ public interface OrderService extends CoreService{
 	
 	Integer addcart(Course course, Integer userId);
 	
-	List<Course> getAllCourseByOrderId(Integer orderId, String coachname);
+	List<Course> getAllCourseByOrderId(Integer orderId);
 	
-	String deletecoursefromcart(Course course, Integer userId);
+	String deletecoursefromcart(Integer courseId, Integer userId);
 	
 	Orders payment(Orders orders);
 
