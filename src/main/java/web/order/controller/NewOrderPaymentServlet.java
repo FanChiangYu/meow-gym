@@ -39,6 +39,11 @@ public class NewOrderPaymentServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		//import static 套件寫法		
+		Orders orders = json2Pojo(request, Orders.class);
+		orders = orderservice.payment(orders);
+		writePojo2Json(response, orders);
+		
 		//GSON 反序列化寫法
 //		Gson gson = new Gson();
 //		Orders orders = gson.fromJson(request.getReader(), Orders.class);
@@ -56,11 +61,5 @@ public class NewOrderPaymentServlet extends HttpServlet{
 //		String json = gson.toJson(orders);
 //		response.setContentType("application/json");
 //		response.getWriter().write(json);
-		
-
-		//import static 套件寫法		
-		Orders orders = json2Pojo(request, Orders.class);
-		orders = orderservice.payment(orders);
-		writePojo2Json(response, orders);
 	}
 }

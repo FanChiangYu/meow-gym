@@ -7,4 +7,6 @@ public interface UserService extends CoreService {
 
 	User login(User user);
 
+	User register(User user);
+
 }

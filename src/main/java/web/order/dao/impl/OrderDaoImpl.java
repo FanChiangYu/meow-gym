@@ -37,7 +37,7 @@ public class OrderDaoImpl implements OrderDao{
 	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
-		String hql= "selet max(orderId) from Orders where userId =:userId and status =:status";
+		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
 		Query<Integer> query = session.createQuery(hql, Integer.class);		
 		return query.setParameter("userId", userId)
 				.setParameter("status", status)
@@ -59,22 +59,53 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Course> selectCourseIdByOrderId(Integer orderId) {
-		return null;
+	public List<Integer> selectCourseListByOrderId(Integer orderId) {
+	//找同筆訂單下所有CourseID
+		String hql = "select courseId from Orderitems where orderId = :orderId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		List<Integer> courseIdList = query.setParameter("orderId", orderId).getResultList();
+		return courseIdList;
 	}
 	
 	@Override
-	public Integer modifyStatusByUesrIdAndOrderId(Integer userId, Integer orderId) {
-		return 1;
+	public List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList) {
+		//找Course.class
+		String hql = "FROM Course where courseId IN(:courseIdList)";
+		Query<Course> query = session.createQuery(hql, Course.class);
+		List<Course> courseList = query.setParameterList("courseId", courseIdList).getResultList();
+		return courseList;
 	}
+	
+	@Override
+	public Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId) {
+		int result = session.createQuery("DELETE Orderitems "
+				 + "WHERE courseId = :courseId and orderId = :orderId")
+				 .setParameter("courseId", courseId)
+				 .setParameter("orderId", orderId)
+				 .executeUpdate();
+		return result;	
+	}
+	
+	@Override
+	public List<Orderitems> selectOrderitemsListByOrderId(Integer orderId) {
+		String hql = "from Orderitems where orderId = :orderId";
+		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
+		List<Orderitems> orderItemsList = query.setParameter("orderId", orderId).getResultList();
+		return orderItemsList;	
+	}
+
+	@Override
+	public Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status) {		
+		int result = session.createQuery("UPDATE Orders "
+				+ "SET status = :status "
+				+ "WHERE orderId = :orderId")
+				.setParameter("status", status)
+				.setParameter("orderId", orderId)
+				.executeUpdate();
+		return result;
+	}	
 
     //未使用的方法
-	@Override
-	public int deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
@@ -85,7 +116,13 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Orders> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+
+	@Override
+	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 
