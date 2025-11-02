@@ -41,4 +41,6 @@ public class ClassSessions {
 	@Transient
 	private String bookStatus; // 用來回應前端，判斷使用者的預約狀態
 							   // "已預約"、"可預約"、"無法預約"(預設）
+	@Transient
+	private Integer userCnt; // 此班次總預約人數，回應前端用
 }
