@@ -8,6 +8,7 @@ import web.coach.pojo.CoachProfiles;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.SessionUsers;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
 
@@ -18,6 +19,8 @@ public interface CourseDao extends CoreDao<Course, Integer>{
 	int insert (CourseRecurringRules courseRecurringRules);
 	
 	int insert (ClassSessions classSessions);
+	
+	int insert (SessionUsers sessionUsers);
 	
 	CoachProfiles selectByCoachId (Integer id);
 	
@@ -30,5 +33,13 @@ public interface CourseDao extends CoreDao<Course, Integer>{
 	List<Integer> selectCourseIdByOrderId (Integer id);
 	
 	List<ClassSessions> selectClassSessionBycourseID (Integer id);
+
+	SessionUsers selectBySessionIdUserID (Integer sessionId, Integer userId);
+
+	Long selectCntBySessionId (Integer sessionId);
+	
+	Long selectCntFromSessionUserById (Integer sessionId, Integer userId);
+	
+	int deleteById (SessionUsers sessionUsers);
 	
 }

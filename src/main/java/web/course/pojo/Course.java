@@ -59,6 +59,8 @@ public class Course extends Core {
 	
 	@Transient
 	private String coachName; // 回應前端用
+	@Transient
+	private Integer quotaUsed; // 回應前端用, 統計使用者已使用堂數
 	
 	@OneToMany
 	@JoinColumn(name = "course_id", referencedColumnName = "course_id", insertable = false, updatable = false)

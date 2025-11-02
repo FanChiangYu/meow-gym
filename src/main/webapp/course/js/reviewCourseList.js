@@ -16,7 +16,7 @@ const shoppingCart = document.querySelector('#shopping-cart');
 // roldId = 3 -> 管理者
 
 // 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
-let Id = 3;
+let Id = 1;
 
 function switchMenu (roleId) {
   switch (roleId) {

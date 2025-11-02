@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
 
   const userMenu = document.querySelector('#user-menu');
   const coachMenu = document.querySelector('#coach-menu');
@@ -59,38 +59,88 @@ document.addEventListener('DOMContentLoaded', function() {
   let avatarUrl = '../img/avatar/result1.png'; // 假設從後端取得到使用者頭像Url
   avatarImg.src = avatarUrl; // 更換img標籤內的src屬性值
 
+  // 分類標籤顏色切換
   function categoryLabel (category) {
     switch(category){
-          case "重訓":
-            return "bg-label-primary";
+      case "重訓":
+        return "bg-label-primary";
 
-          case "飛輪":
-            return "bg-label-twitter";
+      case "飛輪":
+        return "bg-label-twitter";
 
-          case "瑜伽":
-            return "bg-label-dribbble";
+      case "瑜伽":
+        return "bg-label-dribbble";
 
-          default:
-            return "bg-label-primary"
-        }
+      default:
+        return "bg-label-primary"
+    }
   }
 
-  function btnColor (bookStatus) {
+  // 滿堂預約處理
+  function maxQuotaHandle(bookStatus, sessionQuota, QuotaUsed){
+    if (bookStatus === "未預約") {
+      return QuotaUsed >= sessionQuota ? "無法預約" : bookStatus;
+    }
+    return bookStatus;
+  }
+
+  // 按鍵顏色切換
+  function btnColor (bookStatus) { 
     switch(bookStatus){
-          case "可預約":
-            return "btn-primary";
+      case "未預約":
+        return "btn-primary";
 
-          case "已預約":
-            return "btn-danger";
+      case "已預約":
+        return "btn-danger";
 
-          case "無法預約":
-            return "btn-gray";
+      case "無法預約":
+        return "btn-gray";
 
-          default:
-            return "btn-gray"
-        }
+      default:
+        return "btn-gray"
+    }
   }
 
+  // 按鍵文字切換
+  function btnText (bookStatus) {
+    switch(bookStatus){
+      case "未預約":
+        return "預約";
+
+      case "已預約":
+        return "取消預約";
+
+      case "無法預約":
+        return "無法預約";
+
+      default:
+        return "無法預約"
+    }
+  }
+
+  // 按鍵失效切換
+  function btnDisable (bookStatus) {
+    return bookStatus === "無法預約" ? "disabled" : "";
+  }
+
+  // 按鍵觸發function切換
+  function btnFuncSwitch (bookStatus, sessionId) {
+    switch(bookStatus){
+      case "未預約":
+        return `reserveById(${sessionId})`;
+
+      case "已預約":
+        return `cancelById(${sessionId})`;
+
+      case "無法預約":
+        return ``;
+
+      default:
+        return ``;
+    }
+  }
+
+  // 時段顯示切換
   function showTimeSlot (timeSlot) {
   switch (timeSlot) {
     case 1:
@@ -136,7 +186,56 @@ document.addEventListener('DOMContentLoaded', function() {
       return "";
   }
 }
-  
+
+// ------------ 預約上課班次 -----------------
+function reserveById(sessionId) {
+  fetch('reserveSession', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId,
+      bookStatus: "未預約"
+    }),
+  })
+  .then(resp => resp.json())
+  .then(respBody => {
+    if(respBody.successful){
+      location.reload();
+    }else{
+      Swal.fire({
+        title: '錯誤',
+        text: respBody.message,
+        icon: 'error',
+        target: document.body 
+      });
+    }
+  });
+}
+
+// ------------ 取消上課班次 -----------------
+function cancelById(sessionId) {
+  fetch('reserveSession', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId,
+      bookStatus: "已預約"
+    }),
+  })
+  .then(resp => resp.json())
+  .then(respBody => {
+    if(respBody.successful){
+      location.reload();
+    }else{
+      Swal.fire({
+        title: '錯誤',
+        text: respBody.message,
+        icon: 'error',
+        target: document.body 
+      });
+    }
+  });
+}
 
   // 顯示已購買課程列表
   fetch('bookClass')
@@ -147,27 +246,35 @@ document.addEventListener('DOMContentLoaded', function() {
       for (let classResponse of classResponses) {
         
         // 顯示班次
+        let sessionHtml = '';
         for (let classSession of classResponse.classSessions) {
-          let sessionHtml;
+          let newBookStatus = maxQuotaHandle(classSession.bookStatus, classResponse.course.sessionQuota, classResponse.course.quotaUsed);
           sessionHtml +=`
             <tr>
               <td>
                 <span class="text-heading">${classSession.sessionId}</span>
               </td>
               <td>
-                <span class="text-heading">${classSession.sessionDate}</span>
+                <span class="text-heading">
+                  ${new Date(classSession.sessionDate).toLocaleDateString('zh-TW',{
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric'
+                  })}
+                </span>
               </td>
               <td>
                 <span class="text-heading">${showTimeSlot(classSession.timeSlot)}</span>
               </td>
               <td>
-                <span class="text-heading">21/${classResponse.course.capacityMax}</span>
+                <span class="text-heading">${classSession.userCnt}/${classResponse.course.capacityMax}</span>
               </td>
               <td>
-                <span class="text-heading">已預約</span>
+                <span class="text-heading">${newBookStatus}</span>
               </td>
               <td>
-                <button class="btn rounded-pill waves-effect waves-light ${btnColor(classSession.bookStatus)}">取消預約</button>
+                <button onclick="${btnFuncSwitch(newBookStatus, classSession.sessionId)}" class="btn rounded-pill waves-effect waves-light ${btnColor(newBookStatus)} ${btnDisable(newBookStatus)}">${btnText(newBookStatus)}</button>
               </td>
             </tr>
           `;
@@ -185,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="col-sm-6 col-lg-12">
                   <div class="card p-2 h-100 shadow-none border">
                     <div class="rounded-2 text-center mb-4">
-                      <img class="img-fluid" src=${classResponse.course.imgUrl} alt="課程圖片">
+                      <img class="img-fluid" src="${classResponse.course.imgUrl}" alt="課程圖片">
                     </div>
                     <div class="card-body p-4 pt-2">
                       <div class="d-flex justify-content-between align-items-center mb-4">
@@ -195,10 +302,11 @@ document.addEventListener('DOMContentLoaded', function() {
                           <span class="text-warning"><i class="icon-base ti tabler-star-filled icon-lg me-1 mb-1_5"></i></span><span class="fw-normal">(1.23k)</span>
                         </p>
                       </div>
+                      <p class="mt-1">課程ID : ${classResponse.course.courseId}</p>
                       <p class="mt-1">教練 : ${classResponse.coachName}</p>
-                      <p class="mt-1">使用期限 : ${new Date(courseResponse.course.dateStart).toLocaleDateString('zh-TW')} ~ ${new Date(courseResponse.course.dateStart).toLocaleDateString('zh-TW')}</p>
-                      <p class="mt-1">課堂額度 : ${classResponse.course.sessionQuota}</p>
-                      <p class="mt-1">總共使用 : 5堂</p>
+                      <p class="mt-1">使用期限 : ${new Date(classResponse.course.dateStart).toLocaleDateString('zh-TW')} ~ ${new Date(classResponse.course.dateEnd).toLocaleDateString('zh-TW')}</p>
+                      <p class="mt-1">課堂額度 : ${classResponse.course.sessionQuota}堂</p>
+                      <p class="mt-1">總共使用 : ${classResponse.course.quotaUsed}堂</p>
                     </div>
                     <div class="card-datatable">
                       <table class="datatables-users table">
@@ -212,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <th>動作</th>
                           </tr>
                         </thead>
-                        <tbody id="course-table-body">
+                        <tbody>
                           ${sessionHtml}
                         </tbody>   
                       </table>
@@ -227,5 +335,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    
-});
+// });

@@ -26,6 +26,7 @@ import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.SessionUsers;
 import web.course.service.CourseService;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
@@ -201,9 +202,14 @@ public class CourseServiceImpl implements CourseService {
 			cousre.setSuccessful(false);
 			return cousre;
 		}
-		cousre = dao.selectById(cousre.getCourseId());
-		cousre.setSuccessful(true);
-		return cousre;
+		Course findCourse = dao.selectById(cousre.getCourseId());
+		if (findCourse == null) {
+			cousre.setSuccessful(false);
+			return cousre;
+		}
+		
+		findCourse.setSuccessful(true);
+		return findCourse;
 	}
 
 	@Override
@@ -301,26 +307,71 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<ClassResponse> findClass(Integer id) {
+	public List<ClassResponse> findClass(Integer userId) {
 		List<Orders> orders = new ArrayList<>();
 		List<ClassResponse> classResponses = new ArrayList<>();
 		// 尋找訂單是否有已購買課程
-		orders = dao.selectOrderByUserId(id);
+		orders = dao.selectOrderByUserId(userId);
 		for (Orders order : orders) {
 			List<Integer> courseIds = dao.selectCourseIdByOrderId(order.getOrderId()); // 從Orderitems找CourseId
 			for (Integer couseId : courseIds) {
 				ClassResponse classResponse = new ClassResponse(); 
 				Course course = dao.selectById(couseId); // 找課程
-				List<ClassSessions> classSessions = dao.selectClassSessionBycourseID(couseId); // 找班次
+				Integer quotaCnt = Math.toIntExact(findQuotaUsed(course, userId)); // 計算已使用堂數
+				course.setQuotaUsed(quotaCnt);
+				List<ClassSessions> classSessionsList = dao.selectClassSessionBycourseID(couseId); // 找班次
+				// 判斷每個ClassSessions的預約狀態
+				for (ClassSessions classSessions : classSessionsList) {
+					SessionUsers sessionUsers = dao.selectBySessionIdUserID(classSessions.getSessionId(), userId);
+					Long countUser = dao.selectCntBySessionId(classSessions.getSessionId()); // 找班次人數
+					classSessions.setUserCnt(Math.toIntExact(countUser));
+					if (sessionUsers == null) {
+						if (countUser >= course.getCapacityMax() && countUser != null) {
+							classSessions.setBookStatus("無法預約");
+						} else { 
+							classSessions.setBookStatus("未預約");
+						}
+					} else {
+						classSessions.setBookStatus("已預約");
+					}
+				}
 				// 全部放到ClassResponse物件
 				classResponse.setCourse(course);
 				classResponse.setCoachName(findName(course)); // 找教練名
-				classResponse.setClassSessions(classSessions);
+				classResponse.setClassSessions(classSessionsList);
 				classResponses.add(classResponse); // 放到List
 			}
 		}
 		
 		return classResponses;
+	}
+	
+	@Override
+	public Long findQuotaUsed(Course course, Integer userId) {
+		Long selectCntTotal = 0L;
+		List<ClassSessions> csList = dao.selectClassSessionBycourseID(course.getCourseId());
+		for (ClassSessions cs : csList) {
+			Long selectCnt = dao.selectCntFromSessionUserById(cs.getSessionId(), userId);
+			if (selectCnt != null && selectCnt > 0) {
+				selectCntTotal += selectCnt;
+			}
+		}
+		return selectCntTotal;
+	}
+
+	@Override
+	public Boolean reserveUpdate(ClassSessions classSessions, Integer useId) {
+		SessionUsers su = new SessionUsers();
+		su.setSessionId(classSessions.getSessionId());
+		su.setUserId(useId);
+		if ("未預約".equals(classSessions.getBookStatus())) {
+			int count = dao.insert(su);
+			return count == 1;		
+		} else if ("已預約".equals(classSessions.getBookStatus())) {
+			int count = dao.deleteById(su);
+			return count == 1;
+		}
+		return false;
 	}
 	
 
