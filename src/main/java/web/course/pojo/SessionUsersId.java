@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SessionUsersId implements Serializable{
+	private static final long serialVersionUID = -1536554326804108556L;
 	public Integer sessionId;
 	public Integer userId;
 	@Override

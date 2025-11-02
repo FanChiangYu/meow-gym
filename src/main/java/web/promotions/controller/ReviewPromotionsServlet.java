@@ -33,11 +33,11 @@ public class ReviewPromotionsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		CoursePromo coursePromo = json2Pojo(req, CoursePromo.class);
 //		JsonObject obj = new JsonObject();
-		resp.setContentType("application/json");
-		CoursePromo coursePromo = GSON.fromJson(req.getReader(), CoursePromo.class);
-		String imgBase64Str = coursePromo.getImgBase64Str();
-		byte[] bytes = DECODER.decode(imgBase64Str);
-		Files.write(Paths.get("D:/uploaded_files/avatar.png"), bytes);
+//		resp.setContentType("application/json");
+//		CoursePromo coursePromo = GSON.fromJson(req.getReader(), CoursePromo.class);
+//		String imgBase64Str = coursePromo.getImgBase64Str();
+//		byte[] bytes = DECODER.decode(imgBase64Str);
+//		Files.write(Paths.get("D:/uploaded_files/avatar.png"), bytes);
 		
 	}
 }

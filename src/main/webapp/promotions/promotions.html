@@ -41,15 +41,11 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
-
-    <link rel="stylesheet" href="..//assets/vendor/libs/fullcalendar/fullcalendar.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/quill/editor.css" />
-    <link rel="stylesheet" href="..//assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
 
@@ -122,7 +118,7 @@
             </li>
 
             <!-- 會員專區 -->
-            <li class="menu-item open d-none" id="user-menu">
+            <li class="menu-item d-none" id="user-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>會員專區</div>
@@ -138,7 +134,7 @@
                     <div>課程瀏覽</div>
                   </a>
                 </li>
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="#" class="menu-link">
                     <div>預約上課</div>
                   </a>
@@ -312,13 +308,47 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" id="class-content">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-      
-             
-
-              
-              
+        
+              <div class="row mb-6 gy-6">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0" id="courseTitle"></h5>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="mb-6">
+                          <label class="form-label" for="coursePrice">課程原價</label>
+                          <input type="text" class="form-control" id="coursePrice" disabled />
+                        </div>
+                        <div class="mb-6">
+                          <label class="form-label" for="date-start">開始日期</label>
+                          <input type="text" id="date-start" class="form-control dob-picker"
+                            placeholder="YYYY-MM-DD" />
+                        </div>
+                        <div class="mb-6">
+                          <label class="form-label" for="date-end">結束日期</label>
+                          <input type="text" id="date-end" class="form-control dob-picker"
+                            placeholder="YYYY-MM-DD" />
+                        </div>    
+                        <div class="mb-6">
+                          <label for="course-img" class="form-label">課程圖片 (僅允許 PNG 格式圖片)</label>
+                          <input class="form-control" type="file" id="course-img" accept=".png" />
+                        </div>
+                        <div class="mb-6">
+                          <label class="form-label" for="promo-price">課程促銷價格</label>
+                          <input type="number" class="form-control" id="promo-price" placeholder="課程訂價" />
+                        </div>
+                        
+                        <button id="apply-btn" type="button" class="btn btn-primary">確認</button>
+                        <button id="apply-btn" type="button" class="btn btn-primary">取消</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
               <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
@@ -427,21 +457,19 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="..//assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/popular.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-    <script src="..//assets/vendor/libs/@form-validation/auto-focus.js"></script>
-    <script src="..//assets/vendor/libs/select2/select2.js"></script>
-    <script src="..//assets/vendor/libs/moment/moment.js"></script>
-    <script src="..//assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
+    <script src="../assets/vendor/libs/moment/moment.js"></script>
+    <script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="../assets/vendor/libs/select2/select2.js"></script>
     <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
-
     <script src="../assets/js/main.js"></script>
-    <script src="js/bookClass.js"></script>
-
-
+    
     <!-- Page JS -->
+     <script src="./js/promotions.js"></script>
+     <script src="../assets/js/form-layouts.js"></script>
+    <!-- <script src="js/form-layouts.js"></script>
+    <script src="js/promotions.js"></script> -->
   </body>
 </html>

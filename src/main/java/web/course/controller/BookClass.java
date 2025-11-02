@@ -28,8 +28,8 @@ public class BookClass extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 假設已從session取得userId = 1;
-		Integer useId = 1;
-		List<ClassResponse> respBody = service.findClass(useId);
+		Integer userId = 1;
+		List<ClassResponse> respBody = service.findClass(userId);
 		writePojo2Json(resp, respBody);
 	}
 }
