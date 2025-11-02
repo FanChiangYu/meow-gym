@@ -27,6 +27,4 @@ public class PromotionsDaoImpl implements PromotionsDao {
 		session.persist(coursePromo);
 		return 1;
 	}
-	
-
 }
