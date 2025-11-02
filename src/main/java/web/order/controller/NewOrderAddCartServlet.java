@@ -26,8 +26,8 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("/order/newOrder")
-public class NewOrderServlet extends HttpServlet{
+@WebServlet("newOrder")
+public class NewOrderAddCartServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;
 	
@@ -38,7 +38,7 @@ public class NewOrderServlet extends HttpServlet{
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 //		//取會員資料
@@ -49,39 +49,26 @@ public class NewOrderServlet extends HttpServlet{
 		
 		//取課程資訊
 		Course course = (Course) session.getAttribute("course");
-		String coachname = (String)session.getAttribute("coachName");
+//		String coachname = (String)session.getAttribute("coachName");
 		Integer orderId = orderservice.addcart(course, userId);
-		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId, coachname);
+		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId);
 		//回傳課程資訊
 		writePojo2Json(response, courseList);
 	}
-		
-//		JsonObject respbody = new JsonObject();
-//		NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
-//		Course course = newCourseRequest.getCourse();
-//		List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
-//		course = service.apply(course);
-//		
-//		if(course.isSuccessful()) {
-//			System.out.println(course.getCourseId());
-//			respbody = service.apply(Rules, course.getCourseId());
-//			writePojo2Json(response, respbody);
-//		} else {
-//			writePojo2Json(response, course);
-//		}
-
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Course course = json2Pojo(request, Course.class);
-		Integer courseId = course.getCourseId();
-		HttpSession session = request.getSession();
-//		//取會員資料
-//		User user = (User) session.getAttribute("user");
-//		Integer userId = user.getUserId();
-		//先寫死
-		Integer userId = 1;
-//		String answer = orderservice.deletecoursefromcart(courseId, userId);
-//		writePojo2Json(response, answer);
-	}
 }
+
+
+//JsonObject respbody = new JsonObject();
+//NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
+//Course course = newCourseRequest.getCourse();
+//List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
+//course = service.apply(course);
+//
+//if(course.isSuccessful()) {
+//	System.out.println(course.getCourseId());
+//	respbody = service.apply(Rules, course.getCourseId());
+//	writePojo2Json(response, respbody);
+//} else {
+//	writePojo2Json(response, course);
+//}
+
