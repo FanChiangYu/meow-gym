@@ -26,7 +26,7 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("newOrder")
+@WebServlet("/order/newOrder")
 public class NewOrderAddCartServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;

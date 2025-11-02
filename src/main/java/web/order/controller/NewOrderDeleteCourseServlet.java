@@ -26,7 +26,7 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("deleteCart")
+@WebServlet("/order/deleteCart")
 public class NewOrderDeleteCourseServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;
