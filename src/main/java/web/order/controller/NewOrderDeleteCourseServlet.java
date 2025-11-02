@@ -26,8 +26,8 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("newOrderPayment")
-public class NewOrderPaymentServlet extends HttpServlet{
+@WebServlet("deleteCart")
+public class NewOrderDeleteCourseServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;
 	
@@ -36,30 +36,35 @@ public class NewOrderPaymentServlet extends HttpServlet{
 		//Spring無法控管Servlet物件，透過 CommonUtil.getBean()￾取得 Service物件
 		orderservice = CommonUtil.getBean(getServletContext(), OrderService.class);
 	}
-	
+			
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		//import static 套件寫法		
-		Orders orders = json2Pojo(request, Orders.class);
-		orders = orderservice.payment(orders);
-		writePojo2Json(response, orders);
-		
-		//GSON 反序列化寫法
-//		Gson gson = new Gson();
-//		Orders orders = gson.fromJson(request.getReader(), Orders.class);
-//		JsonObject jsonObject = new JsonObject();
-//		
-//		orders = orderservice.payment(orders);
-//		if(orders != null) {
-//			jsonObject.addProperty("success", true);
-//			jsonObject.addProperty("order ID", orders.getOrderId());
-//		} else {
-//			jsonObject.addProperty("success", false);
-//		}
-//		
-//		
-//		String json = gson.toJson(orders);
-//		response.setContentType("application/json");
-//		response.getWriter().write(json);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Course course = json2Pojo(request, Course.class);
+		Integer courseId = course.getCourseId();
+//		HttpSession session = request.getSession();
+//		//取會員資料
+//		User user = (User) session.getAttribute("user");
+//		Integer userId = user.getUserId();
+		//先寫死
+		Integer userId = 1;
+		String answer = orderservice.deletecoursefromcart(courseId, userId);
+		writePojo2Json(response, answer);
 	}
 }
+
+
+
+//JsonObject respbody = new JsonObject();
+//NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
+//Course course = newCourseRequest.getCourse();
+//List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
+//course = service.apply(course);
+//
+//if(course.isSuccessful()) {
+//	System.out.println(course.getCourseId());
+//	respbody = service.apply(Rules, course.getCourseId());
+//	writePojo2Json(response, respbody);
+//} else {
+//	writePojo2Json(response, course);
+//}
+
