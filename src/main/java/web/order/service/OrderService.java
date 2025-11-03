@@ -8,9 +8,9 @@ import web.order.pojo.Orders;
 
 public interface OrderService extends CoreService{
 	
-	Integer addcart(Course course, Integer userId);
+	Boolean addcart(Course course, Integer userId);
 	
-	List<Course> getAllCourseByOrderId(Integer orderId);
+	List<Course> getAllCourseByUserId(Integer userId);
 	
 	String deletecoursefromcart(Integer courseId, Integer userId);
 	

@@ -26,7 +26,7 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("/order/newOrderPayment")
+//@WebServlet("/order/payment")
 public class NewOrderPaymentServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;
@@ -43,23 +43,40 @@ public class NewOrderPaymentServlet extends HttpServlet{
 		Orders orders = json2Pojo(request, Orders.class);
 		orders = orderservice.payment(orders);
 		writePojo2Json(response, orders);
-		
-		//GSON 反序列化寫法
-//		Gson gson = new Gson();
-//		Orders orders = gson.fromJson(request.getReader(), Orders.class);
-//		JsonObject jsonObject = new JsonObject();
-//		
-//		orders = orderservice.payment(orders);
-//		if(orders != null) {
-//			jsonObject.addProperty("success", true);
-//			jsonObject.addProperty("order ID", orders.getOrderId());
-//		} else {
-//			jsonObject.addProperty("success", false);
-//		}
-//		
-//		
-//		String json = gson.toJson(orders);
-//		response.setContentType("application/json");
-//		response.getWriter().write(json);
 	}
 }
+
+
+
+//JsonObject respbody = new JsonObject();
+//NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
+//Course course = newCourseRequest.getCourse();
+//List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
+//course = service.apply(course);
+//
+//if(course.isSuccessful()) {
+//	System.out.println(course.getCourseId());
+//	respbody = service.apply(Rules, course.getCourseId());
+//	writePojo2Json(response, respbody);
+//} else {
+//	writePojo2Json(response, course);
+//}
+
+
+//GSON 反序列化寫法
+//Gson gson = new Gson();
+//Orders orders = gson.fromJson(request.getReader(), Orders.class);
+//JsonObject jsonObject = new JsonObject();
+//
+//orders = orderservice.payment(orders);
+//if(orders != null) {
+//	jsonObject.addProperty("success", true);
+//	jsonObject.addProperty("order ID", orders.getOrderId());
+//} else {
+//	jsonObject.addProperty("success", false);
+//}
+//
+//
+//String json = gson.toJson(orders);
+//response.setContentType("application/json");
+//response.getWriter().write(json);

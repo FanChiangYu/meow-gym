@@ -26,7 +26,7 @@ import web.order.service.OrderService;
 import web.order.service.impl.OrderServiceImpl;
 import web.user.pojo.User;
 
-@WebServlet("/order/newOrder")
+//@WebServlet("/order/addCart")
 public class NewOrderAddCartServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private OrderService orderservice;
@@ -50,25 +50,9 @@ public class NewOrderAddCartServlet extends HttpServlet{
 		//取課程資訊
 		Course course = (Course) session.getAttribute("course");
 //		String coachname = (String)session.getAttribute("coachName");
-		Integer orderId = orderservice.addcart(course, userId);
-		List<Course> courseList = orderservice.getAllCourseByOrderId(orderId);
+		Boolean booLean = orderservice.addcart(course, userId);
+		List<Course> courseList = orderservice.getAllCourseByUserId(userId);
 		//回傳課程資訊
 		writePojo2Json(response, courseList);
 	}
 }
-
-
-//JsonObject respbody = new JsonObject();
-//NewCourseRequest newCourseRequest = json2Pojo(request, NewCourseRequest.class);
-//Course course = newCourseRequest.getCourse();
-//List<CourseRecurringRules> Rules = newCourseRequest.getRules(); 
-//course = service.apply(course);
-//
-//if(course.isSuccessful()) {
-//	System.out.println(course.getCourseId());
-//	respbody = service.apply(Rules, course.getCourseId());
-//	writePojo2Json(response, respbody);
-//} else {
-//	writePojo2Json(response, course);
-//}
-

@@ -30,12 +30,12 @@ public class OrderServiceImpl implements OrderService{
 	//標註需要交易控制的⽅法
 	@Transactional
 	@Override
-	public Integer addcart(Course course, Integer userId) {
+	public Boolean addcart(Course course, Integer userId) {
 		//比對訂單course資訊		
-		if(course.getCourseId() == null) {
-			System.out.println("取得訂單course資訊失敗");
-			return null;
-		}
+//		if(course.getCourseId() == null) {
+//			System.out.println("取得訂單course資訊失敗");
+//			return false;
+//		}
 		System.out.println(course.getCourseId());
 		
 		//邏輯：產生Orders By userId/
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService{
 			int count = orderdao.insert(orders);
 			if(count != 1) {
 				System.out.println("產生Order失敗");
-				return null;
+				return false;
 			}
 			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");	
 		}
@@ -64,21 +64,23 @@ public class OrderServiceImpl implements OrderService{
 		int count1 = orderdao.insert(orderitems);
 		if(count1 == 1) {
 			System.out.println("儲存orderitems資料成功");
-			return orderId;
+			return true;
 		} else {
 			System.out.println("儲存orderitems資料失敗");
-			return null;
+			return false;
 		}
 	}
 	
 	@Transactional	
 	@Override
-	public List<Course> getAllCourseByOrderId(Integer orderId) {
-		//Step1:找同筆訂單下所有CourseID
+	public List<Course> getAllCourseByUserId(Integer userId) {
+		//Step1:用userId找orderId by Orders
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		//Step2:找同筆訂單下所有CourseID
 		List<Integer> courseIdList = orderdao.selectCourseListByOrderId(orderId);
-		//Step2:藉由courseID 去撈course.class
+		//Step3:藉由courseID 去撈course.class
 		List<Course> courseList = orderdao.selectCourseListByCourseIdList(courseIdList);
-		//Step3:跑foreach 放入 coachname
+		//Step4:跑foreach 放入 coachname
 		for(Course course : courseList) {
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);

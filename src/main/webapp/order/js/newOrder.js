@@ -4,7 +4,7 @@ const coach = document.querySelector('#name');
 const date = document.querySelector('#date');
 const capacityMax = document.querySelector('#capacity-max');
 
-fetch('newOrder')
+fetch('addCart')
 	.then(resp => resp.json())
 	.then(neworders => {
 		for (let neworder of neworders) {
@@ -56,7 +56,7 @@ function valueOrNull (value) {
 }
 
 document.getElementById('payOnCard').addEventListener('click', function(){
-  fetch('newOrderPayment', {
+  fetch('payment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -92,7 +92,7 @@ document.getElementById('payOnCard').addEventListener('click', function(){
       });
     }
   });
-});
+
 
 document.getElementById('payOnCash').addEventListener('click', function(){
   fetch('newOrder', {
@@ -131,7 +131,6 @@ document.getElementById('payOnCash').addEventListener('click', function(){
       });
     }
   });
-});
 
 //結帳確認
 //const title = document.querySelector('#title');
@@ -188,4 +187,4 @@ document.getElementById('payOnCash').addEventListener('click', function(){
 //      });
 //    }
 //  });
-});
+//});
