@@ -72,7 +72,7 @@ public class OrderDaoImpl implements OrderDao{
 		//找Course.class
 		String hql = "FROM Course where courseId IN(:courseIdList)";
 		Query<Course> query = session.createQuery(hql, Course.class);
-		List<Course> courseList = query.setParameterList("courseId", courseIdList).getResultList();
+		List<Course> courseList = query.setParameterList("courseIdList", courseIdList).getResultList();
 		return courseList;
 	}
 	

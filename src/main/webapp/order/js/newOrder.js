@@ -1,51 +1,61 @@
 //我的購物車//
-const title = document.querySelector('#title');
-const coach = document.querySelector('#name');
-const date = document.querySelector('#date');
-const capacityMax = document.querySelector('#capacity-max');
-
+const course_title = document.querySelector('#course_title');
+const course_coachName = document.querySelector('#course_coachName');
+const course_dateStart = document.querySelector('#course_dateStart');
+const course_dateEnd = document.querySelector('#course_dateEnd');
+const course_capacityMax = document.querySelector('#course_capacityMax');
+const course_coursePrice = document.querySelector('#course_coursePrice');
+// document.addEventListener('load', addCart);
+addCart();
+function addCart(){
 fetch('addCart')
 	.then(resp => resp.json())
-	.then(neworders => {
-		for (let neworder of neworders) {
-			span.innerHTML = `
-				<a>
-					<span>${orders.courseId}</span>
-				</a>
+	.then(courseList => {
+		for (let course of courseList) {
+			course_title.innerHTML += `
+				<p>
+					<a>
+						<span>${course.title}</span>
+					</a>	
+				</p>
 			`;
-			a.innerHTML += `
-				<a>
-					<span>${orders.coachId}</span>
-				</a>
+			course_coachName.innerHTML += `
+				<div>
+					<a>${course.coachName}</a>
+				</div>
 			`;
-			a.innerHTML += `
-				<a>
-					<span>${orders.date}</span>
-				</a>
+			course_dateStart.innerHTML += `
+				<div>
+					<a>${course.dateStart}</a>
+				</div>
 			`;
-			a.innerHTML += `
-				<a>
-					<span>${orders.capacityMax}</span>
-				</a>
+			course_dateEnd.innerHTML += `
+				<div>
+					<a>${course.dateEnd}</a>
+				</div>
+			`;
+			course_capacityMax.innerHTML += `
+				<div>
+					<a>${course.capacityMax}</a>
+				</div>
+			`;
+			course_coursePrice.innerHTML += `
+				<div>
+					<s>${course.coursePrice}</s>
+				</div>
 			`;
 		}
 	});
+}
 
 //確認付款內容//
-//const pills-cc-tab = document.querySelector('#pills-cc-tab');//
-//const pills-cod-tab = document.querySelector('#pills-cod-tab');//
 const payOnCard = document.querySelector('#payOnCard');
 const payOnCash = document.querySelector('#payOnCash');
-
-const order_id = document.querySelector('#order_id');
-const user_id = document.querySelector('#user_id');
-const pay_amount = document.querySelector('#pay_amount');
-
-const card_number = document.querySelector('#paymentCard');
-const card_holder = document.querySelector('#paymentCardName');
-const exp_year = document.querySelector('#paymentCardExpiryDate');
-const exp_month = document.querySelector('#paymentCardExpiryDate');
-const cvc = document.querySelector('#paymentCardCvv');
+const cardNumber = document.querySelector('#cardNumber');
+const cardHolder = document.querySelector('#cardHolder');
+const expYear = document.querySelector('#expYear');
+const expMonth = document.querySelector('#expMonth');
+const cvc = document.querySelector('#ccc');
 
 function valueOrNull (value) {
   if(value === undefined || value === null || value === ''){
@@ -55,20 +65,17 @@ function valueOrNull (value) {
   }
 }
 
-document.getElementById('payOnCard').addEventListener('click', function(){
+document.getElementById('payOnCard').addEventListener('click', paymentByCard);
+function paymentByCard(){  
   fetch('payment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      //order_id: '99999',//
-      //user_id: '1',//
-      pay_amount: pay_amount.value,
-      status: 'pending',
-      pay_method: 'credit_card',
-      card_holder: valueOrNull(card_holder.value),
-      card_number: valueOrNull(card_number.value),
-      exp_year: valueOrNull(exp_year.value),
-      exp_month: valueOrNull(exp_month.value),
+      paymentMethod: 'Card',
+      cardHolder: valueOrNull(cardHolder.value),
+      cardNumber: valueOrNull(cardNumber.value),
+      expYear: valueOrNull(expYear.value),
+      expMonth: valueOrNull(expMonth.value),
       cvc: valueOrNull(cvc.value)
     }),
   })
@@ -92,23 +99,15 @@ document.getElementById('payOnCard').addEventListener('click', function(){
       });
     }
   });
+};
 
-
-document.getElementById('payOnCash').addEventListener('click', function(){
-  fetch('newOrder', {
+document.getElementById('payOnCash').addEventListener('click', paymentByCash);
+function paymentByCash(){
+  fetch('payment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      //order_id: 99998,//
-      //user_id: 2,//
-      pay_amount: pay_amount.value,
-      status: 'pending',
-      pay_method: 'cash',
-      card_holder: 'user_id.value',
-      card_number: '999999999',
-      exp_year: 9999,
-      exp_month: 99,
-      cvc: 9999
+      paymentMethod: 'cash'
     }),
   })
   .then(resp => resp.json())
@@ -131,8 +130,17 @@ document.getElementById('payOnCash').addEventListener('click', function(){
       });
     }
   });
+};
 
 //結帳確認
+//const orderId = document.querySelector('#order_id');
+//const userId = document.querySelector('#user_id');
+//const payAmount = document.querySelector('#pay_amount');
+//const cardNumber = document.querySelector('#paymentCard');
+//const cardHolder = document.querySelector('#paymentCardName');
+//const expYear = document.querySelector('#paymentCardExpiryDate');
+//const expMonth = document.querySelector('#paymentCardExpiryDate');
+//const cvc = document.querySelector('#paymentCardCvv');
 //const title = document.querySelector('#title');
 //const category = document.querySelector('#category');
 //const roomId = document.querySelector('#room-id');
@@ -181,7 +189,7 @@ document.getElementById('payOnCash').addEventListener('click', function(){
       // alert(body.message);
 //      Swal.fire({
 //        title: '錯誤',
-        text: body.message,
+//        text: body.message,
 //        icon: 'error',
 //        target: document.body 
 //      });
