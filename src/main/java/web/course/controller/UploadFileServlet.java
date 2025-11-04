@@ -38,7 +38,7 @@ public class UploadFileServlet extends HttpServlet{
 		Part part = req.getPart("file");
 		String fileName = FileUtil.getFileName(part);
 		fileName = service.addTimestampToFileName(fileName);
-		imgReqPath = "/meow-gym/getImg?file=" + fileName;
+		imgReqPath = "/meow-gym/course/getImg?file=" + fileName;
 		
 		boolean writeResult = service.writeToImgPath(part);
 		

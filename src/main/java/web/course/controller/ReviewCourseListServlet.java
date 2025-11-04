@@ -26,7 +26,7 @@ import web.course.service.impl.CourseServiceImpl;
 import web.member.service.MemberService;
 import web.user.pojo.User;
 
-@WebServlet("/course/reviewCourseList")
+//@WebServlet("/course/reviewCourseList")
 public class ReviewCourseListServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private CourseService service;

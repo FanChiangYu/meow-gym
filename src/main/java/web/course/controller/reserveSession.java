@@ -17,7 +17,7 @@ import core.util.CommonUtil;
 import web.course.pojo.ClassSessions;
 import web.course.service.CourseService;
 
-@WebServlet("/course/reserveSession")
+//@WebServlet("/course/reserveSession")
 public class reserveSession extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CourseService service;

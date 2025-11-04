@@ -145,7 +145,7 @@ public class CourseServiceImpl implements CourseService {
 				result.addProperty("message", "未選擇時段");
 				return result;
 			}
-//			System.out.println(course.getCourseId());
+
 			int count = dao.insert(rule);
 			if(count != 1) {
 				result.addProperty("successful", false);
@@ -176,7 +176,7 @@ public class CourseServiceImpl implements CourseService {
 			
 		}
 		result.addProperty("successful", true);
-		result.addProperty("Message", "送出成功");
+		result.addProperty("message", "送出成功");
 		return result;
 	}
 
@@ -214,6 +214,7 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String modify(Course cousre) {
+		System.out.println("======================" + cousre.getApprovalStatus());
 		int count = dao.update(cousre);
 		return count > 0 ? "更新成功" : "更新失敗";
 	}

@@ -15,7 +15,7 @@ import core.util.CommonUtil;
 import web.course.pojo.ClassResponse;
 import web.course.service.CourseService;
 
-@WebServlet("/course/bookClass")
+//@WebServlet("/course/bookClass")
 public class BookClass extends HttpServlet {
 	private static final long serialVersionUID = 2025350997976321063L;
 	private CourseService service;

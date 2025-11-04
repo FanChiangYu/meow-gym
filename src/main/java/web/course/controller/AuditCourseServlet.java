@@ -19,7 +19,7 @@ import web.course.pojo.Course;
 import web.course.service.CourseService;
 import web.course.service.impl.CourseServiceImpl;
 
-@WebServlet("/course/auditCourse")
+//@WebServlet("/course/auditCourse")
 public class AuditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CourseService service;
