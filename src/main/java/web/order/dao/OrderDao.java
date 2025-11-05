@@ -9,10 +9,6 @@ import web.order.pojo.Orders;
 
 public interface OrderDao extends CoreDao<Orders, Integer>{
 	
-	Orders selectById(Integer id);
-	
-	int insert(Orders orders);
-	
 	int insert(Orderitems orderitems);
 	
 	Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status);
@@ -28,4 +24,8 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId);
 	
 	Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status);
+	
+	Orders selectOrdersByOrderId(Integer orderId);
+	
+	int insert(Orders orders);
 }

@@ -21,16 +21,12 @@ public class NewOrderAddCartController {
 
 	@GetMapping("addCart")
 	@ResponseBody
-	protected List<Course> addCart(@SessionAttribute(value = "user", required = false) User setUser,
+	protected List<Course> addCart(@SessionAttribute(value = "user", required = false) User setUser, 
 			@SessionAttribute(value = "course", required = false) Course setCourse) {
-
-//		//取會員資料
+		//取會員資料
 //		Integer userId = setUser.getUserId();
 		// 先寫死
 		Integer userId = 1;
-
-		// 取課程資訊
-//		String coachname = (String)session.getAttribute("coachName");
 
 		// 判斷是否有加入購物車的課程，如無則顯示課程清單
 		if (setCourse != null) {// 比對訂單course資訊
@@ -38,7 +34,6 @@ public class NewOrderAddCartController {
 			System.out.println(booLean);
 		}
 		// 回傳購物車清單
-		// 回傳課程資訊
 		List<Course> courseList = orderservice.getAllCourseByUserId(userId);
 		return courseList;
 	}

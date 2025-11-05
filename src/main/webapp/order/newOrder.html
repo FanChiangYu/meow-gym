@@ -385,104 +385,52 @@
 			
 			                    <!-- Shopping bag -->
 			                    <h5>我的購物車</h5>
-			                    <ul class="list-group mb-4">
+			                    <ul class="list-group mb-4" id="myCart">
 			              		  <!-- 課程畫面 -->
-			                      <li class="list-group-item p-6">
-			                        <div class="d-flex gap-4">
-			                          <div class="flex-shrink-0 d-flex align-items-center">
-			                            <img src="./images/test.png"" alt="google home" class="w-px-100" />
-			                          </div>
-			                          <div class="flex-grow-1">
-			                            <div class="row">
-			                              <div class="col-md-8">
-			                                <p class="me-3 mb-2">
-			                                  <a href="javascript:void(0)" class="fw-medium">
-			                                    <span class="text-heading" id="course_title"></span></a>
-			                                </p>
-			                                <div
-			                                  class="read-only-ratings raty mb-2"
-			                                  data-read-only="true"
-			                                  data-score="4"
-			                                  data-number="5"></div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1" >教練：</span>
-			                                  <a href="javascript:void(0)" class="me-4" id="course_coachName"></a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1" >開課日：</span>
-			                                  <a href="javascript:void(0)" class="me-4" id="course_dateStart"></a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1" >完課日：</span>
-			                                  <a href="javascript:void(0)" class="me-4" id="course_dateEnd"></a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1" >課堂額度：</span>
-			                                  <a href="javascript:void(0)" class="me-4" id="course_capacityMax"></a>
-			                                </div>
-			                              </div>
-			                              <div class="col-md-4">
-			                                <div class="text-md-end">
-			                                  <button type="button" class="btn-close btn-pinned" aria-label="Close"></button>
-			                                  <div class="my-2 mt-md-6 mb-md-4">
-			                                    <span class="text-primary">specialprice</span>
-			                                    <s class="text-body" id="course_coursePrice"></s>
-			                                  </div>
-			                                </div>
-			                              </div>
-			                            </div>
-			                          </div>
-			                        </div>
-			                      </li>
-			                      <!-- 課程畫面 -->
-			                      <li class="list-group-item p-6">
-			                        <div class="d-flex gap-4">
-			                          <div class="flex-shrink-0 d-flex align-items-center">
-			                            <img src="./images/test.png" alt="google home" class="w-px-100" />
-			                          </div>
-			                          <div class="flex-grow-1">
-			                            <div class="row">
-			                              <div class="col-md-8">
-			                                <p class="me-3 mb-2">
-			                                  <a href="javascript:void(0)" class="fw-medium"
-			                                    ><span class="text-heading">初階瑜珈課</span></a>
-			                                </p>
-			                                <div
-			                                  class="read-only-ratings raty mb-2"
-			                                  data-read-only="true"
-			                                  data-score="4"
-			                                  data-number="5"></div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">教練：</span>
-			                                  <a href="javascript:void(0)" class="me-4">coach</a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">開課日：</span>
-			                                  <a href="javascript:void(0)" class="me-4">date_start</a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">完課日：</span>
-			                                  <a href="javascript:void(0)" class="me-4">date_end</a>
-			                                </div>
-			                                <div class="text-body-secondary mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">課堂額度：</span>
-			                                  <a href="javascript:void(0)" class="me-4">capacity_max</a>
-			                                </div>				                               			                                
-			                              </div>
-			                              <div class="col-md-4">
-			                                <div class="text-md-end">
-			                                  <button type="button" class="btn-close btn-pinned" aria-label="Close"></button>
-			                                  <div class="my-2 mt-md-6 mb-md-4">
-			                                    <span class="text-primary">specialprice</span><s class="text-body">originprice</s>
-			                                  </div>
-			                                </div>
-			                              </div>
-			                            </div>
-			                          </div>
-			                        </div>
-			                      </li>
-			                    </ul>
-			                  </div>
+<!-- 			                      <li class="list-group-item p-6"> -->
+<!-- 			                        <div class="d-flex gap-4"> -->
+<!-- 			                          <div class="flex-shrink-0 d-flex align-items-center"> -->
+<!-- 			                            <img src="./images/test.png" alt="google home" class="w-px-100" /> -->
+<!-- 			                          </div> -->
+<!-- 			                          <div class="flex-grow-1"> -->
+<!-- 			                            <div class="row"> -->
+<!-- 			                              <div class="col-md-8"> -->
+<!-- 			                                <p class="me-3 mb-2"> -->
+<!-- 			                                  <a href="javascript:void(0)" class="fw-medium"> -->
+<!-- 			                                    <span class="text-heading" id="course_title"></span></a> -->
+<!-- 			                                </p> -->
+<!-- 			                                <div class="text-body-secondary mb-2 d-flex flex-wrap"> -->
+<!-- 			                                  <span class="me-1" >教練：</span> -->
+<!-- 			                                  <a href="javascript:void(0)" class="me-4" id="course_coachName"></a> -->
+<!-- 			                                </div> -->
+<!-- 			                                <div class="text-body-secondary mb-2 d-flex flex-wrap"> -->
+<!-- 			                                  <span class="me-1" >開課日：</span> -->
+<!-- 			                                  <a href="javascript:void(0)" class="me-4" id="course_dateStart"></a> -->
+<!-- 			                                </div> -->
+<!-- 			                                <div class="text-body-secondary mb-2 d-flex flex-wrap"> -->
+<!-- 			                                  <span class="me-1" >完課日：</span> -->
+<!-- 			                                  <a href="javascript:void(0)" class="me-4" id="course_dateEnd"></a> -->
+<!-- 			                                </div> -->
+<!-- 			                                <div class="text-body-secondary mb-2 d-flex flex-wrap"> -->
+<!-- 			                                  <span class="me-1" >課堂額度：</span> -->
+<!-- 			                                  <a href="javascript:void(0)" class="me-4" id="course_capacityMax"></a> -->
+<!-- 			                                </div> -->
+<!-- 			                              </div> -->
+<!-- 			                              <div class="col-md-4"> -->
+<!-- 			                                <div class="text-md-end"> -->
+<!-- 			                                  <button type="button" class="btn-close btn-pinned" id="delect_btn" aria-label="Close"></button> -->
+<!-- 			                                  <div class="my-2 mt-md-6 mb-md-4"> -->
+<!-- 			                                    <span class="text-primary">specialprice</span> -->
+<!-- 			                                    <s class="text-body" id="course_coursePrice"></s> -->
+<!-- 			                                  </div> -->
+<!-- 			                                </div> -->
+<!-- 			                              </div> -->
+<!-- 			                            </div> -->
+<!-- 			                          </div> -->
+<!-- 			                        </div> -->
+<!-- 			                      </li> -->
+			                 	</ul>
+			                  </div>	     
 			
 			                  <!-- Cart right -->
 			                  <div class="col-xl-4">
@@ -557,7 +505,7 @@
 			                              <label class="form-label w-100" for="paymentCard">Card Number</label>
 			                              <div class="input-group input-group-merge">
 			                                <input
-			                                  id="paymentCard"
+			                                  id="cardNumber"
 			                                  name="paymentCard"
 			                                  class="form-control credit-card-mask"
 			                                  type="text"
@@ -572,7 +520,7 @@
 			                              <label class="form-label" for="paymentCardName">Name</label>
 			                              <input 
 				                             type="text" 
-				                             id="paymentCardName" 
+				                             id="cardHolder" 
 				                             class="form-control" 
 				                             placeholder="Name" />
 			                            </div>
@@ -580,7 +528,7 @@
 			                              <label class="form-label" for="paymentCardExpiryDate">Exp. Mon</label>
 			                              <input
 			                                type="text"
-			                                id="paymentCardExpiryDate"
+			                                id="expMonth"
 			                                class="form-control expiry-date-mask"
 			                                maxlength="2"
 			                                placeholder="MM" />
@@ -589,7 +537,7 @@
 			                              <label class="form-label" for="paymentCardExpiryDate">Exp. Year</label>
 			                              <input
 			                                type="text"
-			                                id="paymentCardExpiryDate"
+			                                id="expYear"
 			                                class="form-control expiry-date-mask"
 			                                maxlength="2"
 			                                placeholder="YY" />
@@ -599,7 +547,7 @@
 			                              <div class="input-group input-group-merge">
 			                                <input
 			                                  type="text"
-			                                  id="paymentCardCvv"
+			                                  id="ccc"
 			                                  class="form-control cvv-code-mask"
 			                                  maxlength="3"
 			                                  placeholder="000" />

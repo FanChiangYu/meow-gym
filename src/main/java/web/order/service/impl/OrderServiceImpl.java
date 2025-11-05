@@ -2,20 +2,15 @@ package web.order.service.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.bytebuddy.build.Plugin.Engine.PoolStrategy.Eager;
 import web.course.pojo.Course;
 import web.course.service.CourseService;
 import web.order.dao.OrderDao;
-import web.order.dao.impl.OrderDaoImpl;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
@@ -112,11 +107,33 @@ public class OrderServiceImpl implements OrderService{
 		}
 		return "Delete course ok";
 	}
+	
+//	@Transactional
+//	@Override
+//	public List<Orderitems> getPayAmountListByUserId(Integer userId) {
+//		//Step1:確認Orders and Orderitems 的 orderId
+//		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+//		//Step2:撈List<Orderitems> by orderId
+//		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
+//		//Step:計算payAmount
+////		Integer totalPayAmount;
+////		for(Orderitems purchasedPrice : orderitemList) {
+////			totalPayAmount += purchasedPrice;
+////		}
+////		//Step:回傳List<Orderitems> payAmountList
+////		//select title by courseId
+////		//select promoPrice by courseId
+////		List<Orderitems> payAmountList;
+////		payAmountList.setTitle();
+////		payAmountList.setPromoPrice();
+////		payAmountList.setPayAmount();
+//		return payAmountList;
+//	}
 
 	@Transactional
 	@Override
-	//比對付款資訊
-	public Orders payment(Orders orders) {
+	public Orders payment(Orders orders, Integer userId) {
+		//Step1:比對前端付款資訊
 		if(orders.getCardNumber() == null) {
 			orders.setMessage("信用卡卡號未輸入");
 			orders.setSuccessful(false);
@@ -147,7 +164,6 @@ public class OrderServiceImpl implements OrderService{
 			return orders;
 		}
 		
-		//確認付款資料
 		System.out.println(orders.getPaymentMethod());
 		System.out.println(orders.getCardNumber());
 		System.out.println(orders.getCardHolder());
@@ -155,24 +171,35 @@ public class OrderServiceImpl implements OrderService{
 		System.out.println(orders.getExpMonth());
 		System.out.println(orders.getCvc());
 		
-		//寫入DB資料
-//		orders.setUserId(2); //暫定
+		//Step2:確認orderId by userId and status
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		
+		//Step3:select Orders by orderId, 並寫入DB資料
+		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); //廢Coding?
+		payOrder.setPaymentMethod(orders.getPaymentMethod());
+		payOrder.setCardNumber(orders.getCardNumber());
+		payOrder.setCardHolder(orders.getCardHolder());
+		payOrder.setExpYear(orders.getExpYear());
+		payOrder.setExpMonth(orders.getExpMonth());
+		payOrder.setCvc(orders.getCvc());
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-		orders.setCreatedAt(timestamp);
-		//計算payAmount
+		payOrder.setCreatedAt(timestamp);
 		
-		
-		
-		orders.setPayAmount(null);
-		//執行資料交易控制
-		int count = orderdao.insert(orders);
+		//Step4:執行資料交易控制
+		int count = orderdao.insert(payOrder);
 		if(count == 1) {
-			orders.setMessage("送出成功");
-			orders.setSuccessful(true);
+			payOrder.setMessage("送出成功");
+			payOrder.setSuccessful(true);
 		} else {
-			orders.setMessage("送出失敗");
-			orders.setSuccessful(false);
+			payOrder.setMessage("送出失敗");
+			payOrder.setSuccessful(false);
 		}
-		return orders;
+		return payOrder;
+	}
+
+	@Override
+	public List<Orderitems> getPayAmountListByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

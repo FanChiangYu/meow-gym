@@ -1,11 +1,5 @@
 package web.order.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -23,18 +17,7 @@ public class OrderDaoImpl implements OrderDao{
 	@PersistenceContext
 	private Session session;
 
-	//Hibernate寫法
-	@Override
-	public Orders selectById(Integer id) {
-		return session.get(Orders.class, id);
-	}
-	
-	@Override
-	public int insert(Orders orders) {
-		session.persist(orders);
-		return 1;
-	}
-	
+	//Hibernate寫法	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
 		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
@@ -103,15 +86,20 @@ public class OrderDaoImpl implements OrderDao{
 				.setParameter("orderId", orderId)
 				.executeUpdate();
 		return result;
-	}	
-
-    //未使用的方法
+	}
+	
 	@Override
-	public int update(Orders pojo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Orders selectOrdersByOrderId(Integer orderId) {
+		return session.get(Orders.class, orderId);
+	}
+	
+	@Override
+	public int insert(Orders orders) {
+		session.persist(orders);
+		return 1;
 	}
 
+    //未使用的方法
 	@Override
 	public List<Orders> selectAll() {
 		// TODO Auto-generated method stub
@@ -120,6 +108,18 @@ public class OrderDaoImpl implements OrderDao{
 
 	@Override
 	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Orders selectById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

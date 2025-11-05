@@ -4,6 +4,7 @@ import java.util.List;
 
 import core.service.CoreService;
 import web.course.pojo.Course;
+import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 
 public interface OrderService extends CoreService{
@@ -14,6 +15,8 @@ public interface OrderService extends CoreService{
 	
 	String deletecoursefromcart(Integer courseId, Integer userId);
 	
-	Orders payment(Orders orders);
+	List<Orderitems> getPayAmountListByUserId(Integer userId);
+	
+	Orders payment(Orders orders, Integer userId);
 
 }
