@@ -96,8 +96,8 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
         roomId: valueOrNull(roomId.value),
         sessionQuota: valueOrNull(sessionQuota.value),
         capacityMax: valueOrNull(capacityMax.value),
-        dateStart: valueOrNull(dateStart.value),
-        dateEnd: valueOrNull(dateEnd.value),
+        dateStart: valueOrNull(dateStart.value).replaceAll('-', '/'),
+        dateEnd: valueOrNull(dateEnd.value).replaceAll('-', '/'),
         coursePrice: valueOrNull(coursePrice.value),
         description: valueOrNull(description.value),
         imgUrl
