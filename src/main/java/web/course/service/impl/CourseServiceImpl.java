@@ -28,6 +28,7 @@ import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
 import web.course.service.CourseService;
+import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
 
@@ -197,7 +198,6 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public Course find(Course cousre) {
-		System.out.println(cousre.getCourseId());
 		if(cousre.getCourseId() == null) {
 			cousre.setSuccessful(false);
 			return cousre;
@@ -374,6 +374,26 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public List<Course> findApprovalCourse() {
+		List<Course> courses = dao.selectApprovalCourse();
+		for (Course course : courses) {
+			course.setCoachName(findName(course));
+		}
+		return courses;
+	}
+
+	@Override
+	public Course findPayStatus(User user, Course course) {
+		List<Orderitems> oiList = dao.selectOrderItemByCourseId(course.getCourseId()); // 找符合的購物明細
+		for (Orderitems oi : oiList) {
+			Orders order = dao.selectOrderByOrderId(oi.getOrderId()); // 用每張明細，找到相應的訂單
+			if(user.getUserId() == order.getUserId()) { // 藉此比對此課程與使用者是否有關聯
+				course.setPayStatus(order.getStatus());	// 將課程購買狀態放入Course物件
+			}
+		}
+		return course;
+	}
 
 }

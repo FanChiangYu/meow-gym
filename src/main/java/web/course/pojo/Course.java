@@ -66,6 +66,8 @@ public class Course extends Core {
 	private String coachName; // 回應前端用
 	@Transient
 	private Integer quotaUsed; // 回應前端用, 統計使用者已使用堂數
+	@Transient
+	private String payStatus; // 回應前端用, 判斷此課程的付款狀態
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "course_id", referencedColumnName = "course_id", insertable = false, updatable = false)

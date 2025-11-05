@@ -13,6 +13,7 @@ import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.user.pojo.User;
 
 public interface CourseService extends CoreService {
 	
@@ -43,4 +44,8 @@ public interface CourseService extends CoreService {
 	Boolean reserveUpdate (ClassSessions classSessions, Integer userId);
 	
 	Long findQuotaUsed (Course course, Integer UserId);
+	
+	List<Course> findApprovalCourse();
+	
+	Course findPayStatus(User user, Course course);
 }

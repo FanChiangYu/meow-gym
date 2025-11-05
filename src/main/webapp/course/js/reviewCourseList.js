@@ -260,7 +260,6 @@ fetch('reviewCourseList')
           }).then(result => {
 
             if (result.isConfirmed) {
-              console.log('資料已刪除');
               fetch('auditCourse', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -271,7 +270,6 @@ fetch('reviewCourseList')
               })
               .then(() => location.reload());
             } else if(result.isDenied) {
-              console.log('不通過');
               fetch('auditCourse', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
