@@ -194,4 +194,35 @@ public class CourseDaoImpl implements CourseDao {
 				.uniqueResult();
 	}
 
+	@Override
+	public List<Course> selectApprovalCourse() {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Course ")
+				.append("WHERE approvalStatus = :approvalStatus ")
+				.append("ORDER BY courseId");
+		
+		return session
+				.createQuery(hql.toString(), Course.class)
+				.setParameter("approvalStatus", "通過")
+				.getResultList();
+	}
+
+	@Override
+	public List<Orderitems> selectOrderItemByCourseId(Integer courseId) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Orderitems ")
+				.append("WHERE courseId = :courseId ")
+				.append("ORDER BY orderItemId");
+		
+		return session
+				.createQuery(hql.toString(), Orderitems.class)
+				.setParameter("courseId", courseId)
+				.getResultList();
+	}
+
+	@Override
+	public Orders selectOrderByOrderId(Integer orderId) {
+		return session.get(Orders.class, orderId);
+	}
+
 }
