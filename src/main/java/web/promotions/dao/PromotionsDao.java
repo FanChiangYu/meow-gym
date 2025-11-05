@@ -9,4 +9,6 @@ public interface PromotionsDao {
 	List<CoursePromo> selectPromo();
 
 	int insert(CoursePromo coursePromo);
+
+	int delete(CoursePromo coursePromo);
 }

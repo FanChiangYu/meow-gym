@@ -15,7 +15,7 @@ let courses;
 						<td>${p ? p.dateStart : ''}~${p ? p.dateEnd : ''}</td>
 						<td>${c.coursePrice}</td>
 						<td>
-							<button id="apply-btn" type="button" class="btn btn-primary">刪除</button>
+							<button id="delete-btn" type="button" class="btn btn-primary">刪除</button>
 						</td>
 						<td>
 							<button id="apply-btn" type="button" class="btn btn-primary" onclick="addPromotion(${c.courseId}, '${c.title}', ${c.coursePrice})">編輯</button>

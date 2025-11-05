@@ -27,4 +27,9 @@ public class PromotionsDaoImpl implements PromotionsDao {
 		session.persist(coursePromo);
 		return 1;
 	}
+	@Override
+	public int delete(CoursePromo coursePromo) {
+		session.delete(coursePromo);
+		return 1;
+	}
 }

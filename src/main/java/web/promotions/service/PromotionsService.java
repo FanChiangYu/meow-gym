@@ -12,6 +12,7 @@ public interface PromotionsService extends CoreService {
 	List<CoursePromo> selectAll();
 
 	CoursePromo apply(CoursePromo coursePromo) throws IOException;
-	
+
 	List<Course> findCourseAndPromotionAll();
+
 }
