@@ -1,6 +1,5 @@
 package web.course.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import core.dao.CoreDao;
@@ -9,6 +8,7 @@ import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
+import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
 
@@ -41,5 +41,11 @@ public interface CourseDao extends CoreDao<Course, Integer>{
 	Long selectCntFromSessionUserById (Integer sessionId, Integer userId);
 	
 	int deleteById (SessionUsers sessionUsers);
+	
+	List<Course> selectApprovalCourse();
+	
+	List<Orderitems> selectOrderItemByCourseId(Integer courseId);
+	
+	Orders selectOrderByOrderId(Integer orderId);
 	
 }
