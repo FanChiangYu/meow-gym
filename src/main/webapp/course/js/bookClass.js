@@ -189,8 +189,8 @@
 
 // ------------ 預約上課班次 -----------------
 function reserveById(sessionId) {
-  fetch('reserveSession', {
-    method: 'POST',
+  fetch('reserve', {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       sessionId,
@@ -214,8 +214,8 @@ function reserveById(sessionId) {
 
 // ------------ 取消上課班次 -----------------
 function cancelById(sessionId) {
-  fetch('reserveSession', {
-    method: 'POST',
+  fetch('reserve', {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       sessionId,
@@ -238,7 +238,7 @@ function cancelById(sessionId) {
 }
 
   // 顯示已購買課程列表
-  fetch('bookClass')
+  fetch('reserve')
     .then(resp => resp.json())
     .then(classResponses => {
 

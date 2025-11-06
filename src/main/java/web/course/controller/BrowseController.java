@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import web.course.pojo.Course;
@@ -21,22 +23,21 @@ import web.course.pojo.CourseResponse;
 import web.course.service.CourseService;
 import web.user.pojo.User;
 
-@Controller
-@RequestMapping("course")
+@RestController
+@RequestMapping("course/browse")
 public class BrowseController {
 	@Autowired
 	private CourseService service;
-	
-	@GetMapping("browseCourse")
-	@ResponseBody
+
+	@GetMapping
 	public List<Course> browseCourse(){
 		return service.findApprovalCourse();
 	}
-	
-	@PostMapping("browseCourse")
-	@ResponseBody
-	public CourseResponse browseCoursePost(@RequestBody Course course, @SessionAttribute(value = "user", required = false) User user){
+	@GetMapping("{courseId}")
+	public CourseResponse browseCoursePost(@PathVariable Integer courseId, @SessionAttribute(value = "user", required = false) User user){
 		CourseResponse courseResponse = new CourseResponse();
+		Course course = new Course();
+		course.setCourseId(courseId);
 		course = service.find(course);
 		String userName = service.findName(course);
 		List<CourseRecurringRules> rules = service.findRules(course);
@@ -49,8 +50,7 @@ public class BrowseController {
 		return courseResponse;
 	}
 	
-	@PostMapping("addCart")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> addCart(HttpSession session, @RequestBody Course course) {
 		Map<String, Object> result = new HashMap<>();
 		User user = (User) session.getAttribute("user");

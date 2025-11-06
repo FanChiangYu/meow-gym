@@ -167,7 +167,7 @@ function showTimeSlot (timeSlot) {
 }
 
 function addCart(courseId){
-  fetch('addCart', {
+  fetch('browse', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -196,13 +196,7 @@ function addCart(courseId){
 }
 
 function browseById(courseId) {
-  fetch('browseCourse', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      courseId
-    }),
-  })
+  fetch(`browse/${courseId}`)
   .then(resp => resp.json())
   .then(courseResponse => {
         
@@ -279,7 +273,7 @@ function browseById(courseId) {
   });
 }
 
-fetch('browseCourse')
+fetch('browse')
 .then(resp => resp.json())
 .then(courses => {
   let courseHtml = '';
@@ -302,6 +296,7 @@ fetch('browseCourse')
   courseContainer.innerHTML += courseHtml;
 });
 
+// 測試用
 addCartBtn.addEventListener('click', function(){
 
   if(courseId.value === "" || isNaN(courseId.value)){
@@ -314,31 +309,6 @@ addCartBtn.addEventListener('click', function(){
     return;
   }
 
-  fetch('addCart', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      courseId: courseId.value
-    }),
-  })
-  .then(resp => resp.json())
-  .then(body => {
-    if(body.successful){
-      Swal.fire({
-        title: body.message,
-        text: '已加入購物車',
-        icon: 'success',
-        confirmButtonText: '前往購物車'
-      })
-      .then(()=>location.href = '/meow-gym/order/newOrder.html');
-    }else{
-      Swal.fire({
-        title: '錯誤',
-        text: body.message,
-        icon: 'error',
-        target: document.body 
-      });
-    }
-  });
+  addCart(courseId.value);
 
 });
