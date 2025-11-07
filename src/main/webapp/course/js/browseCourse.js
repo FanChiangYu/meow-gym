@@ -203,6 +203,18 @@ function browseById(courseId) {
     if(courseResponse.course.successful){
 
       let rulesHtml = '';
+      let promoPriceHtml = '';
+
+      if(courseResponse.course.promoPrice === null){
+        promoPriceHtml += `
+          <p>課程定價: <strong>${courseResponse.course.coursePrice}</strong></p>
+        `;
+      } else {
+        promoPriceHtml += `
+          <p class="text-decoration-line-through">課程定價: ${courseResponse.course.coursePrice}</p>
+          <p class="text-danger"><strong>課程特價: ${courseResponse.course.promoPrice}</strong></p>
+        `;
+      }
 
       courseResponse.rules.forEach((rule, index) => {
         rulesHtml += `
@@ -225,7 +237,7 @@ function browseById(courseId) {
             <p>${courseResponse.course.description}</p>
             <p>每週上課時間:</p>
             ${rulesHtml}
-            <p>課程定價: <strong>${courseResponse.course.coursePrice}</strong></p>
+            ${promoPriceHtml}
           </div>
         `,
         imageUrl: courseResponse.course.imgUrl,

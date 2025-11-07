@@ -48,4 +48,6 @@ public interface CourseService extends CoreService {
 	List<Course> findApprovalCourse();
 	
 	Course findPayStatus(User user, Course course);
+	
+	Course findPromo(Course course);
 }

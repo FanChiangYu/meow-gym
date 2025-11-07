@@ -39,6 +39,7 @@ public class BrowseController {
 		Course course = new Course();
 		course.setCourseId(courseId);
 		course = service.find(course);
+		course = service.findPromo(course);
 		String userName = service.findName(course);
 		List<CourseRecurringRules> rules = service.findRules(course);
 		if(user != null) {

@@ -18,8 +18,10 @@ import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
 import web.course.pojo.SessionUsersId;
+import web.index.pojo.CoursePromotions;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 import web.user.pojo.User;
 
 @Repository
@@ -223,6 +225,19 @@ public class CourseDaoImpl implements CourseDao {
 	@Override
 	public Orders selectOrderByOrderId(Integer orderId) {
 		return session.get(Orders.class, orderId);
+	}
+
+	@Override
+	public List<CoursePromo> selectByCoursId(Integer courseId) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM CoursePromo ")
+				.append("WHERE courseId = :courseId ")
+				.append("ORDER BY promoId");
+		
+		return session
+				.createQuery(hql.toString(), CoursePromo.class)
+				.setParameter("courseId", courseId)
+				.getResultList();
 	}
 
 }

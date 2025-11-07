@@ -28,8 +28,10 @@ import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
 import web.course.service.CourseService;
+import web.index.service.IndexService;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 import web.user.pojo.User;
 
 @Service
@@ -37,6 +39,8 @@ import web.user.pojo.User;
 public class CourseServiceImpl implements CourseService {
 	@Autowired
 	private CourseDao dao;
+	@Autowired
+	private IndexService indexService;
 
 	@Override
 	public Course apply(Course course) {
@@ -379,6 +383,7 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> findApprovalCourse() {
 		List<Course> courses = dao.selectApprovalCourse();
 		for (Course course : courses) {
+			course = findPromo(course);
 			course.setCoachName(findName(course));
 		}
 		return courses;
@@ -391,6 +396,18 @@ public class CourseServiceImpl implements CourseService {
 			Orders order = dao.selectOrderByOrderId(oi.getOrderId()); // 用每張明細，找到相應的訂單
 			if(user.getUserId() == order.getUserId()) { // 藉此比對此課程與使用者是否有關聯
 				course.setPayStatus(order.getStatus());	// 將課程購買狀態放入Course物件
+			}
+		}
+		return course;
+	}
+
+	@Override
+	public Course findPromo(Course course) {
+		List<CoursePromo> cpList = dao.selectByCoursId(course.getCourseId()); // 尋找促銷活動
+		for (CoursePromo cp : cpList) {
+			if(indexService.isOnSale(cp)) {	// 是否還在促銷活動期間
+				course.setImgUrl(cp.getImgUrl()); // 替換成促銷活動圖片
+				course.setPromoPrice(cp.getPromoPrice()); //放入促銷活動價格
 			}
 		}
 		return course;
