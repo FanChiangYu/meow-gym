@@ -114,7 +114,6 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
       .then(resp => resp.json())
       .then(body => {
         if(body.successful){
-          // alert(body.message);
           Swal.fire({
             title: '完成',
             text: body.message,
@@ -122,7 +121,6 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
             target: document.body 
           });
         }else{
-          // alert(body.message);
           Swal.fire({
             title: '錯誤',
             text: body.message,
@@ -141,7 +139,7 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
         target: document.body 
       });
     }else{
-      fetch('uploadFile', {
+      fetch('img', {
         method: 'POST',
         body: formData
       })
