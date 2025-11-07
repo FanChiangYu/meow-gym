@@ -50,10 +50,10 @@ public class Course extends Core {
 	@Column(name = "CAPACITY_MAX")
 	private Integer capacityMax; 
 	@Column(name = "DATE_START")
-	@JsonFormat(pattern = "yyyy/MM/dd") 
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date dateStart; 
 	@Column(name = "DATE_END")
-	@JsonFormat(pattern = "yyyy/MM/dd") 
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date dateEnd; 
 	@Column(name = "COURSE_PRICE")
 	private Integer coursePrice; 
