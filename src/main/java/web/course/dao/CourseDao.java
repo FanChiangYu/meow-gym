@@ -51,4 +51,10 @@ public interface CourseDao extends CoreDao<Course, Integer>{
 	Orders selectOrderByOrderId(Integer orderId);
 	
 	List<CoursePromo> selectByCoursId(Integer courseId);
+	
+	List<Course> selectCourseByCoachId (Integer coachId);
+	
+	int updateChkAt (ClassSessions classSessions);
+	
+	int updateChkOut (ClassSessions classSessions);
 }

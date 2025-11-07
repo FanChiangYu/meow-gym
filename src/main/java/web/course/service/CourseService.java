@@ -50,4 +50,8 @@ public interface CourseService extends CoreService {
 	Course findPayStatus(User user, Course course);
 	
 	Course findPromo(Course course);
+	
+	List<ClassResponse> getCoursesByCoach (Integer coachId);
+	
+	Boolean updateChkTime (ClassSessions classSessions);
 }

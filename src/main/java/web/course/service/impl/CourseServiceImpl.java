@@ -413,4 +413,37 @@ public class CourseServiceImpl implements CourseService {
 		return course;
 	}
 
+	@Override
+	public List<ClassResponse> getCoursesByCoach(Integer coachId) {
+		List<Course> courses = dao.selectCourseByCoachId(coachId);
+		List<ClassResponse> classResponses = new ArrayList<>();
+		for (Course course : courses) {
+			ClassResponse classResponse = new ClassResponse(); 
+			List<ClassSessions> classSessionsList = dao.selectClassSessionBycourseID(course.getCourseId()); // 找班次
+			for (ClassSessions classSessions : classSessionsList) {
+				Long countUser = dao.selectCntBySessionId(classSessions.getSessionId()); // 找班次人數
+				classSessions.setUserCnt(Math.toIntExact(countUser));
+			}
+			// 全部放到ClassResponse物件
+			classResponse.setCourse(course);
+			classResponse.setClassSessions(classSessionsList);
+			classResponses.add(classResponse); // 放到List
+		}
+		return classResponses;
+	}
+
+	@Override
+	public Boolean updateChkTime(ClassSessions classSessions) {
+		int result = 0;
+		if("AT".equals(classSessions.getChkSelect())) {
+			result = dao.updateChkAt(classSessions);
+			return result > 0;
+		} else if ("OUT".equals(classSessions.getChkSelect())) {
+			result = dao.updateChkOut(classSessions);
+			return result > 0;
+		} else {
+			return false;
+		}
+	}
+
 }

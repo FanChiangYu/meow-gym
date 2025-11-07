@@ -240,4 +240,41 @@ public class CourseDaoImpl implements CourseDao {
 				.getResultList();
 	}
 
+	@Override
+	public List<Course> selectCourseByCoachId(Integer coachId) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Course ")
+				.append("WHERE coachId = :coachId ")
+				.append("ORDER BY courseId");
+		
+		return session
+				.createQuery(hql.toString(), Course.class)
+				.setParameter("coachId", coachId)
+				.getResultList();
+	}
+
+	@Override
+	public int updateChkAt(ClassSessions classSessions) {
+		final StringBuilder hql = new StringBuilder()
+				.append("update ClassSessions set ")
+				.append("checkinAt = NOW() ")
+				.append("where sessionId = :sessionId");
+		
+		return session.createQuery(hql.toString())
+				.setParameter("sessionId", classSessions.getSessionId())
+				.executeUpdate();
+	}
+	
+	@Override
+	public int updateChkOut(ClassSessions classSessions) {
+		final StringBuilder hql = new StringBuilder()
+				.append("update ClassSessions set ")
+				.append("checkinOut = NOW() ")
+				.append("where sessionId = :sessionId");
+		
+		return session.createQuery(hql.toString())
+				.setParameter("sessionId", classSessions.getSessionId())
+				.executeUpdate();
+	}
+
 }
