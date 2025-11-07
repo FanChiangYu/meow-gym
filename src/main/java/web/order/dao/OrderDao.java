@@ -6,6 +6,7 @@ import core.dao.CoreDao;
 import web.course.pojo.Course;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 
 public interface OrderDao extends CoreDao<Orders, Integer>{
 	
@@ -15,15 +16,19 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Integer selectCoursePriceByCourseId(Integer courseId);
 	
-	List<Integer> selectCourseListByOrderId(Integer orderId);
+	List<Orderitems> selectCourseIdAndOrderitemIdListByOrderId(Integer orderId); //廢code?
 	
-	List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList);
+	List<Course> selectCourseAndOrderitemListByOrderitems(List<Orderitems> courseIdAndOrderitemIdList);
 	
 	Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId);
 	
-	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId);
+	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId); //廢code?
 	
 	Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status);
+	
+	Course selectCourseByCourseId (Integer courseId);
+	
+	CoursePromo selectCoursePromoPriceByCourseId(Integer courseId);
 	
 	Orders selectOrdersByOrderId(Integer orderId);
 	

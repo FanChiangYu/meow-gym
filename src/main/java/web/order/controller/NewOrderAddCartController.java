@@ -1,6 +1,7 @@
 package web.order.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class NewOrderAddCartController {
 
 	@GetMapping("addCart")
 	@ResponseBody
-	protected List<Course> addCart(@SessionAttribute(value = "user", required = false) User setUser, 
+	protected Map<String, Object> addCart(@SessionAttribute(value = "user", required = false) User setUser, 
 			@SessionAttribute(value = "course", required = false) Course setCourse) {
 		//取會員資料
 //		Integer userId = setUser.getUserId();
@@ -34,7 +35,7 @@ public class NewOrderAddCartController {
 			System.out.println(booLean);
 		}
 		// 回傳購物車清單
-		List<Course> courseList = orderservice.getAllCourseByUserId(userId);
-		return courseList;
+		Map<String, Object> orderitemsAndCourseList = orderservice.getAllOrderitemsAndCourseByUserId(userId);
+		return orderitemsAndCourseList;
 	}
 }

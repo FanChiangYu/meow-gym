@@ -39,8 +39,6 @@ public class Orderitems extends Core {
 	private String title;  //課程名稱
 	@Transient
 	private Integer promoPrice;  //促銷價格
-	@Transient
-	private Integer payAmount; // 總付款金額
 
 //fields
 //	private static final long serialVersionUID = 1L;

@@ -2,7 +2,9 @@ package web.order.service.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
+import web.promotions.pojo.CoursePromo;
 
 @Service
 public class OrderServiceImpl implements OrderService{	
@@ -68,19 +71,23 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Transactional	
 	@Override
-	public List<Course> getAllCourseByUserId(Integer userId) {
+	public Map<String, Object> getAllOrderitemsAndCourseByUserId(Integer userId) {
 		//Step1:用userId找orderId by Orders
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		//Step2:找同筆訂單下所有CourseID
-		List<Integer> courseIdList = orderdao.selectCourseListByOrderId(orderId);
+		List<Orderitems> courseIdAndOrderitemIdList = orderdao.selectCourseIdAndOrderitemIdListByOrderId(orderId);
 		//Step3:藉由courseID 去撈course.class
-		List<Course> courseList = orderdao.selectCourseListByCourseIdList(courseIdList);
+		List<Course> courseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdAndOrderitemIdList);
 		//Step4:跑foreach 放入 coachname
 		for(Course course : courseList) {
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);
 		}
-		return courseList;
+		//Step5:回傳Orderitems and Course
+		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
+		orderitemsAndCourseList.put("Orderitems", courseIdAndOrderitemIdList);
+		orderitemsAndCourseList.put("Course", courseList);
+		return orderitemsAndCourseList;
 	}
 	
 	@Transactional	
@@ -88,7 +95,7 @@ public class OrderServiceImpl implements OrderService{
 	public String deletecoursefromcart(Integer courseId, Integer userId) {
 		//確認and刪除orderitems的課程資訊
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId);
+		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId); //需修改
 		if(count1 == 1) {
 			System.out.println("Delete course in DB success.");
 		}else {
@@ -108,27 +115,35 @@ public class OrderServiceImpl implements OrderService{
 		return "Delete course ok";
 	}
 	
-//	@Transactional
-//	@Override
-//	public List<Orderitems> getPayAmountListByUserId(Integer userId) {
-//		//Step1:確認Orders and Orderitems 的 orderId
-//		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-//		//Step2:撈List<Orderitems> by orderId
-//		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-//		//Step:計算payAmount
-////		Integer totalPayAmount;
-////		for(Orderitems purchasedPrice : orderitemList) {
-////			totalPayAmount += purchasedPrice;
-////		}
-////		//Step:回傳List<Orderitems> payAmountList
-////		//select title by courseId
-////		//select promoPrice by courseId
-////		List<Orderitems> payAmountList;
-////		payAmountList.setTitle();
-////		payAmountList.setPromoPrice();
-////		payAmountList.setPayAmount();
-//		return payAmountList;
-//	}
+	@Transactional
+	@Override
+	public Map<String, Object> getPayAmountListByUserId(Integer userId) {
+		//Step1:確認Orders and Orderitems 的 orderId
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		//Step2:撈List<Orderitems> by orderId
+		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
+		//Step3:計算payAmount
+		Orders orders = orderdao.selectOrdersByOrderId(orderId);
+		for(Orderitems orderitems : orderitemList) {
+			Integer purchasedPrice = orderitems.getPurchasedPrice();
+			purchasedPrice += purchasedPrice;
+			orders.setPayAmount(purchasedPrice); //問老師
+		}
+		//Step4:回傳Orders payAmount and List<Orderitems> payAmountList
+		for (Orderitems orderitems : orderitemList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);//select title by courseId
+			CoursePromo coursePromo = orderdao.selectCoursePromoPriceByCourseId(courseId);//select promoPrice by courseId
+			orderitems.setTitle(course.getTitle());
+			orderitems.setPromoPrice(coursePromo.getPromoPrice());
+		}
+		
+		//Step5:回傳個課程價格及購課總價
+		Map<String, Object> payAmountList = new HashMap<>();
+		payAmountList.put("Orders", orders);
+		payAmountList.put("Orderitems", orderitemList);
+		return payAmountList;
+	}
 
 	@Transactional
 	@Override
@@ -175,7 +190,7 @@ public class OrderServiceImpl implements OrderService{
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		
 		//Step3:select Orders by orderId, 並寫入DB資料
-		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); //廢Coding?
+		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); ////廢code?
 		payOrder.setPaymentMethod(orders.getPaymentMethod());
 		payOrder.setCardNumber(orders.getCardNumber());
 		payOrder.setCardHolder(orders.getCardHolder());
@@ -195,11 +210,5 @@ public class OrderServiceImpl implements OrderService{
 			payOrder.setSuccessful(false);
 		}
 		return payOrder;
-	}
-
-	@Override
-	public List<Orderitems> getPayAmountListByUserId(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

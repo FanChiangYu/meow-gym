@@ -1,6 +1,7 @@
 package web.order.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +23,14 @@ public class NewOrderPayAmountController {
 
 	@GetMapping("payAmount")
 	@ResponseBody
-	protected List<Orderitems> payAmount(@SessionAttribute(value = "user", required = false) User setUser) {
+	protected Map<String, Object> payAmount(@SessionAttribute(value = "user", required = false) User setUser) {
 //		//取會員資料
 //		Integer userId = setUser.getUserId();
 		// 先寫死
 		Integer userId = 1;
 		
 		// 回傳個課程價格及購課總價
-		List<Orderitems> payAmountList = orderservice.getPayAmountListByUserId(userId);
+		Map<String, Object> payAmountList = orderservice.getPayAmountListByUserId(userId);
 		return payAmountList;
 	}
 }

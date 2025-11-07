@@ -10,6 +10,7 @@ import web.course.pojo.Course;
 import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 
 @Repository
 public class OrderDaoImpl implements OrderDao{
@@ -42,20 +43,20 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Integer> selectCourseListByOrderId(Integer orderId) {
+	public List<Orderitems> selectCourseIdAndOrderitemIdListByOrderId(Integer orderId) {
 	//找同筆訂單下所有CourseID
-		String hql = "select courseId from Orderitems where orderId = :orderId";
-		Query<Integer> query = session.createQuery(hql, Integer.class);		
-		List<Integer> courseIdList = query.setParameter("orderId", orderId).getResultList();
-		return courseIdList;
+		String hql = "select courseId, orderItemId from Orderitems where orderId = :orderId";
+		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);		
+		List<Orderitems> courseIdAndOrderitemIdList = query.setParameter("orderId", orderId).getResultList();
+		return courseIdAndOrderitemIdList;
 	}
 	
 	@Override
-	public List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList) {
+	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Orderitems> courseIdAndOrderitemIdList) {
 		//找Course.class
-		String hql = "FROM Course where courseId IN(:courseIdList)";
+		String hql = "FROM Course where courseId IN(:courseIdAndOrderitemIdList)";
 		Query<Course> query = session.createQuery(hql, Course.class);
-		List<Course> courseList = query.setParameterList("courseIdList", courseIdList).getResultList();
+		List<Course> courseList = query.setParameterList("courseIdAndOrderitemIdList", courseIdAndOrderitemIdList).getResultList();
 		return courseList;
 	}
 	
@@ -86,6 +87,16 @@ public class OrderDaoImpl implements OrderDao{
 				.setParameter("orderId", orderId)
 				.executeUpdate();
 		return result;
+	}
+	
+	@Override
+	public Course selectCourseByCourseId(Integer courseId) {
+		return session.get(Course.class, courseId);
+	}
+
+	@Override
+	public CoursePromo selectCoursePromoPriceByCourseId(Integer courseId) {
+		return session.get(CoursePromo.class, courseId);
 	}
 	
 	@Override

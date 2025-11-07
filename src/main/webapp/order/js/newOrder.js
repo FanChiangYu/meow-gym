@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					            </div>
 					            <div class="col-md-4">
 					               <div class="text-md-end">
-					                  <button type="button" class="btn-close btn-pinned" aria-label="Close" onclick="deleteCourse()"></button>
+					                  <button type="button" class="btn-close btn-pinned" id="delete_btn" aria-label="Close" onclick="deleteCourse()"></button>
 					                  <div class="my-2 mt-md-6 mb-md-4">
 					                     <span class="text-primary">specialprice</span>
 					                     <s class="text-body" id="course_coursePrice">${course.coursePrice}</s>
@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 	
 	//刪除課程//
-	const delect_btn = document.querySelector('#delect_btn');
-	const delect_course = document.querySelector('#course_title')
+	const delete_btn = document.querySelector('#delete_btn');
+	const delete_course = document.querySelector('#course_title')
 	
 	function valueOrNull (value) {
 	  if(value === undefined || value === null || value === ''){
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	  }
 	}
 	
-	document.getElementById('delect_btn').addEventListener('click', deleteCourse);
+	document.getElementById('delete_btn').addEventListener('click', deleteCourse);
 	function deleteCourse (){
 		fetch('deleteCart', {
 	    method: 'POST',
