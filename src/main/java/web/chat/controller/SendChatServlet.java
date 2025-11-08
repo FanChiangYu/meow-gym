@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -36,26 +42,26 @@ public class SendChatServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-			
-			Gson gson = new Gson();
-			// req.getReader()讀取 HTTP 請求的 Body (前端送來的 JSON)
-			// fromJson:把 JSON 轉成 Chats >> Java Bean
 
-			// req.getReader()讀取請求內的body 轉成Javabean
-			Chats chats = gson.fromJson(req.getReader(), Chats.class);
+		Gson gson = new Gson();
+		// req.getReader()讀取 HTTP 請求的 Body (前端送來的 JSON)
+		// fromJson:把 JSON 轉成 Chats >> Java Bean
 
-			int result = chatDao.insert(chats); // 將聊天訊息送進資料庫
+		// req.getReader()讀取請求內的body 轉成Javabean
+		Chats chats = gson.fromJson(req.getReader(), Chats.class);
 
-			JsonObject respBody = new JsonObject();
-			respBody.addProperty("ok", result == 1);
-			//respBody.add("loginUser", gson.toJsonTree(loginUser)); //因為loginUser是購物袋，所以要用JsonElement toJsonTree(Object src)和 add(而非addProperty)去新增
+		int result = chatDao.insert(chats); // 將聊天訊息送進資料庫
 
-			String json = gson.toJson(respBody);
-			resp.setContentType("application/json");
-			resp.getWriter().write(json);
-		//}
+		JsonObject respBody = new JsonObject();
+		respBody.addProperty("ok", result == 1);
+		// respBody.add("loginUser", gson.toJsonTree(loginUser));
+		// //因為loginUser是購物袋，所以要用JsonElement toJsonTree(Object src)和
+		// add(而非addProperty)去新增
 
-		
+		String json = gson.toJson(respBody);
+		resp.setContentType("application/json");
+		resp.getWriter().write(json);
+
 	}
 
 	// 方便測試GET
@@ -116,6 +122,38 @@ public class SendChatServlet extends HttpServlet {
 //	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		resp.setContentType("application/json");
 //		resp.getWriter().write("addChat alive");
+//	}
+//
+//}
+
+
+//Spring MVC
+//@Controller
+//@RequestMapping("chat")
+//public class SendChat {
+//	private static final long serialVersionUID = 1L;
+//
+//	@Autowired
+//	private ChatDao chatDao;
+//
+//	@PostMapping("sendchat")
+//	@ResponseBody
+//	public Chats sendChatToDB(@RequestBody Chats chats) {
+//
+//		if (chats == null) {
+//			chats = new Chats();
+//			chats.setMessage("請輸入訊息");
+//			chats.setSuccessful(false);
+//			return chats;
+//		} else {
+//			int result = chatDao.insert(chats); // 將聊天訊息送進資料庫
+//			if (result == 1) {
+//				chats.setMessage("輸入訊息成功");
+//				chats.setSuccessful(true);
+//			};
+//			return chats;
+//		}
+//
 //	}
 //
 //}

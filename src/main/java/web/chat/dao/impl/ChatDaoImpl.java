@@ -23,6 +23,7 @@ public class ChatDaoImpl implements ChatDao {
 	@PersistenceContext
 	private Session session;
 
+	//送出訊息
 	@Override
 	public int insert(Chats chats) {
 		// hibernate自動對應哪個資料表、屬性對應欄位。
@@ -31,20 +32,26 @@ public class ChatDaoImpl implements ChatDao {
 		return 1;
 	}
 
-	// 即時拉出DB-對話訊息的所有詳細資料
+	// 移到Service:即時拉出DB-對話訊息的所有詳細資料
 	@Override
-	public Chats saveAndLoad(int courseId, int userId, Integer coachId, String content) {
-		Chats chat = new Chats();
-		chat.setCourseId(courseId);
-		chat.setUserId(userId);
-		chat.setCoachId(coachId);
-		chat.setContent(content);
+	public Chats saveAndLoad(Chats chats) {
+		//Chats chat = new Chats();
+		
+//		chat.setCourseId(chatscourseId);
+//		chat.setUserId(userId);
+//		chat.setCoachId(coachId);
+//		chat.setContent(content);
+		
+//		chats.setCourseId(chats.getCourseId());
+//		chats.setUserId(chats.getUserId());
+//		chats.setCoachId(chats.getCoachId());
+//		chats.setContent(chats.getContent());
 
-		// 寫入 + 立即同步 + 重新讀回 (created_at由DB填)
-		session.persist(chat); // insert
+		 //寫入 + 立即同步 + 重新讀回 (created_at由DB填)
+		session.persist(chats); // insert
 		session.flush(); // 寫進DB拿到chat_id
-		session.refresh(chat); // 重新從DB撈（created_at會有值）
-		return chat;
+		session.refresh(chats); // 重新從DB撈（created_at會有值）
+		return chats;
 	}
 
 	// 依照courseId 查詢歷史訊息

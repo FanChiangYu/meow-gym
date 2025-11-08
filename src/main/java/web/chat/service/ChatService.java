@@ -1,5 +1,8 @@
 package web.chat.service;
 
-public interface ChatService {
+import web.chat.pojo.Chats;
 
+public interface ChatService {
+	 //copy the saveAndLoad method from DAO to Service layer.
+	Chats saveAndLoad(Chats chats);
 }

@@ -1,6 +1,8 @@
-package web.user.controller;
+package web.chat.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import web.user.pojo.User;
 
-@WebServlet("/user/info")
+@WebServlet("/chat/userinfo")
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// session原本就有，用舊的就好
+		// session原本就有，用舊的就好>> 有新的就不建，有舊的就用舊的
 		HttpSession session = req.getSession(false);
 		System.out.println("UserInfoServlet" + session);
 
@@ -48,3 +53,25 @@ public class UserInfoServlet extends HttpServlet {
 	}
 
 }
+
+
+//Spring MVC
+//@Controller
+//@RequestMapping("chat")
+//public class UserInfo{
+//	private static final long serialVersionUID = 1L;
+//
+//	Map<String, Object> body = new HashMap<>();
+//	
+//	@GetMapping("userinfo")
+//	@ResponseBody
+//	public Map<String, Object> getUserInfo(HttpServletRequest request) {
+//		
+//		HttpSession session = request.getSession(false);
+//		
+//		User loginUser = (User) session.getAttribute("user");
+//		
+//		body.put("loginUser", loginUser);
+//		return body; //Jackson 序列化成 JSON
+//	}
+//}
