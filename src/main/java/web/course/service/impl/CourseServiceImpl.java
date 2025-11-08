@@ -26,7 +26,9 @@ import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.SessionUsers;
 import web.course.service.CourseService;
+import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
 
@@ -144,7 +146,7 @@ public class CourseServiceImpl implements CourseService {
 				result.addProperty("message", "未選擇時段");
 				return result;
 			}
-//			System.out.println(course.getCourseId());
+
 			int count = dao.insert(rule);
 			if(count != 1) {
 				result.addProperty("successful", false);
@@ -175,7 +177,7 @@ public class CourseServiceImpl implements CourseService {
 			
 		}
 		result.addProperty("successful", true);
-		result.addProperty("Message", "送出成功");
+		result.addProperty("message", "送出成功");
 		return result;
 	}
 
@@ -196,18 +198,23 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public Course find(Course cousre) {
-		System.out.println(cousre.getCourseId());
 		if(cousre.getCourseId() == null) {
 			cousre.setSuccessful(false);
 			return cousre;
 		}
-		cousre = dao.selectById(cousre.getCourseId());
-		cousre.setSuccessful(true);
-		return cousre;
+		Course findCourse = dao.selectById(cousre.getCourseId());
+		if (findCourse == null) {
+			cousre.setSuccessful(false);
+			return cousre;
+		}
+		
+		findCourse.setSuccessful(true);
+		return findCourse;
 	}
 
 	@Override
 	public String modify(Course cousre) {
+		System.out.println("======================" + cousre.getApprovalStatus());
 		int count = dao.update(cousre);
 		return count > 0 ? "更新成功" : "更新失敗";
 	}
@@ -301,21 +308,38 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<ClassResponse> findClass(Integer id) {
+	public List<ClassResponse> findClass(Integer userId) {
 		List<Orders> orders = new ArrayList<>();
 		List<ClassResponse> classResponses = new ArrayList<>();
 		// 尋找訂單是否有已購買課程
-		orders = dao.selectOrderByUserId(id);
+		orders = dao.selectOrderByUserId(userId);
 		for (Orders order : orders) {
 			List<Integer> courseIds = dao.selectCourseIdByOrderId(order.getOrderId()); // 從Orderitems找CourseId
 			for (Integer couseId : courseIds) {
 				ClassResponse classResponse = new ClassResponse(); 
 				Course course = dao.selectById(couseId); // 找課程
-				List<ClassSessions> classSessions = dao.selectClassSessionBycourseID(couseId); // 找班次
+				Integer quotaCnt = Math.toIntExact(findQuotaUsed(course, userId)); // 計算已使用堂數
+				course.setQuotaUsed(quotaCnt);
+				List<ClassSessions> classSessionsList = dao.selectClassSessionBycourseID(couseId); // 找班次
+				// 判斷每個ClassSessions的預約狀態
+				for (ClassSessions classSessions : classSessionsList) {
+					SessionUsers sessionUsers = dao.selectBySessionIdUserID(classSessions.getSessionId(), userId);
+					Long countUser = dao.selectCntBySessionId(classSessions.getSessionId()); // 找班次人數
+					classSessions.setUserCnt(Math.toIntExact(countUser));
+					if (sessionUsers == null) {
+						if (countUser >= course.getCapacityMax() && countUser != null) {
+							classSessions.setBookStatus("無法預約");
+						} else { 
+							classSessions.setBookStatus("未預約");
+						}
+					} else {
+						classSessions.setBookStatus("已預約");
+					}
+				}
 				// 全部放到ClassResponse物件
 				classResponse.setCourse(course);
 				classResponse.setCoachName(findName(course)); // 找教練名
-				classResponse.setClassSessions(classSessions);
+				classResponse.setClassSessions(classSessionsList);
 				classResponses.add(classResponse); // 放到List
 			}
 		}
@@ -323,5 +347,53 @@ public class CourseServiceImpl implements CourseService {
 		return classResponses;
 	}
 	
+	@Override
+	public Long findQuotaUsed(Course course, Integer userId) {
+		Long selectCntTotal = 0L;
+		List<ClassSessions> csList = dao.selectClassSessionBycourseID(course.getCourseId());
+		for (ClassSessions cs : csList) {
+			Long selectCnt = dao.selectCntFromSessionUserById(cs.getSessionId(), userId);
+			if (selectCnt != null && selectCnt > 0) {
+				selectCntTotal += selectCnt;
+			}
+		}
+		return selectCntTotal;
+	}
+
+	@Override
+	public Boolean reserveUpdate(ClassSessions classSessions, Integer useId) {
+		SessionUsers su = new SessionUsers();
+		su.setSessionId(classSessions.getSessionId());
+		su.setUserId(useId);
+		if ("未預約".equals(classSessions.getBookStatus())) {
+			int count = dao.insert(su);
+			return count == 1;		
+		} else if ("已預約".equals(classSessions.getBookStatus())) {
+			int count = dao.deleteById(su);
+			return count == 1;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Course> findApprovalCourse() {
+		List<Course> courses = dao.selectApprovalCourse();
+		for (Course course : courses) {
+			course.setCoachName(findName(course));
+		}
+		return courses;
+	}
+
+	@Override
+	public Course findPayStatus(User user, Course course) {
+		List<Orderitems> oiList = dao.selectOrderItemByCourseId(course.getCourseId()); // 找符合的購物明細
+		for (Orderitems oi : oiList) {
+			Orders order = dao.selectOrderByOrderId(oi.getOrderId()); // 用每張明細，找到相應的訂單
+			if(user.getUserId() == order.getUserId()) { // 藉此比對此課程與使用者是否有關聯
+				course.setPayStatus(order.getStatus());	// 將課程購買狀態放入Course物件
+			}
+		}
+		return course;
+	}
 
 }

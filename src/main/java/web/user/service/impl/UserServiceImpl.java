@@ -45,4 +45,10 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public User register(User user) {
+		// business logic
+		return null;
+	}
+
 }

@@ -2,6 +2,7 @@ package web.order.service.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.bytebuddy.build.Plugin.Engine.PoolStrategy.Eager;
+import web.course.pojo.Course;
+import web.course.service.CourseService;
 import web.order.dao.OrderDao;
 import web.order.dao.impl.OrderDaoImpl;
 import web.order.pojo.Orderitems;
@@ -17,48 +21,95 @@ import web.order.pojo.Orders;
 import web.order.service.OrderService;
 
 @Service
-public class OrderServiceImpl implements OrderService{
-	
-	//設定Spring 注入(DI)
+public class OrderServiceImpl implements OrderService{	
 	@Autowired
 	private OrderDao orderdao;
-
-	//Spring 注入，註解(或刪除)初始化該屬性的程式
-//	public OrderServiceImpl() throws NamingException {
-//		orderdao = new OrderDaoImpl();
-//	}
+	@Autowired
+	private CourseService courseService;
 	
 	//標註需要交易控制的⽅法
-//	@Transactional
-//	@Override
-//	public Orderitems addcart(Orderitems orderitems, Integer userId) {
-//		//比對訂單資訊		
-//		if(orderitems.getCourseId() == null) {
-//			orderitems.setMessage("未取得購買課程ID");
-//			orderitems.setSuccessful(false);
-//			return orderitems;
-//		}
-//		//確認Order_items內容
-//		System.out.println(orderitems.getCourseId());
-//		
-//		//
-//		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-//		
-//		
-//		int count2 = orderdao.insert(orderitems);
-//		
-//		//執行資料交易控制
-//		if(count2 == 1) {
-//			orderitems.setMessage("送出成功");
-//			orderitems.setSuccessful(true);
-//		} else {
-//			orderitems.setMessage("送出失敗");
-//			orderitems.setSuccessful(false);
-//		}
-//		//回傳course info
-//		return course;
-//	}
-
+	@Transactional
+	@Override
+	public Integer addcart(Course course, Integer userId) {
+		//比對訂單course資訊		
+		if(course.getCourseId() == null) {
+			System.out.println("取得訂單course資訊失敗");
+			return null;
+		}
+		System.out.println(course.getCourseId());
+		
+		//邏輯：產生Orders By userId/
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		if (orderId == null) {
+			Orders orders = new Orders(); 
+			orders.setUserId(userId);
+			orders.setPayAmount(0);
+			orders.setStatus("pending");
+			orders.setPaymentMethod("pending");
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			orders.setCreatedAt(timestamp);
+			int count = orderdao.insert(orders);
+			if(count != 1) {
+				System.out.println("產生Order失敗");
+				return null;
+			}
+			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");	
+		}
+		//邏輯：執行儲存orderitems資料交易控制
+		Orderitems orderitems = new Orderitems();
+		orderitems.setOrderId(orderId);
+		orderitems.setCourseId(course.getCourseId());
+		Integer purchasedPrice = orderdao.selectCoursePriceByCourseId(course.getCourseId()); 
+		orderitems.setPurchasedPrice(purchasedPrice);
+		int count1 = orderdao.insert(orderitems);
+		if(count1 == 1) {
+			System.out.println("儲存orderitems資料成功");
+			return orderId;
+		} else {
+			System.out.println("儲存orderitems資料失敗");
+			return null;
+		}
+	}
+	
+	@Transactional	
+	@Override
+	public List<Course> getAllCourseByOrderId(Integer orderId) {
+		//Step1:找同筆訂單下所有CourseID
+		List<Integer> courseIdList = orderdao.selectCourseListByOrderId(orderId);
+		//Step2:藉由courseID 去撈course.class
+		List<Course> courseList = orderdao.selectCourseListByCourseIdList(courseIdList);
+		//Step3:跑foreach 放入 coachname
+		for(Course course : courseList) {
+			String coachName = courseService.findName(course);
+			course.setCoachName(coachName);
+		}
+		return courseList;
+	}
+	
+	@Transactional	
+	@Override
+	public String deletecoursefromcart(Integer courseId, Integer userId) {
+		//確認and刪除orderitems的課程資訊
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId);
+		if(count1 == 1) {
+			System.out.println("Delete course in DB success.");
+		}else {
+			System.out.println("Delete course in DB fail, pls check!");
+		}
+		//比對orderitems與orders
+		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
+		if (orderitemList == null) { //修改orders狀態為cancel
+			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "pending");
+			if(count2 == 1) {
+				System.out.println("orderitems不存在 cancel成功");
+			}else {
+				System.out.println("orderitems存在 cancel失敗");
+			}			
+		}
+		return "Delete course ok";
+	}
 
 	@Transactional
 	@Override
@@ -95,23 +146,23 @@ public class OrderServiceImpl implements OrderService{
 		}
 		
 		//確認付款資料
-		System.out.println(orders.getPayAmount());
-		System.out.println(orders.getStatus());
 		System.out.println(orders.getPaymentMethod());
-		System.out.println(orders.getCardHolder());
 		System.out.println(orders.getCardNumber());
+		System.out.println(orders.getCardHolder());
 		System.out.println(orders.getExpYear());
 		System.out.println(orders.getExpMonth());
 		System.out.println(orders.getCvc());
 		
 		//寫入DB資料
-//		orders.setOrderId(1); //暫定
-		orders.setUserId(2); //暫定
+//		orders.setUserId(2); //暫定
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		orders.setCreatedAt(timestamp);
+		//計算payAmount
 		
+		
+		
+		orders.setPayAmount(null);
 		//執行資料交易控制
-//		beginTx();
 		int count = orderdao.insert(orders);
 		if(count == 1) {
 			orders.setMessage("送出成功");
@@ -119,10 +170,7 @@ public class OrderServiceImpl implements OrderService{
 		} else {
 			orders.setMessage("送出失敗");
 			orders.setSuccessful(false);
-//			rollback();
 		}
-//		commit();
 		return orders;
 	}
-	
 }

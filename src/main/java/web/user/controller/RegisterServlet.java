@@ -16,8 +16,9 @@ import core.util.CommonUtil;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
-@WebServlet("/user/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/user/register")
+public class RegisterServlet extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
 	private UserService userService;
 
@@ -31,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		User user = json2Pojo(req, User.class);
 		HttpSession session = req.getSession();
 
-		User respbody = userService.login(user);
+		User respbody = userService.register(user);
 
 		if (respbody.isSuccessful()) {
 			session.setAttribute("user", respbody);
@@ -41,4 +42,5 @@ public class LoginServlet extends HttpServlet {
 		}
 
 	}
+
 }

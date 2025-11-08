@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import web.course.pojo.Course;
 import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
@@ -32,17 +33,11 @@ public class OrderDaoImpl implements OrderDao{
 	public int insert(Orders orders) {
 		session.persist(orders);
 		return 1;
-	}	
-	
-	@Override
-	public int insert(Orderitems orderitems) {
-		session.persist(orderitems);
-		return 1;
 	}
 	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
-		String hql= "selet max(orderId) from Orders where userId =:userId and status =:status";
+		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
 		Query<Integer> query = session.createQuery(hql, Integer.class);		
 		return query.setParameter("userId", userId)
 				.setParameter("status", status)
@@ -56,15 +51,61 @@ public class OrderDaoImpl implements OrderDao{
 		return query.setParameter("courseId", courseId)
 				.uniqueResult();
 	}
-
 	
-    //未使用的方法
 	@Override
-	public int deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insert(Orderitems orderitems) {
+		session.persist(orderitems);
+		return 1;
+	}
+	
+	@Override
+	public List<Integer> selectCourseListByOrderId(Integer orderId) {
+	//找同筆訂單下所有CourseID
+		String hql = "select courseId from Orderitems where orderId = :orderId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		List<Integer> courseIdList = query.setParameter("orderId", orderId).getResultList();
+		return courseIdList;
+	}
+	
+	@Override
+	public List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList) {
+		//找Course.class
+		String hql = "FROM Course where courseId IN(:courseIdList)";
+		Query<Course> query = session.createQuery(hql, Course.class);
+		List<Course> courseList = query.setParameterList("courseId", courseIdList).getResultList();
+		return courseList;
+	}
+	
+	@Override
+	public Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId) {
+		int result = session.createQuery("DELETE Orderitems "
+				 + "WHERE courseId = :courseId and orderId = :orderId")
+				 .setParameter("courseId", courseId)
+				 .setParameter("orderId", orderId)
+				 .executeUpdate();
+		return result;	
+	}
+	
+	@Override
+	public List<Orderitems> selectOrderitemsListByOrderId(Integer orderId) {
+		String hql = "from Orderitems where orderId = :orderId";
+		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
+		List<Orderitems> orderItemsList = query.setParameter("orderId", orderId).getResultList();
+		return orderItemsList;	
 	}
 
+	@Override
+	public Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status) {		
+		int result = session.createQuery("UPDATE Orders "
+				+ "SET status = :status "
+				+ "WHERE orderId = :orderId")
+				.setParameter("status", status)
+				.setParameter("orderId", orderId)
+				.executeUpdate();
+		return result;
+	}	
+
+    //未使用的方法
 	@Override
 	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
@@ -77,39 +118,11 @@ public class OrderDaoImpl implements OrderDao{
 		return null;
 	}
 
-	//JDBC 寫法
-//	private DataSource ds;
-//	
-//	public OrderDaoImpl() throws NamingException {
-//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/group1Project");
-//	}
-//
-//	@Override
-//	public int insert(Orders orders) {
-//		String sql = "insert into ORDERS(ORDER_ID, USER_ID, PAY_AMOUNT, STATUS, PAYMENT_METHOD, CARD_HOLDER, CARD_NUMBER, EXP_YEAR, EXP_MONTH, CVC, CREATED_AT) " +
-//					 "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//		try (
-//			Connection conn = ds.getConnection();
-//			PreparedStatement pstmt = conn.prepareStatement(sql)
-//		) {
-//			pstmt.setInt(1, orders.getOrderId());
-//			pstmt.setInt(2, orders.getUserId());
-//			pstmt.setInt(3, orders.getPayAmount());
-//			pstmt.setString(4, orders.getStatus());
-//			pstmt.setString(5, orders.getPaymentMethod());
-//			pstmt.setString(6, orders.getCardHolder());
-//			pstmt.setInt(7, orders.getCardNumber());
-//			pstmt.setInt(8, orders.getExpYear());
-//			pstmt.setInt(9, orders.getExpMonth());
-//			pstmt.setInt(10, orders.getCvc());
-//			pstmt.setTimestamp(11, orders.getCreatedAt());
-//			return pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return -1;
-//	}
-	
+	@Override
+	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 

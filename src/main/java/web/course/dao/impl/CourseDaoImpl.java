@@ -16,6 +16,8 @@ import web.course.dao.CourseDao;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
+import web.course.pojo.SessionUsers;
+import web.course.pojo.SessionUsersId;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.user.pojo.User;
@@ -138,6 +140,89 @@ public class CourseDaoImpl implements CourseDao {
 				.createQuery(hql.toString(), ClassSessions.class)
 				.setParameter("courseId", id)
 				.getResultList();
+	}
+
+	@Override
+	public SessionUsers selectBySessionIdUserID(Integer sessionId, Integer userId) {
+		SessionUsersId id = new SessionUsersId();
+		id.sessionId = sessionId;
+		id.userId = userId;
+		return session.get(SessionUsers.class, id);
+	}
+
+	@Override
+	public Long selectCntBySessionId(Integer sessionId) {
+		String hql = "SELECT COUNT(*) FROM SessionUsers WHERE sessionId = :sessionId";
+		
+		return session
+				.createQuery(hql, Long.class)
+				.setParameter("sessionId", sessionId)
+				.uniqueResult();
+	}
+
+	@Override
+	public int insert(SessionUsers sessionUsers) {
+		session.persist(sessionUsers);
+		return 1;
+	}
+
+	@Override
+	public int deleteById(SessionUsers sessionUsers) {
+		final StringBuilder hql = new StringBuilder()
+				.append("DELETE FROM SessionUsers ")
+				.append("WHERE sessionId = :sessionId ")
+				.append("AND userId = :userId");
+		
+		return session
+				.createQuery(hql.toString())
+				.setParameter("sessionId", sessionUsers.getSessionId())
+				.setParameter("userId", sessionUsers.getUserId())
+				.executeUpdate();
+	}
+
+	@Override
+	public Long selectCntFromSessionUserById(Integer sessionId, Integer userId) {
+		StringBuilder hql = new StringBuilder()
+				.append("SELECT COUNT(*) FROM SessionUsers ")
+				.append("WHERE sessionId = :sessionId ")
+				.append("AND userId = :userId");
+		
+		return session
+				.createQuery(hql.toString(), Long.class)
+				.setParameter("sessionId", sessionId)
+				.setParameter("userId", userId)
+				.uniqueResult();
+	}
+
+	@Override
+	public List<Course> selectApprovalCourse() {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Course ")
+				.append("WHERE approvalStatus = :approvalStatus ")
+				.append("ORDER BY courseId");
+		
+		return session
+				.createQuery(hql.toString(), Course.class)
+				.setParameter("approvalStatus", "通過")
+				.getResultList();
+	}
+
+	@Override
+	public List<Orderitems> selectOrderItemByCourseId(Integer courseId) {
+		final StringBuilder hql = new StringBuilder()
+				.append("FROM Orderitems ")
+				.append("WHERE courseId = :courseId ")
+				.append("ORDER BY orderItemId");
+		
+		return session
+				.createQuery(hql.toString(), Orderitems.class)
+				.setParameter("courseId", courseId)
+				.getResultList();
+	}
+
+	@Override
+	public Orders selectOrderByOrderId(Integer orderId) {
+		return session.get(Orders.class, orderId);
 	}
 
 }
