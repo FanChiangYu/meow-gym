@@ -14,7 +14,7 @@ import web.user.pojo.User;
 
 @Controller
 @RequestMapping("order")
-public class NewOrderDeleteCourseController {
+public class DeleteCourseController {
 	@Autowired
 	private OrderService orderservice;
 	

@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService{
 	public String deletecoursefromcart(Integer courseId, Integer userId) {
 		//確認and刪除orderitems的課程資訊
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId); //需修改
+		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId); //需修改 因從前端拿Orderitems
 		if(count1 == 1) {
 			System.out.println("Delete course in DB success.");
 		}else {
@@ -127,7 +127,7 @@ public class OrderServiceImpl implements OrderService{
 		for(Orderitems orderitems : orderitemList) {
 			Integer purchasedPrice = orderitems.getPurchasedPrice();
 			purchasedPrice += purchasedPrice;
-			orders.setPayAmount(purchasedPrice); //問老師
+			orders.setPayAmount(purchasedPrice); //問老師 
 		}
 		//Step4:回傳Orders payAmount and List<Orderitems> payAmountList
 		for (Orderitems orderitems : orderitemList) {
@@ -190,7 +190,7 @@ public class OrderServiceImpl implements OrderService{
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		
 		//Step3:select Orders by orderId, 並寫入DB資料
-		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); ////廢code?
+		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); ////廢code? 190
 		payOrder.setPaymentMethod(orders.getPaymentMethod());
 		payOrder.setCardNumber(orders.getCardNumber());
 		payOrder.setCardHolder(orders.getCardHolder());
@@ -210,5 +210,28 @@ public class OrderServiceImpl implements OrderService{
 			payOrder.setSuccessful(false);
 		}
 		return payOrder;
+	}
+
+	@Transactional	
+	@Override
+	public Map<String, Object> getOrderConfirmation(Integer userId) {
+		//Step1:用userId找orderId by Orders
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "paid");
+		//Step2:撈Orders by orderId
+		Orders completeOrders = orderdao.selectOrdersByOrderId(orderId);		
+		//Step3:撈List<Orderitems> by orderId
+		List<Orderitems> completeOrderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
+		//Step4:藉由courseID 去撈course.class and 跑foreach 放入 coachname
+		List<Course> completeCourseList = orderdao.selectCourseAndOrderitemListByOrderitems(completeOrderitemList);
+		for(Course course : completeCourseList) {
+			String coachName = courseService.findName(course);
+			course.setCoachName(coachName);
+		}
+		//Step5:回傳Orders, Orderitems and Course
+		Map<String, Object> orderConfirmation = new HashMap<>();
+		orderConfirmation.put("Orders", completeOrders);
+		orderConfirmation.put("Orderitems", completeOrderitemList);
+		orderConfirmation.put("Course", completeCourseList);		
+		return orderConfirmation;
 	}
 }

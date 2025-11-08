@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     paymentObj = {
       1: { title: 'Paid', class: 'text-success' },
       2: { title: 'Pending', class: 'text-warning' },
-      3: { title: 'Failed', class: 'text-danger' },
-      4: { title: 'Cancelled', class: 'text-secondary' }
+      3: { title: 'Cancelled', class: 'text-secondary' }
     };
 
   // shoppingrecord
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
           render: function (data, type, full, meta) {
             const order_id = full['order'];
             // Creates full output for row
-            const row_output = '<a href="app-ecommerce-order-details.html"><span>#' + order_id + '</span></a>';
+            const row_output = '<a href="http://localhost:8080/meow-gym/order/shoppinglist.html"><span>#' + order_id + '</span></a>';
             return row_output;
           }
         },
@@ -188,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                   <i class="icon-base ti tabler-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end m-0">
-                  <a href="app-ecommerce-order-details.html" class="dropdown-item">View</a>
+                  <a href="order/shoppinglist.html" class="dropdown-item">View</a>
                   <a href="javascript:void(0);" class="dropdown-item delete-record">Delete</a>
                 </div>
               </div>`;
@@ -212,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
           features: [
             {
               pageLength: {
-                menu: [7, 10, 25, 50, 100],
+                menu: [10, 25, 50, 100],
                 text: '_MENU_'
               }
             },

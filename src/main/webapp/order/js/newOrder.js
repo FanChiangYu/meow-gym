@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					                  <button type="button" class="btn-close btn-pinned" id="delete_btn" aria-label="Close" onclick="deleteCourse()"></button>
 					                  <div class="my-2 mt-md-6 mb-md-4">
 					                     <span class="text-primary">specialprice</span>
-					                     <s class="text-body" id="course_coursePrice">${course.coursePrice}</s>
+					                     <span class="text-primary" id="course_coursePrice">${course.coursePrice}</span>
 					                  </div>
 					               </div>
 					            </div>
