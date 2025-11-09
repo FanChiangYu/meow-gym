@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +36,10 @@ public class ClassSessions {
 	@Column(name = "TIME_SLOT")
 	private Integer timeSlot;
 	@Column(name = "CHECKIN_AT")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Timestamp checkinAt;
 	@Column(name = "CHECKIN_OUT")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Timestamp checkinOut;
 	
 	@Transient
@@ -43,4 +47,7 @@ public class ClassSessions {
 							   // "已預約"、"可預約"、"無法預約"(預設）
 	@Transient
 	private Integer userCnt; // 此班次總預約人數，回應前端用
+	
+	@Transient
+	private String chkSelect; // 上下課打卡判斷，"AT"、"OUT"
 }

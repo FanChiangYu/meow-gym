@@ -87,7 +87,6 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
         }
       )
     });
-    console.log(rules);
 
     function callNewCourse(imgUrl) {
       const course = {

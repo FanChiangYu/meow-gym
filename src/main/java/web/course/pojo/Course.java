@@ -50,10 +50,10 @@ public class Course extends Core {
 	@Column(name = "CAPACITY_MAX")
 	private Integer capacityMax; 
 	@Column(name = "DATE_START")
-	@JsonFormat(pattern = "yyyy/MM/dd") 
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date dateStart; 
 	@Column(name = "DATE_END")
-	@JsonFormat(pattern = "yyyy/MM/dd") 
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date dateEnd; 
 	@Column(name = "COURSE_PRICE")
 	private Integer coursePrice; 
@@ -68,6 +68,8 @@ public class Course extends Core {
 	private Integer quotaUsed; // 回應前端用, 統計使用者已使用堂數
 	@Transient
 	private String payStatus; // 回應前端用, 判斷此課程的付款狀態
+	@Transient
+	private Integer promoPrice; // 回應前端用, 課程促銷活動價格
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "course_id", referencedColumnName = "course_id", insertable = false, updatable = false)
