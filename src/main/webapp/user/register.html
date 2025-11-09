@@ -299,12 +299,12 @@
                       </div>
                       <div class="col-md-6">
                         <label for="password" class="form-label">會員密碼</label>
-                        <input class="form-control" type="password" id="password" name="password"
+                        <input class="form-control" type="password" id="password" name="password" minlength="8"
                           placeholder="至少8位數，包含英文及數字" />
                       </div>
                       <div class="col-md-6">
                         <label for="confirmPassword" class="form-label">確認密碼</label>
-                        <input type="text" class="form-control" id="confirmPassword" name="confirmPassword"
+                        <input type="text" class="form-control" id="confirmPassword" name="confirmPassword" minlength="8"
                           placeholder="再次輸入會員密碼" />
                       </div>
                       <div class="col-md-6">
@@ -316,7 +316,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="gender" class="form-label">Timezone</label>
+                        <label for="gender" class="form-label">性別</label>
                         <select id="gender" class="select2 form-select">
                           <option value="">性別</option>
                           <option value="female">女</option>
@@ -329,7 +329,7 @@
                           <input type="text" id="date-birthday" class="form-control dob-picker" placeholder="YYYY-MM-DD" />
                         </div>
                       <div class="col-md-6">
-                        <label class="form-label" for="cnt_code">通訊地址</label>
+                        <label class="form-label" for="cnt_code">縣市</label>
                         <select id="cnt_code" class="select2 form-select">
                           <option value="">選擇縣市</option>
                           <option value="1">01 台北市 </option>
@@ -357,7 +357,7 @@
                         </select>
                       </div>
                       <div class="col-md-6">
-                        <label for="dist_code" class="form-label">Timezone</label>
+                        <label for="dist_code" class="form-label">鄉鎮區域</label>
                         <select id="dist_code" class="select2 form-select">
                           <option value="">選擇鄉鎮</option>
                           <option value="4401">4401 馬公市</option>
@@ -378,7 +378,7 @@
                       </div>
                     </div>
                     <div class="mt-2">
-                      <button type="button" class="btn btn-primary me-3" id="applybutton">Save changes</button>
+                      <button type="button" class="btn btn-primary me-3" id="applybutton">成為會員</button>
                       <button type="reset" class="btn btn-label-secondary">Cancel</button>
                     </div>
                   </form>
@@ -492,7 +492,7 @@
 
   <script src="../assets/js/main.js"></script>
   <script src="js/project_template.js"></script>
-  <script src="js/userDetialCheck.js"></script>
+  <script src="js/register.js"></script>
   <script src="js/form-layouts.js"></script>
 
   <!-- Page JS -->

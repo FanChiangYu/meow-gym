@@ -3,12 +3,12 @@ const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0
 
 const email = document.querySelector("#email");
 
-email.addEventListener('blur', function(){
+// email.addEventListener('blur', function(){
 	
-	if(email.value.match(reg) === null){
-		alert('error'); //
-	}else{
-		alert('finish');
-	}
-	; //時機
-})
+// 	if(email.value.match(reg) === null){
+// 		alert('error'); //
+// 	}else{
+// 		alert('finish');
+// 	}
+// 	; //時機
+// })
