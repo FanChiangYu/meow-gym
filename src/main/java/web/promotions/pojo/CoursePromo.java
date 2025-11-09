@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,8 +35,10 @@ public class CoursePromo extends Core {
 	@Column(name = "promo_price")
 	private Integer promoPrice;
 	@Column(name = "date_start")
+	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date dateStart;
 	@Column(name = "date_end")
+	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date dateEnd;
 	@Column(name = "img_url")
 	private String imgUrl;
