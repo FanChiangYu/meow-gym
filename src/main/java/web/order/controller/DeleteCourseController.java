@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import web.course.pojo.Course;
+import core.pojo.Core;
+import web.order.pojo.Orderitems;
 import web.order.service.OrderService;
 import web.user.pojo.User;
 
@@ -20,15 +21,16 @@ public class DeleteCourseController {
 	
 	@PostMapping("deleteCart")
 	@ResponseBody
-	protected String deleteCart(@RequestBody Course course, 
+	protected Core deleteCart(@RequestBody Orderitems orderitems, 
 			@SessionAttribute(value = "user", required = false) User setUser){
-		Integer courseId = course.getCourseId();
+		Integer orderItemId = orderitems.getOrderItemId();
 //		//取會員資料
-		Integer userId = setUser.getUserId();
+//		Integer userId = setUser.getUserId();
 		//先寫死
-//		Integer userId = 1;
-		String answer = orderservice.deletecoursefromcart(courseId, userId);
-		return answer;
+		Integer userId = 1;
+		Core core = new Core();
+		core.setSuccessful(orderservice.deletecoursefromcart(orderItemId, userId));
+		return core;
 	}
 }
 

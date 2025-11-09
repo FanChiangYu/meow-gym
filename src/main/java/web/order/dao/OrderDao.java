@@ -16,13 +16,11 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Integer selectCoursePriceByCourseId(Integer courseId);
 	
-	List<Orderitems> selectCourseIdAndOrderitemIdListByOrderId(Integer orderId); //廢code?
+	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId);
 	
-	List<Course> selectCourseAndOrderitemListByOrderitems(List<Orderitems> courseIdAndOrderitemIdList);
+	List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList);
 	
-	Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId);
-	
-	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId); //廢code?
+	Integer deleteOrderitemsByOrderItemId(Integer orderItemId);
 	
 	Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status);
 	

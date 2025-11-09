@@ -43,39 +43,30 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Orderitems> selectCourseIdAndOrderitemIdListByOrderId(Integer orderId) {
-	//找同筆訂單下所有CourseID
-		String hql = "select courseId, orderItemId from Orderitems where orderId = :orderId";
-		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);		
-		List<Orderitems> courseIdAndOrderitemIdList = query.setParameter("orderId", orderId).getResultList();
-		return courseIdAndOrderitemIdList;
-	}
-	
-	@Override
-	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Orderitems> courseIdAndOrderitemIdList) {
-		//找Course.class
-		String hql = "FROM Course where courseId IN(:courseIdAndOrderitemIdList)";
-		Query<Course> query = session.createQuery(hql, Course.class);
-		List<Course> courseList = query.setParameterList("courseIdAndOrderitemIdList", courseIdAndOrderitemIdList).getResultList();
-		return courseList;
-	}
-	
-	@Override
-	public Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId) {
-		int result = session.createQuery("DELETE Orderitems "
-				 + "WHERE courseId = :courseId and orderId = :orderId")
-				 .setParameter("courseId", courseId)
-				 .setParameter("orderId", orderId)
-				 .executeUpdate();
-		return result;	
-	}
-	
-	@Override
 	public List<Orderitems> selectOrderitemsListByOrderId(Integer orderId) {
+		//找同筆訂單下所有CourseID
 		String hql = "from Orderitems where orderId = :orderId";
 		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
 		List<Orderitems> orderItemsList = query.setParameter("orderId", orderId).getResultList();
 		return orderItemsList;	
+	}
+	
+	@Override
+	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList) {
+		//找Course.class
+		String hql = "FROM Course where courseId IN(:courseIdList)";
+		Query<Course> query = session.createQuery(hql, Course.class);
+		List<Course> courseList = query.setParameterList("courseIdList", courseIdList).getResultList();
+		return courseList;
+	}
+	
+	@Override
+	public Integer deleteOrderitemsByOrderItemId(Integer orderItemId) {
+		int result = session.createQuery("DELETE Orderitems "
+				 + "WHERE orderItemId = :orderItemId")
+				 .setParameter("orderItemId", orderItemId)
+				 .executeUpdate();
+		return result;	
 	}
 
 	@Override

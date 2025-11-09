@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function(){
+let courseList;
+let orderItemList;
+// document.addEventListener("DOMContentLoaded", function(){
 	//我的購物車//
 	const course_title = document.querySelector('#course_title');
 	const course_coachName = document.querySelector('#course_coachName');
@@ -12,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	function addCart(){
 	fetch('addCart')
 		.then(resp => resp.json())
-		.then(courseList => {
+		.then(body => {
+			courseList = body.Course;
+			orderItemList = body.Orderitems;
+			
 			for (let course of courseList) {
 				myCart.innerHTML += `
 					<li class="list-group-item p-6">
@@ -51,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					            </div>
 					            <div class="col-md-4">
 					               <div class="text-md-end">
-					                  <button type="button" class="btn-close btn-pinned" id="delete_btn" aria-label="Close" onclick="deleteCourse()"></button>
+					                  <button type="button" class="btn-close btn-pinned" aria-label="Close" onclick="deleteCourse(${course.courseId})"></button>
 					                  <div class="my-2 mt-md-6 mb-md-4">
 					                     <span class="text-primary">specialprice</span>
 					                     <span class="text-primary" id="course_coursePrice">${course.coursePrice}</span>
@@ -67,10 +72,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		});
 	}
 	
-	//刪除課程//
-	const delete_btn = document.querySelector('#delete_btn');
-	const delete_course = document.querySelector('#course_title')
-	
 	function valueOrNull (value) {
 	  if(value === undefined || value === null || value === ''){
 	    return null;
@@ -79,13 +80,15 @@ document.addEventListener("DOMContentLoaded", function(){
 	  }
 	}
 	
-	document.getElementById('delete_btn').addEventListener('click', deleteCourse);
-	function deleteCourse (){
-		fetch('deleteCart', {
+	//刪除課程//
+	function deleteCourse(courseId){
+		const orderItemId = orderItemList.find(e => e.courseId === courseId).orderItemId;
+
+	  fetch('deleteCart', {
 	    method: 'POST',
 	    headers: { 'Content-Type': 'application/json' },
 	    body: JSON.stringify({
-	      title: valueOrNull(delect_course.value),
+	      orderItemId: valueOrNull(orderItemId)
 	    }),
 	  })
 	  .then(resp => resp.json())
@@ -98,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	        icon: 'success', //彈窗的圖示類型//
 	        target: document.body //決定彈窗要插入到哪個 DOM 元素裡。預設是整個 <body>，這裡明確指定為 document.body。//
 	      });
+				location.reload();
 	    }else{
 	      // alert(body.message,);
 	      Swal.fire({
@@ -108,6 +112,17 @@ document.addEventListener("DOMContentLoaded", function(){
 	      });
 	    }
 	  });
+	  
+	  // if(e.target.classList.contains("delete_btn")){
+		//   //console.log("delete");
+		//   let r = confirm("確認移除？");
+		//   if (r){
+		// 	  e.target.closest("li").classList.add("fade_out");
+		// 	  setTimeout(function(){
+		// 	  e.target.closest("li").remove();
+		// 	  }, 1000);      
+		//   }
+	  // }
 	}
 	
 	//課程結帳清單//
@@ -197,4 +212,4 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	//結帳確認//
 	
-});
+// });

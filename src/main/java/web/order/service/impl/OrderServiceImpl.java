@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,9 +76,10 @@ public class OrderServiceImpl implements OrderService{
 		//Step1:用userId找orderId by Orders
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		//Step2:找同筆訂單下所有CourseID
-		List<Orderitems> courseIdAndOrderitemIdList = orderdao.selectCourseIdAndOrderitemIdListByOrderId(orderId);
+		List<Orderitems> orderitemsList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step3:藉由courseID 去撈course.class
-		List<Course> courseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdAndOrderitemIdList);
+		List<Integer> courseIdList = orderitemsList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+		List<Course> courseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdList);
 		//Step4:跑foreach 放入 coachname
 		for(Course course : courseList) {
 			String coachName = courseService.findName(course);
@@ -85,34 +87,35 @@ public class OrderServiceImpl implements OrderService{
 		}
 		//Step5:回傳Orderitems and Course
 		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
-		orderitemsAndCourseList.put("Orderitems", courseIdAndOrderitemIdList);
+		orderitemsAndCourseList.put("Orderitems", orderitemsList);
 		orderitemsAndCourseList.put("Course", courseList);
 		return orderitemsAndCourseList;
 	}
 	
 	@Transactional	
 	@Override
-	public String deletecoursefromcart(Integer courseId, Integer userId) {
-		//確認and刪除orderitems的課程資訊
+	public boolean deletecoursefromcart(Integer orderItemId, Integer userId) {
+		//Step1:確認and刪除orderitems的課程資訊
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-		int count1 = orderdao.deleteOrderitemsByCourseIdAndOrderId(courseId, orderId); //需修改 因從前端拿Orderitems
+		int count1 = orderdao.deleteOrderitemsByOrderItemId(orderItemId); //需修改 因從前端拿Orderitems
 		if(count1 == 1) {
 			System.out.println("Delete course in DB success.");
+			//Step2:比對orderitems與orders
+			List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
+			if (orderitemList == null) { //修改orders狀態為cancel
+				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "pending");
+				if(count2 == 1) {
+					System.out.println("orderitems不存在 orderstatus cancel成功");
+				}else {
+					System.out.println("orderitems存在 orderstatus cancel失敗");
+				}			
+			}
+			return true;
 		}else {
 			System.out.println("Delete course in DB fail, pls check!");
+			return false;
 		}
-		//比對orderitems與orders
-		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-		if (orderitemList == null) { //修改orders狀態為cancel
-			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "pending");
-			if(count2 == 1) {
-				System.out.println("orderitems不存在 cancel成功");
-			}else {
-				System.out.println("orderitems存在 cancel失敗");
-			}			
-		}
-		return "Delete course ok";
 	}
 	
 	@Transactional
@@ -137,7 +140,6 @@ public class OrderServiceImpl implements OrderService{
 			orderitems.setTitle(course.getTitle());
 			orderitems.setPromoPrice(coursePromo.getPromoPrice());
 		}
-		
 		//Step5:回傳個課程價格及購課總價
 		Map<String, Object> payAmountList = new HashMap<>();
 		payAmountList.put("Orders", orders);
@@ -222,7 +224,8 @@ public class OrderServiceImpl implements OrderService{
 		//Step3:撈List<Orderitems> by orderId
 		List<Orderitems> completeOrderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step4:藉由courseID 去撈course.class and 跑foreach 放入 coachname
-		List<Course> completeCourseList = orderdao.selectCourseAndOrderitemListByOrderitems(completeOrderitemList);
+		List<Integer> courseIdList = completeOrderitemList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+		List<Course> completeCourseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdList);
 		for(Course course : completeCourseList) {
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);

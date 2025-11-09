@@ -12,7 +12,7 @@ public interface OrderService extends CoreService{
 	
 	Map<String, Object> getAllOrderitemsAndCourseByUserId(Integer userId);
 	
-	String deletecoursefromcart(Integer courseId, Integer userId);
+	boolean deletecoursefromcart(Integer courseId, Integer userId);
 	
 	Map<String, Object> getPayAmountListByUserId(Integer userId);
 	
