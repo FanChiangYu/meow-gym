@@ -41,6 +41,8 @@
   <!-- Page CSS -->
 
   <link rel="stylesheet" href="../assets/vendor/css/pages/page-icons.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
 
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
@@ -283,26 +285,6 @@
             <div class="col-md-12">
               <div class="card mb-6">
                 <!-- Account -->
-                <div class="card-body">
-                  <div class="d-flex align-items-start align-items-sm-center gap-6">
-                    <img src="../../assets/img/avatars/1.png" alt="user-avatar"
-                      class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
-                    <div class="button-wrapper">
-                      <label for="avatar_url" class="btn btn-primary me-3 mb-4" tabindex="0">
-                        <span class="d-none d-sm-block">Upload new photo</span>
-                        <i class="icon-base ti tabler-upload d-block d-sm-none"></i>
-                        <input type="file" id="avatar_url" class="account-file-input" hidden
-                          accept="image/png, image/jpeg" />
-                      </label>
-                      <button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-                        <i class="icon-base ti tabler-reset d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Reset</span>
-                      </button>
-
-                      <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
-                    </div>
-                  </div>
-                </div>
                 <div class="card-body pt-4">
                   <form id="formAccountSettings" method="GET" onsubmit="return false">
                     <div class="row gy-4 gx-6 mb-6">
@@ -342,12 +324,25 @@
                           <option value="others">其他</option>
                         </select>
                       </div>
-                      <div class="col-md-6">
+                      <!-- <div class="col-md-6">
                         <label for="birthday" class="form-label">出生日期</label>
                         <select id="birthday" class="select2 form-select">
                           <js YYYYMMDD套件>
                         </select>
-                      </div>
+                      </div> -->
+                      
+                      <!-- Inline Picker-->
+                      <!-- <div class="col-md-6 col-12">
+                        <label for="birthday" class="form-label">出生日期</label>
+                        <input type="text" class="form-control mb-1" placeholder="YYYY-MM-DD" id="flatpickr-inline" />
+                      </div> -->
+                      <!-- /Inline Picker-->
+
+                       <div class="mb-6">
+                          <label class="form-label" for="date-birthday">開始日期</label>
+                          <input type="text" id="date-birthday" class="form-control dob-picker"
+                            placeholder="YYYY-MM-DD" />
+                        </div>
                       <div class="col-md-6">
                         <label class="form-label" for="cnt_code">通訊地址</label>
                         <select id="cnt_code" class="select2 form-select">
@@ -505,12 +500,15 @@
   <!-- endbuild -->
 
   <!-- Vendors JS -->
+  <script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+  <script src="../assets/vendor/libs/select2/select2.js"></script>
 
   <!-- Main JS -->
 
   <script src="../assets/js/main.js"></script>
   <script src="js/project_template.js"></script>
   <script src="js/userDetialCheck.js"></script>
+  <script src="js/form-layouts.js"></script>
 
   <!-- Page JS -->
 </body>
