@@ -1,7 +1,6 @@
 package web.user.controller;
 
 import static core.util.CommonUtil.json2Pojo;
-import static core.util.CommonUtil.writePojo2Json;
 
 import java.io.IOException;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import web.user.pojo.User;
 import web.user.service.UserService;
