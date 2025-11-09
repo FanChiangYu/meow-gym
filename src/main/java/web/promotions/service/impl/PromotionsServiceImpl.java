@@ -117,4 +117,10 @@ public class PromotionsServiceImpl implements PromotionsService {
 	public List<Course> findCourseAndPromotionAll() {
 		return courseDao.selectAll();
 	}
+
+	@Override
+	public int delete(CoursePromo coursePromo) {
+		return dao.deleteById(coursePromo);
+	}
+
 }

@@ -15,4 +15,6 @@ public interface PromotionsService extends CoreService {
 
 	List<Course> findCourseAndPromotionAll();
 
+	int delete(CoursePromo coursePromo);
+
 }

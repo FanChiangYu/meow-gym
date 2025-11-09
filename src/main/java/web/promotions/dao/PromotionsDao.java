@@ -10,5 +10,6 @@ public interface PromotionsDao {
 
 	int insert(CoursePromo coursePromo);
 
-	int delete(CoursePromo coursePromo);
+	int deleteById(CoursePromo coursePromo);
+
 }
