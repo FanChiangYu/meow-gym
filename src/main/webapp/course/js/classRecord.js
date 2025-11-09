@@ -218,7 +218,7 @@ function chatById(courseId) {
   .then(resp => resp.json())
   .then(respbody => {
     if(respbody.ok){
-      location.href = "/meow-gym/chat/addChat.html"
+      location.href = "/meow-gym/chat/app-chat.html"
     }else{
       Swal.fire({
         title: '錯誤',

@@ -67,7 +67,7 @@ public class BrowseController {
 			result.put("successful", course.isSuccessful());
 			result.put("message", course.getTitle());
 			session.setAttribute("course", course);
-			session.setAttribute("courseId", course.getCoachId());
+			session.setAttribute("courseId", course.getCourseId());
 			session.setAttribute("coachName", coachName);
 		} else {
 			result.put("successful", course.isSuccessful());
