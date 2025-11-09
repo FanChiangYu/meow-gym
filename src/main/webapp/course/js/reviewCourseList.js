@@ -157,7 +157,7 @@ function showTimeSlot (timeSlot) {
 }
 
 // ------------ 載入課程審核表單 -----------------
-fetch('reviewCourseList')
+fetch('audit')
 	.then(resp => resp.json())
 	.then(courses => {
 
@@ -201,13 +201,7 @@ fetch('reviewCourseList')
   // ------------ 審核課程 -----------------
   function auditById(id) {
 
-    fetch('reviewCourseList', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          courseId: id
-        }),
-      })
+    fetch(`audit/${id}`)
       .then(resp => resp.json())
       .then(courseResponse => {
         
@@ -240,7 +234,6 @@ fetch('reviewCourseList')
                 <p>課程定價: <strong>${courseResponse.course.coursePrice}</strong></p>
               </div>
             `,
-            // imageUrl: '/meow-gym/getImg?file=' + course.imgUrl,
             imageUrl: courseResponse.course.imgUrl,
             imageWidth: 500,
             // imageHeight: 500,
@@ -260,8 +253,8 @@ fetch('reviewCourseList')
           }).then(result => {
 
             if (result.isConfirmed) {
-              fetch('auditCourse', {
-                method: 'POST',
+              fetch('audit', {
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   courseId: id,
@@ -270,8 +263,8 @@ fetch('reviewCourseList')
               })
               .then(() => location.reload());
             } else if(result.isDenied) {
-              fetch('auditCourse', {
-                method: 'POST',
+              fetch('audit', {
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   courseId: id,
