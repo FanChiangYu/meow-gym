@@ -28,8 +28,10 @@ import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
 import web.course.service.CourseService;
+import web.index.service.IndexService;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 import web.user.pojo.User;
 
 @Service
@@ -37,6 +39,8 @@ import web.user.pojo.User;
 public class CourseServiceImpl implements CourseService {
 	@Autowired
 	private CourseDao dao;
+	@Autowired
+	private IndexService indexService;
 
 	@Override
 	public Course apply(Course course) {
@@ -379,6 +383,7 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> findApprovalCourse() {
 		List<Course> courses = dao.selectApprovalCourse();
 		for (Course course : courses) {
+			course = findPromo(course);
 			course.setCoachName(findName(course));
 		}
 		return courses;
@@ -394,6 +399,51 @@ public class CourseServiceImpl implements CourseService {
 			}
 		}
 		return course;
+	}
+
+	@Override
+	public Course findPromo(Course course) {
+		List<CoursePromo> cpList = dao.selectByCoursId(course.getCourseId()); // 尋找促銷活動
+		for (CoursePromo cp : cpList) {
+			if(indexService.isOnSale(cp)) {	// 是否還在促銷活動期間
+				course.setImgUrl(cp.getImgUrl()); // 替換成促銷活動圖片
+				course.setPromoPrice(cp.getPromoPrice()); //放入促銷活動價格
+			}
+		}
+		return course;
+	}
+
+	@Override
+	public List<ClassResponse> getCoursesByCoach(Integer coachId) {
+		List<Course> courses = dao.selectCourseByCoachId(coachId);
+		List<ClassResponse> classResponses = new ArrayList<>();
+		for (Course course : courses) {
+			ClassResponse classResponse = new ClassResponse(); 
+			List<ClassSessions> classSessionsList = dao.selectClassSessionBycourseID(course.getCourseId()); // 找班次
+			for (ClassSessions classSessions : classSessionsList) {
+				Long countUser = dao.selectCntBySessionId(classSessions.getSessionId()); // 找班次人數
+				classSessions.setUserCnt(Math.toIntExact(countUser));
+			}
+			// 全部放到ClassResponse物件
+			classResponse.setCourse(course);
+			classResponse.setClassSessions(classSessionsList);
+			classResponses.add(classResponse); // 放到List
+		}
+		return classResponses;
+	}
+
+	@Override
+	public Boolean updateChkTime(ClassSessions classSessions) {
+		int result = 0;
+		if("AT".equals(classSessions.getChkSelect())) {
+			result = dao.updateChkAt(classSessions);
+			return result > 0;
+		} else if ("OUT".equals(classSessions.getChkSelect())) {
+			result = dao.updateChkOut(classSessions);
+			return result > 0;
+		} else {
+			return false;
+		}
 	}
 
 }
