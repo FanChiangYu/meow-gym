@@ -1,13 +1,6 @@
 package web.user.controller;
 
-import static core.util.CommonUtil.json2Pojo;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +37,10 @@ public class UserController extends HttpServlet {
 
 	@PostMapping("register")
 	@ResponseBody
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = json2Pojo(req, User.class);
-		HttpSession session = req.getSession();
+	public User register(@RequestBody User user, HttpSession session) {
 
 		User respbody = userService.register(user);
+		return respbody;
 
 	}
 
