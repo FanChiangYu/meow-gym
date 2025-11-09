@@ -52,6 +52,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession wsSession) throws Exception {
 		// 1. 取得登入者
 		final User user = getLoginUser(wsSession);
+		
+		//1-1. 呼叫 httpsession 的 courseId
+		HttpSession session = getHttpSession(wsSession); 
+		Integer courseIdNew = (Integer)session.getAttribute("courseId");
+		System.out.println("fan courseId" + courseIdNew);
 
 		if (user == null) {
 			wsSession.close();
@@ -60,7 +65,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 		// 2. 從 Query 取 courseId
 		final Integer courseId = getIntQueryParam(wsSession, "courseId");
-
+		
+//		final Integer courseIdNew =wsSession.get
+				
 		// 3. 權限驗證：是否擁有該課程 >> 可省略
 		System.out.println("user.getUserId()" + user.getUserId());
 		System.out.println("user.getUserName()" + user.getName());
