@@ -2,10 +2,13 @@
 console.log("chatroom.js loaded");
 
 //not concern for websocket
-const input = document.querySelector(".chat-message");
+//const input = document.querySelector(".chat-message"); //歷史訊息
+const input = document.querySelector("#chat-message");
 const username = document.querySelector(".username");
 
-const sendbutton = document.querySelector(".send-button");
+//const sendbutton = document.querySelector(".send-button");
+const sendbutton = document.querySelector("#send-button");
+
 const chatplace = document.querySelector(".chat-place");
 const classlist = document.querySelector(".class-list");
 const chatlink = document.querySelector(".chat-link");
@@ -15,8 +18,8 @@ const courselink = document.querySelector(".course-link");
 
 let loginUser = null;//提前宣告，載入資料後，要把會員資料儲存在這裡
 let currentCourseId = null;
-let recentchats = null; //add
-let ws = null; //add
+let recentchats = null;
+let ws = null;
 
 
 //載入頁面就開始從後端servlet抓資料
@@ -45,57 +48,23 @@ fetch('/meow-gym/chat/getusercourseid', {
 		//新增多種課程......
 		for (let i = 0; i < body.usercourseid.length; i++) {
 			console.log(body.usercourseid[i].courseId);
+			classlist.innerHTML += `
+			<li class="chat-contact-list-item mb-0 course-link">
+			        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid[i].courseId}">
+			          <div class="flex-shrink-0 avatar avatar-busy">
+			            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
+			          </div>
+			          <div class="chat-contact-info flex-grow-1 ms-4">
+			            <div class="d-flex justify-content-between align-items-center">
+			              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid[i].courseId}</h6>
+			              <small class="chat-contact-list-item-time">1 Day</small>
+			            </div>
+			            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
+			              user</small>
+			          </div>
+			        </a>
+			      </li>`;
 
-			// classlist.innerHTML += `
-			//     <a href="#" data-courseid="${body.usercourseid[i].courseId}" 
-			//        class="m-4 px-4 text-center border course-link ">
-			//        課程編號 ${body.usercourseid[i].courseId}
-			//     </a>`;
-			// classlist.innerHTML += `
-			// 	<li class="chat-contact-list-item mb-1 course-link">
-			//             <a class="d-flex align-items-center chat-link" data-courseid="${body.usercourseid[i].courseId}">
-			//               <div class="flex-shrink-0 avatar avatar-online">
-			//                 <img src="../assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
-			//               </div>
-			//               <div class="chat-contact-info flex-grow-1 ms-4">
-			//                 <div class="d-flex justify-content-between align-items-center">
-			//                   <h6 class="chat-contact-name text-truncate m-0 fw-normal">課程標號${body.usercourseid[i].courseId}</h6>
-			//                   <small class="chat-contact-list-item-time">5 Minutes</small>
-			//                 </div>
-			//                 <small class="chat-contact-status text-truncate">Refer friends. Get rewards.</small>
-			//               </div>
-			//             </a>
-			//           </li>`;
-
-			// classlist.innerHTML += `
-			// 	<li class="chat-contact-list-item course-link">
-            //             <a class="d-flex align-items-center chat-link" data-courseid="${body.usercourseid[i].courseId}">
-            //               <div class="flex-shrink-0 avatar">
-            //                 <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-            //               </div>
-            //               <div class="chat-contact-info flex-grow-1 ms-4">
-            //                 <h6 class="chat-contact-name text-truncate m-0 fw-normal">課程標號${body.usercourseid[i].courseId}</h6>
-            //                 <small class="chat-contact-status text-truncate">Business Analyst</small>
-            //               </div>
-            //             </a>
-            //           </li>`;
-
-				classlist.innerHTML += `
-				<li class="chat-contact-list-item mb-0 course-link">
-                        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid[i].courseId}">
-                          <div class="flex-shrink-0 avatar avatar-busy">
-                            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid[i].courseId}</h6>
-                              <small class="chat-contact-list-item-time">1 Day</small>
-                            </div>
-                            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
-                              user</small>
-                          </div>
-                        </a>
-                      </li>`;
 		}
 
 	});
@@ -151,37 +120,6 @@ function connectChat(courseId) {
 		console.log(allMessages);
 
 		for (let i = 0; i < allMessages.length; i++) {
-			// chatplace.innerHTML += `
-			// 	<div>
-			// 	<span data-userid="${allMessages[i].userId}" data-name="${allMessages[i].name}"
-			//        class="m-4 px-4 border">
-			//        ${allMessages[i].name}:
-			//     </span>
-			//     <span data-courseid="${allMessages.courseId}" 
-			//        class="m-4 px-4 border">
-			//      ${allMessages[i].text}
-			//     </span></div>`;
-
-			// chatplace.innerHTML += `
-			//   <li class="chat-message chat-message-right" data-userid="${allMessages[i].user}"  data-name="${allMessages[i].name}">
-			//               <div class="d-flex overflow-hidden">
-			//                 <div class="chat-message-wrapper flex-grow-1">
-			//                   <div class="chat-message-text">
-			//                      ${allMessages[i].name}:<p class="mb-0">${allMessages[i].text}</p>
-			//                   </div>
-			//                   <div class="text-end text-body-secondary mt-1">
-			//                     <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
-			//                     <small>10:00 AM</small>
-			//                   </div>
-			//                 </div>
-			//                 <div class="user-avatar flex-shrink-0 ms-4">
-			//                   <div class="avatar avatar-sm">
-			//                     <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-			//                   </div>
-			//                 </div>
-			//               </div>
-			//             </li>`;
-
 			chatplace.innerHTML += `
 			   <li class="chat-message chat-message-right chat-contact-list-item">
                           <div class="d-flex overflow-hidden">

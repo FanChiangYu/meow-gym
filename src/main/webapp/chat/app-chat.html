@@ -1845,6 +1845,7 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                     </div>
                     <!-- My project end-->
 
+                    <!-- add class-list-->
                     <ul class="list-unstyled chat-contact-list py-2 mb-0 class-list" id="chat-list">
                       <li class="chat-contact-list-item chat-contact-list-item-title mt-0">
                         <h5 class="text-primary mb-0">你的課程有:</h5>
@@ -2282,7 +2283,9 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                     <!-- Chat message form -->
                     <div class="chat-history-footer shadow-xs">
                       <form class="form-send-message d-flex justify-content-between align-items-center">
-                        <input class="form-control message-input border-0 me-4 shadow-none"
+
+                        <!-- add id chat-message -->
+                        <input id="chat-message" class="form-control message-input border-0 me-4 shadow-none"
                           placeholder="Type your message here..." />
                         <div class="message-actions d-flex align-items-center">
                           <span class="btn btn-text-secondary btn-icon rounded-pill cursor-pointer">
@@ -2294,7 +2297,8 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                             </span>
                             <input type="file" id="attach-doc" hidden />
                           </label>
-                          <button class="btn btn-primary d-flex send-msg-btn">
+                          <!-- add id send-button -->
+                          <button id="send-button" class="btn btn-primary d-flex send-msg-btn">
                             <span class="align-middle d-md-inline-block d-none">Send</span>
                             <i class="icon-base ti tabler-send icon-16px ms-md-2 ms-0"></i>
                           </button>
