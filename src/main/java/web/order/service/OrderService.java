@@ -1,6 +1,6 @@
 package web.order.service;
 
-import java.util.List;
+import java.util.Map;
 
 import core.service.CoreService;
 import web.course.pojo.Course;
@@ -8,12 +8,16 @@ import web.order.pojo.Orders;
 
 public interface OrderService extends CoreService{
 	
-	Integer addcart(Course course, Integer userId);
+	Boolean addcart(Course course, Integer userId);
 	
-	List<Course> getAllCourseByOrderId(Integer orderId);
+	Map<String, Object> getAllOrderitemsAndCourseByUserId(Integer userId);
 	
-	String deletecoursefromcart(Integer courseId, Integer userId);
+	boolean deletecoursefromcart(Integer courseId, Integer userId);
 	
-	Orders payment(Orders orders);
+	Map<String, Object> getPayAmountListByUserId(Integer userId);
+	
+	Orders payment(Orders orders, Integer userId);
+	
+	Map<String, Object> getOrderConfirmation(Integer userId);
 
 }

@@ -6,12 +6,9 @@ import core.dao.CoreDao;
 import web.course.pojo.Course;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 
 public interface OrderDao extends CoreDao<Orders, Integer>{
-	
-	Orders selectById(Integer id);
-	
-	int insert(Orders orders);
 	
 	int insert(Orderitems orderitems);
 	
@@ -19,13 +16,19 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Integer selectCoursePriceByCourseId(Integer courseId);
 	
-	List<Integer> selectCourseListByOrderId(Integer orderId);
-	
-	List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList);
-	
-	Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId);
-	
 	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId);
 	
+	List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList);
+	
+	Integer deleteOrderitemsByOrderItemId(Integer orderItemId);
+	
 	Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status);
+	
+	Course selectCourseByCourseId (Integer courseId);
+	
+	CoursePromo selectCoursePromoPriceByCourseId(Integer courseId);
+	
+	Orders selectOrdersByOrderId(Integer orderId);
+	
+	int insert(Orders orders);
 }
