@@ -22,7 +22,7 @@ let recentchats = null;
 let ws = null;
 
 
-//載入頁面就開始從後端servlet抓資料
+//載入頁面就開始從後端拿資料
 
 //取得login資料
 fetch('/meow-gym/chat/userinfo', {
@@ -42,21 +42,45 @@ fetch('/meow-gym/chat/getusercourseid', {
 }).then(resp => resp.json())
 	.then(body => {
 		console.log(body);
-		console.log(body.usercourseid[0].courseId);
-		console.log(body.usercourseid.length);
+		//console.log(body.usercourseid[0].courseId);
+		console.log(body.usercourseid);
+
+		currentCourseId = body.usercourseid; // [CHANGED] 更新目前選擇的課程 ID	
+		console.log("載入課程:", currentCourseId);
+		connectChat(currentCourseId);
 
 		//新增多種課程......
-		for (let i = 0; i < body.usercourseid.length; i++) {
-			console.log(body.usercourseid[i].courseId);
-			classlist.innerHTML += `
+		// for (let i = 0; i < body.usercourseid.length; i++) {
+		// 	console.log(body.usercourseid[i].courseId);
+		// 	classlist.innerHTML += `
+		// 	<li class="chat-contact-list-item mb-0 course-link">
+		// 	        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid[i].courseId}">
+		// 	          <div class="flex-shrink-0 avatar avatar-busy">
+		// 	            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
+		// 	          </div>
+		// 	          <div class="chat-contact-info flex-grow-1 ms-4">
+		// 	            <div class="d-flex justify-content-between align-items-center">
+		// 	              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid[i].courseId}</h6>
+		// 	              <small class="chat-contact-list-item-time">1 Day</small>
+		// 	            </div>
+		// 	            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
+		// 	              user</small>
+		// 	          </div>
+		// 	        </a>
+		// 	      </li>`;
+
+		// }
+
+		//列出現在課程 (可刪除)
+		classlist.innerHTML += `
 			<li class="chat-contact-list-item mb-0 course-link">
-			        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid[i].courseId}">
+			        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid}">
 			          <div class="flex-shrink-0 avatar avatar-busy">
 			            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
 			          </div>
 			          <div class="chat-contact-info flex-grow-1 ms-4">
 			            <div class="d-flex justify-content-between align-items-center">
-			              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid[i].courseId}</h6>
+			              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid}</h6>
 			              <small class="chat-contact-list-item-time">1 Day</small>
 			            </div>
 			            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
@@ -65,46 +89,55 @@ fetch('/meow-gym/chat/getusercourseid', {
 			        </a>
 			      </li>`;
 
-		}
-
 	});
 
 // 分房間發fetch
-classlist.addEventListener("click", function (e) {
-	const link = e.target.closest(".chat-link");
-	const li = e.target.closest("li");
 
-	// 1) 先清掉所有 active（包含先前選到的）
-	classlist.querySelectorAll(".chat-contact-list-item.active").forEach(item => { item.classList.remove("active") });
+// classlist.addEventListener("click", function (e) {
+// 	const link = e.target.closest(".chat-link");
+// 	const li = e.target.closest("li");
 
-	if (link) {
-		e.preventDefault(); // 阻止 a 連結的跳轉
-		console.log(e.target);
-		console.log(link);
+// 	// 1) 先清掉所有 active（包含先前選到的）
+// 	classlist.querySelectorAll(".chat-contact-list-item.active").forEach(item => { item.classList.remove("active") });
 
-		//background become purple
-		console.log(li);
+// 	if (link) {
+// 		e.preventDefault(); // 阻止 a 連結的跳轉
+// 		console.log(e.target);
+// 		console.log(link);
 
-		li.classList.add("active");
+// 		//background become purple
+// 		console.log(li);
 
-		const courseId = link.dataset.courseid;
-		currentCourseId = Number(courseId); // [CHANGED] 更新目前選擇的課程 ID	
-		console.log("載入課程:", courseId);
-		connectChat(courseId);
+// 		li.classList.add("active");
 
-	}
+// 		const courseId = link.dataset.courseid;
+// 		currentCourseId = Number(courseId); // [CHANGED] 更新目前選擇的課程 ID	
+// 		console.log("載入課程:", courseId);
+// 		connectChat(courseId);
+
+// 	}
+// });
+
+//改成面重新載入
+document.addEventListener("DOMContentLoaded", function (e) {
+
+
+
 });
 
+
+
+
 //websocket 處理點擊 courseId 後的聊天紀錄載入
-function connectChat(courseId) {
+function connectChat(currentCourseId) {
 	if (ws) {
 		ws.close();
 	};
 	chatplace.innerHTML = '';
-	currentCourseId = courseId; // global to store the currentCourseId.
-	console.log(currentCourseId); // show correctly
+	// currentCourseId = courseId; // global to store the currentCourseId.
+	// console.log(currentCourseId); // show correctly
 
-	ws = new WebSocket(`ws://localhost:8080/meow-gym/chat?courseId=${courseId}`);
+	ws = new WebSocket(`ws://localhost:8080/meow-gym/chat?courseId=${currentCourseId}`);
 
 	ws.addEventListener("open", function () {
 		//送一個訊息到後端 >> 不送了，免得又說不是JSON炸掉

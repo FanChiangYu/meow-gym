@@ -54,9 +54,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		final User user = getLoginUser(wsSession);
 		
 		//1-1. 呼叫 httpsession 的 courseId
-		HttpSession session = getHttpSession(wsSession); 
-		Integer courseIdNew = (Integer)session.getAttribute("courseId");
-		System.out.println("fan courseId" + courseIdNew);
+//		HttpSession session = getHttpSession(wsSession); 
+//		Integer courseIdNew = (Integer)session.getAttribute("courseId");
+//		System.out.println("fan courseId" + courseIdNew); //send to frontend
 
 		if (user == null) {
 			wsSession.close();
@@ -65,6 +65,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 		// 2. 從 Query 取 courseId
 		final Integer courseId = getIntQueryParam(wsSession, "courseId");
+		System.out.println("New Spring websocket courseId" + courseId);
 		
 //		final Integer courseIdNew =wsSession.get
 				
