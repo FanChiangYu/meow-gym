@@ -1,13 +1,12 @@
 package web.order.pojo;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -34,6 +33,12 @@ public class Orderitems extends Core {
 	private Integer courseId; // 課程ID
 	@Column(name = "PURCHASED_PRICE")
 	private Integer purchasedPrice; // 購買單價
+	
+	// 回應前端用
+	@Transient
+	private String title;  //課程名稱
+	@Transient
+	private Integer promoPrice;  //促銷價格
 
 //fields
 //	private static final long serialVersionUID = 1L;

@@ -22,7 +22,7 @@ import web.promotions.service.PromotionsService;
 
 @Transactional
 @Service
-public class PromotionsServiceImpl implements PromotionsService{
+public class PromotionsServiceImpl implements PromotionsService {
 	@Autowired
 	private PromotionsDao dao;
 	@Autowired
@@ -35,82 +35,81 @@ public class PromotionsServiceImpl implements PromotionsService{
 
 	@Override
 	public CoursePromo apply(CoursePromo coursePromo) throws IOException {
-		if(coursePromo.getPromoPrice() == null) {
+		if (coursePromo.getPromoPrice() == null) {
 			coursePromo.setMessage("未填寫課程訂價");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
-		if(coursePromo.getDateStart() == null) {
+
+		if (coursePromo.getDateStart() == null) {
 			coursePromo.setMessage("未選擇開始日期");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
-		if(coursePromo.getDateEnd() == null) {
+
+		if (coursePromo.getDateEnd() == null) {
 			coursePromo.setMessage("未選擇結束日期");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
+
 		Date dateStart = new Date(coursePromo.getDateStart().getTime());
 		Date dateEnd = new Date(coursePromo.getDateEnd().getTime());
 		Date dateNow = new Date();
-		
-		if(dateStart.before(dateNow)) {
+
+		if (dateStart.before(dateNow)) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			coursePromo.setMessage("開始日期請選擇" + sdf.format(dateNow) + "之後");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
+
 		long dateDiff = (dateEnd.getTime() - dateStart.getTime()) / (1000 * 60 * 60 * 24);
-		
-		if(dateDiff < 30) {
+
+		if (dateDiff < 30) {
 			coursePromo.setMessage("結束日期需大於開始日期30天");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
+
 		final String imgBase64 = coursePromo.getImgBase64();
 		if (imgBase64 == null || imgBase64.isEmpty()) {
 			coursePromo.setMessage("未選擇圖片");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
+
 		String filename = coursePromo.getFilename();
 		if (filename == null || filename.isEmpty()) {
 			coursePromo.setMessage("缺少圖片檔名");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
-		
+
 		filename = addTimestampToFileName(filename);
 		String fullPath = FileUtil.IMG_ROOT_PATH + filename;
 		byte[] img = Base64.getDecoder().decode(imgBase64);
 		Path path = Paths.get(fullPath);
 		Files.write(path, img);
 		coursePromo.setImgUrl(filename);
-		
+
 		int count = dao.insert(coursePromo);
-		if(count == 1) {
+		if (count == 1) {
 			coursePromo.setMessage("送出成功");
 			coursePromo.setSuccessful(true);
 		} else {
 			coursePromo.setMessage("送出失敗");
 			coursePromo.setSuccessful(false);
 		}
-		
+
 		return coursePromo;
 	}
-	
+
 	public String addTimestampToFileName(String fileName) {
 		int dotIndex = fileName.lastIndexOf(".");
 		String extension = fileName.substring(dotIndex);
 		String baseName = fileName.substring(0, dotIndex);
-		String timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
-                			.format(new java.util.Date());
+		String timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
 		return baseName + "_" + timestamp + extension;
 	}
 
@@ -118,4 +117,10 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public List<Course> findCourseAndPromotionAll() {
 		return courseDao.selectAll();
 	}
+
+	@Override
+	public int delete(CoursePromo coursePromo) {
+		return dao.deleteById(coursePromo);
+	}
+
 }

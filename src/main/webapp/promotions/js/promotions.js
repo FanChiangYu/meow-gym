@@ -26,8 +26,8 @@ document.querySelector('#apply-btn').addEventListener('click', () => {
         body: JSON.stringify({
             courseId: sessionStorage.getItem('id'),
             promoPrice: promoPrice.value,
-            dateStart: dateStart.value,
-            dateEnd: dateEnd.value,
+            dateStart: dateStart.value.replaceAll('-', '/'),
+            dateEnd: dateEnd.value.replaceAll('-', '/'),
             imgBase64,
             filename: courseImg.files[0].name
         })
