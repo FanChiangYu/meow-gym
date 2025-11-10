@@ -1,7 +1,6 @@
 package web.chat.config;
 
-import java.util.Collection;
-import java.util.Collections;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;

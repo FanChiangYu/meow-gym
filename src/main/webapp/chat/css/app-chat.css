@@ -1,0 +1,11 @@
+.chat-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.purple-bg {
+  background-color: #6f42c1 !important;
+  color: #fff !important;
+}
+
