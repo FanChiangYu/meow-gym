@@ -21,11 +21,5 @@ public class ChatServiceImpl implements ChatService {
 		 return chatDao.saveAndLoad(chats);
 	 }
 	 
-	 //用編號找課程名稱
-	 
-	 
-	// order status
-
-	// blacklist
 
 }

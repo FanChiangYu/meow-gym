@@ -9,7 +9,7 @@ const username = document.querySelector(".username");
 //const sendbutton = document.querySelector(".send-button");
 const sendbutton = document.querySelector("#send-button");
 
-const chatplace = document.querySelector(".chat-place");
+const chatplace = document.querySelector("#chat-place");
 const classlist = document.querySelector(".class-list");
 const chatlink = document.querySelector(".chat-link");
 
@@ -72,22 +72,22 @@ fetch('/meow-gym/chat/getusercourseid', {
 		// }
 
 		//列出現在課程 (可刪除)
-		classlist.innerHTML += `
-			<li class="chat-contact-list-item mb-0 course-link">
-			        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid}">
-			          <div class="flex-shrink-0 avatar avatar-busy">
-			            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-			          </div>
-			          <div class="chat-contact-info flex-grow-1 ms-4">
-			            <div class="d-flex justify-content-between align-items-center">
-			              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid}</h6>
-			              <small class="chat-contact-list-item-time">1 Day</small>
-			            </div>
-			            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
-			              user</small>
-			          </div>
-			        </a>
-			      </li>`;
+		// classlist.innerHTML += `
+		// 	<li class="chat-contact-list-item mb-0 course-link">
+		// 	        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid}">
+		// 	          <div class="flex-shrink-0 avatar avatar-busy">
+		// 	            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
+		// 	          </div>
+		// 	          <div class="chat-contact-info flex-grow-1 ms-4">
+		// 	            <div class="d-flex justify-content-between align-items-center">
+		// 	              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid}</h6>
+		// 	              <small class="chat-contact-list-item-time">1 Day</small>
+		// 	            </div>
+		// 	            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
+		// 	              user</small>
+		// 	          </div>
+		// 	        </a>
+		// 	      </li>`;
 
 	});
 
@@ -118,18 +118,11 @@ fetch('/meow-gym/chat/getusercourseid', {
 // 	}
 // });
 
-//改成面重新載入
-document.addEventListener("DOMContentLoaded", function (e) {
-
-
-
-});
-
-
-
 
 //websocket 處理點擊 courseId 後的聊天紀錄載入
 function connectChat(currentCourseId) {
+
+	console.log("Login user inside connectChat:", loginUser);
 	if (ws) {
 		ws.close();
 	};
@@ -152,17 +145,25 @@ function connectChat(currentCourseId) {
 		const allMessages = JSON.parse(e.data);
 		console.log(allMessages);
 
+
 		for (let i = 0; i < allMessages.length; i++) {
+
+			const isSelf = loginUser.name === `${allMessages[i].name}`;
+			const messageSelf = isSelf ? "chat-message-right" : "chat-message-left";
+
+			//聊天訊息顯示方向判斷
+
 			chatplace.innerHTML += `
-			   <li class="chat-message chat-message-right chat-contact-list-item">
+			   <li class="chat-message chat-contact-list-item ${messageSelf}">
                           <div class="d-flex overflow-hidden">
                             <div class="chat-message-wrapper flex-grow-1">
+							${allMessages[i].name}
                               <div class="chat-message-text">
                                 <p class="mb-0">${allMessages[i].text}</p>
                               </div>
                               <div class="text-end text-body-secondary mt-1">
                                 <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
-                                <small>10:00 AM</small>
+                                <small>${allMessages[i].time.slice(0, 16)}</small>
                               </div>
                             </div>
                             <div class="user-avatar flex-shrink-0 ms-4">
@@ -172,7 +173,6 @@ function connectChat(currentCourseId) {
                             </div>
                           </div>
                         </li>`;
-
 
 		}
 	};
