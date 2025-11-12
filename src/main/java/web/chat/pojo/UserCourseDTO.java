@@ -20,6 +20,7 @@ public class UserCourseDTO extends Core{
 	private static final long serialVersionUID = -5775833812254098286L;
 	
     private Integer userId;
+
     private Integer courseId;
 
 }
