@@ -421,7 +421,7 @@
 <!-- 			                                <div class="text-md-end"> -->
 <!-- 			                                  <button type="button" class="btn-close btn-pinned" id="delete_btn" aria-label="Close" onclick="deleteCourse()"></button> -->
 <!-- 			                                  <div class="my-2 mt-md-6 mb-md-4"> -->
-<!-- 			                                    <span class="text-primary">specialprice</span> -->
+<!--                                          <span class="text-primary" id="course_promoPrice">${course.promoPrice}</span> -->
 <!-- 			                                    <span class="text-primary" id="course_coursePrice"></span> -->
 <!-- 			                                  </div> -->
 <!-- 			                                </div> -->
@@ -438,16 +438,15 @@
 			                    <div class="border rounded p-6 mb-4">
 			                      <!-- Price Details -->
 			                      <h6>結帳細項</h6>
-			                      <dl class="row mb-0 text-heading">
-			                        <dt class="col-6 fw-normal">重量訓練入門</dt>
-			                        <dd class="col-6 text-end">4000</dd>
-			                        <dt class="col-6 fw-normal">初階瑜珈課</dt>
-			                        <dd class="col-6 text-end">3500</dd>
+			                      <dl class="row mb-0 text-heading" id="orderPayCourseList">
+			                        <!-- <dt class="col-6 fw-normal" id="title">重量訓練入門</dt>
+                              <dd class="col-6 text-end" id="coursePromoPrice">3500</dd> -->
+			                        <!-- <dd class="col-6 text-end" id="coursePrice">4000</dd> -->
 			                      </dl>
 			                      <hr class="mx-n6 my-6" />
-			                      <dl class="row mb-0">
-			                        <dt class="col-6 text-heading">總價</dt>
-			                        <dd class="col-6 fw-medium text-end text-heading mb-0">price</dd>
+			                      <dl class="row mb-0" id="orderTotalAmount">
+			                        <!-- <dt class="col-6 text-heading">總價</dt>
+			                        <dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">price</dd> -->
 			                      </dl>
 			                    </div>
 			                    <div class="d-grid">
@@ -525,7 +524,15 @@
 				                             class="form-control" 
 				                             placeholder="Name" />
 			                            </div>
-			                            <div class="col-6 col-md-4">
+                                  <div class="col-6 col-md-4">
+                                    <label class="form-label" for="paymentCardExpiryDate" id="paymentCardExpiryDate">Exp. Date</label>
+                                    <input
+                                      type="text"
+                                      id="paymentCardExpiryDate"
+                                      class="form-control expiry-date-mask"
+                                      placeholder="MM/YY" />
+                                  </div>
+                                  <!-- <div class="col-6 col-md-4">
 			                              <label class="form-label" for="paymentCardExpiryDate">Exp. Mon</label>
 			                              <input
 			                                type="text"
@@ -542,13 +549,13 @@
 			                                class="form-control expiry-date-mask"
 			                                maxlength="2"
 			                                placeholder="YY" />
-			                            </div>
+			                            </div> -->
 			                            <div class="col-6 col-md-4">
 			                              <label class="form-label" for="paymentCardCvv">CVV Code</label>
 			                              <div class="input-group input-group-merge">
 			                                <input
 			                                  type="text"
-			                                  id="ccc"
+			                                  id="cvc"
 			                                  class="form-control cvv-code-mask"
 			                                  maxlength="3"
 			                                  placeholder="000" />
@@ -584,16 +591,16 @@
 			                    <div class="border rounded p-6">
 			                      <!-- Price Details -->
 			                      <h6>結帳細項</h6>
-			                      <dl class="row mb-0 text-heading">
-			                        <dt class="col-6 fw-normal">重量訓練入門</dt>
+			                      <dl class="row mb-0 text-heading" id="paymentPayCourseList">
+			                        <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
 			                        <dd class="col-6 text-end">4000</dd>
 			                        <dt class="col-6 fw-normal">初階瑜珈課</dt>
-			                        <dd class="col-6 text-end">3500</dd>
+			                        <dd class="col-6 text-end">3500</dd> -->
 			                      </dl>
 			                      <hr class="mx-n6 my-6" />
-			                      <dl class="row mb-0">
-			                        <dt class="col-6 text-heading mb-3">總價</dt>
-			                        <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd>
+			                      <dl class="row mb-0" id="paymentTotalAmount">
+			                        <!-- <dt class="col-6 text-heading mb-3">總價</dt>
+			                        <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
 			                      </dl>
 			                    </div>
 			                  </div>
@@ -606,32 +613,26 @@
 			                  <div class="col-12 col-lg-8 mx-auto text-center mb-2">
 			                    <h4>感謝您的購買，請確認以下購買資訊</h4>
 			                    <p>
-			                      您的訂單已成立 <a href="javascript:void(0)" class="text-heading fw-medium">###</a>
+			                      您的訂單已成立，我們已將訂單資訊寄至您登記的mail信箱，請至您的mail信箱確認，若兩分鐘後仍未收到，請來電告知我們專人處理，謝謝
 			                    </p>
 			                    <p>
-			                      我們已將訂單資訊寄至您登記的mail信箱
-			                      <a href="mailto:john.doe@example.com" class="text-heading fw-medium">john.doe@example.com</a>
-			                      請至您的mail信箱確認，若兩分鐘後仍未收到，請來電告知我們專人處理，謝謝
-			                    </p>
-			                    <p>
-			                      <span>
-			                      	<i class="icon-base ti tabler-clock me-1 text-heading"></i> Time placed:&nbsp;
-			                      </span>
-			                      <form action="#" method="get">25/05/2020 13:35pm</form>
-			                    </p>
+                            <form action="#" method="get">Email信箱:</form><a href="mailto:john.doe@example.com" class="text-heading fw-medium">john.doe@example.com</a>
+			                    </p>                     
 			                  </div>
 			                  
 			                  <!-- Confirmation details -->
 			                  <div class="col-12">
 			                    <ul class="list-group list-group-horizontal-md">
 			                      <li class="list-group-item flex-fill p-6 text-body">
-			                        <h6 class="d-flex align-items-center gap-2">
-			                          <i class="icon-base ti tabler-credit-card"></i> 付款方式
-			                        </h6>
-			                        <p class="mb-0 mt-4">
-			                        <form action="#" method="get">payment_method</form>
-			                        <form action="#" method="get">invoice_number</form>
-			                        <form action="#" method="get">invoice_date</form>
+			                        <h6 class="d-flex align-items-center gap-2">付款資訊</h6>
+                              <p class="mb-0 mt-4">
+                                <form action="#" method="get">訂單編號:</form><a href="javascript:void(0)" class="text-heading fw-medium">###</a>
+			                        </p>
+                              <p class="mb-0 mt-4">
+                                <i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間:&nbsp;<span>25/05/2020 13:35pm</span>
+			                        </p>
+                              <p class="mb-0 mt-4">
+                                <i class="icon-base ti tabler-credit-card"></i>付款方式:<a href="javascript:void(0)" class="text-heading fw-medium">###</a>
 			                        </p>
 			                      </li>
 			                    </ul>
@@ -641,77 +642,43 @@
 			                <div class="row">
 			                  <!-- Confirmation items -->
 			                  <div class="col-xl-9 mb-6 mb-xl-0">
-			                    <ul class="list-group">
-			                      <li class="list-group-item p-6">
+			                    <ul class="list-group" id="confirmation">
+			                      <!-- <li class="list-group-item p-6">
 			                        <div class="d-flex gap-4">
 			                          <div class="flex-shrink-0">
-			                            <img src="./images/test.png" alt="google home" class="w-px-80" />
+			                            <img src="${course.imgUrl}" alt="google home" class="w-px-80" />
 			                          </div>
 			                          <div class="flex-grow-1">
 			                            <div class="row">
 			                              <div class="col-md-8">
 			                                <a href="javascript:void(0)">
-			                                  <h6 class="mb-2">重量訓練入門</h6>
+			                                  <h6 class="mb-2" id="confirmation_title">${course.title}</h6>
 			                                </a>
 			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">教練：</span> <a href="javascript:void(0)">coach</a>
+			                                  <span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
 			                                </div>
 			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">開課日：</span> <a href="javascript:void(0)">date_start</a>
+			                                  <span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
 			                                </div>
 			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">完課日：</span> <a href="javascript:void(0)">date_end</a>
+			                                  <span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
 			                                </div>
  			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">課堂額度：</span> <a href="javascript:void(0)">capacity_max</a>
+			                                  <span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
 			                                </div>                           
 			                              </div>
 			                              <div class="col-md-4">
 			                                <div class="text-md-end">
 			                                  <div class="my-2 my-lg-6">
-			                                    <span class="text-primary">specialprice</span><s class="text-body-secondary">originprice</s>
+			                                    <span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
+                                          <span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
 			                                  </div>
 			                                </div>
 			                              </div>
 			                            </div>
 			                          </div>
 			                        </div>
-			                      </li>			                      
-			                      <li class="list-group-item p-6">
-			                        <div class="d-flex gap-4">
-			                          <div class="flex-shrink-0">
-			                            <img src="./images/test.png" alt="google home" class="w-px-80" />
-			                          </div>
-			                          <div class="flex-grow-1">
-			                            <div class="row">
-			                              <div class="col-md-8">
-			                                <a href="javascript:void(0)">
-			                                  <h6 class="mb-2">初階瑜珈課</h6>
-			                                </a>
-			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">教練：</span> <a href="javascript:void(0)">coach</a>
-			                                </div>
-			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">開課日：</span> <a href="javascript:void(0)">date_start</a>
-			                                </div>
-			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">完課日：</span> <a href="javascript:void(0)">date_end</a>
-			                                </div>
- 			                                <div class="text-body mb-2 d-flex flex-wrap">
-			                                  <span class="me-1">課堂額度：</span> <a href="javascript:void(0)">capacity_max</a>
-			                                </div>                           
-			                              </div>
-			                              <div class="col-md-4">
-			                                <div class="text-md-end">
-			                                  <div class="my-2 my-lg-6">
-			                                    <span class="text-primary">specialprice</span><s class="text-body-secondary">originprice</s>
-			                                  </div>
-			                                </div>
-			                              </div>
-			                            </div>
-			                          </div>
-			                        </div>
-			                      </li>
+			                      </li>			                       -->
 			                    </ul>
 			                  </div>
 			                  
@@ -720,16 +687,16 @@
 			                    <div class="border rounded p-6">
 			                      <!-- Price Details -->
 			                      <h6>結帳細項</h6>
-			                      <dl class="row mb-0 text-heading">
-			                        <dt class="col-6 fw-normal">重量訓練入門</dt>
+			                      <dl class="row mb-0 text-heading" id="confirmPayCourseList">
+			                        <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
 			                        <dd class="col-6 text-end">4000</dd>
 			                        <dt class="col-6 fw-normal">初階瑜珈課</dt>
-			                        <dd class="col-6 text-end">3500</dd>
+			                        <dd class="col-6 text-end">3500</dd> -->
 			                      </dl>
 			                      <hr class="mx-n6 my-6" />
-			                      <dl class="row mb-0">
-			                        <dt class="col-6 text-heading">總價</dt>
-			                        <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd>
+			                      <dl class="row mb-0" id="confirmTotalAmount">
+			                        <!-- <dt class="col-6 text-heading">總價</dt>
+			                        <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
 			                      </dl>
 			                    </div>
 			                  </div>
@@ -829,22 +796,18 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/theme.js  -->
-
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="../assets/vendor/libs/hammer/hammer.js"></script>
     <script src="../assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="../assets/vendor/js/menu.js"></script>
-    
+    <script src="../assets/vendor/js/menu.js"></script>    
     <script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script> <!--新增-->
     <script src="../assets/vendor/libs/pickr/pickr.js"></script> <!--新增-->
 
     <!-- endbuild -->
-
     <!-- Vendors JS -->
 	<script src="../assets/vendor/libs/select2/select2.js"></script> <!--新增-->
     <script src="../assets/vendor/libs/bs-stepper/bs-stepper.js"></script> <!--新增-->
