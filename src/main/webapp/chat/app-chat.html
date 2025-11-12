@@ -1813,230 +1813,12 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                 <!-- /Sidebar Left-->
 
                 <!-- Chat & Contacts -->
-                <div class="col app-chat-contacts app-sidebar flex-grow-0 overflow-hidden border-end"
-                  id="app-chat-contacts">
-                  <div class="sidebar-header h-px-75 px-5 border-bottom d-flex align-items-center">
-                    <div class="d-flex align-items-center me-6 me-lg-0">
-                      <div class="flex-shrink-0 avatar avatar-online me-4" data-bs-toggle="sidebar"
-                        data-overlay="app-overlay-ex" data-target="#app-chat-sidebar-left">
-                        <img class="user-avatar rounded-circle cursor-pointer" src="../assets/img/avatars/1.png"
-                          alt="Avatar" />
-                      </div>
-                      <div class="flex-grow-1 input-group input-group-merge">
-                        <span class="input-group-text" id="basic-addon-search31"><i
-                            class="icon-base ti tabler-search icon-xs"></i></span>
-                        <input type="text" class="form-control chat-search-input" placeholder="Search..."
-                          aria-label="Search..." aria-describedby="basic-addon-search31" />
-                      </div>
-                    </div>
-                    <i class="icon-base ti tabler-x icon-lg cursor-pointer position-absolute top-50 end-0 translate-middle d-lg-none d-block"
-                      data-overlay data-bs-toggle="sidebar" data-target="#app-chat-contacts"></i>
-                  </div>
-                  <div class="sidebar-body">
-                    <!-- Chats -->
-                    <!-- My project -->
-                    <!--<h4>聊天室來啦</h4>-->
-                    <h2 id="username" class="username"></h2>
-
-                    <div class="chat-place"></div>
-                    <div class="send-place mt-4">
-                      <input id="chat-message" placeholder="輸入訊息"></input>
-                      <button type="button" id="send-button">送出</button>
-                    </div>
-                    <!-- My project end-->
-
-                    <!-- add class-list-->
-                    <ul class="list-unstyled chat-contact-list py-2 mb-0 class-list" id="chat-list">
-                      <li class="chat-contact-list-item chat-contact-list-item-title mt-0">
-                        <h5 class="text-primary mb-0">你的課程有:</h5>
-                      </li>
-
-                      <li class="chat-contact-list-item chat-list-item-0 d-none">
-                        <h6 class="text-body-secondary mb-0">No Chats Found</h6>
-                      </li>
-
-
-                      <li class="chat-contact-list-item mb-1">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar avatar-online">
-                            <img src="../assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <h6 class="chat-contact-name text-truncate m-0 fw-normal">Waldemar Mannering</h6>
-                              <small class="chat-contact-list-item-time">5 Minutes</small>
-                            </div>
-                            <small class="chat-contact-status text-truncate">Refer friends. Get rewards.</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item mb-1">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar avatar-offline">
-                            <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <h6 class="chat-contact-name text-truncate fw-normal m-0">Felecia Rower</h6>
-                              <small class="chat-contact-list-item-time">30 Minutes</small>
-                            </div>
-                            <small class="chat-contact-status text-truncate">I will purchase it for sure. 👍</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item mb-0">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar avatar-busy">
-                            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                              <h6 class="chat-contact-name text-truncate fw-normal m-0">Calvin Moore</h6>
-                              <small class="chat-contact-list-item-time">1 Day</small>
-                            </div>
-                            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
-                              user</small>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-
+              
                     <!-- Contacts -->
-                    <ul class="list-unstyled chat-contact-list mb-0 py-2" id="contact-list">
-                      <li class="chat-contact-list-item chat-contact-list-item-title mt-0">
-                        <h5 class="text-primary mb-0">Contacts</h5>
-                      </li>
-                      <li class="chat-contact-list-item contact-list-item-0 d-none">
-                        <h6 class="text-body-secondary mb-0">No Contacts Found</h6>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Natalie Maxwell</h6>
-                            <small class="chat-contact-status text-truncate">UI/UX Designer</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Jess Cook</h6>
-                            <small class="chat-contact-status text-truncate">Business Analyst</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="avatar d-block flex-shrink-0">
-                            <span class="avatar-initial rounded-circle bg-label-primary">LM</span>
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Louie Mason</h6>
-                            <small class="chat-contact-status text-truncate">Resource Manager</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Krystal Norton</h6>
-                            <small class="chat-contact-status text-truncate">Business Executive</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/8.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Stacy Garrison</h6>
-                            <small class="chat-contact-status text-truncate">Marketing Ninja</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="avatar d-block flex-shrink-0">
-                            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Calvin Moore</h6>
-                            <small class="chat-contact-status text-truncate">UX Engineer</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/10.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Mary Giles</h6>
-                            <small class="chat-contact-status text-truncate">Account Department</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Waldemar Mannering</h6>
-                            <small class="chat-contact-status text-truncate">AWS Support</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="avatar d-block flex-shrink-0">
-                            <span class="avatar-initial rounded-circle bg-label-danger">AJ</span>
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Amy Johnson</h6>
-                            <small class="chat-contact-status text-truncate">Frontend Developer</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">Felecia Rower</h6>
-                            <small class="chat-contact-status text-truncate">Cloud Engineer</small>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="chat-contact-list-item mb-0">
-                        <a class="d-flex align-items-center">
-                          <div class="flex-shrink-0 avatar">
-                            <img src="../assets/img/avatars/11.png" alt="Avatar" class="rounded-circle" />
-                          </div>
-                          <div class="chat-contact-info flex-grow-1 ms-4">
-                            <h6 class="chat-contact-name text-truncate m-0 fw-normal">William Stephens</h6>
-                            <small class="chat-contact-status text-truncate">Backend Developer</small>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
                 <!-- /Chat contacts -->
 
                 <!-- Chat conversation -->
-                <div class="col app-chat-conversation d-flex align-items-center justify-content-center flex-column"
+                <!--<div class="col app-chat-conversation d-flex align-items-center justify-content-center flex-column"
                   id="app-chat-conversation">
                   <div class="bg-label-primary p-8 rounded-circle">
                     <i class="icon-base ti tabler-message-2 icon-50px"></i>
@@ -2046,16 +1828,12 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                   <button class="btn btn-primary app-chat-conversation-btn" id="app-chat-conversation-btn">
                     Select Contact
                   </button>
-                  <!-- <div class="chat-place"></div> -->
-                </div>
+                </div>-->
                 <!-- /Chat conversation -->
 
-
-
-
                 <!-- Chat History -->
-                <div class="col app-chat-history d-none" id="app-chat-history">
-                  <div class="chat-history-wrapper">
+                <div class="col app-chat-history d-block" id="app-chat-history">
+                  <!-- <div class="chat-history-wrapper">
                     <div class="chat-history-header border-bottom">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex overflow-hidden align-items-center">
@@ -2099,12 +1877,14 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="chat-history-body">
-                      <ul class="list-unstyled chat-history chat-place">
+                  <div class="chat-history-body">
+                    <ul class="list-unstyled chat-history">
+                      <!-- add chat-place to load the history chats -->
+                      <div id="chat-place"></div>
 
-                        <li class="chat-message chat-message-right">
+                      <!--<li class="chat-message chat-message-right">
                           <div class="d-flex overflow-hidden">
                             <div class="chat-message-wrapper flex-grow-1">
                               <div class="chat-message-text">
@@ -2276,153 +2056,145 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                               </div>
                             </div>
                           </div>
-                        </li>
-                      </ul>
-                    </div>
+                        </li>-->
+                    </ul>
+                  </div>
 
-                    <!-- Chat message form -->
-                    <div class="chat-history-footer shadow-xs">
-                      <form class="form-send-message d-flex justify-content-between align-items-center">
+                  <!-- Chat message form -->
+                  <div class="chat-history-footer shadow-xs">
+                    <form class="form-send-message d-flex justify-content-between align-items-center">
 
-                        <!-- add id chat-message -->
-                        <input id="chat-message" class="form-control message-input border-0 me-4 shadow-none"
-                          placeholder="Type your message here..." />
-                        <div class="message-actions d-flex align-items-center">
-                          <span class="btn btn-text-secondary btn-icon rounded-pill cursor-pointer">
-                            <i class="speech-to-text icon-base ti tabler-microphone icon-22px text-heading"></i>
-                          </span>
-                          <label for="attach-doc" class="form-label mb-0">
-                            <span class="btn btn-text-secondary btn-icon rounded-pill cursor-pointer mx-1">
-                              <i class="icon-base ti tabler-paperclip icon-22px text-heading"></i>
-                            </span>
-                            <input type="file" id="attach-doc" hidden />
-                          </label>
-                          <!-- add id send-button -->
-                          <button id="send-button" class="btn btn-primary d-flex send-msg-btn">
-                            <span class="align-middle d-md-inline-block d-none">Send</span>
-                            <i class="icon-base ti tabler-send icon-16px ms-md-2 ms-0"></i>
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                      <!-- add id chat-message -->
+                      <input id="chat-message" class="form-control message-input border-0 me-4 shadow-none"
+                        placeholder="Type your message here..." />
+                      <div class="message-actions d-flex align-items-center">
+
+                        <!-- add id send-button -->
+
+                        <button id="send-button" class="btn btn-primary d-flex">
+                          <span class="align-middle d-md-inline-block d-none">Send</span>
+                          <i class="icon-base ti tabler-send icon-16px ms-md-2 ms-0"></i>
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <!-- /Chat History -->
+              </div>
+              <!-- /Chat History -->
 
-                <!-- Sidebar Right -->
-                <div class="col app-chat-sidebar-right app-sidebar overflow-hidden" id="app-chat-sidebar-right">
-                  <div
-                    class="sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
-                    <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
-                      <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                    </div>
-                    <h5 class="mt-4 mb-0">Felecia Rower</h5>
-                    <span>NextJS Developer</span>
-                    <i class="icon-base ti tabler-x icon-lg cursor-pointer close-sidebar d-block"
-                      data-bs-toggle="sidebar" data-overlay data-target="#app-chat-sidebar-right"></i>
+              <!-- Sidebar Right -->
+              <!--<div class="col app-chat-sidebar-right app-sidebar overflow-hidden" id="app-chat-sidebar-right">
+                <div
+                  class="sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
+                  <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
+                    <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
                   </div>
-                  <div class="sidebar-body p-6 pt-0">
-                    <div class="my-6">
-                      <p class="text-uppercase mb-1 text-body-secondary">About</p>
-                      <p class="mb-0">
-                        It is a long established fact that a reader will be distracted by the readable content .
-                      </p>
-                    </div>
-                    <div class="my-6">
-                      <p class="text-uppercase mb-1 text-body-secondary">Personal Information</p>
-                      <ul class="list-unstyled d-grid gap-4 mb-0 ms-2 py-2 text-heading">
-                        <li class="d-flex align-items-center">
-                          <i class="icon-base ti tabler-mail icon-md"></i>
-                          <span class="align-middle ms-2">josephGreen@email.com</span>
-                        </li>
-                        <li class="d-flex align-items-center">
-                          <i class="icon-base ti tabler-phone-call icon-md"></i>
-                          <span class="align-middle ms-2">+1(123) 456 - 7890</span>
-                        </li>
-                        <li class="d-flex align-items-center">
-                          <i class="icon-base ti tabler-clock icon-md"></i>
-                          <span class="align-middle ms-2">Mon - Fri 10AM - 8PM</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="my-6">
-                      <p class="text-uppercase text-body-secondary mb-1">Options</p>
-                      <ul class="list-unstyled d-grid gap-4 ms-2 py-2 text-heading">
-                        <li class="cursor-pointer d-flex align-items-center">
-                          <i class="icon-base ti tabler-bookmark icon-md"></i>
-                          <span class="align-middle ms-2">Add Tag</span>
-                        </li>
-                        <li class="cursor-pointer d-flex align-items-center">
-                          <i class="icon-base ti tabler-star icon-md"></i>
-                          <span class="align-middle ms-2">Important Contact</span>
-                        </li>
-                        <li class="cursor-pointer d-flex align-items-center">
-                          <i class="icon-base ti tabler-photo icon-md"></i>
-                          <span class="align-middle ms-2">Shared Media</span>
-                        </li>
-                        <li class="cursor-pointer d-flex align-items-center">
-                          <i class="icon-base ti tabler-ban icon-md"></i>
-                          <span class="align-middle ms-2">Block Contact</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="d-flex mt-6">
-                      <button class="btn btn-danger w-100" data-bs-toggle="sidebar" data-overlay
-                        data-target="#app-chat-sidebar-right">
-                        Delete Contact<i class="icon-base ti tabler-trash icon-16px ms-2"></i>
-                      </button>
-                    </div>
+                  <h5 class="mt-4 mb-0">Felecia Rower</h5>
+                  <span>NextJS Developer</span>
+                  <i class="icon-base ti tabler-x icon-lg cursor-pointer close-sidebar d-block" data-bs-toggle="sidebar"
+                    data-overlay data-target="#app-chat-sidebar-right"></i>
+                </div>
+                <div class="sidebar-body p-6 pt-0">
+                  <div class="my-6">
+                    <p class="text-uppercase mb-1 text-body-secondary">About</p>
+                    <p class="mb-0">
+                      It is a long established fact that a reader will be distracted by the readable content .
+                    </p>
+                  </div>
+                  <div class="my-6">
+                    <p class="text-uppercase mb-1 text-body-secondary">Personal Information</p>
+                    <ul class="list-unstyled d-grid gap-4 mb-0 ms-2 py-2 text-heading">
+                      <li class="d-flex align-items-center">
+                        <i class="icon-base ti tabler-mail icon-md"></i>
+                        <span class="align-middle ms-2">josephGreen@email.com</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="icon-base ti tabler-phone-call icon-md"></i>
+                        <span class="align-middle ms-2">+1(123) 456 - 7890</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="icon-base ti tabler-clock icon-md"></i>
+                        <span class="align-middle ms-2">Mon - Fri 10AM - 8PM</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="my-6">
+                    <p class="text-uppercase text-body-secondary mb-1">Options</p>
+                    <ul class="list-unstyled d-grid gap-4 ms-2 py-2 text-heading">
+                      <li class="cursor-pointer d-flex align-items-center">
+                        <i class="icon-base ti tabler-bookmark icon-md"></i>
+                        <span class="align-middle ms-2">Add Tag</span>
+                      </li>
+                      <li class="cursor-pointer d-flex align-items-center">
+                        <i class="icon-base ti tabler-star icon-md"></i>
+                        <span class="align-middle ms-2">Important Contact</span>
+                      </li>
+                      <li class="cursor-pointer d-flex align-items-center">
+                        <i class="icon-base ti tabler-photo icon-md"></i>
+                        <span class="align-middle ms-2">Shared Media</span>
+                      </li>
+                      <li class="cursor-pointer d-flex align-items-center">
+                        <i class="icon-base ti tabler-ban icon-md"></i>
+                        <span class="align-middle ms-2">Block Contact</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="d-flex mt-6">
+                    <button class="btn btn-danger w-100" data-bs-toggle="sidebar" data-overlay
+                      data-target="#app-chat-sidebar-right">
+                      Delete Contact<i class="icon-base ti tabler-trash icon-16px ms-2"></i>
+                    </button>
                   </div>
                 </div>
-                <!-- /Sidebar Right -->
+              </div>-->
+              <!-- /Sidebar Right -->
 
-                <div class="app-overlay"></div>
+              <div class="app-overlay"></div>
+            </div>
+          </div>
+        </div>
+        <!-- / Content -->
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl">
+            <div
+              class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
+              <div class="text-body">
+                &#169;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="footer-link">Pixinvent</a>
+              </div>
+              <div class="d-none d-lg-inline-block">
+                <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank">License</a>
+                <a href="https://themeforest.net/user/pixinvent/portfolio" target="_blank" class="footer-link me-4">More
+                  Themes</a>
+
+                <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/" target="_blank"
+                  class="footer-link me-4">Documentation</a>
+
+                <a href="https://pixinvent.ticksy.com/" target="_blank"
+                  class="footer-link d-none d-sm-inline-block">Support</a>
               </div>
             </div>
           </div>
-          <!-- / Content -->
+        </footer>
+        <!-- / Footer -->
 
-          <!-- Footer -->
-          <footer class="content-footer footer bg-footer-theme">
-            <div class="container-xxl">
-              <div
-                class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
-                <div class="text-body">
-                  &#169;
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="footer-link">Pixinvent</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeforest.net/licenses/standard" class="footer-link me-4"
-                    target="_blank">License</a>
-                  <a href="https://themeforest.net/user/pixinvent/portfolio" target="_blank"
-                    class="footer-link me-4">More Themes</a>
-
-                  <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/" target="_blank"
-                    class="footer-link me-4">Documentation</a>
-
-                  <a href="https://pixinvent.ticksy.com/" target="_blank"
-                    class="footer-link d-none d-sm-inline-block">Support</a>
-                </div>
-              </div>
-            </div>
-          </footer>
-          <!-- / Footer -->
-
-          <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
+        <div class="content-backdrop fade"></div>
       </div>
-      <!-- / Layout page -->
+      <!-- Content wrapper -->
     </div>
+    <!-- / Layout page -->
+  </div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
 
-    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-    <div class="drag-target"></div>
+  <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+  <div class="drag-target"></div>
   </div>
   <!-- / Layout wrapper -->
 
