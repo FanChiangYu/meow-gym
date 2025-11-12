@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService{
 			Integer coursePromo = orderdao.selectPromoPriceByCourseId(courseId);
 			course.setPromoPrice(coursePromo);
 		}
-		//Step6:決定回傳課程價錢(確認是否為促銷區間)
+		//Step6:決定回傳課程價錢(確認是否為促銷區間) debug
 		
 		//Step7:回傳Orderitems and Course
 		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
@@ -144,9 +144,9 @@ public class OrderServiceImpl implements OrderService{
 			orderitems.setDateStart(coursePromo.getDateStart());
 			orderitems.setDateEnd(coursePromo.getDateEnd());
 		}
-		//Step4:決定回傳課程價錢(確認是否為促銷區間)
+		//Step4:決定回傳課程價錢(確認是否為促銷區間) debug
 		
-		//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
+		//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價) debug
 		Orders orders = orderdao.selectOrdersByOrderId(orderId);
 		for(Orderitems orderitems : orderitemList) {
 			Integer purchasedPrice = orderitems.getPurchasedPrice();
@@ -163,7 +163,7 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	@Override
 	public Orders payment(Orders orders, Integer userId) {
-		//Step1:比對前端付款資訊
+		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊  debug
 		if(orders.getCardNumber() == null) {
 			orders.setMessage("信用卡卡號未輸入");
 			orders.setSuccessful(false);

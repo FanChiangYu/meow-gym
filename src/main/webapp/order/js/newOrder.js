@@ -18,6 +18,14 @@ const course_capacityMax = document.querySelector('#course_capacityMax');
 const course_promoPrice = document.querySelector('#course_promoPrice');
 const course_coursePrice = document.querySelector('#course_coursePrice');
 const myCart = document.querySelector('#myCart');
+const confirmation_title = document.querySelector('#confirmation_title');
+const confirmation_coachName = document.querySelector('#confirmation_coachName');
+const confirmation_dateStart = document.querySelector('#confirmation_dateStart');
+const confirmation_dateEnd = document.querySelector('#confirmation_dateEnd');
+const confirmation_capacityMax = document.querySelector('#confirmation_capacityMax');
+const confirmation_promoPrice = document.querySelector('#confirmation_promoPrice');
+const confirmation_coursePrice = document.querySelector('#confirmation_coursePrice');
+const confirmation = document.querySelector('#confirmation');
 
 addCart();
 function addCart(){
@@ -79,6 +87,48 @@ function addCart(){
 				</li>
 			`;
 		}
+
+		for (let course of courseList) {
+			confirmation.innerHTML += 
+			`
+			<li class="list-group-item p-6">
+				<div class="d-flex gap-4">
+					<div class="flex-shrink-0">
+						<img src="${course.imgUrl}" alt="google home" class="w-px-80" />
+					</div>
+					<div class="flex-grow-1">
+						<div class="row">
+							<div class="col-md-8">
+								<a href="javascript:void(0)">
+									<h6 class="mb-2" id="confirmation_title">${course.title}</h6>
+								</a>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
+								</div>                           
+							</div>
+							<div class="col-md-4">
+								<div class="text-md-end">
+									<div class="my-2 my-lg-6">
+										<span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
+										<span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>		
+			`;
+		}
 	});
 }
 
@@ -132,8 +182,12 @@ const title = document.querySelector('#title');
 const promoPrice = document.querySelector('#coursePromoPrice');
 const coursePrice = document.querySelector('#coursePrice');
 const payAmount = document.querySelector('#pay_amount');
-const payCourseList = document.querySelector('#payCourseList');
-const totalAmount = document.querySelector('#totalAmount');
+const orderPayCourseList = document.querySelector('#orderPayCourseList');
+const orderTotalAmount = document.querySelector('#orderTotalAmount');
+const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
+const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
+const confirmPayCourseList = document.querySelector('#confirmPayCourseList');
+const confirmTotalAmount = document.querySelector('#confirmTotalAmount');
 
 payAmountList();
 function payAmountList(){
@@ -143,9 +197,27 @@ function payAmountList(){
 		orders = body.Orders;
 		orderitemList = body.Orderitems;
 		for (let orderItem of orderitemList) {
-			payCourseList.innerHTML += 
+			orderPayCourseList.innerHTML += 
 			`
-			<dl class="row mb-0 text-heading" id="payCourseList">
+			<dl class="row mb-0 text-heading" id="orderPayCourseList">
+				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
+				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+			</dl>
+			`;
+
+			paymentPayCourseList.innerHTML += 
+			`
+			<dl class="row mb-0 text-heading" id="paymentPayCourseList">
+				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
+				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+			</dl>
+			`;
+
+			confirmPayCourseList.innerHTML += 
+			`
+			<dl class="row mb-0 text-heading" id="confirmPayCourseList">
 				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
 				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
 				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
@@ -153,11 +225,24 @@ function payAmountList(){
 			`;
 		}
 
-		totalAmount.innerHTML += 
+		orderTotalAmount.innerHTML += 
 		`
 		  <dt class="col-6 text-heading">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="pay_amount">${orders.payAmount}</dd>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${orders.payAmount}</dd>
 		`;
+
+		paymentTotalAmount.innerHTML += 
+		`
+		  <dt class="col-6 text-heading mb-3">總價</dt>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${orders.payAmount}</dd>
+		`;
+
+		confirmTotalAmount.innerHTML += 
+		`
+		  <dt class="col-6 text-heading">總價</dt>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="confirmTotalAmount">${orders.payAmount}</dd>
+		`;
+
 	});
 }
 
@@ -166,9 +251,12 @@ const payOnCard = document.querySelector('#payOnCard');
 const payOnCash = document.querySelector('#payOnCash');
 const cardNumber = document.querySelector('#cardNumber');
 const cardHolder = document.querySelector('#cardHolder');
-const expYear = document.querySelector('#expYear');
-const expMonth = document.querySelector('#expMonth');
-const cvc = document.querySelector('#ccc');
+const paymentCardExpiryDate = document.querySelector('#paymentCardExpiryDate');
+let expYear = paymentCardExpiryDate.toString().slice(0, 2);
+let expMonth = paymentCardExpiryDate.toString().slice(-2);
+// const expYear = document.querySelector('#expYear');
+// const expMonth = document.querySelector('#expMonth');
+const cvc = document.querySelector('#cvc');
 
 document.getElementById('payOnCard').addEventListener('click', paymentByCard);
 function paymentByCard(){  
@@ -212,7 +300,7 @@ function paymentByCash(){
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
-			paymentMethod: 'cash'
+			paymentMethod: 'Cash'
 		}),
 	})
 	.then(resp => resp.json())
