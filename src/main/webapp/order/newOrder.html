@@ -421,7 +421,7 @@
 <!-- 			                                <div class="text-md-end"> -->
 <!-- 			                                  <button type="button" class="btn-close btn-pinned" id="delete_btn" aria-label="Close" onclick="deleteCourse()"></button> -->
 <!-- 			                                  <div class="my-2 mt-md-6 mb-md-4"> -->
-<!-- 			                                    <span class="text-primary">specialprice</span> -->
+<!--                                          <span class="text-primary" id="course_promoPrice">${course.promoPrice}</span> -->
 <!-- 			                                    <span class="text-primary" id="course_coursePrice"></span> -->
 <!-- 			                                  </div> -->
 <!-- 			                                </div> -->
@@ -438,16 +438,15 @@
 			                    <div class="border rounded p-6 mb-4">
 			                      <!-- Price Details -->
 			                      <h6>結帳細項</h6>
-			                      <dl class="row mb-0 text-heading">
-			                        <dt class="col-6 fw-normal">重量訓練入門</dt>
-			                        <dd class="col-6 text-end">4000</dd>
-			                        <dt class="col-6 fw-normal">初階瑜珈課</dt>
-			                        <dd class="col-6 text-end">3500</dd>
+			                      <dl class="row mb-0 text-heading" id="payCourseList">
+			                        <!-- <dt class="col-6 fw-normal" id="title">重量訓練入門</dt>
+			                        <dd class="col-6 text-end" id="coursePrice">4000</dd>
+			                        <dd class="col-6 text-end" id="coursePromoPrice">3500</dd> -->
 			                      </dl>
 			                      <hr class="mx-n6 my-6" />
-			                      <dl class="row mb-0">
-			                        <dt class="col-6 text-heading">總價</dt>
-			                        <dd class="col-6 fw-medium text-end text-heading mb-0">price</dd>
+			                      <dl class="row mb-0" id="totalAmount">
+			                        <!-- <dt class="col-6 text-heading">總價</dt>
+			                        <dd class="col-6 fw-medium text-end text-heading mb-0" id="pay_amount">price</dd> -->
 			                      </dl>
 			                    </div>
 			                    <div class="d-grid">
@@ -829,22 +828,18 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/theme.js  -->
-
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="../assets/vendor/libs/hammer/hammer.js"></script>
     <script src="../assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="../assets/vendor/js/menu.js"></script>
-    
+    <script src="../assets/vendor/js/menu.js"></script>    
     <script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script> <!--新增-->
     <script src="../assets/vendor/libs/pickr/pickr.js"></script> <!--新增-->
 
     <!-- endbuild -->
-
     <!-- Vendors JS -->
 	<script src="../assets/vendor/libs/select2/select2.js"></script> <!--新增-->
     <script src="../assets/vendor/libs/bs-stepper/bs-stepper.js"></script> <!--新增-->

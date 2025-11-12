@@ -85,7 +85,15 @@ public class OrderServiceImpl implements OrderService{
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);
 		}
-		//Step5:回傳Orderitems and Course
+		//Step5:跑foreach 放入 coursePromo
+		for(Course course : courseList) {
+			Integer courseId = course.getCourseId();
+			Integer coursePromo = orderdao.selectPromoPriceByCourseId(courseId);
+			course.setPromoPrice(coursePromo);
+		}
+		//Step6:決定回傳課程價錢(確認是否為促銷區間)
+		
+		//Step7:回傳Orderitems and Course
 		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
 		orderitemsAndCourseList.put("Orderitems", orderitemsList);
 		orderitemsAndCourseList.put("Course", courseList);
@@ -102,9 +110,10 @@ public class OrderServiceImpl implements OrderService{
 			System.out.println("Delete course in DB success.");
 			//Step2:比對orderitems與orders
 			List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-			if (orderitemList == null) { //修改orders狀態為cancel
+			System.out.println(orderitemList);
+			if (orderitemList == null) { //修改orders狀態為cancel, 需要debug進不來, 問老師
 				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "pending");
+				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "cancel"); 
 				if(count2 == 1) {
 					System.out.println("orderitems不存在 orderstatus cancel成功");
 				}else {
@@ -125,20 +134,24 @@ public class OrderServiceImpl implements OrderService{
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		//Step2:撈List<Orderitems> by orderId
 		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-		//Step3:計算payAmount
+		//Step3:回傳List<Orderitems> payAmountList
+		for (Orderitems orderitems : orderitemList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			CoursePromo coursePromo = orderdao.selectCoursePromoPriceByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+			orderitems.setPromoPrice(coursePromo.getPromoPrice());
+			orderitems.setDateStart(coursePromo.getDateStart());
+			orderitems.setDateEnd(coursePromo.getDateEnd());
+		}
+		//Step4:決定回傳課程價錢(確認是否為促銷區間)
+		
+		//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
 		Orders orders = orderdao.selectOrdersByOrderId(orderId);
 		for(Orderitems orderitems : orderitemList) {
 			Integer purchasedPrice = orderitems.getPurchasedPrice();
 			purchasedPrice += purchasedPrice;
-			orders.setPayAmount(purchasedPrice); //問老師 
-		}
-		//Step4:回傳Orders payAmount and List<Orderitems> payAmountList
-		for (Orderitems orderitems : orderitemList) {
-			Integer courseId = orderitems.getCourseId();
-			Course course = orderdao.selectCourseByCourseId(courseId);//select title by courseId
-			CoursePromo coursePromo = orderdao.selectCoursePromoPriceByCourseId(courseId);//select promoPrice by courseId
-			orderitems.setTitle(course.getTitle());
-			orderitems.setPromoPrice(coursePromo.getPromoPrice());
+			orders.setPayAmount(purchasedPrice); //錢算不對,需要debug, 問老師 
 		}
 		//Step5:回傳個課程價格及購課總價
 		Map<String, Object> payAmountList = new HashMap<>();

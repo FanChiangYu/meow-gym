@@ -1,5 +1,7 @@
 package web.order.pojo;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -36,9 +40,15 @@ public class Orderitems extends Core {
 	
 	// 回應前端用
 	@Transient
-	private String title;  //課程名稱
+	private String title;  //回傳前端課程名稱
 	@Transient
-	private Integer promoPrice;  //促銷價格
+	private Integer promoPrice;  //回傳前端促銷價格
+	@Transient
+	@JsonFormat(pattern = "yyyy/MM/dd")
+	private Date dateStart;//回傳促銷開始日
+	@Transient
+	@JsonFormat(pattern = "yyyy/MM/dd")
+	private Date dateEnd;//回傳促銷結束日
 
 //fields
 //	private static final long serialVersionUID = 1L;

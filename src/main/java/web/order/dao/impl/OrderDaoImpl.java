@@ -61,6 +61,14 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
+	public Integer selectPromoPriceByCourseId(Integer courseId) {
+		String hql = "select promoPrice from CoursePromo where courseId = :courseId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("courseId", courseId)
+				.uniqueResult();
+	}
+	
+	@Override
 	public Integer deleteOrderitemsByOrderItemId(Integer orderItemId) {
 		int result = session.createQuery("DELETE Orderitems "
 				 + "WHERE orderItemId = :orderItemId")
