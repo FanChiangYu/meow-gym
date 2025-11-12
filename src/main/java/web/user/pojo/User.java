@@ -31,10 +31,13 @@ public class User extends Core {
 	private Integer userId;
 
 	@Column(name = "cnt_code")
-	private int cntCode;
+	private Integer cntCode;
 
 	@Column(name = "dist_code")
-	private int distCode;
+	private Integer distCode;
+
+	@Column(name = "role")
+	private Integer role;
 
 	@Column(name = "detail_address")
 	private String detailAddress;
