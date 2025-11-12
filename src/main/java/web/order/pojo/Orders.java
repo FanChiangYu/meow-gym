@@ -1,7 +1,6 @@
 package web.order.pojo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,13 +39,13 @@ public class Orders extends Core{
 	@Column(name = "CARD_HOLDER")
 	private String cardHolder; // 持卡人姓名
 	@Column(name = "CARD_NUMBER")
-	private Integer cardNumber; // 信用卡卡號
+	private String cardNumber; // 信用卡卡號
 	@Column(name = "EXP_YEAR")
-	private Integer expYear; // 信用卡到期年
+	private String expYear; // 信用卡到期年
 	@Column(name = "EXP_MONTH")
-	private Integer expMonth; // 信用卡到期月
+	private String expMonth; // 信用卡到期月
 	@Column(name = "CVC")//可以不寫
-	private Integer cvc; // CVC驗證碼
+	private String cvc; // CVC驗證碼
 	@Column(name = "CREATED_AT")
 	private Timestamp createdAt; // 付款時間
 	

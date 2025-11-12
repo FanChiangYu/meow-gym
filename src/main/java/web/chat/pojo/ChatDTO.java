@@ -76,7 +76,7 @@ public class ChatDTO {
 		this.createdAt = createdAt;
 	}
 
-	// ✅ Hibernate 期望的簽名（務必 public）
+	
 	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt) {
 		this.chatId = chatId;
 		this.courseId = courseId;

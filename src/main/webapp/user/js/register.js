@@ -8,6 +8,7 @@ const phoneNumber = document.querySelector("#phoneNumber");
 const gender = document.querySelector("#gender");
 const birthday = document.querySelector("#date-birthday");
 const cnt_code = document.querySelector("#cnt_code");
+const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
 
@@ -74,6 +75,26 @@ applybutton.addEventListener('click', function () {
 		alert('地址為必填欄位');
 		return;
 	}
+
+	fetch('register', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			cntCode: cnt_code.value,
+			distCode: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+			password: password.value,
+		}),
+	})
+
 
 });
 

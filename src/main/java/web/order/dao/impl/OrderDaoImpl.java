@@ -1,11 +1,5 @@
 package web.order.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -16,6 +10,7 @@ import web.course.pojo.Course;
 import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
+import web.promotions.pojo.CoursePromo;
 
 @Repository
 public class OrderDaoImpl implements OrderDao{
@@ -23,18 +18,7 @@ public class OrderDaoImpl implements OrderDao{
 	@PersistenceContext
 	private Session session;
 
-	//Hibernate寫法
-	@Override
-	public Orders selectById(Integer id) {
-		return session.get(Orders.class, id);
-	}
-	
-	@Override
-	public int insert(Orders orders) {
-		session.persist(orders);
-		return 1;
-	}
-	
+	//Hibernate寫法	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
 		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
@@ -59,39 +43,38 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Integer> selectCourseListByOrderId(Integer orderId) {
-	//找同筆訂單下所有CourseID
-		String hql = "select courseId from Orderitems where orderId = :orderId";
-		Query<Integer> query = session.createQuery(hql, Integer.class);		
-		List<Integer> courseIdList = query.setParameter("orderId", orderId).getResultList();
-		return courseIdList;
-	}
-	
-	@Override
-	public List<Course> selectCourseListByCourseIdList(List<Integer> courseIdList) {
-		//找Course.class
-		String hql = "FROM Course where courseId IN(:courseIdList)";
-		Query<Course> query = session.createQuery(hql, Course.class);
-		List<Course> courseList = query.setParameterList("courseId", courseIdList).getResultList();
-		return courseList;
-	}
-	
-	@Override
-	public Integer deleteOrderitemsByCourseIdAndOrderId(Integer courseId, Integer orderId) {
-		int result = session.createQuery("DELETE Orderitems "
-				 + "WHERE courseId = :courseId and orderId = :orderId")
-				 .setParameter("courseId", courseId)
-				 .setParameter("orderId", orderId)
-				 .executeUpdate();
-		return result;	
-	}
-	
-	@Override
 	public List<Orderitems> selectOrderitemsListByOrderId(Integer orderId) {
+		//找同筆訂單下所有CourseID
 		String hql = "from Orderitems where orderId = :orderId";
 		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
 		List<Orderitems> orderItemsList = query.setParameter("orderId", orderId).getResultList();
 		return orderItemsList;	
+	}
+	
+	@Override
+	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList) {
+		//找Course.class
+		String hql = "FROM Course where courseId IN(:courseIdList)";
+		Query<Course> query = session.createQuery(hql, Course.class);
+		List<Course> courseList = query.setParameterList("courseIdList", courseIdList).getResultList();
+		return courseList;
+	}
+	
+	@Override
+	public Integer selectPromoPriceByCourseId(Integer courseId) {
+		String hql = "select promoPrice from CoursePromo where courseId = :courseId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("courseId", courseId)
+				.uniqueResult();
+	}
+	
+	@Override
+	public Integer deleteOrderitemsByOrderItemId(Integer orderItemId) {
+		int result = session.createQuery("DELETE Orderitems "
+				 + "WHERE orderItemId = :orderItemId")
+				 .setParameter("orderItemId", orderItemId)
+				 .executeUpdate();
+		return result;	
 	}
 
 	@Override
@@ -103,15 +86,30 @@ public class OrderDaoImpl implements OrderDao{
 				.setParameter("orderId", orderId)
 				.executeUpdate();
 		return result;
-	}	
-
-    //未使用的方法
+	}
+	
 	@Override
-	public int update(Orders pojo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Course selectCourseByCourseId(Integer courseId) {
+		return session.get(Course.class, courseId);
 	}
 
+	@Override
+	public CoursePromo selectCoursePromoPriceByCourseId(Integer courseId) {
+		return session.get(CoursePromo.class, courseId);
+	}
+	
+	@Override
+	public Orders selectOrdersByOrderId(Integer orderId) {
+		return session.get(Orders.class, orderId);
+	}
+	
+	@Override
+	public int insert(Orders orders) {
+		session.persist(orders);
+		return 1;
+	}
+
+    //未使用的方法
 	@Override
 	public List<Orders> selectAll() {
 		// TODO Auto-generated method stub
@@ -120,6 +118,18 @@ public class OrderDaoImpl implements OrderDao{
 
 	@Override
 	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Orders selectById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
