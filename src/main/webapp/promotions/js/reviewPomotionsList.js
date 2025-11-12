@@ -47,10 +47,25 @@ function removePromotion(courseId){
 		.then(resp => resp.json())
 		.then(response => {
 			if(response.successful){
-				alert(response.message);
-				location.reload();
+				Swal.fire({
+	            title: '刪除促銷成功!!',
+	            text: response.message,
+	            icon: 'success',
+	            target: document.body
+          });
+				setTimeout(function() {
+				  location.reload();
+				}, 2000);
 			}else{
-				alert(response.message)
+				Swal.fire({
+	            title: '新增促銷失敗',
+	            text: response.message,
+	            icon: 'error',
+	            target: document.body
+          });
+         		setTimeout(function() {
+				  location.reload();
+				}, 2000);
 			}
 		})
 	}
