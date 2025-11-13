@@ -38,10 +38,13 @@ public class UserController extends HttpServlet {
 	@PostMapping("register")
 	@ResponseBody
 	public User register(@RequestBody User user, HttpSession session) {
-
-		User respbody = userService.register(user);
-		return respbody;
-
+		if (user == null) {
+			user = new User();
+			user.setMessage("無會員資訊");
+			user.setSuccessful(false);
+			return user;
+		}
+		return userService.register(user);
 	}
 
 }

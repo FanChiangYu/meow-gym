@@ -27,7 +27,7 @@ public class User extends Core {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
+	@Column(name = "user_id", insertable = false)
 	private Integer userId;
 
 	@Column(name = "cnt_code")
@@ -36,7 +36,7 @@ public class User extends Core {
 	@Column(name = "dist_code")
 	private Integer distCode;
 
-	@Column(name = "role")
+	@Column(name = "role", insertable = false)
 	private Integer role;
 
 	@Column(name = "detail_address")
@@ -51,25 +51,25 @@ public class User extends Core {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "reset_code")
+	@Column(name = "reset_code", insertable = false)
 	private String resetCode;
 
 	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "avatar_url")
+	@Column(name = "avatar_url", insertable = false)
 	private String avatarUrl;
 
-	@Column(name = "is_banned")
+	@Column(name = "is_banned", insertable = false)
 	private boolean isBanned;
 
 	@Column(name = "birthday")
 	private Date birthday;
 
-	@Column(name = "gender")
+	@Column(name = "gender", insertable = false)
 	private String gender;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", insertable = false)
 	private Timestamp createdAt;
 
 }

@@ -9,12 +9,12 @@ import web.user.pojo.User;
 import web.user.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao dao;
 
-	@Transactional
 	@Override
 	public User login(User user) {
 		final String email = user.getEmail();
@@ -45,7 +45,58 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User register(User user) {
 
-		return null;
+		if (user.getEmail() == null) {
+			user.setMessage("會員帳號未輸入");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getName() == null) {
+			user.setMessage("姓名未輸入");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getPassword() == null) {
+			user.setMessage("請輸入密碼");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getPhone() == null) {
+			user.setMessage("請輸入電話");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getBirthday() == null) {
+			user.setMessage("出生日期未輸入");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getCntCode() == null) {
+			user.setMessage("請選擇縣市");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getDistCode() == null) {
+			user.setMessage("請選擇鄉鎮區域");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		if (user.getDetailAddress() == null) {
+			user.setMessage("請填寫地址");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		user.setMessage("註冊成功");
+		user.setSuccessful(true);
+
+		return user;
 	}
 
 }
