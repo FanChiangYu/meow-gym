@@ -24,10 +24,10 @@ public class DeleteCourseController {
 	protected Core deleteCart(@RequestBody Orderitems orderitems, 
 			@SessionAttribute(value = "user", required = false) User setUser){
 		Integer orderItemId = orderitems.getOrderItemId();
-//		//取會員資料
-//		Integer userId = setUser.getUserId();
+		//取會員資料
+		Integer userId = setUser.getUserId();
 		//先寫死
-		Integer userId = 1;
+//		Integer userId = 1;
 		Core core = new Core();
 		core.setSuccessful(orderservice.deletecoursefromcart(orderItemId, userId));
 		return core;

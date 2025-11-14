@@ -18,14 +18,6 @@ const course_capacityMax = document.querySelector('#course_capacityMax');
 const course_promoPrice = document.querySelector('#course_promoPrice');
 const course_coursePrice = document.querySelector('#course_coursePrice');
 const myCart = document.querySelector('#myCart');
-const confirmation_title = document.querySelector('#confirmation_title');
-const confirmation_coachName = document.querySelector('#confirmation_coachName');
-const confirmation_dateStart = document.querySelector('#confirmation_dateStart');
-const confirmation_dateEnd = document.querySelector('#confirmation_dateEnd');
-const confirmation_capacityMax = document.querySelector('#confirmation_capacityMax');
-const confirmation_promoPrice = document.querySelector('#confirmation_promoPrice');
-const confirmation_coursePrice = document.querySelector('#confirmation_coursePrice');
-const confirmation = document.querySelector('#confirmation');
 
 addCart();
 function addCart(){
@@ -87,54 +79,12 @@ function addCart(){
 				</li>
 			`;
 		}
-
-		for (let course of courseList) {
-			confirmation.innerHTML += 
-			`
-			<li class="list-group-item p-6">
-				<div class="d-flex gap-4">
-					<div class="flex-shrink-0">
-						<img src="${course.imgUrl}" alt="google home" class="w-px-80" />
-					</div>
-					<div class="flex-grow-1">
-						<div class="row">
-							<div class="col-md-8">
-								<a href="javascript:void(0)">
-									<h6 class="mb-2" id="confirmation_title">${course.title}</h6>
-								</a>
-								<div class="text-body mb-2 d-flex flex-wrap">
-									<span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
-								</div>
-								<div class="text-body mb-2 d-flex flex-wrap">
-									<span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
-								</div>
-								<div class="text-body mb-2 d-flex flex-wrap">
-									<span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
-								</div>
-								<div class="text-body mb-2 d-flex flex-wrap">
-									<span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
-								</div>                           
-							</div>
-							<div class="col-md-4">
-								<div class="text-md-end">
-									<div class="my-2 my-lg-6">
-										<span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
-										<span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>		
-			`;
-		}
 	});
 }
 
 //刪除課程//
 function deleteCourse(courseId){
-	const orderItemId = orderItemList.find(e => e.courseId === courseId).orderItemId;
+	const orderItemId = orderItemList.find(e => e.courseId === courseId).orderItemId; //找時間弄懂
 
 	fetch('deleteCart', {
 		method: 'POST',
@@ -164,17 +114,6 @@ function deleteCourse(courseId){
 			});
 		}
 	});
-	
-	// if(e.target.classList.contains("delete_btn")){
-	//   //console.log("delete");
-	//   let r = confirm("確認移除？");
-	//   if (r){
-	// 	  e.target.closest("li").classList.add("fade_out");
-	// 	  setTimeout(function(){
-	// 	  e.target.closest("li").remove();
-	// 	  }, 1000);      
-	//   }
-	// }
 }
 
 //課程結帳清單//
@@ -183,25 +122,22 @@ const promoPrice = document.querySelector('#coursePromoPrice');
 const coursePrice = document.querySelector('#coursePrice');
 const payAmount = document.querySelector('#pay_amount');
 const orderPayCourseList = document.querySelector('#orderPayCourseList');
-const orderTotalAmount = document.querySelector('#orderTotalAmount');
 const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
+const orderTotalAmount = document.querySelector('#orderTotalAmount');
 const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
-const confirmPayCourseList = document.querySelector('#confirmPayCourseList');
-const confirmTotalAmount = document.querySelector('#confirmTotalAmount');
 
 payAmountList();
 function payAmountList(){
 	fetch('payAmount')
 	.then(resp => resp.json())
 	.then(body => {
-		orders = body.Orders;
-		orderitemList = body.Orderitems;
-		for (let orderItem of orderitemList) {
+		payAmount_orders = body.Orders;
+		payAmount_orderItemList = body.Orderitems;
+		for (let orderItem of payAmount_orderItemList) {
 			orderPayCourseList.innerHTML += 
 			`
 			<dl class="row mb-0 text-heading" id="orderPayCourseList">
 				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
-				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
 				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
 			</dl>
 			`;
@@ -210,16 +146,6 @@ function payAmountList(){
 			`
 			<dl class="row mb-0 text-heading" id="paymentPayCourseList">
 				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
-				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
-				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
-			</dl>
-			`;
-
-			confirmPayCourseList.innerHTML += 
-			`
-			<dl class="row mb-0 text-heading" id="confirmPayCourseList">
-				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
-				<dd class="col-6 text-end" id="coursePromoPrice">${orderItem.promoPrice}</dd>
 				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
 			</dl>
 			`;
@@ -228,21 +154,14 @@ function payAmountList(){
 		orderTotalAmount.innerHTML += 
 		`
 		  <dt class="col-6 text-heading">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${orders.payAmount}</dd>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${payAmount_orders.payAmount}</dd>
 		`;
 
 		paymentTotalAmount.innerHTML += 
 		`
 		  <dt class="col-6 text-heading mb-3">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${orders.payAmount}</dd>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${payAmount_orders.payAmount}</dd>
 		`;
-
-		confirmTotalAmount.innerHTML += 
-		`
-		  <dt class="col-6 text-heading">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="confirmTotalAmount">${orders.payAmount}</dd>
-		`;
-
 	});
 }
 
@@ -326,3 +245,116 @@ function paymentByCash(){
 };
 
 //結帳確認//
+const confirmation_payment = document.querySelector('#confirmation_payment');
+const confirmation_title = document.querySelector('#confirmation_title');
+const confirmation_coachName = document.querySelector('#confirmation_coachName');
+const confirmation_dateStart = document.querySelector('#confirmation_dateStart');
+const confirmation_dateEnd = document.querySelector('#confirmation_dateEnd');
+const confirmation_capacityMax = document.querySelector('#confirmation_capacityMax');
+const confirmation_promoPrice = document.querySelector('#confirmation_promoPrice');
+const confirmation_coursePrice = document.querySelector('#confirmation_coursePrice');
+const confirmation_course = document.querySelector('#confirmation_course');
+
+const confirmPayCourseList = document.querySelector('#confirmPayCourseList');
+const confirmTotalAmount = document.querySelector('#confirmTotalAmount');
+
+confirmation();
+function confirmation(){
+	fetch('confirmation')
+	.then(resp => resp.json())
+	.then(body => {
+		userEmail = body.User;
+		orderDetail = body.Orders;
+		confirmation_courseList = body.Course;
+		confirmation_orderItemList = body.Orderitems;
+
+		confirmation_payment.innerHTML += 
+		`
+		<li class="list-group-item flex-fill p-6 text-body">
+			<h6 class="d-flex align-items-center gap-2">會員付款資訊</h6>
+			<p class="mb-0 mt-4">
+				<i class="icon-base ti tabler-file-dollar"></i>訂單編號 : <span>${orderDetail.orderId}</span>
+			</p>
+			<p class="mb-0 mt-4">
+				<i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間 : &nbsp;<span>${orderDetail.createdAt}</span>
+			</p>
+			<p class="mb-0 mt-4">
+				<i class="icon-base ti tabler-credit-card"></i>付款方式 : <span>${orderDetail.paymentMethod}</span>
+			</p>
+			<p class="mb-0 mt-4">
+				<i class="icon-base ti tabler-mail"></i>信箱 : <span>${userEmail}</span>
+			</p>  
+		</li>
+		`;
+
+		for (let course of confirmation_courseList) {
+			confirmation_course.innerHTML += 
+			`
+			<li class="list-group-item p-6">
+				<div class="d-flex gap-4">
+					<div class="flex-shrink-0">
+						<img src="${course.imgUrl}" alt="google home" class="w-px-80" />
+					</div>
+					<div class="flex-grow-1">
+						<div class="row">
+							<div class="col-md-8">
+								<a href="javascript:void(0)">
+									<h6 class="mb-2" id="confirmation_title">${course.title}</h6>
+								</a>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
+								</div>
+								<div class="text-body mb-2 d-flex flex-wrap">
+									<span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
+								</div>                           
+							</div>
+							<div class="col-md-4">
+								<div class="text-md-end">
+									<div class="my-2 my-lg-6">
+										<span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
+										<span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>		
+			`;
+		}
+
+		for (let orderItem of confirmation_orderItemList) {
+			confirmPayCourseList.innerHTML += 
+			`
+			<dl class="row mb-0 text-heading" id="confirmPayCourseList">
+				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+			</dl>
+			`;
+		}
+
+		confirmTotalAmount.innerHTML += 
+		`
+		  <dt class="col-6 text-heading">總價</dt>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="confirmTotalAmount">${orderDetail.payAmount}</dd>
+		`;
+	});
+}
+
+
+// if(e.target.classList.contains("delete_btn")){
+//   //console.log("delete");
+//   let r = confirm("確認移除？");
+//   if (r){
+// 	  e.target.closest("li").classList.add("fade_out");
+// 	  setTimeout(function(){
+// 	  e.target.closest("li").remove();
+// 	  }, 1000);      
+//   }
+// }
