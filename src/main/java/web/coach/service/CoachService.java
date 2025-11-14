@@ -1,5 +1,13 @@
 package web.coach.service;
 
-public interface CoachService {
+import java.util.List;
 
+import web.coach.pojo.CoachAndUser;
+
+public interface CoachService {
+	
+	List<CoachAndUser> findCoachAndUser();
+	
+	boolean inviteCoach(Integer userId);
+	
 }

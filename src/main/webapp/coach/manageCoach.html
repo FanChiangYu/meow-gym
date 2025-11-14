@@ -41,6 +41,7 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
 
@@ -323,39 +324,13 @@
                         <th>會員ID</th>
                         <th>姓名</th>
                         <th>帳號 (電子郵件)</th>
-                        <th>電話號碼</th>
+                        <th>身份</th>
                         <th>審核狀態</th>
                         <th>教練資邀請</th>
                         <th>申請資料審核</th>
                       </tr>
                     </thead>
-                    <tbody id="course-table-body">
-                      <tr>
-                        <td>
-                          <span class="text-heading">12</span>
-                        </td>
-                        <td>
-                          <span class="text-truncate d-flex align-items-center text-heading">
-                            <i class="icon-base ti tabler-user icon-md text-success me-2"></i>
-                            王小明
-                          </span>
-                        </td>
-                        <td>
-                          <span class="text-heading">example@gmail.com</span>
-                        </td>
-                        <td>
-                          <span class="text-heading">0912345678</span>
-                        </td>
-                        <td>
-                          <span class="badge ${approvalLabel(course.approvalStatus)}">不通過</span>
-                        </td>
-                         <td>
-                          <button onclick="auditById(${course.courseId})" class="btn rounded-pill btn-primary waves-effect waves-light">邀請</button>
-                        </td>
-                        <td>
-                          <button onclick="auditById(${course.courseId})" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>
-                        </td>
-                      </tr>
+                    <tbody id="user-table-body">
                     </tbody>   
                   </table>
                 </div>
@@ -470,11 +445,12 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
     <script src="../assets/js/main.js"></script>
-    <script src="js/applyCoach.js"></script>
+    <script src="js/manageCoach.js"></script>
 
     <!-- Page JS -->
   </body>
