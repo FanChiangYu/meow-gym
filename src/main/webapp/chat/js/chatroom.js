@@ -4,7 +4,7 @@ console.log("chatroom.js loaded");
 //not concern for websocket
 //const input = document.querySelector(".chat-message"); //歷史訊息
 const input = document.querySelector("#chat-message");
-const username = document.querySelector(".username");
+//const username = document.querySelector(".username");
 
 //const sendbutton = document.querySelector(".send-button");
 const sendbutton = document.querySelector("#send-button");
@@ -31,7 +31,8 @@ fetch('/meow-gym/chat/userinfo', {
 	.then(body => {
 		loginUser = body.loginUser;
 		console.log(loginUser); //代表
-		username.innerText = `${loginUser.name}，你好！`;
+		// username.innerText = `${loginUser.name}，你好！`;
+		console.log("loginUser.avatarUrl" + loginUser.avatarUrl);
 	});
 
 
@@ -153,6 +154,28 @@ function connectChat(currentCourseId) {
 
 			//聊天訊息顯示方向判斷
 
+			// 	chatplace.innerHTML += `
+			// 	   <li class="chat-message chat-contact-list-item ${messageSelf}">
+			//                   <div class="d-flex overflow-hidden">
+			//                     <div class="chat-message-wrapper flex-grow-1">
+			// 					${allMessages[i].name}
+			//                       <div class="chat-message-text">
+			//                         <p class="mb-0">${allMessages[i].text}</p>
+			//                       </div>
+			//                       <div class="text-end text-body-secondary mt-1">
+			//                         <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
+			//                         <small>${allMessages[i].time.slice(0, 16)}</small>
+			//                       </div>
+			//                     </div>
+			//                     <div class="user-avatar flex-shrink-0 ms-4">
+			//                       <div class="avatar avatar-sm">
+			//                         <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+			//                       </div>
+			//                     </div>
+			//                   </div>
+			//                 </li>`;
+			// }
+
 			chatplace.innerHTML += `
 			   <li class="chat-message chat-contact-list-item ${messageSelf}">
                           <div class="d-flex overflow-hidden">
@@ -167,13 +190,12 @@ function connectChat(currentCourseId) {
                               </div>
                             </div>
                             <div class="user-avatar flex-shrink-0 ms-4">
-                              <div class="avatar avatar-sm">
-                                <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                              </div>
+                            <div class="avatar">
+                    			<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
+							</div>
                             </div>
                           </div>
                         </li>`;
-
 		}
 	};
 
@@ -204,41 +226,44 @@ sendbutton.addEventListener("click", function () {
 
 //============ add header settings==============
 
-function switchMenu (role) {
-  switch (role) {
-    // 顯示會員列表
-    case 1: 
-      userMenu.classList.remove('d-none'); 
-      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
-      break;
-  
-    // 顯示教練列表  
-    case 2:
-      coachMenu.classList.remove('d-none'); 
-      break;
-  
-    // 顯示管理者列表  
-    case 3:
-      adminMenu.classList.remove('d-none'); 
-      break;
-  
-    // 預設顯示會員列表
-    default:
-      userMenu.classList.remove('d-none'); 
-      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
-      break;
-  }
+function switchMenu(role) {
+	switch (role) {
+		// 顯示會員列表
+		case 1:
+			userMenu.classList.remove('d-none');
+			shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+			break;
+
+		// 顯示教練列表  
+		case 2:
+			coachMenu.classList.remove('d-none');
+			break;
+
+		// 顯示管理者列表  
+		case 3:
+			adminMenu.classList.remove('d-none');
+			break;
+
+		// 預設顯示會員列表
+		default:
+			userMenu.classList.remove('d-none');
+			shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+			break;
+	}
 }
 
 fetch('/meow-gym/index/loginData')
-.then(resp => resp.json())
-.then(respbody => {
-  if(respbody.successful){
-    switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
-    userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
-    avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
-  }
-});
+	.then(resp => resp.json())
+	.then(respbody => {
+		if (respbody.successful) {
+			switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
+			userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
+			console.log("使用者名稱:", respbody.user.name);
+			avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+		}
+	});
+
+
 
 
 
