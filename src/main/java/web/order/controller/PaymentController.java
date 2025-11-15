@@ -24,9 +24,9 @@ public class PaymentController {
 	protected Orders payment (@RequestBody Orders orders, 
 			@SessionAttribute(value = "user", required = false) User setUser) {		
 		//取會員資料
-		Integer userId = setUser.getUserId();
+//		Integer userId = setUser.getUserId();
 		// 先寫死
-//		Integer userId = 1;
+		Integer userId = 1;
 		
 		//import static 套件寫法		
 		return orderservice.payment(orders, userId);

@@ -141,6 +141,8 @@ public class OrderServiceImpl implements OrderService{
 		//Step2:撈List<Orderitems> by orderId
 		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step3:回傳Orders and List<Orderitems> payAmountList
+		Integer totalAmount = 0;
+		Orders orders = orderdao.selectOrdersByOrderId(orderId);
 		for (Orderitems orderitems : orderitemList) {
 			Integer courseId = orderitems.getCourseId();
 			Course course = orderdao.selectCourseByCourseId(courseId);
@@ -162,16 +164,11 @@ public class OrderServiceImpl implements OrderService{
 			}else {
 				orderitems.setPurchasedPrice(orderitems.getCoursePrice());
 			}
-
+			//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
+			Integer purchasedPrice = orderitems.getPurchasedPrice();
+			totalAmount += purchasedPrice;
+			orders.setPayAmount(totalAmount); 
 		}
-		//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
-		Orders orders = orderdao.selectOrdersByOrderId(orderId);
-		Integer totalAmount = 0;
-		for (Orderitems orderitems : orderitemList) {
-		Integer purchasedPrice = orderitems.getPurchasedPrice();
-		totalAmount += purchasedPrice;
-		}
-		orders.setPayAmount(totalAmount); 
 		//Step6:回傳個課程價格及購課總價
 		Map<String, Object> payAmountList = new HashMap<>();
 		payAmountList.put("Orders", orders);
@@ -182,7 +179,7 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	@Override
 	public Orders payment(Orders orders, Integer userId) {
-		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊  debug
+		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊
 		if(orders.getPaymentMethod().equals("Card")) {
 			if(orders.getCardNumber() == null) {
 				orders.setMessage("信用卡卡號未輸入");

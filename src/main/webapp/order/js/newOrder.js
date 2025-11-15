@@ -118,9 +118,7 @@ function deleteCourse(courseId){
 
 //課程結帳清單//
 const title = document.querySelector('#title');
-const promoPrice = document.querySelector('#coursePromoPrice');
 const coursePrice = document.querySelector('#coursePrice');
-const payAmount = document.querySelector('#pay_amount');
 const orderPayCourseList = document.querySelector('#orderPayCourseList');
 const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
 const orderTotalAmount = document.querySelector('#orderTotalAmount');
