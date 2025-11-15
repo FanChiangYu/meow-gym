@@ -20,7 +20,9 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList);
 	
-	Integer selectPromoPriceByCourseId (Integer courseId);
+	Integer selectPromoPriceByCourseId (Integer courseId); //沒用到
+	
+	CoursePromo selectCoursePromoByCourseId(Integer courseId);
 	
 	Integer deleteOrderitemsByOrderItemId(Integer orderItemId);
 	
@@ -28,9 +30,9 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Course selectCourseByCourseId (Integer courseId);
 	
-	CoursePromo selectCoursePromoPriceByCourseId(Integer courseId);
-	
 	Orders selectOrdersByOrderId(Integer orderId);
 	
 	int insert(Orders orders);
+	
+	String selectUserEmailByUserId(Integer userId);
 }
