@@ -37,19 +37,14 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			user.setMessage("登入成功");
 			user.setSuccessful(true);
-		} else {
-
 		}
-
 		return user;
 
 	}
 
 	@Override
 	public User register(User user) {
-		
-		
-		
+
 		return null;
 	}
 

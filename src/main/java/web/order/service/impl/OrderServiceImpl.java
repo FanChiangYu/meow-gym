@@ -2,6 +2,7 @@ package web.order.service.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,11 +89,16 @@ public class OrderServiceImpl implements OrderService{
 		//Step5:跑foreach 放入 coursePromo
 		for(Course course : courseList) {
 			Integer courseId = course.getCourseId();
-			Integer coursePromo = orderdao.selectPromoPriceByCourseId(courseId);
-			course.setPromoPrice(coursePromo);
+			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
+			//Step6:決定回傳課程價錢(確認是否為促銷區間) debug促銷價跑掉
+			if (coursePromo != null) {
+				Date today = new Date();
+				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
+					    (today.before(coursePromo.getDateEnd()) || today.equals(coursePromo.getDateEnd()))) {
+					course.setPromoPrice(coursePromo.getPromoPrice());
+				}
+			}
 		}
-		//Step6:決定回傳課程價錢(確認是否為促銷區間) debug
-		
 		//Step7:回傳Orderitems and Course
 		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
 		orderitemsAndCourseList.put("Orderitems", orderitemsList);
@@ -115,9 +121,9 @@ public class OrderServiceImpl implements OrderService{
 				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "cancel"); 
 				if(count2 == 1) {
-					System.out.println("orderitems不存在 orderstatus cancel成功");
+					System.out.println("orderitems不存在 orders updatestatus_cancel成功");
 				}else {
-					System.out.println("orderitems存在 orderstatus cancel失敗");
+					System.out.println("orderitems存在 orders updatestatus_cancel失敗");
 				}			
 			}
 			return true;
@@ -134,26 +140,36 @@ public class OrderServiceImpl implements OrderService{
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
 		//Step2:撈List<Orderitems> by orderId
 		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-		//Step3:回傳List<Orderitems> payAmountList
+		//Step3:回傳Orders and List<Orderitems> payAmountList
+		Integer totalAmount = 0;
+		Orders orders = orderdao.selectOrdersByOrderId(orderId);
 		for (Orderitems orderitems : orderitemList) {
 			Integer courseId = orderitems.getCourseId();
 			Course course = orderdao.selectCourseByCourseId(courseId);
-			CoursePromo coursePromo = orderdao.selectCoursePromoPriceByCourseId(courseId);
+			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
 			orderitems.setTitle(course.getTitle());
-			orderitems.setPromoPrice(coursePromo.getPromoPrice());
-			orderitems.setDateStart(coursePromo.getDateStart());
-			orderitems.setDateEnd(coursePromo.getDateEnd());
-		}
-		//Step4:決定回傳課程價錢(確認是否為促銷區間) debug
-		
-		//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價) debug
-		Orders orders = orderdao.selectOrdersByOrderId(orderId);
-		for(Orderitems orderitems : orderitemList) {
+			orderitems.setCoursePrice(course.getCoursePrice());
+			//Step4:決定回傳課程價錢(確認是否為促銷區間) debug促銷價跑掉
+			Date today = new Date();			
+			if(coursePromo != null) {
+				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
+					    (today.before(coursePromo.getDateEnd()) || today.equals(coursePromo.getDateEnd()))) {
+					orderitems.setDateStart(coursePromo.getDateStart());
+					orderitems.setDateEnd(coursePromo.getDateEnd());
+					orderitems.setPromoPrice(coursePromo.getPromoPrice());
+				}
+			}
+			if(orderitems.getPromoPrice() != null) {
+				orderitems.setPurchasedPrice(orderitems.getPromoPrice());
+			}else {
+				orderitems.setPurchasedPrice(orderitems.getCoursePrice());
+			}
+			//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
 			Integer purchasedPrice = orderitems.getPurchasedPrice();
-			purchasedPrice += purchasedPrice;
-			orders.setPayAmount(purchasedPrice); //錢算不對,需要debug, 問老師 
+			totalAmount += purchasedPrice;
+			orders.setPayAmount(totalAmount); 
 		}
-		//Step5:回傳個課程價格及購課總價
+		//Step6:回傳個課程價格及購課總價
 		Map<String, Object> payAmountList = new HashMap<>();
 		payAmountList.put("Orders", orders);
 		payAmountList.put("Orderitems", orderitemList);
@@ -163,37 +179,38 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	@Override
 	public Orders payment(Orders orders, Integer userId) {
-		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊  debug
-		if(orders.getCardNumber() == null) {
-			orders.setMessage("信用卡卡號未輸入");
-			orders.setSuccessful(false);
-			return orders;
-		}
-		
-		if(orders.getCardHolder() == null) {
-			orders.setMessage("未輸入持卡人姓名");
-			orders.setSuccessful(false);
-			return orders;
-		}
-		
-		if(orders.getExpYear() == null) {
-			orders.setMessage("未輸入有效年份");
-			orders.setSuccessful(false);
-			return orders;
-		}
-		
-		if(orders.getExpMonth() == null) {
-			orders.setMessage("未輸入有效月份");
-			orders.setSuccessful(false);
-			return orders;
-		}
-		
-		if(orders.getCvc() == null) {
-			orders.setMessage("未輸入信用卡驗證碼");
-			orders.setSuccessful(false);
-			return orders;
-		}
-		
+		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊
+		if(orders.getPaymentMethod().equals("Card")) {
+			if(orders.getCardNumber() == null) {
+				orders.setMessage("信用卡卡號未輸入");
+				orders.setSuccessful(false);
+				return orders;
+			}
+			
+			if(orders.getCardHolder() == null) {
+				orders.setMessage("未輸入持卡人姓名");
+				orders.setSuccessful(false);
+				return orders;
+			}
+			
+			if(orders.getExpYear() == null) {
+				orders.setMessage("未輸入有效年份");
+				orders.setSuccessful(false);
+				return orders;
+			}
+			
+			if(orders.getExpMonth() == null) {
+				orders.setMessage("未輸入有效月份");
+				orders.setSuccessful(false);
+				return orders;
+			}
+			
+			if(orders.getCvc() == null) {
+				orders.setMessage("未輸入信用卡驗證碼");
+				orders.setSuccessful(false);
+				return orders;
+			}
+		}		
 		System.out.println(orders.getPaymentMethod());
 		System.out.println(orders.getCardNumber());
 		System.out.println(orders.getCardHolder());
@@ -203,9 +220,8 @@ public class OrderServiceImpl implements OrderService{
 		
 		//Step2:確認orderId by userId and status
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-		
 		//Step3:select Orders by orderId, 並寫入DB資料
-		Orders payOrder = orderdao.selectOrdersByOrderId(orderId); ////廢code? 190
+		Orders payOrder = orderdao.selectOrdersByOrderId(orderId);
 		payOrder.setPaymentMethod(orders.getPaymentMethod());
 		payOrder.setCardNumber(orders.getCardNumber());
 		payOrder.setCardHolder(orders.getCardHolder());
@@ -214,12 +230,17 @@ public class OrderServiceImpl implements OrderService{
 		payOrder.setCvc(orders.getCvc());
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		payOrder.setCreatedAt(timestamp);
-		
 		//Step4:執行資料交易控制
-		int count = orderdao.insert(payOrder);
-		if(count == 1) {
+		int count1 = orderdao.insert(payOrder);
+		if(count1 == 1) {
 			payOrder.setMessage("送出成功");
 			payOrder.setSuccessful(true);
+			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "paid"); 
+			if(count2 == 1) {
+				System.out.println("orders updatestatus_paid成功");
+			}else {
+				System.out.println("orders updatestatus_paid失敗");
+			}	
 		} else {
 			payOrder.setMessage("送出失敗");
 			payOrder.setSuccessful(false);
@@ -234,20 +255,30 @@ public class OrderServiceImpl implements OrderService{
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "paid");
 		//Step2:撈Orders by orderId
 		Orders completeOrders = orderdao.selectOrdersByOrderId(orderId);		
-		//Step3:撈List<Orderitems> by orderId
-		List<Orderitems> completeOrderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-		//Step4:藉由courseID 去撈course.class and 跑foreach 放入 coachname
-		List<Integer> courseIdList = completeOrderitemList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+		//Step3:撈Email by userId
+		String userEmail = orderdao.selectUserEmailByUserId(userId);
+		//Step4:找同筆訂單下所有CourseID
+		List<Orderitems> completeOrderitemsList = orderdao.selectOrderitemsListByOrderId(orderId);
+		//Step5:回傳List<Orderitems> payAmountList
+		for (Orderitems orderitems : completeOrderitemsList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+		}
+		//Step6:藉由courseID 去撈course.class
+		List<Integer> courseIdList = completeOrderitemsList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
 		List<Course> completeCourseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdList);
+		//Step7:跑foreach 放入 coachname
 		for(Course course : completeCourseList) {
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);
 		}
-		//Step5:回傳Orders, Orderitems and Course
+		//Step8:回傳userEmail, Orders, Orderitems and Course
 		Map<String, Object> orderConfirmation = new HashMap<>();
+		orderConfirmation.put("User", userEmail);
 		orderConfirmation.put("Orders", completeOrders);
-		orderConfirmation.put("Orderitems", completeOrderitemList);
-		orderConfirmation.put("Course", completeCourseList);		
-		return orderConfirmation;
+		orderConfirmation.put("Orderitems", completeOrderitemsList);
+		orderConfirmation.put("Course", completeCourseList);
+		return orderConfirmation;		
 	}
 }

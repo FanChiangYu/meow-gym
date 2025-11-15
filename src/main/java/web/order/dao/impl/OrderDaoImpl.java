@@ -94,7 +94,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public CoursePromo selectCoursePromoPriceByCourseId(Integer courseId) {
+	public CoursePromo selectCoursePromoByCourseId(Integer courseId) {
 		return session.get(CoursePromo.class, courseId);
 	}
 	
@@ -107,6 +107,14 @@ public class OrderDaoImpl implements OrderDao{
 	public int insert(Orders orders) {
 		session.persist(orders);
 		return 1;
+	}
+
+	@Override
+	public String selectUserEmailByUserId(Integer userId) {
+		String hql = "select email from User where userId = :userId";
+		Query<String> query = session.createQuery(hql, String.class);		
+		return query.setParameter("userId", userId)
+				.uniqueResult();
 	}
 
     //未使用的方法
