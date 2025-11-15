@@ -16,6 +16,7 @@ public class ChatDTO {
 
 	// add 20251114
 	private String avatarUrl;
+	private Integer role;
 	// add 20251114 end
 
 	public ChatDTO() {
@@ -78,6 +79,14 @@ public class ChatDTO {
 	public String getAvatarUrl() {
 		return avatarUrl;
 	}
+	
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
 	// add end 20251114
 
 //	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt) {
@@ -90,7 +99,7 @@ public class ChatDTO {
 //		this.createdAt = createdAt;
 //	}
 
-	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt, String avatarUrl) {
+	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt, String avatarUrl, Integer role) {
 		super();
 		this.chatId = chatId;
 		this.courseId = courseId;
@@ -99,6 +108,7 @@ public class ChatDTO {
 		this.content = content;
 		this.createdAt = createdAt;
 		this.avatarUrl = avatarUrl;
+		this.role = role;
 	}
 
 //	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt) {
@@ -110,7 +120,7 @@ public class ChatDTO {
 //		this.createdAt = (createdAt == null) ? null : new Timestamp(createdAt.getTime());
 //	}
 
-	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt, String avatarUrl) {
+	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt, String avatarUrl, Integer role) {
 		this.chatId = chatId;
 		this.courseId = courseId;
 		this.userId = userId;
@@ -118,6 +128,7 @@ public class ChatDTO {
 		this.content = content;
 		this.createdAt = (createdAt == null) ? null : new Timestamp(createdAt.getTime());
 		this.avatarUrl = avatarUrl;
+		this.role = role;
 	}
 
 }

@@ -73,7 +73,7 @@ public class ChatDaoImpl implements ChatDao {
 	// add 20251114
 	@Override
 	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
-		String hql = "select new web.chat.pojo.ChatDTO(c.chatId, c.courseId, c.userId, u.name, c.content, c.createdAt, u.avatarUrl) from web.chat.pojo.Chats c join web.user.pojo.User u on u.userId = c.userId where c.courseId = :courseId order by c.createdAt";
+		String hql = "select new web.chat.pojo.ChatDTO(c.chatId, c.courseId, c.userId, u.name, c.content, c.createdAt, u.avatarUrl, u.role) from web.chat.pojo.Chats c join web.user.pojo.User u on u.userId = c.userId where c.courseId = :courseId order by c.createdAt";
 		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
 	}
 	// add

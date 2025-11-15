@@ -2,11 +2,7 @@
 console.log("chatroom.js loaded");
 
 //not concern for websocket
-//const input = document.querySelector(".chat-message"); //歷史訊息
 const input = document.querySelector("#chat-message");
-//const username = document.querySelector(".username");
-
-//const sendbutton = document.querySelector(".send-button");
 const sendbutton = document.querySelector("#send-button");
 
 const chatplace = document.querySelector("#chat-place");
@@ -129,8 +125,6 @@ function connectChat(currentCourseId) {
 		ws.close();
 	};
 	chatplace.innerHTML = '';
-	// currentCourseId = courseId; // global to store the currentCourseId.
-	// console.log(currentCourseId); // show correctly
 
 	ws = new WebSocket(`ws://localhost:8080/meow-gym/chat?courseId=${currentCourseId}`);
 
@@ -176,14 +170,27 @@ function connectChat(currentCourseId) {
 			//                 </li>`;
 			// }
 
+			//聊天角色判斷
+			let roleText = "";
+			if (allMessages[i].role == 1) {
+				roleText = "";
+			} else if (allMessages[i].role == 2) {
+				roleText = "教練";
+			} else if (allMessages[i].role == 3) {
+				roleText = "";
+			}
+
+			//教練頭像加上紫色邊框
+			const caochrole = roleText === "教練" ? "coach-border" : "";
+
 			chatplace.innerHTML += `
 			   <li class="chat-message chat-contact-list-item ${messageSelf}">
                           <div class="d-flex overflow-hidden">
                             <div class="chat-message-wrapper flex-grow-1">
 							<div class="d-flex align-items-end flex-grow-1">
-								<div class="user-avatar flex-shrink-0 ms-4">
-									<div>${allMessages[i].name}</div>
-										<div class="avatar">
+								<div class="user-avatar ms-4">
+								<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
+										<div class="avatar ${caochrole}">
 											<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
 										</div>
 								</div>
@@ -205,7 +212,7 @@ function connectChat(currentCourseId) {
 
 		// ✅ 歷史訊息載入完，捲到最底
 		const chatHistoryBody = document.querySelector('.chat-history-body');
-			chatHistoryBody.scrollTop = chatHistoryBody.scrollHeight;
+		chatHistoryBody.scrollTop = chatHistoryBody.scrollHeight;
 
 
 	};
@@ -238,6 +245,7 @@ sendbutton.addEventListener("click", function () {
 //============ add header settings==============
 
 function switchMenu(role) {
+
 	switch (role) {
 		// 顯示會員列表
 		case 1:
@@ -267,12 +275,14 @@ fetch('/meow-gym/index/loginData')
 	.then(resp => resp.json())
 	.then(respbody => {
 		if (respbody.successful) {
+			console.log(respbody.user.role);
 			switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
 			userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
 			console.log("使用者名稱:", respbody.user.name);
 			avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
 		}
 	});
+
 
 
 

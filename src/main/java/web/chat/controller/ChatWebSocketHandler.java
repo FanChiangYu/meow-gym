@@ -104,6 +104,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 				// add 20251114
 				respbody.addProperty("avatarUrl", record.getAvatarUrl());
+				respbody.addProperty("role", record.getRole());
 				// add 20251114 end
 
 				arr.add(respbody);
@@ -169,6 +170,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 		// add 20251114
 		resp.addProperty("avatarUrl", user.getAvatarUrl());
+		resp.addProperty("role", user.getRole());
 		// add 20251114 end
 		
 		System.out.println("boardcast to all resp"+resp);
