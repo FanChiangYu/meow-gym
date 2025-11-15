@@ -215,7 +215,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			System.out.println("value" + value);
 			return Integer.parseInt(value);
 		}
-
 	}
 
 	private void broadcastToRoom(int courseId, String jsonPayload) throws IOException {

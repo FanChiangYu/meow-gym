@@ -120,6 +120,7 @@ fetch('/meow-gym/chat/getusercourseid', {
 // });
 
 
+
 //websocket 處理點擊 courseId 後的聊天紀錄載入
 function connectChat(currentCourseId) {
 
@@ -153,7 +154,6 @@ function connectChat(currentCourseId) {
 			const messageSelf = isSelf ? "chat-message-right" : "chat-message-left";
 
 			//聊天訊息顯示方向判斷
-
 			// 	chatplace.innerHTML += `
 			// 	   <li class="chat-message chat-contact-list-item ${messageSelf}">
 			//                   <div class="d-flex overflow-hidden">
@@ -180,23 +180,34 @@ function connectChat(currentCourseId) {
 			   <li class="chat-message chat-contact-list-item ${messageSelf}">
                           <div class="d-flex overflow-hidden">
                             <div class="chat-message-wrapper flex-grow-1">
-							${allMessages[i].name}
-                              <div class="chat-message-text">
-                                <p class="mb-0">${allMessages[i].text}</p>
-                              </div>
+							<div class="d-flex align-items-end flex-grow-1">
+								<div class="user-avatar flex-shrink-0 ms-4">
+									<div>${allMessages[i].name}</div>
+										<div class="avatar">
+											<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
+										</div>
+								</div>
+									 <div class="chat-message-text">
+                               			 <p class="mb-0">${allMessages[i].text}</p>
+                              		</div>
+							</div>
+                             
                               <div class="text-end text-body-secondary mt-1">
                                 <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
                                 <small>${allMessages[i].time.slice(0, 16)}</small>
                               </div>
                             </div>
-                            <div class="user-avatar flex-shrink-0 ms-4">
-                            <div class="avatar">
-                    			<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
-							</div>
-                            </div>
+                        
                           </div>
                         </li>`;
-		}
+
+		};
+
+		// ✅ 歷史訊息載入完，捲到最底
+		const chatHistoryBody = document.querySelector('.chat-history-body');
+			chatHistoryBody.scrollTop = chatHistoryBody.scrollHeight;
+
+
 	};
 
 	ws.addEventListener('close', e => alert('連線已關閉'));
