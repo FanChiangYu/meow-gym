@@ -1,6 +1,9 @@
 package web.coach.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import web.coach.dao.CoachDao;
 import web.coach.pojo.CoachAndUser;
+import web.coach.pojo.CoachCertificates;
+import web.coach.pojo.CoachEducations;
+import web.coach.pojo.CoachExperiences;
 import web.coach.pojo.CoachProfiles;
 import web.coach.service.CoachService;
 import web.user.pojo.User;
@@ -37,16 +43,54 @@ public class CoachServiceImpl implements CoachService{
 	}
 
 	@Override
-	public boolean inviteCoach(Integer userId) {
+	public boolean inviteCoach(Integer userId) throws ParseException {
 		int count = dao.updateRole(userId);
-		if(count > 0) {
-			CoachProfiles cp = new CoachProfiles();
-			cp.setApprovalStatus("待審核");
-			cp.setUserId(userId);
-			cp.setBio("");
-			int cpCount = dao.insertCoachProfiles(cp);
-			return cpCount > 0 ? true : false;
+		if (count <= 0) {
+			return false;
 		}
-		return false;
+		
+		CoachProfiles profiles = new CoachProfiles();
+		profiles.setApprovalStatus("待審核");
+		profiles.setUserId(userId);
+		profiles.setBio("");
+		count = dao.insertCoachProfiles(profiles);
+		if (count != 1) {
+			return false;
+		}
+		Integer coachId = profiles.getCouachId();
+		
+		CoachCertificates certificates = new CoachCertificates();
+		certificates.setCoachId(coachId);
+		certificates.setName("");
+		certificates.setFileUrl("");
+		count = dao.insertCoachCertificates(certificates);
+		if (count != 1) {
+			return false;
+		}
+		
+		CoachEducations educations = new CoachEducations();
+		educations.setCoachId(coachId);
+		educations.setSchool("");
+		educations.setDegree("");
+		count = dao.insertCoachEducations(educations);
+		if (count != 1) {
+			return false;
+		}
+		
+		CoachExperiences experiences = new CoachExperiences();
+		String dateStr = "2025-01-01";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date initDate = sdf.parse(dateStr);
+		experiences.setCoachId(coachId);
+		experiences.setCompany("");
+		experiences.setTitle("");
+		experiences.setStartDate(initDate);
+		experiences.setEndDate(initDate);
+		count = dao.insertCoachExperiences(experiences);
+		if (count != 1) {
+			return false;
+		}
+		
+		return true;
 	}
 }

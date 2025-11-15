@@ -1,5 +1,6 @@
 package web.coach.controller;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import web.user.pojo.User;
 @RequestMapping("coach/manage")
 public class ManageCotroller {
 	@Autowired
-	CoachService service;
+	private CoachService service;
 
 	@GetMapping
 	public List<CoachAndUser> getUserList(){
@@ -28,7 +29,7 @@ public class ManageCotroller {
 	}
 	
 	@PostMapping
-	public Map<String, Object> invite(@RequestBody User user){
+	public Map<String, Object> invite(@RequestBody User user) throws ParseException{
 		Boolean result = service.inviteCoach(user.getUserId());
 		Map<String, Object> respbody = new HashMap<>();
 		if (result) {
