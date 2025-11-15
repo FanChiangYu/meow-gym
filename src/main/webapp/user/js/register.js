@@ -3,7 +3,6 @@ const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0
 const email = document.querySelector("#email");
 const username = document.querySelector("#name");
 const password = document.querySelector("#password");
-const confirmPassword = document.querySelector("#confirmPassword");
 const phoneNumber = document.querySelector("#phoneNumber");
 const gender = document.querySelector("#gender");
 const birthday = document.querySelector("#date-birthday");
@@ -20,7 +19,7 @@ function valueOrNull(value) {
 	}
 }
 
-email.addEventListener('blur', function () {
+email.addEventListener('blur', function() {
 	if (email.value.match(reg) === null) {
 		alert('帳號格式不正確'); //
 	}
@@ -28,7 +27,7 @@ email.addEventListener('blur', function () {
 
 
 
-applybutton.addEventListener('click', function () {
+applybutton.addEventListener('click', function() {
 
 
 	if (valueOrNull(username.value) == null) {
@@ -38,11 +37,6 @@ applybutton.addEventListener('click', function () {
 
 	if (valueOrNull(password.value) == null) {
 		alert('密碼未輸入');
-		return;
-	}
-
-	if (valueOrNull(confirmPassword.value) == null) {
-		alert('欄位未輸入');
 		return;
 	}
 
@@ -81,17 +75,15 @@ applybutton.addEventListener('click', function () {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
 			cntCode: cnt_code.value,
-			distCode: password.value,
+			distCode: dist_code.value,
+			detailAddress: detail_address.value,
+			email: email.value,
+			name: username.value,
 			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
-			password: password.value,
+			phone: phoneNumber.value,
+			birthday: birthday.value,
+			gender: gender.value,
+			createdAt: password.value,
 		}),
 	})
 

@@ -1,5 +1,8 @@
 package web.user.service.impl;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,9 +96,17 @@ public class UserServiceImpl implements UserService {
 			return user;
 		}
 
-		user.setMessage("註冊成功");
-		user.setSuccessful(true);
-
+		user.setRole(1);
+		user.setBanned(false);
+		user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+		int count = dao.insertUser(user);
+		if (count == 1) {
+			user.setMessage("註冊成功");
+			user.setSuccessful(true);
+		} else {
+			user.setMessage("註冊失敗");
+			user.setSuccessful(false);
+		}
 		return user;
 	}
 

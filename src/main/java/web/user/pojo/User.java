@@ -36,7 +36,7 @@ public class User extends Core {
 	@Column(name = "dist_code")
 	private Integer distCode;
 
-	@Column(name = "role", insertable = false)
+	@Column(name = "role")
 	private Integer role;
 
 	@Column(name = "detail_address")
@@ -51,25 +51,25 @@ public class User extends Core {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "reset_code", insertable = false)
+	@Column(name = "reset_code")
 	private String resetCode;
 
 	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "avatar_url", insertable = false)
+	@Column(name = "avatar_url")
 	private String avatarUrl;
 
-	@Column(name = "is_banned", insertable = false)
+	@Column(name = "is_banned")
 	private boolean isBanned;
 
 	@Column(name = "birthday")
 	private Date birthday;
 
-	@Column(name = "gender", insertable = false)
+	@Column(name = "gender")
 	private String gender;
 
-	@Column(name = "created_at", insertable = false)
+	@Column(name = "created_at")
 	private Timestamp createdAt;
 
 }
