@@ -4,21 +4,19 @@ const adminMenu = document.querySelector('#admin-menu');
 const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
+const description = document.querySelector('#description');
+const school = document.querySelector('#school');
+const degree = document.querySelector('#degree');
+const company = document.querySelector('#company');
+const title = document.querySelector('#title');
+const startDate = document.querySelector('#start-date');
+const endDate = document.querySelector('#end-date');
+const certificate = document.querySelector('#certificate');
+const img = document.querySelector('#img');
+const changeBtn = document.querySelector('#change-btn');
 
-
-// 1a. 用fetch向後端取得roleId(角色ID)
-// 1b. 或從瀏覽器的sessionStorage取得roleId (如果登入時有存的話)
-// 2. 呼叫switchMenu(); 切換側邊欄顯示
-
-// roldId = 1 -> 一般會員
-// roldId = 2 -> 教練
-// roldId = 3 -> 管理者
-
-// 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
-let Id = 1;
-
-function switchMenu (roleId) {
-  switch (roleId) {
+function switchMenu (role) {
+  switch (role) {
     // 顯示會員列表
     case 1: 
       userMenu.classList.remove('d-none'); 
@@ -43,15 +41,18 @@ function switchMenu (roleId) {
   }
 }
 
-switchMenu(Id); // 呼叫function切換側邊欄
+fetch('/meow-gym/index/loginData')
+.then(resp => resp.json())
+.then(respbody => {
+  if(respbody.successful){
+    switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
+    userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
+    avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+  }
+});
 
-
-// 使用者名稱顯示同理，如果還無法向後端取得user table的name，一樣先寫死，改標籤內的顯示文字
-let uName = '金城武'; 
-userName.textContent = uName; // 修改標籤內使用者名稱文字
-
-
-// 使用者頭像顯示，如果還無法向後端取得user table的avatal_url，img標籤src可不改，直接顯示預設頭像
-// 如果有取得avatal_url，按照以下寫法更改img標籤src的圖片路徑，以顯示使用者上傳的頭像
-let avatarUrl = '../img/avatar/result1.png'; // 假設從後端取得到使用者頭像Url
-avatarImg.src = avatarUrl; // 更換img標籤內的src屬性值
+fetch('apply')
+.then(resp => resp.json())
+.then(respbody => {
+  
+});

@@ -306,83 +306,36 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" id="class-content">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-      
-              <div class="card mb-6">
-                <div class="card-header d-flex flex-wrap justify-content-between gap-4">
-                  <div class="card-title mb-0 me-1">
-                    <h5 class="mb-0">大肌肌重訓</h5>
+              <div class="card">
+                <div class="card-header border-bottom">
+                  <h5 class="card-title mb-0">教練審核</h5>
+                  <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0">
+                    <div class="col-md-4 user_role"></div>
+                    <div class="col-md-4 user_plan"></div>
+                    <div class="col-md-4 user_status"></div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="row gy-6 mb-6">
-                    <div class="col-sm-6 col-lg-12">
-                      <div class="card p-2 h-100 shadow-none border">
-                        <div class="rounded-2 text-center mb-4">
-                          <img class="img-fluid w-50" src="/meow-gym/course/img/大肌肌重訓促銷.png" alt="課程圖片">
-                        </div>
-                        <div class="card-body p-4 pt-2">
-                          <p class="mt-1">課程ID : 100</p>
-                          <p class="mt-1">審核 : <strong class="badge bg-label-danger fs-6">不通過</strong></p>
-                          <p class="mt-1">課程類別 : 重訓</p>
-                          <p class="mt-1">上課日期 : 2025/10/27 ~ 2025/11/30</p>
-                          <p class="mt-1">課堂額度 : 12堂</p>
-                          <p class="mt-1">地點 : 教室A</p>
-                          <p class="mt-1">上課最大人數 : 20人</p>
-                           <p class="mt-1">課程定價 : 500</p>
-                        </div>
-                        <div class="card-datatable">
-                          <table class="datatables-users table">
-                            <thead class="border-top">
-                              <tr>
-                                <th>課程班次ID</th>
-                                <th>日期</th>
-                                <th>時段</th>
-                                <th>預約人數</th>
-                                <th>上課打卡時間</th>
-                                <th>下卡打卡時間</th>
-                                <th>上課打卡</th>
-                                <th>下卡打卡</th>
-                              </tr>
-                            </thead>
-                            <tbody>     
-                              <tr>
-                                <td>
-                                  <span class="text-heading">7</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">
-                                    2025/11/3（週一）
-                                  </span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">9:00 ~ 10:00</span>
-                                </td>
-                                <td>
-                                  <span class="text-heading">0/30</span>
-                                </td>
-                                 <td>
-                                  <span class="text-heading">2025/10/27 15:01:01</span>
-                                </td>
-                                 <td>
-                                  <span class="text-heading">2025/10/27 15:01:01</span>
-                                </td>
-                                <td>
-                                  <button onclick="reserveById(7)" class="btn rounded-pill waves-effect waves-light btn-primary ">打卡</button>
-                                </td>
-                                <td>
-                                  <button onclick="reserveById(7)" class="btn rounded-pill waves-effect waves-light btn-primary ">打卡</button>
-                                </td>
-                              </tr>
-                            </tbody>   
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="card-datatable">
+                  <table class="datatables-users table">
+                    <thead class="border-top">
+                      <tr>
+                        <th>會員ID</th>
+                        <th>姓名</th>
+                        <th>帳號 (電子郵件)</th>
+                        <th>身份</th>
+                        <th>審核狀態</th>
+                        <th>教練資邀請</th>
+                        <th>申請資料審核</th>
+                      </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                    </tbody>   
+                  </table>
                 </div>
               </div>
+            
               
 
 
@@ -497,7 +450,7 @@
     <!-- Main JS -->
 
     <script src="../assets/js/main.js"></script>
-    <script src="js/manageCourse.js"></script>
+    <script src="js/manageCoach.js"></script>
 
     <!-- Page JS -->
   </body>

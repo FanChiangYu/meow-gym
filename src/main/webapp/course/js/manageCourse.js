@@ -188,6 +188,7 @@ fetch('manage')
     });
 
     let sessionTableHtml = '';
+    let chatBtnHtml = '';
     if(classResponse.course.approvalStatus == "通過"){
       sessionTableHtml = `
         <div class="card-datatable">
@@ -209,6 +210,10 @@ fetch('manage')
             </tbody>   
           </table>
         </div>
+      `;
+
+      chatBtnHtml = `
+        <button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary ">聊天室</button>
       `;
     }
 
@@ -234,7 +239,10 @@ fetch('manage')
                 <p class="mt-1">課堂額度 : ${classResponse.course.sessionQuota}堂</p>
                 <p class="mt-1">地點 : ${roomName(classResponse.course.roomId)}</p>
                 <p class="mt-1">上課最大人數 : ${classResponse.course.capacityMax}人</p>
+                <div class="d-flex justify-content-between align-items-center mb-4">
                   <p class="mt-1">課程定價 : ${classResponse.course.coursePrice}</p>
+                  ${chatBtnHtml}
+                </div>
               </div>
               ${sessionTableHtml}
             </div>
@@ -307,4 +315,22 @@ function checkinOutById(sessionId) {
       });
     }
   })
+}
+
+// ------------ 轉跳聊天室 -----------------
+function chatById(courseId) {
+  fetch(`record/${courseId}`)
+  .then(resp => resp.json())
+  .then(respbody => {
+    if(respbody.ok){
+      location.href = "/meow-gym/chat/app-chat.html"
+    }else{
+      Swal.fire({
+        title: '錯誤',
+        text: '轉跳失敗',
+        icon: 'error',
+        target: document.body 
+      });
+    }
+  });
 }
