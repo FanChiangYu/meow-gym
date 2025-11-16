@@ -11,6 +11,7 @@ import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.promotions.pojo.CoursePromo;
+import web.user.pojo.User;
 
 @Repository
 public class OrderDaoImpl implements OrderDao{
@@ -52,7 +53,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList) {
+	public List<Course> selectCourseListByOrderitemsCourseIdList(List<Integer> courseIdList) {
 		//找Course.class
 		String hql = "FROM Course where courseId IN(:courseIdList)";
 		Query<Course> query = session.createQuery(hql, Course.class);
@@ -119,14 +120,30 @@ public class OrderDaoImpl implements OrderDao{
 		return query.setParameter("userId", userId)
 				.uniqueResult();
 	}
-
-    //未使用的方法
+	
 	@Override
-	public List<Orders> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public User selectUserByUserId(Integer userId) {
+		return session.get(User.class, userId);
+	}
+	
+	@Override
+	public List<Orders> selectShoppingRecordOrdersByUserId(Integer userId) {
+		String hql = "FROM Orders where userId =:userId and AND status IN ('PAID', 'WAIT_PAID')";
+		Query<Orders> query = session.createQuery(hql, Orders.class);
+		List<Orders> shoppingRecordOrders = query.setParameter("userId", userId).getResultList();
+		return shoppingRecordOrders;
+	}
+	
+	@Override
+	public List<Orderitems> selectOrderitemListByOrderIdList(List<Integer> orderIdList) {
+		//找Orderitems.class
+		String hql = "FROM Orderitems where orderId IN(:orderIdList)";
+		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
+		List<Orderitems> shoppingRecordOrderItemsList = query.setParameterList("orderIdList", orderIdList).getResultList();
+		return shoppingRecordOrderItemsList;
 	}
 
+    //未使用的方法
 	@Override
 	public int deleteById(Integer id) {
 		// TODO Auto-generated method stub
@@ -143,6 +160,12 @@ public class OrderDaoImpl implements OrderDao{
 	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Orders> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 
