@@ -19,7 +19,7 @@ function valueOrNull(value) {
 	}
 }
 
-email.addEventListener('blur', function() {
+email.addEventListener('blur', function () {
 	if (email.value.match(reg) === null) {
 		alert('帳號格式不正確');
 	}
@@ -68,7 +68,7 @@ function check() {
 	}
 }
 
-applybutton.addEventListener('click', function() {
+applybutton.addEventListener('click', function () {
 	const file = avatarUrl.files[0];
 	if (!file) {
 		alert("請上傳圖片！");
@@ -88,16 +88,6 @@ applybutton.addEventListener('click', function() {
 	formData.append('createdAt', password.value);
 	formData.append('avatarFile', file, file.name); // 直接上傳檔案
 
-	fetch('register', {
-		method: 'POST',
-		body: formData
-	})
-		.then(resp => resp.json())
-		.then(body => {
-			if (body.successful) {
-				location.href = 'registerSuccessPage.html';
-			} else {
-				alert(body.message);
-			}
-		});
+	location.href = 'registerSuccessPage.html';
+
 });
