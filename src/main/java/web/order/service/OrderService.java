@@ -19,5 +19,6 @@ public interface OrderService extends CoreService{
 	Orders payment(Orders orders, Integer userId);
 	
 	Map<String, Object> getOrderConfirmation(Integer userId);
-
+	
+	Map<String, Object> getAllShoppingRecordListByUserId(Integer userId);
 }

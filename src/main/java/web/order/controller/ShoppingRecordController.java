@@ -28,7 +28,7 @@ public class ShoppingRecordController {
 //		Integer userId = 1;
 
 		// 回傳購物車清單
-		Map<String, Object> orderitemsAndCourseList = orderservice.getAllOrderitemsAndCourseByUserId(userId);
-		return orderitemsAndCourseList;
+		Map<String, Object> shoppingRecordList = orderservice.getAllShoppingRecordListByUserId(userId);
+		return shoppingRecordList;
 	}
 }

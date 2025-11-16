@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -78,5 +80,8 @@ public class User extends Core {
 
 	@Transient
 	private String filename;
+	
+	@Transient
+	private MultipartFile avatarFile;
 
 }

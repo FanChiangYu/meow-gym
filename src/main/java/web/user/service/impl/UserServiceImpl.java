@@ -6,11 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import core.util.FileUtil;
 import web.course.service.CourseService;
@@ -106,23 +106,18 @@ public class UserServiceImpl implements UserService {
 			return user;
 		}
 
-		String filename = user.getAvatarUrl();
+		MultipartFile file = user.getAvatarFile();
+		String filename = file.getOriginalFilename();
+
 		if (filename == null || filename.isEmpty()) {
 			user.setMessage("缺少圖片檔名");
 			user.setSuccessful(false);
 			return user;
 		}
-
-		final String imgBase64 = user.getAvatarUrl();
-		if (imgBase64 == null || imgBase64.isEmpty()) {
-			user.setMessage("未選擇圖片");
-			user.setSuccessful(false);
-			return user;
-		}
-
 		filename = courseService.addTimestampToFileName(filename);
 		String fullPath = FileUtil.IMG_ROOT_PATH + filename;
-		byte[] img = Base64.getDecoder().decode(imgBase64);
+		byte[] img = file.getBytes();
+
 		Path path = Paths.get(fullPath);
 		Files.write(path, img);
 		user.setAvatarUrl("/meow-gym/course/img/" + filename);

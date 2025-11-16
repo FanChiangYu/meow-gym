@@ -1,6 +1,7 @@
 package web.user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.user.pojo.User;
 import web.user.service.UserService;
@@ -39,13 +42,23 @@ public class UserController extends HttpServlet {
 
 	@PostMapping("register")
 	@ResponseBody
-	public User register(@RequestBody User user, HttpSession session) throws IOException {
-		if (user == null) {
-			user = new User();
-			user.setMessage("無會員資訊");
-			user.setSuccessful(false);
-			return user;
-		}
+	public User register(@RequestParam String cntCode, @RequestParam String distCode,
+			@RequestParam String detailAddress, @RequestParam String email, @RequestParam String name,
+			@RequestParam String password, @RequestParam String phone, @RequestParam String birthday,
+			@RequestParam String gender, @RequestParam("avatarFile") MultipartFile avatarFile) throws IOException {
+
+		User user = new User();
+		user.setCntCode(Integer.parseInt(cntCode));
+		user.setDistCode(Integer.parseInt(distCode));
+		user.setDetailAddress(detailAddress);
+		user.setEmail(email);
+		user.setName(name);
+		user.setPassword(password);
+		user.setPhone(phone);
+		user.setBirthday(Date.valueOf(birthday));
+		user.setGender(gender);
+		user.setAvatarFile(avatarFile);
+
 		return userService.register(user);
 	}
 
