@@ -19,6 +19,7 @@ import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
 import web.promotions.pojo.CoursePromo;
+import web.user.pojo.User;
 
 @Service
 public class OrderServiceImpl implements OrderService{	
@@ -80,7 +81,7 @@ public class OrderServiceImpl implements OrderService{
 		List<Orderitems> orderitemsList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step3:藉由courseID 去撈course.class
 		List<Integer> courseIdList = orderitemsList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
-		List<Course> courseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdList);
+		List<Course> courseList = orderdao.selectCourseListByOrderitemsCourseIdList(courseIdList);
 		//Step4:跑foreach 放入 coachname
 		for(Course course : courseList) {
 			String coachName = courseService.findName(course);
@@ -259,7 +260,7 @@ public class OrderServiceImpl implements OrderService{
 		}
 		//Step6:藉由courseID 去撈course.class
 		List<Integer> courseIdList = completeOrderitemsList.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
-		List<Course> completeCourseList = orderdao.selectCourseAndOrderitemListByOrderitems(courseIdList);
+		List<Course> completeCourseList = orderdao.selectCourseListByOrderitemsCourseIdList(courseIdList);
 		//Step7:跑foreach 放入 coachname
 		for(Course course : completeCourseList) {
 			String coachName = courseService.findName(course);
@@ -285,5 +286,21 @@ public class OrderServiceImpl implements OrderService{
 		orderConfirmation.put("Orderitems", completeOrderitemsList);
 		orderConfirmation.put("Course", completeCourseList);
 		return orderConfirmation;		
+	}
+
+	@Override
+	public Map<String, Object> getAllShoppingRecordListByUserId(Integer userId) {		
+		//Step1:撈Users by userId
+//		User user = orderdao.selectUserByUserId(userId);
+		//Step1:撈OrderList by userId
+		List<Orders> shoppingRecordOrders = orderdao.selectShoppingRecordOrdersByUserId(userId);
+		//Step2:撈OrderItemsList by OrdersList
+		List<Integer> orderIdList = shoppingRecordOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
+		List<Orderitems> shoppingRecordOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
+		//Step3:回傳Orders, Orderitems
+		Map<String, Object> shoppingRecordList = new HashMap<>();
+		shoppingRecordList.put("Orders", shoppingRecordOrders);
+		shoppingRecordList.put("Orderitems", shoppingRecordOrderItemsList);	
+		return shoppingRecordList;
 	}
 }
