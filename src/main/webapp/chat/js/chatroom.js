@@ -47,28 +47,6 @@ fetch('/meow-gym/chat/getusercourseid', {
 		console.log("載入課程:", currentCourseId);
 		connectChat(currentCourseId);
 
-		//新增多種課程......
-		// for (let i = 0; i < body.usercourseid.length; i++) {
-		// 	console.log(body.usercourseid[i].courseId);
-		// 	classlist.innerHTML += `
-		// 	<li class="chat-contact-list-item mb-0 course-link">
-		// 	        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid[i].courseId}">
-		// 	          <div class="flex-shrink-0 avatar avatar-busy">
-		// 	            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-		// 	          </div>
-		// 	          <div class="chat-contact-info flex-grow-1 ms-4">
-		// 	            <div class="d-flex justify-content-between align-items-center">
-		// 	              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid[i].courseId}</h6>
-		// 	              <small class="chat-contact-list-item-time">1 Day</small>
-		// 	            </div>
-		// 	            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
-		// 	              user</small>
-		// 	          </div>
-		// 	        </a>
-		// 	      </li>`;
-
-		// }
-
 		//列出現在課程 (可刪除)
 		// classlist.innerHTML += `
 		// 	<li class="chat-contact-list-item mb-0 course-link">
@@ -160,31 +138,6 @@ function connectChat(currentCourseId) {
 
 			//教練頭像加上紫色邊框
 			const caochrole = roleText === "教練" ? "coach-border" : "";
-
-			// chatplace.innerHTML += `
-			//    <li class="chat-message chat-contact-list-item ${messageSelf}">
-			//               <div class="d-flex overflow-hidden">
-			//                 <div class="chat-message-wrapper flex-grow-1">
-			// 				<div class="d-flex align-items-end flex-grow-1">
-			// 					<div class="user-avatar ms-4">
-			// 					<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
-			// 							<div class="avatar ${caochrole}">
-			// 								<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
-			// 							</div>
-			// 					</div>
-			// 						 <div class="chat-message-text">
-			//                    			 <p class="mb-0">${allMessages[i].text}</p>
-			//                   		</div>
-			// 				</div>
-
-			//                   <div class="text-end text-body-secondary mt-1">
-			//                     <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
-			//                     <small>${allMessages[i].time.slice(0, 16)}</small>
-			//                   </div>
-			//                 </div>
-
-			//               </div>
-			//             </li>`;
 
 			if (loginUser.role === 3) {
 				chatplace.innerHTML += `
@@ -306,11 +259,17 @@ fetch('/meow-gym/index/loginData')
 	.then(resp => resp.json())
 	.then(respbody => {
 		if (respbody.successful) {
-			console.log(respbody.user.role);
 			switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
 			userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
-			console.log("使用者名稱:", respbody.user.name);
 			avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+		} else {
+			Swal.fire({
+				title: '錯誤',
+				text: '請先登入',
+				icon: 'error',
+				target: document.body
+			})
+				.then(() => location.href = '/meow-gym/index/login');
 		}
 	});
 
