@@ -51,6 +51,7 @@
 	<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 
 	<script src="../assets/js/config.js"></script>
+	<script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
 </head>
 
 <body>
@@ -242,22 +243,9 @@
 							<div class="card mb-6">
 								<!-- Account -->
 								<div class="card-body">
-									<div class="d-flex align-items-start align-items-sm-center gap-6">
-										<img src="./default/img/1.png" alt="user-avatar"
-											class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
-										<div class="button-wrapper">
-											<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-												<span class="d-none d-sm-block">Upload new photo</span>
-												<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
-												<input type="file" id="upload" class="account-file-input" hidden
-													accept=".png" />
-											</label>
-											<button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-												<i class="icon-base ti tabler-reset d-block d-sm-none"></i>
-												<span class="d-none d-sm-block">Reset</span>
-											</button>
-											<div>Allowed PNG.</div>
-										</div>
+									<div class="mb-6">
+										<label for="upload" class="form-label">課程圖片 (僅允許 PNG 格式圖片)</label>
+										<input class="form-control" type="file" id="upload" accept=".png" />
 									</div>
 									<div class="card-body pt-4">
 										<form id="formAccountSettings" method="GET" onsubmit="return false">
@@ -272,7 +260,8 @@
 												</div>
 												<div class="col-md-6">
 													<label for="password" class="form-label">會員密碼</label> <input class="form-control"
-														type="password" id="password" name="password" minlength="8" placeholder="至少8位數，包含英文及數字" />
+														type="password" id="password" name="password" minlength="8" placeholder="至少8位數，包含英文及數字"
+														autocomplete="off" />
 												</div>
 												<div class="col-md-6">
 													<label class="form-label" for="phoneNumber">聯繫電話</label>
@@ -453,7 +442,7 @@
 		<!-- endbuild -->
 
 		<!-- Vendors JS -->
-		<script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+
 		<script src="../assets/vendor/libs/select2/select2.js"></script>
 
 		<!-- Main JS -->
