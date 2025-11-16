@@ -9,3 +9,7 @@
   color: #fff !important;
 }
 
+.coach-border {
+  border: 4px solid #8d61de !important;
+  border-radius: 30% !important;
+}

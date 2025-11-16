@@ -14,6 +14,11 @@ public class ChatDTO {
 	private String content;
 	private Timestamp createdAt;
 
+	// add 20251114
+	private String avatarUrl;
+	private Integer role;
+	// add 20251114 end
+
 	public ChatDTO() {
 		super();
 	}
@@ -66,7 +71,35 @@ public class ChatDTO {
 		this.createdAt = createdAt;
 	}
 
-	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt) {
+	// add 20251114
+	public void setAvatarUrl(String AvatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+	
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
+	// add end 20251114
+
+//	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt) {
+//		super();
+//		this.chatId = chatId;
+//		this.courseId = courseId;
+//		this.userId = userId;
+//		this.name = name;
+//		this.content = content;
+//		this.createdAt = createdAt;
+//	}
+
+	public ChatDTO(Integer chatId, Integer courseId, Integer userId, String name, String content, Timestamp createdAt, String avatarUrl, Integer role) {
 		super();
 		this.chatId = chatId;
 		this.courseId = courseId;
@@ -74,16 +107,28 @@ public class ChatDTO {
 		this.name = name;
 		this.content = content;
 		this.createdAt = createdAt;
+		this.avatarUrl = avatarUrl;
+		this.role = role;
 	}
 
-	
-	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt) {
+//	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt) {
+//		this.chatId = chatId;
+//		this.courseId = courseId;
+//		this.userId = userId;
+//		this.name = name;
+//		this.content = content;
+//		this.createdAt = (createdAt == null) ? null : new Timestamp(createdAt.getTime());
+//	}
+
+	public ChatDTO(int chatId, int courseId, int userId, String name, String content, Date createdAt, String avatarUrl, Integer role) {
 		this.chatId = chatId;
 		this.courseId = courseId;
 		this.userId = userId;
 		this.name = name;
 		this.content = content;
 		this.createdAt = (createdAt == null) ? null : new Timestamp(createdAt.getTime());
+		this.avatarUrl = avatarUrl;
+		this.role = role;
 	}
 
 }
