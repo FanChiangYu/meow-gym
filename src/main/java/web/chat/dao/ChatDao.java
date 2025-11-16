@@ -24,6 +24,10 @@ public interface ChatDao extends CoreDao<User, Integer>{
 	 // B 方案：寫入後立刻帶回 DB 寫入完成的 Entity（含 id、created_at)
 	//Chats saveAndLoad(int courseId, int userId, Integer coachId, String content);
 	Chats saveAndLoad(Chats chats);
+	
+	// add 20251115
+	List<UserCourseDTO> selectUserCourseId(Integer role);
+	// add 20251115 end
 
 
 }

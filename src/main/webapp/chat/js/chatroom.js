@@ -29,6 +29,7 @@ fetch('/meow-gym/chat/userinfo', {
 		console.log(loginUser); //代表
 		// username.innerText = `${loginUser.name}，你好！`;
 		console.log("loginUser.avatarUrl" + loginUser.avatarUrl);
+		console.log("loginUser.role" + loginUser.role);
 	});
 
 
@@ -147,46 +148,49 @@ function connectChat(currentCourseId) {
 			const isSelf = loginUser.name === `${allMessages[i].name}`;
 			const messageSelf = isSelf ? "chat-message-right" : "chat-message-left";
 
-			//聊天訊息顯示方向判斷
-			// 	chatplace.innerHTML += `
-			// 	   <li class="chat-message chat-contact-list-item ${messageSelf}">
-			//                   <div class="d-flex overflow-hidden">
-			//                     <div class="chat-message-wrapper flex-grow-1">
-			// 					${allMessages[i].name}
-			//                       <div class="chat-message-text">
-			//                         <p class="mb-0">${allMessages[i].text}</p>
-			//                       </div>
-			//                       <div class="text-end text-body-secondary mt-1">
-			//                         <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
-			//                         <small>${allMessages[i].time.slice(0, 16)}</small>
-			//                       </div>
-			//                     </div>
-			//                     <div class="user-avatar flex-shrink-0 ms-4">
-			//                       <div class="avatar avatar-sm">
-			//                         <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-			//                       </div>
-			//                     </div>
-			//                   </div>
-			//                 </li>`;
-			// }
-
 			//聊天角色判斷
 			let roleText = "";
 			if (allMessages[i].role == 1) {
-				roleText = "";
+				roleText = "會員";
 			} else if (allMessages[i].role == 2) {
 				roleText = "教練";
 			} else if (allMessages[i].role == 3) {
-				roleText = "";
+				roleText = "管理者";
 			}
 
 			//教練頭像加上紫色邊框
 			const caochrole = roleText === "教練" ? "coach-border" : "";
 
-			chatplace.innerHTML += `
+			// chatplace.innerHTML += `
+			//    <li class="chat-message chat-contact-list-item ${messageSelf}">
+			//               <div class="d-flex overflow-hidden">
+			//                 <div class="chat-message-wrapper flex-grow-1">
+			// 				<div class="d-flex align-items-end flex-grow-1">
+			// 					<div class="user-avatar ms-4">
+			// 					<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
+			// 							<div class="avatar ${caochrole}">
+			// 								<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
+			// 							</div>
+			// 					</div>
+			// 						 <div class="chat-message-text">
+			//                    			 <p class="mb-0">${allMessages[i].text}</p>
+			//                   		</div>
+			// 				</div>
+
+			//                   <div class="text-end text-body-secondary mt-1">
+			//                     <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
+			//                     <small>${allMessages[i].time.slice(0, 16)}</small>
+			//                   </div>
+			//                 </div>
+
+			//               </div>
+			//             </li>`;
+
+			if (loginUser.role === 3) {
+				chatplace.innerHTML += `
 			   <li class="chat-message chat-contact-list-item ${messageSelf}">
-                          <div class="d-flex overflow-hidden">
-                            <div class="chat-message-wrapper flex-grow-1">
+			              <div class="d-flex overflow-hidden">
+			                <div class="chat-message-wrapper flex-grow-1">
 							<div class="d-flex align-items-end flex-grow-1">
 								<div class="user-avatar ms-4">
 								<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
@@ -195,22 +199,49 @@ function connectChat(currentCourseId) {
 										</div>
 								</div>
 									 <div class="chat-message-text">
-                               			 <p class="mb-0">${allMessages[i].text}</p>
-                              		</div>
+									 <span class="material-symbols-outlined">close</span>
+			                   			 <p class="mb-0">${allMessages[i].text}</p>
+			                  		</div>
 							</div>
-                             
-                              <div class="text-end text-body-secondary mt-1">
-                                <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
-                                <small>${allMessages[i].time.slice(0, 16)}</small>
-                              </div>
-                            </div>
-                        
-                          </div>
-                        </li>`;
+
+			                  <div class="text-end text-body-secondary mt-1">
+			                    <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
+			                    <small>${allMessages[i].time.slice(0, 16)}</small>
+			                  </div>
+			                </div>
+
+			              </div>
+			            </li>`;
+			} else {
+				chatplace.innerHTML += `
+			   <li class="chat-message chat-contact-list-item ${messageSelf}">
+			              <div class="d-flex overflow-hidden">
+			                <div class="chat-message-wrapper flex-grow-1">
+							<div class="d-flex align-items-end flex-grow-1">
+								<div class="user-avatar ms-4">
+								<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
+										<div class="avatar ${caochrole}">
+											<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
+										</div>
+								</div>
+									 <div class="chat-message-text">
+			                   			 <p class="mb-0">${allMessages[i].text}</p>
+			                  		</div>
+							</div>
+
+			                  <div class="text-end text-body-secondary mt-1">
+			                    <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
+			                    <small>${allMessages[i].time.slice(0, 16)}</small>
+			                  </div>
+			                </div>
+
+			              </div>
+			            </li>`;
+			}
 
 		};
 
-		// ✅ 歷史訊息載入完，捲到最底
+		// 歷史訊息載入完，捲到最底
 		const chatHistoryBody = document.querySelector('.chat-history-body');
 		chatHistoryBody.scrollTop = chatHistoryBody.scrollHeight;
 

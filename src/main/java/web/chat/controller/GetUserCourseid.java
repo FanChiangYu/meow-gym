@@ -57,6 +57,7 @@ public class GetUserCourseid {
 
 		User loginUser = (User) session.getAttribute("user");
 
+		// 呼叫 httpsession 的 courseId
 		// add
 		Integer courseIdNew = (Integer) session.getAttribute("courseId");
 		System.out.println("fan courseId" + courseIdNew); // send to frontend

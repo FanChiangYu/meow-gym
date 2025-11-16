@@ -50,6 +50,10 @@
 
   <link rel="stylesheet" href="../assets/vendor/css/pages/app-chat.css" />
 
+  <!-- google icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
+
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
 
@@ -292,223 +296,224 @@
             <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
 
             <!-- Chat History -->
-             <div class="content-wrapper">
-          <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="app-chat card overflow-hidden">
-              <div class="row g-0">
-                <!-- Sidebar Left -->
-                <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
-                  <div
-                    class="chat-sidebar-left-user sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
-                    <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
-                      <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                    </div>
-                    <h5 class="mt-4 mb-0">John Doe</h5>
-                    <span>Admin</span>
-                    <i class="icon-base ti tabler-x icon-lg cursor-pointer close-sidebar" data-bs-toggle="sidebar"
-                      data-overlay data-target="#app-chat-sidebar-left"></i>
-                  </div>
-                  <div class="sidebar-body px-6 pb-6">
-                    <div class="my-6">
-                      <div class="maxLength-wrapper">
-                        <label for="chat-sidebar-left-user-about"
-                          class="text-uppercase text-body-secondary mb-1">About</label>
-                        <textarea id="chat-sidebar-left-user-about"
-                          class="form-control chat-sidebar-left-user-about maxLength-example" rows="3" maxlength="120">
+            <div class="content-wrapper">
+              <!-- Content -->
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="app-chat card overflow-hidden">
+                  <div class="row g-0">
+                    <!-- Sidebar Left -->
+                    <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
+                      <div
+                        class="chat-sidebar-left-user sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
+                        <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
+                          <img src="../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                        </div>
+                        <h5 class="mt-4 mb-0">John Doe</h5>
+                        <span>Admin</span>
+                        <i class="icon-base ti tabler-x icon-lg cursor-pointer close-sidebar" data-bs-toggle="sidebar"
+                          data-overlay data-target="#app-chat-sidebar-left"></i>
+                      </div>
+                      <div class="sidebar-body px-6 pb-6">
+                        <div class="my-6">
+                          <div class="maxLength-wrapper">
+                            <label for="chat-sidebar-left-user-about"
+                              class="text-uppercase text-body-secondary mb-1">About</label>
+                            <textarea id="chat-sidebar-left-user-about"
+                              class="form-control chat-sidebar-left-user-about maxLength-example" rows="3"
+                              maxlength="120">
 Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</textarea>
-                        <small id="textarea-maxlength-info"></small>
+                            <small id="textarea-maxlength-info"></small>
+                          </div>
+                        </div>
+                        <div class="my-6">
+                          <p class="text-uppercase text-body-secondary mb-1">Status</p>
+                          <div class="d-grid gap-2 pt-2 text-heading ms-2">
+                            <div class="form-check form-check-success">
+                              <input name="chat-user-status" class="form-check-input" type="radio" value="active"
+                                id="user-active" checked />
+                              <label class="form-check-label" for="user-active">Online</label>
+                            </div>
+                            <div class="form-check form-check-warning">
+                              <input name="chat-user-status" class="form-check-input" type="radio" value="away"
+                                id="user-away" />
+                              <label class="form-check-label" for="user-away">Away</label>
+                            </div>
+                            <div class="form-check form-check-danger">
+                              <input name="chat-user-status" class="form-check-input" type="radio" value="busy"
+                                id="user-busy" />
+                              <label class="form-check-label" for="user-busy">Do not Disturb</label>
+                            </div>
+                            <div class="form-check form-check-secondary">
+                              <input name="chat-user-status" class="form-check-input" type="radio" value="offline"
+                                id="user-offline" />
+                              <label class="form-check-label" for="user-offline">Offline</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="my-6">
+                          <p class="text-uppercase text-body-secondary mb-1">Settings</p>
+                          <ul class="list-unstyled d-grid gap-4 ms-2 pt-2 text-heading">
+                            <li class="d-flex justify-content-between align-items-center">
+                              <div>
+                                <i class="icon-base ti tabler-lock icon-md me-1"></i>
+                                <span class="align-middle">Two-step Verification</span>
+                              </div>
+                              <div class="form-check form-switch mb-0 me-1">
+                                <input type="checkbox" class="form-check-input" checked />
+                              </div>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                              <div>
+                                <i class="icon-base ti tabler-bell icon-md me-1"></i>
+                                <span class="align-middle">Notification</span>
+                              </div>
+                              <div class="form-check form-switch mb-0 me-1">
+                                <input type="checkbox" class="form-check-input" />
+                              </div>
+                            </li>
+                            <li>
+                              <i class="icon-base ti tabler-user-plus icon-md me-1"></i>
+                              <span class="align-middle">Invite Friends</span>
+                            </li>
+                            <li>
+                              <i class="icon-base ti tabler-trash icon-md me-1"></i>
+                              <span class="align-middle">Delete Account</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="d-flex mt-6">
+                          <button class="btn btn-primary w-100" data-bs-toggle="sidebar" data-overlay
+                            data-target="#app-chat-sidebar-left">
+                            Logout<i class="icon-base ti tabler-logout icon-16px ms-2"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div class="my-6">
-                      <p class="text-uppercase text-body-secondary mb-1">Status</p>
-                      <div class="d-grid gap-2 pt-2 text-heading ms-2">
-                        <div class="form-check form-check-success">
-                          <input name="chat-user-status" class="form-check-input" type="radio" value="active"
-                            id="user-active" checked />
-                          <label class="form-check-label" for="user-active">Online</label>
-                        </div>
-                        <div class="form-check form-check-warning">
-                          <input name="chat-user-status" class="form-check-input" type="radio" value="away"
-                            id="user-away" />
-                          <label class="form-check-label" for="user-away">Away</label>
-                        </div>
-                        <div class="form-check form-check-danger">
-                          <input name="chat-user-status" class="form-check-input" type="radio" value="busy"
-                            id="user-busy" />
-                          <label class="form-check-label" for="user-busy">Do not Disturb</label>
-                        </div>
-                        <div class="form-check form-check-secondary">
-                          <input name="chat-user-status" class="form-check-input" type="radio" value="offline"
-                            id="user-offline" />
-                          <label class="form-check-label" for="user-offline">Offline</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="my-6">
-                      <p class="text-uppercase text-body-secondary mb-1">Settings</p>
-                      <ul class="list-unstyled d-grid gap-4 ms-2 pt-2 text-heading">
-                        <li class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <i class="icon-base ti tabler-lock icon-md me-1"></i>
-                            <span class="align-middle">Two-step Verification</span>
-                          </div>
-                          <div class="form-check form-switch mb-0 me-1">
-                            <input type="checkbox" class="form-check-input" checked />
-                          </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <i class="icon-base ti tabler-bell icon-md me-1"></i>
-                            <span class="align-middle">Notification</span>
-                          </div>
-                          <div class="form-check form-switch mb-0 me-1">
-                            <input type="checkbox" class="form-check-input" />
-                          </div>
-                        </li>
-                        <li>
-                          <i class="icon-base ti tabler-user-plus icon-md me-1"></i>
-                          <span class="align-middle">Invite Friends</span>
-                        </li>
-                        <li>
-                          <i class="icon-base ti tabler-trash icon-md me-1"></i>
-                          <span class="align-middle">Delete Account</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="d-flex mt-6">
-                      <button class="btn btn-primary w-100" data-bs-toggle="sidebar" data-overlay
-                        data-target="#app-chat-sidebar-left">
-                        Logout<i class="icon-base ti tabler-logout icon-16px ms-2"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- /Sidebar Left-->
+                    <!-- /Sidebar Left-->
 
-                <!-- Chat & Contacts -->
-              
+                    <!-- Chat & Contacts -->
+
                     <!-- Contacts -->
-                <!-- /Chat contacts -->
+                    <!-- /Chat contacts -->
 
-                <!-- Chat conversation -->
-  
-                <!-- /Chat conversation -->
+                    <!-- Chat conversation -->
 
-                <!-- Chat History -->
-                <div class="col app-chat-history d-block" id="app-chat-history">
-                
-                  <div class="chat-history-body">
-                    <ul class="list-unstyled chat-history">
-                      <!-- add chat-place to load the history chats -->
-                      <div id="chat-place"></div>
-                    </ul>
-                  </div>
+                    <!-- /Chat conversation -->
 
-                  <!-- Chat message form -->
-                  <div class="chat-history-footer shadow-xs">
-                    <form class="form-send-message d-flex justify-content-between align-items-center">
+                    <!-- Chat History -->
+                    <div class="col app-chat-history d-block" id="app-chat-history">
 
-                      <!-- add id chat-message -->
-                      <input id="chat-message" class="form-control message-input border-0 me-4 shadow-none"
-                        placeholder="Type your message here..." />
-                      <div class="message-actions d-flex align-items-center">
-
-                        <!-- add id send-button -->
-
-                        <button id="send-button" class="btn btn-primary d-flex">
-                          <span class="align-middle d-md-inline-block d-none">Send</span>
-                          <i class="icon-base ti tabler-send icon-16px ms-md-2 ms-0"></i>
-                        </button>
+                      <div class="chat-history-body">
+                        <ul class="list-unstyled chat-history">
+                          <!-- add chat-place to load the history chats -->
+                          <div id="chat-place"></div>
+                        </ul>
                       </div>
-                    </form>
+
+                      <!-- Chat message form -->
+                      <div class="chat-history-footer shadow-xs">
+                        <form class="form-send-message d-flex justify-content-between align-items-center">
+
+                          <!-- add id chat-message -->
+                          <input id="chat-message" class="form-control message-input border-0 me-4 shadow-none"
+                            placeholder="Type your message here..." />
+                          <div class="message-actions d-flex align-items-center">
+
+                            <!-- add id send-button -->
+
+                            <button id="send-button" class="btn btn-primary d-flex">
+                              <span class="align-middle d-md-inline-block d-none">Send</span>
+                              <i class="icon-base ti tabler-send icon-16px ms-md-2 ms-0"></i>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
+                  <!-- /Chat History -->
+
+                  <div class="app-overlay"></div>
                 </div>
               </div>
-              <!-- /Chat History -->
-
-              <div class="app-overlay"></div>
             </div>
+            <!-- /Chat History -->
+
+            <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
           </div>
-        </div>
-          <!-- /Chat History -->
+          <!-- / Content -->
 
-          <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
-        </div>
-        <!-- / Content -->
-
-        <!-- Footer -->
-        <footer class="footer bg-dark">
-          <div class="container-fluid container-p-x pt-12 pb-6">
-            <div class="row">
-              <div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-                <h4 class="fw-bold mb-4">
-                  <a href="#" class="footer-text">MEOW GYM
-                  </a>
-                </h4>
-                <span>健身 從這裡出發！</span>
-                <div class="social-icon my-4">
-                  <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-facebook me-2"><i
-                      class="icon-base ti tabler-brand-facebook icon-20px"></i></a>
-                  <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-instagram me-2"><i
-                      class="icon-base ti tabler-brand-instagram icon-20px"></i></a>
-                  <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-linkedin me-2"><i
-                      class="icon-base ti tabler-brand-linkedin icon-20px"></i></a>
-                  <a href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"><i
-                      class="icon-base ti tabler-brand-github icon-20px"></i></a>
+          <!-- Footer -->
+          <footer class="footer bg-dark">
+            <div class="container-fluid container-p-x pt-12 pb-6">
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+                  <h4 class="fw-bold mb-4">
+                    <a href="#" class="footer-text">MEOW GYM
+                    </a>
+                  </h4>
+                  <span>健身 從這裡出發！</span>
+                  <div class="social-icon my-4">
+                    <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-facebook me-2"><i
+                        class="icon-base ti tabler-brand-facebook icon-20px"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-instagram me-2"><i
+                        class="icon-base ti tabler-brand-instagram icon-20px"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-linkedin me-2"><i
+                        class="icon-base ti tabler-brand-linkedin icon-20px"></i></a>
+                    <a href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"><i
+                        class="icon-base ti tabler-brand-github icon-20px"></i></a>
+                  </div>
+                  <p class="pt-6">
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    © Tibame TJA201
+                  </p>
                 </div>
-                <p class="pt-6">
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  © Tibame TJA201
-                </p>
-              </div>
-              <div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
-                <h5 class="footer-text">聯絡方式</h5>
-                <ul class="list-unstyled">
-                  <li><span class="footer-text d-block pb-2">聯絡電話 : 02-2712-0589</span></li>
-                  <li><span class="footer-text d-block pb-2">場館地址 : 台北市中山區南京東路三段219號4F</span></li>
-                  <li><span class="footer-text d-block pb-2">公司信箱 : service@tibame.com</span></li>
-                  <li><span class="footer-text d-block pb-2">營業時間 : 7 : 00 ~ 23 : 00</span></li>
-                </ul>
-              </div>
-              <div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-                <h5 class="footer-text">快速導覽</h5>
-                <ul class="list-unstyled">
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">首頁</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
-                </ul>
-              </div>
-              <div class="col-12 col-sm-6 col-md-3">
-                <h5 class="footer-text">專題成員履歷</h5>
-                <ul class="list-unstyled">
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡芝</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
-                  <li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
-                </ul>
+                <div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
+                  <h5 class="footer-text">聯絡方式</h5>
+                  <ul class="list-unstyled">
+                    <li><span class="footer-text d-block pb-2">聯絡電話 : 02-2712-0589</span></li>
+                    <li><span class="footer-text d-block pb-2">場館地址 : 台北市中山區南京東路三段219號4F</span></li>
+                    <li><span class="footer-text d-block pb-2">公司信箱 : service@tibame.com</span></li>
+                    <li><span class="footer-text d-block pb-2">營業時間 : 7 : 00 ~ 23 : 00</span></li>
+                  </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+                  <h5 class="footer-text">快速導覽</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">首頁</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
+                  </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                  <h5 class="footer-text">專題成員履歷</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡芝</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
-        <!-- / Footer -->
+          </footer>
+          <!-- / Footer -->
 
-        <div class="content-backdrop fade"></div>
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
       </div>
-      <!-- Content wrapper -->
+      <!-- / Layout page -->
     </div>
-    <!-- / Layout page -->
-  </div>
 
-  <!-- Overlay -->
-  <div class="layout-overlay layout-menu-toggle"></div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
 
-  <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-  <div class="drag-target"></div>
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
   </div>
   <!-- / Layout wrapper -->
 
