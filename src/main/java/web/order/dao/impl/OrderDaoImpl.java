@@ -95,7 +95,10 @@ public class OrderDaoImpl implements OrderDao{
 
 	@Override
 	public CoursePromo selectCoursePromoByCourseId(Integer courseId) {
-		return session.get(CoursePromo.class, courseId);
+	    String hql = "FROM CoursePromo WHERE courseId = :courseId";
+	    return session.createQuery(hql, CoursePromo.class)
+	                  .setParameter("courseId", courseId)
+	                  .uniqueResult();
 	}
 	
 	@Override

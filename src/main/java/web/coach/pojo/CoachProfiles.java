@@ -1,7 +1,6 @@
 package web.coach.pojo;
 
-import java.time.LocalDateTime;
-
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,5 +32,5 @@ public class CoachProfiles {
 	@Column(name = "APPROVAL_STATUS")
 	private String approvalStatus; 
 	@Column(name = "APPROVED_AT")
-	private LocalDateTime approvedAt; 
+	private Timestamp approvedAt; 
 }

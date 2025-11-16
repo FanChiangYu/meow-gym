@@ -2,6 +2,8 @@ package web.order.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +23,12 @@ public class AddCartController {
 
 	@GetMapping("addCart")
 	@ResponseBody
-	protected Map<String, Object> addCart(@SessionAttribute(value = "user", required = false) User setUser, 
+	protected Map<String, Object> addCart(HttpSession session,@SessionAttribute(value = "user", required = false) User setUser, 
 			@SessionAttribute(value = "course", required = false) Course setCourse) {
 		//取會員資料
-//		Integer userId = setUser.getUserId();
+		Integer userId = setUser.getUserId();
 		// 先寫死
-		Integer userId = 1;
+//		Integer userId = 1;
 
 		// 判斷是否有加入購物車的課程，如無則顯示課程清單
 		if (setCourse != null) {// 比對訂單course資訊
@@ -35,6 +37,7 @@ public class AddCartController {
 		}
 		// 回傳購物車清單
 		Map<String, Object> orderitemsAndCourseList = orderservice.getAllOrderitemsAndCourseByUserId(userId);
+		session.removeAttribute("course");
 		return orderitemsAndCourseList;
 	}
 }

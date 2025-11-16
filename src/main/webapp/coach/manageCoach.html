@@ -41,11 +41,9 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
-    <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
 
@@ -308,73 +306,36 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" style="border: 2px solid red;">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-      
-              <div class="row mb-6 gy-6">
-                <div class="col-xl">
-                  <div class="card">
-                    <div class="card-header d-flex justify-content-start align-items-center gap-2">
-                      <h5 class="mb-0">教練資格申請</h5>
-                      <span class="badge bg-label-info fs-5">待審核</span>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="mb-6">
-                          <label class="form-label" for="description">教練自我介紹</label>
-                          <textarea id="description" class="form-control"
-                            placeholder="教練自我介紹"></textarea>
-                        </div>
-                        <hr class="my-6 mx-n6">    
-                        <h6>學歷</h6>
-                        <div class="mb-6">
-                          <label class="form-label" for="school">學校名稱</label>
-                          <input type="text" class="form-control" id="school" placeholder="學校名稱" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="degree">學位</label>
-                          <input type="text" class="form-control" id="degree" placeholder="學位" />
-                        </div>
-                        <hr class="my-6 mx-n6">
-                        <h6>工作經歷</h6>
-                        <div class="mb-6">
-                          <label class="form-label" for="company">任職公司</label>
-                          <input type="text" class="form-control" id="company" placeholder="任職公司" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="title">職稱</label>
-                          <input type="text" class="form-control" id="title" placeholder="職稱" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="start-date">任職開始日期</label>
-                          <input type="text" id="start-date" class="form-control dob-picker"
-                            placeholder="YYYY-MM-DD" />
-                        </div>
-                        <div class="mb-6">
-                          <label class="form-label" for="end-date">任職結束日期</label>
-                          <input type="text" id="end-date" class="form-control dob-picker"
-                            placeholder="YYYY-MM-DD" />
-                        </div>   
-                        <hr class="my-6 mx-n6">
-                        <h6>證照</h6>
-                        <div class="mb-6">
-                          <label class="form-label" for="certificate">證照名稱</label>
-                          <input type="text" class="form-control" id="certificate" placeholder="證照名稱" />
-                        </div>
-                        <div class="mb-6">
-                          <label for="img" class="form-label">證照截圖 (僅允許 PNG 格式圖片)</label>
-                          <input class="form-control" type="file" id="img" accept=".png" />
-                        </div>  
-                        <div class="mb-6">
-                          <a href="javascript:void(0)" class="card-link">已上傳檔名.png</a>
-                        </div>
-                        <hr class="my-6 mx-n6">
-                        <button id="change-btn" type="button" class="btn btn-primary">資料變更</button>
-                      </form>
-                    </div>
+              <div class="card">
+                <div class="card-header border-bottom">
+                  <h5 class="card-title mb-0">教練審核</h5>
+                  <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0">
+                    <div class="col-md-4 user_role"></div>
+                    <div class="col-md-4 user_plan"></div>
+                    <div class="col-md-4 user_status"></div>
                   </div>
                 </div>
+                <div class="card-datatable">
+                  <table class="datatables-users table">
+                    <thead class="border-top">
+                      <tr>
+                        <th>會員ID</th>
+                        <th>姓名</th>
+                        <th>帳號 (電子郵件)</th>
+                        <th>身份</th>
+                        <th>審核狀態</th>
+                        <th>教練資邀請</th>
+                        <th>申請資料審核</th>
+                      </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                    </tbody>   
+                  </table>
+                </div>
               </div>
+            
               
 
 
@@ -484,14 +445,12 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="../assets/vendor/libs/select2/select2.js"></script>
     <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
-    <script src="../course/js/form-layouts.js"></script>
+
     <script src="../assets/js/main.js"></script>
-    <script src="js/applyCoach.js"></script>
+    <script src="js/manageCoach.js"></script>
 
     <!-- Page JS -->
   </body>
