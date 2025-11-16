@@ -247,7 +247,7 @@
 											class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
 										<div class="button-wrapper">
 											<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-												<span class="d-none d-sm-block">Upload new photo</span>
+												<span class="d-none d-sm-block">更換頭像</span>
 												<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
 												<input type="file" id="upload" class="account-file-input" hidden
 													accept=".png" />
@@ -264,15 +264,19 @@
 											<div class="row gy-4 gx-6 mb-6">
 												<div class="col-md-6 form-control-validation">
 													<label for="email" class="form-label">會員帳號</label> <input class="form-control" type="text"
-														id="email" name="email" placeholder="請輸入Email" autofocus />
+														id="email" name="email" placeholder="請輸入Email" disabled />
 												</div>
 												<div class="col-md-6 form-control-validation">
 													<label for="name" class="form-label">姓名</label> <input class="form-control" type="text"
-														name="name" id="name" placeholder="請輸入姓名" />
+														name="name" id="name" placeholder="姓名" />
 												</div>
 												<div class="col-md-6">
-													<label for="password" class="form-label">會員密碼</label> <input class="form-control"
-														type="password" id="password" name="password" minlength="8" placeholder="至少8位數，包含英文及數字" />
+													<label for="password" class="form-label">密碼</label> <input class="form-control"
+														type="password" id="password" name="password" minlength="8" disabled/>
+												</div>
+												<div class="col-md-6">
+													<label for="password" class="form-label">修改密碼</label> <input class="form-control"
+														type="password" id="password" name="password" minlength="8" placeholder="至少8位數，包含英文及數字"/>
 												</div>
 												<div class="col-md-6">
 													<label class="form-label" for="phoneNumber">聯繫電話</label>
@@ -334,7 +338,7 @@
 													</select>
 												</div>
 												<div class="col-md-6">
-													<label class="form-label" for="detail_address">填寫地址</label>
+													<label class="form-label" for="detail_address">修改地址</label>
 													<div class="input-group input-group-merge">
 														<span class="input-group-text"></span> <input type="text" id="detail_address"
 															name="detail_address" class="form-control" placeholder="填寫地址" />
@@ -342,7 +346,7 @@
 												</div>
 											</div>
 											<div class="mt-2">
-												<button type="button" class="btn btn-primary me-3" id="applybutton">成為會員</button>
+												<button type="button" class="btn btn-primary me-3" id="applybutton">修改資料</button>
 												<button type="reset" class="btn btn-label-secondary">Cancel</button>
 											</div>
 										</form>

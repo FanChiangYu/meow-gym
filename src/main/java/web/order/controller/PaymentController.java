@@ -23,7 +23,7 @@ public class PaymentController {
 	@ResponseBody
 	protected Orders payment (@RequestBody Orders orders, 
 			@SessionAttribute(value = "user", required = false) User setUser) {		
-//		//取會員資料
+		//取會員資料
 //		Integer userId = setUser.getUserId();
 		// 先寫死
 		Integer userId = 1;
