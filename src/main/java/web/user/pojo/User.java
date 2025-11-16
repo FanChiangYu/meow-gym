@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -71,5 +72,11 @@ public class User extends Core {
 
 	@Column(name = "created_at")
 	private Timestamp createdAt;
+
+	@Transient
+	private String imgBase64;
+
+	@Transient
+	private String filename;
 
 }

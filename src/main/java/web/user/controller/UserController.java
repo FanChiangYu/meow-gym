@@ -1,5 +1,7 @@
 package web.user.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
@@ -37,7 +39,7 @@ public class UserController extends HttpServlet {
 
 	@PostMapping("register")
 	@ResponseBody
-	public User register(@RequestBody User user, HttpSession session) {
+	public User register(@RequestBody User user, HttpSession session) throws IOException {
 		if (user == null) {
 			user = new User();
 			user.setMessage("無會員資訊");

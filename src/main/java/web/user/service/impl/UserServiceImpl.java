@@ -1,12 +1,19 @@
 package web.user.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import core.util.FileUtil;
+import web.course.service.CourseService;
 import web.user.dao.UserDao;
 import web.user.pojo.User;
 import web.user.service.UserService;
@@ -17,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao dao;
+
+	@Autowired
+	private CourseService courseService;
 
 	@Override
 	public User login(User user) {
@@ -46,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User register(User user) {
+	public User register(User user) throws IOException {
 
 		if (user.getEmail() == null) {
 			user.setMessage("會員帳號未輸入");
@@ -95,6 +105,27 @@ public class UserServiceImpl implements UserService {
 			user.setSuccessful(false);
 			return user;
 		}
+
+		String filename = user.getAvatarUrl();
+		if (filename == null || filename.isEmpty()) {
+			user.setMessage("缺少圖片檔名");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		final String imgBase64 = user.getAvatarUrl();
+		if (imgBase64 == null || imgBase64.isEmpty()) {
+			user.setMessage("未選擇圖片");
+			user.setSuccessful(false);
+			return user;
+		}
+
+		filename = courseService.addTimestampToFileName(filename);
+		String fullPath = FileUtil.IMG_ROOT_PATH + filename;
+		byte[] img = Base64.getDecoder().decode(imgBase64);
+		Path path = Paths.get(fullPath);
+		Files.write(path, img);
+		user.setAvatarUrl("/meow-gym/course/img/" + filename);
 
 		user.setRole(1);
 		user.setBanned(false);
