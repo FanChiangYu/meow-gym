@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function (e) {
   let borderColor, bodyBg, headingColor;
-
   borderColor = config.colors.borderColor;
   bodyBg = config.colors.bodyBg;
   headingColor = config.colors.headingColor;
@@ -19,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
       4: { title: 'Ready to Pickup', class: 'bg-label-info' }
     },
     paymentObj = {
-      1: { title: 'Paid', class: 'text-success' },
-      2: { title: 'Pending', class: 'text-warning' },
-      3: { title: 'Cancelled', class: 'text-secondary' }
+      1: { title: 'PAID', class: 'text-success' },
+      2: { title: 'PENDING', class: 'text-warning' },
+      3: { title: 'CANCELLED', class: 'text-secondary' }
     };
 
   // shoppingrecord

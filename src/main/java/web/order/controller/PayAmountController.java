@@ -22,9 +22,9 @@ public class PayAmountController {
 	@ResponseBody
 	protected Map<String, Object> payAmount(@SessionAttribute(value = "user", required = false) User setUser) {
 		//取會員資料
-//		Integer userId = setUser.getUserId();
+		Integer userId = setUser.getUserId();
 		// 先寫死
-		Integer userId = 1;
+//		Integer userId = 1;
 		
 		// 回傳個課程價格及購課總價
 		Map<String, Object> payAmountList = orderservice.getPayAmountListByUserId(userId);

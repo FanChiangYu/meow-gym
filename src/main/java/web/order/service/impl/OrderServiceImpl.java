@@ -39,13 +39,13 @@ public class OrderServiceImpl implements OrderService{
 		System.out.println(course.getCourseId());
 		
 		//邏輯：產生Orders By userId/
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		if (orderId == null) {
 			Orders orders = new Orders(); 
 			orders.setUserId(userId);
 			orders.setPayAmount(0);
-			orders.setStatus("pending");
-			orders.setPaymentMethod("pending");
+			orders.setStatus("PENDING");
+			orders.setPaymentMethod("PENDING");
 			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 			orders.setCreatedAt(timestamp);
 			int count = orderdao.insert(orders);
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService{
 				System.out.println("產生Order失敗");
 				return false;
 			}
-			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");	
+			orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");	
 		}
 		//邏輯：執行儲存orderitems資料交易控制
 		Orderitems orderitems = new Orderitems();
@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Map<String, Object> getAllOrderitemsAndCourseByUserId(Integer userId) {
 		//Step1:用userId找orderId by Orders
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		//Step2:找同筆訂單下所有CourseID
 		List<Orderitems> orderitemsList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step3:藉由courseID 去撈course.class
@@ -90,7 +90,7 @@ public class OrderServiceImpl implements OrderService{
 		for(Course course : courseList) {
 			Integer courseId = course.getCourseId();
 			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
-			//Step6:決定回傳課程價錢(確認是否為促銷區間) debug促銷價跑掉
+			//Step6:決定回傳課程價錢(確認是否為促銷區間)
 			if (coursePromo != null) {
 				Date today = new Date();
 				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public boolean deletecoursefromcart(Integer orderItemId, Integer userId) {
 		//Step1:確認and刪除orderitems的課程資訊
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		int count1 = orderdao.deleteOrderitemsByOrderItemId(orderItemId); //需修改 因從前端拿Orderitems
 		if(count1 == 1) {
 			System.out.println("Delete course in DB success.");
@@ -118,12 +118,12 @@ public class OrderServiceImpl implements OrderService{
 			List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
 			System.out.println(orderitemList);
 			if (orderitemList == null) { //修改orders狀態為cancel, 需要debug進不來, 問老師
-				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
-				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "cancel"); 
+				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
+				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "CANCEL"); 
 				if(count2 == 1) {
-					System.out.println("orderitems不存在 orders updatestatus_cancel成功");
+					System.out.println("orderitems不存在 orders updatestatus_CANCEL成功");
 				}else {
-					System.out.println("orderitems存在 orders updatestatus_cancel失敗");
+					System.out.println("orderitems存在 orders updatestatus_CANCEL失敗");
 				}			
 			}
 			return true;
@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Map<String, Object> getPayAmountListByUserId(Integer userId) {
 		//Step1:確認Orders and Orderitems 的 orderId
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		//Step2:撈List<Orderitems> by orderId
 		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
 		//Step3:回傳Orders and List<Orderitems> payAmountList
@@ -149,7 +149,7 @@ public class OrderServiceImpl implements OrderService{
 			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
 			orderitems.setTitle(course.getTitle());
 			orderitems.setCoursePrice(course.getCoursePrice());
-			//Step4:決定回傳課程價錢(確認是否為促銷區間) debug促銷價跑掉
+			//Step4:決定回傳課程價錢(確認是否為促銷區間)
 			Date today = new Date();			
 			if(coursePromo != null) {
 				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
@@ -193,14 +193,8 @@ public class OrderServiceImpl implements OrderService{
 				return orders;
 			}
 			
-			if(orders.getExpYear() == null) {
-				orders.setMessage("未輸入有效年份");
-				orders.setSuccessful(false);
-				return orders;
-			}
-			
-			if(orders.getExpMonth() == null) {
-				orders.setMessage("未輸入有效月份");
+			if(orders.getExpDate() == null) {
+				orders.setMessage("未輸入有效年月");
 				orders.setSuccessful(false);
 				return orders;
 			}
@@ -214,19 +208,17 @@ public class OrderServiceImpl implements OrderService{
 		System.out.println(orders.getPaymentMethod());
 		System.out.println(orders.getCardNumber());
 		System.out.println(orders.getCardHolder());
-		System.out.println(orders.getExpYear());
-		System.out.println(orders.getExpMonth());
+		System.out.println(orders.getExpDate());
 		System.out.println(orders.getCvc());
 		
 		//Step2:確認orderId by userId and status
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "pending");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		//Step3:select Orders by orderId, 並寫入DB資料
 		Orders payOrder = orderdao.selectOrdersByOrderId(orderId);
 		payOrder.setPaymentMethod(orders.getPaymentMethod());
 		payOrder.setCardNumber(orders.getCardNumber());
 		payOrder.setCardHolder(orders.getCardHolder());
-		payOrder.setExpYear(orders.getExpYear());
-		payOrder.setExpMonth(orders.getExpMonth());
+		payOrder.setExpDate(orders.getExpDate());
 		payOrder.setCvc(orders.getCvc());
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		payOrder.setCreatedAt(timestamp);
@@ -235,11 +227,11 @@ public class OrderServiceImpl implements OrderService{
 		if(count1 == 1) {
 			payOrder.setMessage("送出成功");
 			payOrder.setSuccessful(true);
-			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "paid"); 
+			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "PAID"); 
 			if(count2 == 1) {
-				System.out.println("orders updatestatus_paid成功");
+				System.out.println("orders updatestatus_PAID成功");
 			}else {
-				System.out.println("orders updatestatus_paid失敗");
+				System.out.println("orders updatestatus_PAID失敗");
 			}	
 		} else {
 			payOrder.setMessage("送出失敗");
@@ -252,7 +244,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Map<String, Object> getOrderConfirmation(Integer userId) {
 		//Step1:用userId找orderId by Orders
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "paid");
+		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PAID");
 		//Step2:撈Orders by orderId
 		Orders completeOrders = orderdao.selectOrdersByOrderId(orderId);		
 		//Step3:撈Email by userId
@@ -273,7 +265,20 @@ public class OrderServiceImpl implements OrderService{
 			String coachName = courseService.findName(course);
 			course.setCoachName(coachName);
 		}
-		//Step8:回傳userEmail, Orders, Orderitems and Course
+		//Step8:跑foreach 放入 coursePromo
+		for(Course course : completeCourseList) {
+			Integer courseId = course.getCourseId();
+			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
+			//Step6:決定回傳課程價錢(確認是否為促銷區間)
+			if (coursePromo != null) {
+				Date today = new Date();
+				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
+					    (today.before(coursePromo.getDateEnd()) || today.equals(coursePromo.getDateEnd()))) {
+					course.setPromoPrice(coursePromo.getPromoPrice());
+				}
+			}
+		}
+		//Step9:回傳userEmail, Orders, Orderitems and Course
 		Map<String, Object> orderConfirmation = new HashMap<>();
 		orderConfirmation.put("User", userEmail);
 		orderConfirmation.put("Orders", completeOrders);
