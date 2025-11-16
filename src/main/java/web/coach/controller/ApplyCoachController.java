@@ -15,7 +15,7 @@ import web.user.pojo.User;
 
 @RestController
 @RequestMapping("coach/apply")
-public class ApplyController {
+public class ApplyCoachController {
 	@Autowired
 	private CoachService service;
 	
