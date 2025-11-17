@@ -130,8 +130,8 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Orders> selectShoppingRecordOrdersByUserId(Integer userId) {
 		String hql = "FROM Orders where userId =:userId and AND status IN ('PAID', 'WAIT_PAID')";
 		Query<Orders> query = session.createQuery(hql, Orders.class);
-		List<Orders> shoppingRecordOrders = query.setParameter("userId", userId).getResultList();
-		return shoppingRecordOrders;
+		return query.setParameter("userId", userId)
+				.getResultList();
 	}
 	
 	@Override
@@ -139,8 +139,17 @@ public class OrderDaoImpl implements OrderDao{
 		//找Orderitems.class
 		String hql = "FROM Orderitems where orderId IN(:orderIdList)";
 		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
-		List<Orderitems> shoppingRecordOrderItemsList = query.setParameterList("orderIdList", orderIdList).getResultList();
-		return shoppingRecordOrderItemsList;
+		return query.setParameterList("orderIdList", orderIdList)
+				.getResultList();
+	}
+	
+	@Override
+	public List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status) {
+		String hql = "FROM Orders where userId = :userId and AND status = :status";
+		Query<Orders> query = session.createQuery(hql, Orders.class);
+		return query.setParameter("userId", userId)
+				.setParameter("status", status)
+				.getResultList();
 	}
 
     //未使用的方法

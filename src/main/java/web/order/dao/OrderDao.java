@@ -42,4 +42,6 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	List<Orders> selectShoppingRecordOrdersByUserId(Integer userId);
 	
 	List<Orderitems>selectOrderitemListByOrderIdList(List<Integer> orderIdList); //多找多
+	
+	List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status);
 }

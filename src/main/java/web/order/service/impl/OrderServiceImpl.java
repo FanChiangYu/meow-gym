@@ -214,31 +214,53 @@ public class OrderServiceImpl implements OrderService{
 		
 		//Step2:確認orderId by userId and status
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
-		//Step3:select Orders by orderId, 並寫入DB資料
+		//Step3:select Orders by orderId, 依據PaymentMethod寫入DB資料
 		Orders payOrder = orderdao.selectOrdersByOrderId(orderId);
-		payOrder.setPaymentMethod(orders.getPaymentMethod());
-		payOrder.setCardNumber(orders.getCardNumber());
-		payOrder.setCardHolder(orders.getCardHolder());
-		payOrder.setExpDate(orders.getExpDate());
-		payOrder.setCvc(orders.getCvc());
-		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-		payOrder.setCreatedAt(timestamp);
-		//Step4:執行資料交易控制
-		int count1 = orderdao.insert(payOrder);
-		if(count1 == 1) {
-			payOrder.setMessage("送出成功");
-			payOrder.setSuccessful(true);
-			int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "PAID"); 
-			if(count2 == 1) {
-				System.out.println("orders updatestatus_PAID成功");
-			}else {
-				System.out.println("orders updatestatus_PAID失敗");
-			}	
-		} else {
-			payOrder.setMessage("送出失敗");
-			payOrder.setSuccessful(false);
+		if(orders.getPaymentMethod().equals("Cash")) {
+			payOrder.setPaymentMethod(orders.getPaymentMethod());
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			payOrder.setCreatedAt(timestamp);
+			//Step4-1:現金付款執行資料交易控制
+			int count1 = orderdao.insert(payOrder);
+			if(count1 == 1) {
+				payOrder.setMessage("送出成功");
+				payOrder.setSuccessful(true);
+				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "WAIT_PAID"); 
+				if(count2 == 1) {
+					System.out.println("orders updatestatus_WAIT_PAID成功");
+				}else {
+					System.out.println("orders updatestatus_WAIT_PAID失敗");
+				}	
+			} else {
+				payOrder.setMessage("送出失敗");
+				payOrder.setSuccessful(false);
+			}
+			return payOrder;			
+		}else {
+			payOrder.setPaymentMethod(orders.getPaymentMethod());
+			payOrder.setCardNumber(orders.getCardNumber());
+			payOrder.setCardHolder(orders.getCardHolder());
+			payOrder.setExpDate(orders.getExpDate());
+			payOrder.setCvc(orders.getCvc());
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			payOrder.setCreatedAt(timestamp);
+			//Step4-2:信用卡付款執行資料交易控制
+			int count1 = orderdao.insert(payOrder);
+			if(count1 == 1) {
+				payOrder.setMessage("送出成功");
+				payOrder.setSuccessful(true);
+				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "PAID"); 
+				if(count2 == 1) {
+					System.out.println("orders updatestatus_PAID成功");
+				}else {
+					System.out.println("orders updatestatus_PAID失敗");
+				}	
+			} else {
+				payOrder.setMessage("送出失敗");
+				payOrder.setSuccessful(false);
+			}
+			return payOrder;
 		}
-		return payOrder;
 	}
 
 	@Transactional	
@@ -289,9 +311,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Map<String, Object> getAllShoppingRecordListByUserId(Integer userId) {		
-		//Step1:撈Users by userId
-//		User user = orderdao.selectUserByUserId(userId);
+	public Map<String, Object> getAllShoppingRecordListByUserId(Integer userId) {
 		//Step1:撈OrderList by userId
 		List<Orders> shoppingRecordOrders = orderdao.selectShoppingRecordOrdersByUserId(userId);
 		//Step2:撈OrderItemsList by OrdersList
@@ -302,5 +322,22 @@ public class OrderServiceImpl implements OrderService{
 		shoppingRecordList.put("Orders", shoppingRecordOrders);
 		shoppingRecordList.put("Orderitems", shoppingRecordOrderItemsList);	
 		return shoppingRecordList;
+	}
+
+	@Override
+	public Map<String, Object> getAllCashOrderListByUserId(Integer userId) {
+		//Step1:撈Users by userId
+		User user = orderdao.selectUserByUserId(userId);
+		//Step2:撈OrderList by userId
+		List<Orders> cashOrders = orderdao.selectCashOrdersByUserIdAndStatus(userId, "WAIT_PAID");
+		//Step3:撈OrderItemsList by OrdersList
+		List<Integer> orderIdList = cashOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
+		List<Orderitems> cashOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
+		//Step4:回傳User, Orders, and Orderitems
+		Map<String, Object> cashOrderList = new HashMap<>();
+		cashOrderList.put("User", user);
+		cashOrderList.put("Orders", cashOrders);
+		cashOrderList.put("Orderitems", cashOrderItemsList);	
+		return cashOrderList;
 	}
 }
