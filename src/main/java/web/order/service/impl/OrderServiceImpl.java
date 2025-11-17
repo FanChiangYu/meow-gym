@@ -117,8 +117,7 @@ public class OrderServiceImpl implements OrderService{
 			System.out.println("Delete course in DB success.");
 			//Step2:比對orderitems與orders
 			List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-			System.out.println(orderitemList);
-			if (orderitemList == null) { //修改orders狀態為cancel, 需要debug進不來, 問老師
+			if (orderitemList == null || orderitemList.isEmpty()) {
 				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "CANCEL"); 
 				if(count2 == 1) {
@@ -267,7 +266,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Map<String, Object> getOrderConfirmation(Integer userId) {
 		//Step1:用userId找orderId by Orders
-		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PAID");
+		Integer orderId = orderdao.selectOrderIdAfterPaymentByUesrId(userId);
 		//Step2:撈Orders by orderId
 		Orders completeOrders = orderdao.selectOrdersByOrderId(orderId);		
 		//Step3:撈Email by userId
