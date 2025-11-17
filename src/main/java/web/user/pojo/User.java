@@ -66,7 +66,7 @@ public class User extends Core {
 	private String avatarUrl;
 
 	@Column(name = "is_banned")
-	private boolean isBanned;
+	private Boolean isBanned;
 
 	@Column(name = "birthday")
 	private Date birthday;
