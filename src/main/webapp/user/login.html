@@ -99,44 +99,6 @@
           </li>
 
           <!-- 會員專區 -->
-          <li class="menu-item d-none" id="user-menu">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon icon-base ti tabler-users"></i>
-              <div>會員專區</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div>基本資料</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div>課程瀏覽</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div>預約上課</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div>上課紀錄</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../order/shoppingrecord.html" class="menu-link">
-                  <div>購買紀錄</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../order/newOrder.html" class="menu-link">
-                  <div>購物車</div>
-                </a>
-              </li>
-            </ul>
-          </li>
 
           <!-- 教練專區 -->
           <li class="menu-item d-none" id="coach-menu">
@@ -280,7 +242,7 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y" style="border: 2px solid red;">
+          <div class="container-xxl flex-grow-1 container-p-y">
             <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
             <!-- Login -->
             <div class="card">
@@ -308,14 +270,13 @@
                   </a>
                 </div>
                 <!-- /Logo -->
-                <h4 class="mb-1">Welcome to MEOW GYM! 👋</h4>
-                <p class="mb-6">Please sign-in to your account and start the adventure</p>
+                <h4 class="mb-1">歡迎來到 MEOW GYM! 👋</h4>
 
                 <form id="formAuthentication" class="mb-4" action="index.html" method="GET">
                   <div class="mb-6 form-control-validation">
-                    <label for="email" class="form-label">使⽤者名稱</label>
-                    <input type="text" class="form-control" id="email" name="email-username"
-                      placeholder="Enter your email" autofocus />
+                    <label for="email" class="form-label">會員帳號</label>
+                    <input type="text" class="form-control" id="email" name="email-username" placeholder="請輸入 email"
+                      autofocus />
                   </div>
                   <div class="mb-6 form-password-toggle form-control-validation">
                     <label class="form-label" for="password">密碼</label>
@@ -328,17 +289,10 @@
                   </div>
                   <div class="my-8">
                     <div class="d-flex justify-content-between">
-                      <!-- <div class="form-check mb-0 ms-2">
-                        <input class="form-check-input" type="checkbox" id="remember-me" />
-                        <label class="form-check-label" for="remember-me"> Remember Me </label>
-                      </div> -->
-                      <!-- <a href="auth-forgot-password-basic.html">
-                        <p class="mb-0">Forgot Password?</p>
-                      </a> -->
                     </div>
                   </div>
                   <div class="mb-6">
-                    <button class="btn btn-primary d-grid w-100" type="button" id="loginbt">Login</button>
+                    <button class="btn btn-primary d-grid w-100" type="button" id="loginbt">登入</button>
                   </div>
                 </form>
 

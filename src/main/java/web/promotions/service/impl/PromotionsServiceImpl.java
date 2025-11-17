@@ -91,7 +91,11 @@ public class PromotionsServiceImpl implements PromotionsService {
 		byte[] img = Base64.getDecoder().decode(imgBase64);
 		Path path = Paths.get(fullPath);
 		Files.write(path, img);
-		coursePromo.setImgUrl(filename);
+		coursePromo.setImgUrl("/meow-gym/course/img/" + filename);
+		
+		
+		
+		
 
 		int count = dao.insert(coursePromo);
 		if (count == 1) {
@@ -122,5 +126,6 @@ public class PromotionsServiceImpl implements PromotionsService {
 	public int delete(CoursePromo coursePromo) {
 		return dao.deleteById(coursePromo);
 	}
+	
 
 }

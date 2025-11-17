@@ -1,3 +1,45 @@
+const userMenu = document.querySelector('#user-menu');
+const coachMenu = document.querySelector('#coach-menu');
+const adminMenu = document.querySelector('#admin-menu');
+const userName = document.querySelector('#user-name');
+const avatarImg = document.querySelector('#user-avatar');
+const shoppingCart = document.querySelector('#shopping-cart');
+
+function switchMenu (role) {
+  switch (role) {
+    // 顯示會員列表
+    case 1: 
+      userMenu.classList.remove('d-none'); 
+      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+      break;
+  
+    // 顯示教練列表  
+    case 2:
+      coachMenu.classList.remove('d-none'); 
+      break;
+  
+    // 顯示管理者列表  
+    case 3:
+      adminMenu.classList.remove('d-none'); 
+      break;
+  
+    // 預設顯示會員列表
+    default:
+      userMenu.classList.remove('d-none'); 
+      shoppingCart.classList.remove('d-none');  // 顯示購物車按鍵
+      break;
+  }
+}
+fetch('/meow-gym/index/loginData')
+.then(resp => resp.json())
+.then(respbody => {
+  if(respbody.successful){
+    switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
+    userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
+    avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+  }
+});
+//以下自己編寫的js
 let courses;
 (() => {
 	const tbody = document.querySelector('tbody');
@@ -27,47 +69,68 @@ let courses;
 })();
 
 function addPromotion(id, title, price) {
-	if (confirm('新增促銷活動?')) {
-		sessionStorage.setItem('id', id);
-		sessionStorage.setItem('title', title);
-		sessionStorage.setItem('price', price);
-		location.href = 'promotions.html';
-	}
+	Swal.fire({
+    title: '(是)(否)新增促銷活動？',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: '是',
+    cancelButtonText: '否',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      sessionStorage.setItem('id', id);
+      sessionStorage.setItem('title', title);
+      sessionStorage.setItem('price', price);
+      location.href = 'promotions.html';
+    }
+  });
 }
 
-function removePromotion(courseId){
-	if(confirm('是否有(確認)資料要刪除?')){
-		fetch("delete",{
-			method:'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				courseId:courseId
-			})
-		})
-		.then(resp => resp.json())
-		.then(response => {
-			if(response.successful){
-				Swal.fire({
-	            title: '刪除促銷成功!!',
-	            text: response.message,
-	            icon: 'success',
-	            target: document.body
-          });
-				setTimeout(function() {
-				  location.reload();
-				}, 2000);
-			}else{
-				Swal.fire({
-	            title: '新增促銷失敗',
-	            text: response.message,
-	            icon: 'error',
-	            target: document.body
-          });
-         		setTimeout(function() {
-				  location.reload();
-				}, 2000);
-			}
-		})
-	}
-	
+function removePromotion(courseId) {
+    Swal.fire({
+        title: "確定刪除促銷？",
+        text: "請確認是否要刪除資料？",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "是",
+        cancelButtonText: "否"
+    }).then(result => {
+        if (!result.isConfirmed) return; 
+
+        fetch("delete", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ courseId: courseId })
+        })
+        .then(resp => {
+            if (!resp.ok) {
+                return resp.json().then(err => ({
+                    successful: false,
+                    message: err.message || "系統錯誤"
+                }));
+            }
+            return resp.json();
+        })
+        .then(response => {
+            if (response.successful) {
+                Swal.fire({
+                    title: '刪除促銷成功!!',
+                    text: response.message,
+                    icon: 'success',
+                    target: document.body
+                });
+
+                setTimeout(() => location.reload(), 2000);
+
+            } else {
+                Swal.fire({
+                    title: '刪除促銷失敗',
+                    text: response.message,
+                    icon: 'error',
+                    target: document.body
+                });
+
+                setTimeout(() => location.reload(), 2000);
+            }
+        });
+    });
 }

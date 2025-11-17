@@ -14,20 +14,20 @@ import web.user.pojo.User;
 
 @Controller
 @RequestMapping("order")
-public class ShoppingRecordController {
+public class CashOrderController {
 	@Autowired
 	private OrderService orderservice;
 
-	@GetMapping("shoppingRecord")
+	@GetMapping("cashOrder")
 	@ResponseBody
-	protected Map<String, Object> shoppingRecord(@SessionAttribute(value = "user", required = false) User setUser) {
+	protected Map<String, Object> cashOrder(@SessionAttribute(value = "user", required = false) User setUser) {
 		//取會員資料
 		Integer userId = setUser.getUserId();
 		// 先寫死
 //		Integer userId = 1;
 
 		// 回傳購物車清單
-		Map<String, Object> shoppingRecordList = orderservice.getAllShoppingRecordListByUserId(userId);
-		return shoppingRecordList;
+		Map<String, Object> cashOrderList = orderservice.getAllCashOrderListByUserId(userId);
+		return cashOrderList;
 	}
 }
