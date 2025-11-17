@@ -42,6 +42,8 @@ public class Orderitems extends Core {
 	@Transient
 	private String title;  //回傳前端課程名稱
 	@Transient
+	private Integer coursePrice;  //回傳前端課程價格
+	@Transient
 	private Integer promoPrice;  //回傳前端促銷價格
 	@Transient
 	@JsonFormat(pattern = "yyyy/MM/dd")

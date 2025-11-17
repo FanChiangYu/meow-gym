@@ -1,36 +1,33 @@
 package web.order.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import core.pojo.Core;
-import web.order.pojo.Orderitems;
 import web.order.service.OrderService;
 import web.user.pojo.User;
 
 @Controller
 @RequestMapping("order")
-public class DeleteCourseController {
+public class CashOrderController {
 	@Autowired
 	private OrderService orderservice;
-	
-	@PostMapping("deleteCart")
+
+	@GetMapping("cashOrder")
 	@ResponseBody
-	protected Core deleteCart(@RequestBody Orderitems orderitems, 
-			@SessionAttribute(value = "user", required = false) User setUser){
-		Integer orderItemId = orderitems.getOrderItemId();
+	protected Map<String, Object> cashOrder(@SessionAttribute(value = "user", required = false) User setUser) {
 		//取會員資料
 		Integer userId = setUser.getUserId();
-		//先寫死
+		// 先寫死
 //		Integer userId = 1;
-		Core core = new Core();
-		core.setSuccessful(orderservice.deletecoursefromcart(orderItemId, userId));
-		return core;
+
+		// 回傳購物車清單
+		Map<String, Object> cashOrderList = orderservice.getAllCashOrderListByUserId(userId);
+		return cashOrderList;
 	}
 }
-

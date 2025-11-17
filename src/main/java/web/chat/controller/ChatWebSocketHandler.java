@@ -25,6 +25,7 @@ import web.chat.dao.ChatDao;
 import web.chat.pojo.ChatDTO;
 import web.chat.pojo.Chats;
 import web.chat.pojo.TempIncomingMessage;
+import web.chat.pojo.UserCourseDTO;
 import web.chat.service.ChatService;
 import web.user.pojo.User;
 
@@ -52,11 +53,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession wsSession) throws Exception {
 		// 1. 取得登入者
 		final User user = getLoginUser(wsSession);
-		
-		//1-1. 呼叫 httpsession 的 courseId
-//		HttpSession session = getHttpSession(wsSession); 
-//		Integer courseIdNew = (Integer)session.getAttribute("courseId");
-//		System.out.println("fan courseId" + courseIdNew); //send to frontend
 
 		if (user == null) {
 			wsSession.close();
@@ -66,12 +62,19 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		// 2. 從 Query 取 courseId
 		final Integer courseId = getIntQueryParam(wsSession, "courseId");
 		System.out.println("New Spring websocket courseId" + courseId);
-		
-//		final Integer courseIdNew =wsSession.get
-				
+
 		// 3. 權限驗證：是否擁有該課程 >> 可省略
 		System.out.println("user.getUserId()" + user.getUserId());
 		System.out.println("user.getUserName()" + user.getName());
+		System.out.println("user role" + user.getRole());
+
+		// add 20251115
+		// 如果登入者為"管理者"，取出所有狀態為"通過"的課程courseId，並
+		if (user.getRole() == 3) {
+			List<UserCourseDTO> managecourse = chatDao.selectUserCourseId(3);
+			System.out.println("managecourse" + managecourse);
+		}
+		// add 20251115 end
 
 		// 4. 放進房間
 		Set<WebSocketSession> room = ROOMS.get(courseId);
@@ -101,6 +104,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 				respbody.addProperty("time", record.getCreatedAt().toString());
 				respbody.addProperty("courseId", record.getCourseId().toString());
 				respbody.addProperty("name", record.getName());
+
+				// add 20251114
+				respbody.addProperty("avatarUrl", record.getAvatarUrl());
+				respbody.addProperty("role", record.getRole());
+				// add 20251114 end
+
 				arr.add(respbody);
 			}
 			TextMessage message = new TextMessage(GSON.toJson(arr));
@@ -162,6 +171,13 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		resp.addProperty("time", saved.getCreatedAt().toString()); // 為何不能用Chats直接抓??
 		resp.addProperty("courseId", String.valueOf(courseId));
 
+		// add 20251114
+		resp.addProperty("avatarUrl", user.getAvatarUrl());
+		resp.addProperty("role", user.getRole());
+		// add 20251114 end
+
+		System.out.println("boardcast to all resp" + resp);
+
 		List<JsonObject> one = new ArrayList<>();
 		one.add(resp);
 		broadcastToRoom(courseId, GSON.toJson(one)); // 廣播給同房每個連線
@@ -185,7 +201,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		HttpSession httpSession = getHttpSession(wsSession);
 		return (User) httpSession.getAttribute("user");
 	}
-	
+
 	private HttpSession getHttpSession(WebSocketSession wsSession) {
 		Map<String, Object> userMap = wsSession.getAttributes();
 		return (HttpSession) userMap.get("HTTP_SESSION");
@@ -196,11 +212,14 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	private Integer getIntQueryParam(WebSocketSession session, String key) {
 		String params = session.getUri().getQuery();
 		System.out.println("getIntQueryParam params" + params);
+
 		if (params == null) {
 			return null;
+		} else {
+			String value = params.substring((key + "=").length()); // 直接取等號後面
+			System.out.println("value" + value);
+			return Integer.parseInt(value);
 		}
-		return null;
-
 	}
 
 	private void broadcastToRoom(int courseId, String jsonPayload) throws IOException {
@@ -209,12 +228,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			return;
 		for (WebSocketSession s : room) {
 			if (s.isOpen()) {
-				TextMessage message = new TextMessage(GSON.toJson(jsonPayload));
+				// TextMessage message = new TextMessage(GSON.toJson(jsonPayload));
+				TextMessage message = new TextMessage(jsonPayload);
 				s.sendMessage(message);
 			}
 		}
 	}
 
 }
-
-

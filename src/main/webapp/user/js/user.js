@@ -24,7 +24,7 @@ loginbt.addEventListener("click", () => {
 		.then(resp => resp.json())
 		.then(body => {
 			if (body.successful) {
-				location.href = "userDetial.html"
+				location.href = "userDetail.html"
 			} else {
 				alert("使用者名稱或密碼錯誤");
 			}

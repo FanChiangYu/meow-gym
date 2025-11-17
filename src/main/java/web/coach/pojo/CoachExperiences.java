@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +34,9 @@ public class CoachExperiences {
 	@Column(name = "TITLE")
 	private String title; 
 	@Column(name = "START_DATE")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date startDate; 
 	@Column(name = "END_DATE")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8") 
 	private Date endDate; 
 }

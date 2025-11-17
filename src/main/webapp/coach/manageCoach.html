@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html
   lang="en"
@@ -41,6 +41,7 @@
     <!-- Vendors CSS -->
 
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- endbuild -->
 
@@ -305,9 +306,35 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" style="border: 2px solid red;">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-      
+              <div class="card">
+                <div class="card-header border-bottom">
+                  <h5 class="card-title mb-0">教練審核</h5>
+                  <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0">
+                    <div class="col-md-4 user_role"></div>
+                    <div class="col-md-4 user_plan"></div>
+                    <div class="col-md-4 user_status"></div>
+                  </div>
+                </div>
+                <div class="card-datatable">
+                  <table class="datatables-users table">
+                    <thead class="border-top">
+                      <tr>
+                        <th>會員ID</th>
+                        <th>姓名</th>
+                        <th>帳號 (電子郵件)</th>
+                        <th>身份</th>
+                        <th>審核狀態</th>
+                        <th>教練資邀請</th>
+                        <th>申請資料審核</th>
+                      </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                    </tbody>   
+                  </table>
+                </div>
+              </div>
             
               
 
@@ -418,11 +445,12 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
     <script src="../assets/js/main.js"></script>
-    <script src="js/project_template.js"></script>
+    <script src="js/manageCoach.js"></script>
 
     <!-- Page JS -->
   </body>

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,13 +42,12 @@ public class Orders extends Core{
 	private String cardHolder; // 持卡人姓名
 	@Column(name = "CARD_NUMBER")
 	private String cardNumber; // 信用卡卡號
-	@Column(name = "EXP_YEAR")
-	private String expYear; // 信用卡到期年
-	@Column(name = "EXP_MONTH")
-	private String expMonth; // 信用卡到期月
+	@Column(name = "EXP_DATE")
+	private String expDate; // 信用卡到期年月
 	@Column(name = "CVC")//可以不寫
 	private String cvc; // CVC驗證碼
 	@Column(name = "CREATED_AT")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Timestamp createdAt; // 付款時間
 	
 //fields

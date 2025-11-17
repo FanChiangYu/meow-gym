@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Demo: Tabler - Icons | Vuexy - Bootstrap Dashboard PRO</title>
+    <title>Meow-gym cash order</title>
 
     <meta name="description" content="" />
 
@@ -27,33 +27,28 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
       rel="stylesheet" />
-
     <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
 
     <!-- Core CSS -->
     <!-- build:css assets/vendor/css/theme.css  -->
-
     <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
-
+    <link rel="stylesheet" href="../assets/vendor/libs/pickr/pickr-themes.css" /><!--新增-->
     <link rel="stylesheet" href="../assets/vendor/css/core.css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
-
     <!-- Vendors CSS -->
-
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
     <!-- endbuild -->
-
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" /><!--新增-->
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" /><!--新增-->
+    <link rel="stylesheet" href="../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" /><!--新增-->     
     <!-- Page CSS -->
-
-    <link rel="stylesheet" href="../assets/vendor/css/pages/page-icons.css" />
-
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />     
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../assets/vendor/js/template-customizer.js"></script><!--新增-->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-
     <script src="../assets/js/config.js"></script>
   </head>
 
@@ -122,32 +117,32 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/user/edit.html" class="menu-link">
                     <div>基本資料</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/browseCourse.html" class="menu-link">
                     <div>課程瀏覽</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/bookClass.html" class="menu-link">
                     <div>預約上課</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/classRecord.html" class="menu-link">
                     <div>上課紀錄</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../order/shoppingrecord.html" class="menu-link">
+                  <a href="/meow-gym/order/shoppingrecord.html" class="menu-link">
                     <div>購買紀錄</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../order/newOrder.html" class="menu-link">
+                  <a href="/meow-gym/order/newOrder.html" class="menu-link">
                     <div>購物車</div>
                   </a>
                 </li>
@@ -162,22 +157,17 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>課程瀏覽</div>
+                  <a href="/meow-gym/course/manageCourse.html" class="menu-link">
+                    <div>課程管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/newCourse.html" class="menu-link">
+                  <a href="/meow-gym/course/newCourse.html" class="menu-link">
                     <div>上架課程</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>上課紀錄</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/coach/applyCoach.html" class="menu-link">
                     <div>教練資格申請</div>
                   </a>
                 </li>
@@ -185,40 +175,35 @@
             </li>
 
             <!-- 管理者專區 -->
-            <li class="menu-item d-none" id="admin-menu">
+            <li class="menu-item open" id="admin-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>管理者專區</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/blacklist/showList.html" class="menu-link">
                     <div>黑名單管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/coach/manageCoach.html" class="menu-link">
                     <div>教練審核</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>促銷活動審核</div>
+                  <a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
+                    <div>促銷活動管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/reviewCourseList.html" class="menu-link">
+                  <a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
                     <div>課程審核</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
+                <li class="menu-item active">
+                  <a href="/meow-gym/order/cashOrder.html" class="menu-link">
                     <div>現金付款訂單</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>報表</div>
                   </a>
                 </li>
               </ul>
@@ -307,11 +292,94 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y" style="border: 2px solid red;">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-      
-            
-              
+              <!-- Invoice List Widget -->
+              <div class="card mb-6">
+                <div class="card-widget-separator-wrapper">
+                  <div class="card-body card-widget-separator">
+                    <div class="row gy-4 gy-sm-1">
+                      <div class="col-sm-6 col-lg-3">
+                        <div
+                          class="d-flex justify-content-between align-items-center card-widget-1 border-end pb-4 pb-sm-0">
+                          <div>
+                            <h4 class="mb-0">24</h4>
+                            <p class="mb-0">Clients</p>
+                          </div>
+                          <div class="avatar me-sm-6">
+                            <span class="avatar-initial rounded bg-label-secondary text-heading">
+                              <i class="icon-base ti tabler-user icon-26px"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <hr class="d-none d-sm-block d-lg-none me-6" />
+                      </div>
+                      <div class="col-sm-6 col-lg-3">
+                        <div
+                          class="d-flex justify-content-between align-items-center card-widget-2 border-end pb-4 pb-sm-0">
+                          <div>
+                            <h4 class="mb-0">165</h4>
+                            <p class="mb-0">Invoices</p>
+                          </div>
+                          <div class="avatar me-lg-6">
+                            <span class="avatar-initial rounded bg-label-secondary text-heading">
+                              <i class="icon-base ti tabler-file-invoice icon-26px"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <hr class="d-none d-sm-block d-lg-none" />
+                      </div>
+                      <div class="col-sm-6 col-lg-3">
+                        <div
+                          class="d-flex justify-content-between align-items-center border-end pb-4 pb-sm-0 card-widget-3">
+                          <div>
+                            <h4 class="mb-0">$2.46k</h4>
+                            <p class="mb-0">Paid</p>
+                          </div>
+                          <div class="avatar me-sm-6">
+                            <span class="avatar-initial rounded bg-label-secondary text-heading">
+                              <i class="icon-base ti tabler-checks icon-26px"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-lg-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="mb-0">$876</h4>
+                            <p class="mb-0">Unpaid</p>
+                          </div>
+                          <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-secondary text-heading">
+                              <i class="icon-base ti tabler-circle-off icon-26px"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-
+              <!-- Invoice List Table -->
+              <div class="card">
+                <div class="card-datatable table-responsive">
+                  <table class="invoice-list-table table border-top">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th></th>
+                        <th>#</th>
+                        <th>Status</th>
+                        <th>Client</th>
+                        <th>Total</th>
+                        <th class="text-truncate">Issued Date</th>
+                        <th>Balance</th>
+                        <th>Invoice Status</th>
+                        <th class="cell-fit">Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div> 
               <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
             </div>
             <!-- / Content -->
@@ -400,30 +468,25 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/theme.js  -->
-
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
-
+    <script src="../assets/vendor/libs/pickr/pickr.js"></script><!--新增-->
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
     <script src="../assets/vendor/libs/hammer/hammer.js"></script>
-
     <script src="../assets/vendor/libs/i18n/i18n.js"></script>
-
     <script src="../assets/vendor/js/menu.js"></script>
-
+    <script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script><!--新增-->
     <!-- endbuild -->
-
     <!-- Vendors JS -->
-
+    <script src="../assets/vendor/libs/moment/moment.js"></script><!--新增-->
+    <script src="../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script><!--新增-->
     <!-- Main JS -->
-
     <script src="../assets/js/main.js"></script>
     <script src="js/project_template.js"></script>
-
+    <script src="../assets/js/app-invoice-list.js"></script><!--新增-->
     <!-- Page JS -->
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>     
   </body>
 </html>

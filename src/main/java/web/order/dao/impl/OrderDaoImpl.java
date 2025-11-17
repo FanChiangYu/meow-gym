@@ -11,6 +11,7 @@ import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.promotions.pojo.CoursePromo;
+import web.user.pojo.User;
 
 @Repository
 public class OrderDaoImpl implements OrderDao{
@@ -21,7 +22,7 @@ public class OrderDaoImpl implements OrderDao{
 	//Hibernate寫法	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
-		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
+		String hql= "select max(orderId) from Orders where userId = :userId and status = :status";
 		Query<Integer> query = session.createQuery(hql, Integer.class);		
 		return query.setParameter("userId", userId)
 				.setParameter("status", status)
@@ -52,7 +53,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList) {
+	public List<Course> selectCourseListByOrderitemsCourseIdList(List<Integer> courseIdList) {
 		//找Course.class
 		String hql = "FROM Course where courseId IN(:courseIdList)";
 		Query<Course> query = session.createQuery(hql, Course.class);
@@ -94,8 +95,11 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public CoursePromo selectCoursePromoPriceByCourseId(Integer courseId) {
-		return session.get(CoursePromo.class, courseId);
+	public CoursePromo selectCoursePromoByCourseId(Integer courseId) {
+	    String hql = "FROM CoursePromo WHERE courseId = :courseId";
+	    return session.createQuery(hql, CoursePromo.class)
+	                  .setParameter("courseId", courseId)
+	                  .uniqueResult();
 	}
 	
 	@Override
@@ -108,14 +112,56 @@ public class OrderDaoImpl implements OrderDao{
 		session.persist(orders);
 		return 1;
 	}
+	
 
-    //未使用的方法
 	@Override
-	public List<Orders> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer selectOrderIdAfterPaymentByUesrId(Integer userId) {
+		String hql= "select max(orderId) from Orders where userId = :userId and status IN ('PAID', 'WAIT_PAID')";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("userId", userId)
+				.uniqueResult();
 	}
 
+	@Override
+	public String selectUserEmailByUserId(Integer userId) {
+		String hql = "select email from User where userId = :userId";
+		Query<String> query = session.createQuery(hql, String.class);		
+		return query.setParameter("userId", userId)
+				.uniqueResult();
+	}
+	
+	@Override
+	public User selectUserByUserId(Integer userId) {
+		return session.get(User.class, userId);
+	}
+	
+	@Override
+	public List<Orders> selectShoppingRecordOrdersByUserId(Integer userId) {
+		String hql = "FROM Orders where userId =:userId and status IN ('PAID', 'WAIT_PAID')";
+		Query<Orders> query = session.createQuery(hql, Orders.class);
+		return query.setParameter("userId", userId)
+				.getResultList();
+	}
+	
+	@Override
+	public List<Orderitems> selectOrderitemListByOrderIdList(List<Integer> orderIdList) {
+		//找Orderitems.class
+		String hql = "FROM Orderitems where orderId IN(:orderIdList)";
+		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
+		return query.setParameterList("orderIdList", orderIdList)
+				.getResultList();
+	}
+	
+	@Override
+	public List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status) {
+		String hql = "FROM Orders where userId = :userId and AND status = :status";
+		Query<Orders> query = session.createQuery(hql, Orders.class);
+		return query.setParameter("userId", userId)
+				.setParameter("status", status)
+				.getResultList();
+	}
+
+    //未使用的方法
 	@Override
 	public int deleteById(Integer id) {
 		// TODO Auto-generated method stub
@@ -132,6 +178,12 @@ public class OrderDaoImpl implements OrderDao{
 	public int update(Orders pojo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Orders> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

@@ -18,7 +18,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./images/logo.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -121,39 +121,39 @@
             </li>
 
             <!-- 會員專區 -->
-            <li class="menu-item d-none" id="user-menu">
+            <li class="menu-item open" id="user-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>會員專區</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/user/edit.html" class="menu-link">
                     <div>基本資料</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/browseCourse.html" class="menu-link">
                     <div>課程瀏覽</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/bookClass.html" class="menu-link">
                     <div>預約上課</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/classRecord.html" class="menu-link">
                     <div>上課紀錄</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../order/shoppingrecord.html" class="menu-link">
+                  <a href="/meow-gym/order/shoppingrecord.html" class="menu-link">
                     <div>購買紀錄</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="../order/newOrder.html" class="menu-link">
+                <li class="menu-item active">
+                  <a href="/meow-gym/order/newOrder.html" class="menu-link">
                     <div>購物車</div>
                   </a>
                 </li>
@@ -168,22 +168,17 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>課程瀏覽</div>
+                  <a href="/meow-gym/course/manageCourse.html" class="menu-link">
+                    <div>課程管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/newCourse.html" class="menu-link">
+                  <a href="/meow-gym/course/newCourse.html" class="menu-link">
                     <div>上架課程</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>上課紀錄</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/coach/applyCoach.html" class="menu-link">
                     <div>教練資格申請</div>
                   </a>
                 </li>
@@ -198,33 +193,28 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/blacklist/showList.html" class="menu-link">
                     <div>黑名單管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/coach/manageCoach.html" class="menu-link">
                     <div>教練審核</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>促銷活動審核</div>
+                  <a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
+                    <div>促銷活動管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/reviewCourseList.html" class="menu-link">
+                  <a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
                     <div>課程審核</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/order/cashOrder.html" class="menu-link">
                     <div>現金付款訂單</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>報表</div>
                   </a>
                 </li>
               </ul>
@@ -525,31 +515,13 @@
 				                             placeholder="Name" />
 			                            </div>
                                   <div class="col-6 col-md-4">
-                                    <label class="form-label" for="paymentCardExpiryDate" id="paymentCardExpiryDate">Exp. Date</label>
+                                    <label class="form-label" for="paymentCardExpiryDate">Exp. Date</label>
                                     <input
                                       type="text"
                                       id="paymentCardExpiryDate"
                                       class="form-control expiry-date-mask"
                                       placeholder="MM/YY" />
                                   </div>
-                                  <!-- <div class="col-6 col-md-4">
-			                              <label class="form-label" for="paymentCardExpiryDate">Exp. Mon</label>
-			                              <input
-			                                type="text"
-			                                id="expMonth"
-			                                class="form-control expiry-date-mask"
-			                                maxlength="2"
-			                                placeholder="MM" />
-			                            </div>
-			                            <div class="col-6 col-md-4">
-			                              <label class="form-label" for="paymentCardExpiryDate">Exp. Year</label>
-			                              <input
-			                                type="text"
-			                                id="expYear"
-			                                class="form-control expiry-date-mask"
-			                                maxlength="2"
-			                                placeholder="YY" />
-			                            </div> -->
 			                            <div class="col-6 col-md-4">
 			                              <label class="form-label" for="paymentCardCvv">CVV Code</label>
 			                              <div class="input-group input-group-merge">
@@ -609,32 +581,35 @@
 			
 			              <!-- Confirmation -->
 			              <div id="checkout-confirmation" class="content">
-			                <div class="row mb-6">
+			                <div class="row mb-6" >
 			                  <div class="col-12 col-lg-8 mx-auto text-center mb-2">
 			                    <h4>感謝您的購買，請確認以下購買資訊</h4>
 			                    <p>
 			                      您的訂單已成立，我們已將訂單資訊寄至您登記的mail信箱，請至您的mail信箱確認，若兩分鐘後仍未收到，請來電告知我們專人處理，謝謝
 			                    </p>
-			                    <p>
-                            <i class="icon-base ti tabler-mail"></i>信箱:<span>john.doe@example.com</span>
-			                    </p>                     
+                          <p>
+                            MEOW GYM 聯絡電話 : 02-2712-0589
+                          </P>                   
 			                  </div>
 			                  
 			                  <!-- Confirmation details -->
 			                  <div class="col-12">
-			                    <ul class="list-group list-group-horizontal-md">
-			                      <li class="list-group-item flex-fill p-6 text-body">
-			                        <h6 class="d-flex align-items-center gap-2">付款資訊</h6>
+			                    <ul class="list-group list-group-horizontal-md" id="confirmation_payment">
+			                      <!-- <li class="list-group-item flex-fill p-6 text-body">
+			                        <h6 class="d-flex align-items-center gap-2">會員付款資訊</h6>
                               <p class="mb-0 mt-4">
-                                <i class="icon-base ti tabler-file-dollar"></i>訂單編號:<span>###</span>
+                                <i class="icon-base ti tabler-file-dollar"></i>訂單編號 : <span>###</span>
 			                        </p>
                               <p class="mb-0 mt-4">
-                                <i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間:&nbsp;<span>25/05/2020 13:35pm</span>
+                                <i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間 : &nbsp;<span>25/05/2020 13:35pm</span>
 			                        </p>
                               <p class="mb-0 mt-4">
-                                <i class="icon-base ti tabler-credit-card"></i>付款方式:<span>pay_method</span>
+                                <i class="icon-base ti tabler-credit-card"></i>付款方式 : <span>pay_method</span>
 			                        </p>
-			                      </li>
+                              <p class="mb-0 mt-4">
+                                <i class="icon-base ti tabler-mail"></i>信箱 : <span>john.doe@example.com</span>
+                              </p>  
+			                      </li> -->
 			                    </ul>
 			                  </div>
 			                </div>
@@ -642,7 +617,7 @@
 			                <div class="row">
 			                  <!-- Confirmation items -->
 			                  <div class="col-xl-9 mb-6 mb-xl-0">
-			                    <ul class="list-group" id="confirmation">
+			                    <ul class="list-group" id="confirmation_course">
 			                      <!-- <li class="list-group-item p-6">
 			                        <div class="d-flex gap-4">
 			                          <div class="flex-shrink-0">

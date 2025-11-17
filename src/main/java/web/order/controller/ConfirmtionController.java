@@ -23,9 +23,9 @@ public class ConfirmtionController {
 	protected Map<String, Object> confirmation(@SessionAttribute(value = "user", required = false) User setUser
 			) {
 		//取會員資料
-//		Integer userId = setUser.getUserId();
+		Integer userId = setUser.getUserId();
 		// 先寫死
-		Integer userId = 1;
+//		Integer userId = 1;
 		
 		// 回傳購物車清單
 		Map<String, Object> orderConfirmation = orderservice.getOrderConfirmation(userId);

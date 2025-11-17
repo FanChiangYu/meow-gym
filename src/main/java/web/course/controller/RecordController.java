@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import web.course.pojo.ClassResponse;
 import web.course.service.CourseService;
+import web.user.pojo.User;
 
 @RestController
 @RequestMapping("course/record")
@@ -22,9 +24,8 @@ public class RecordController {
 	private CourseService service;
 	
 	@GetMapping
-	public List<ClassResponse> getRecord(){
-		Integer userId = 1; // 假設已從session取得userId = 1;
-		return service.findClass(userId);
+	public List<ClassResponse> getRecord(@SessionAttribute(value = "user", required = false) User user){
+		return service.findClass(user.getUserId());
 	}
 	
 	@GetMapping("{courseId}")

@@ -1,5 +1,5 @@
-const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const avatarUrl = document.querySelector('#upload');
+//const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const avatarImg = document.querySelector('#upload');
 const email = document.querySelector("#email");
 const username = document.querySelector("#name");
 const password = document.querySelector("#password");
@@ -9,7 +9,7 @@ const birthday = document.querySelector("#date-birthday");
 const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
-const applybutton = document.getElementById("applybutton");
+const applybutton = document.querySelector("#applybutton");
 
 function valueOrNull(value) {
 	if (value === undefined || value === null || value === '' || Number.isNaN(value)) {
@@ -19,14 +19,7 @@ function valueOrNull(value) {
 	}
 }
 
-email.addEventListener('blur', function () {
-	if (email.value.match(reg) === null) {
-		alert('帳號格式不正確');
-	}
-});
-
-check();
-function check() {
+function registerCheck(value) {
 	if (valueOrNull(username.value) == null) {
 		alert('姓名未輸入');
 		return;
@@ -66,28 +59,50 @@ function check() {
 		alert('地址為必填欄位');
 		return;
 	}
+
+	return value;
 }
 
-applybutton.addEventListener('click', function () {
-	const file = avatarUrl.files[0];
-	if (!file) {
-		alert("請上傳圖片！");
-		return;
+email.addEventListener('blur', function () {
+	if (email.value.match(reg) === null) {
+		alert('帳號格式不正確');
 	}
+})
 
-	const formData = new FormData();
-	formData.append('cntCode', cnt_code.value);
-	formData.append('distCode', dist_code.value);
-	formData.append('detailAddress', detail_address.value);
-	formData.append('email', email.value);
-	formData.append('name', username.value);
-	formData.append('password', password.value);
-	formData.append('phone', phoneNumber.value);
-	formData.append('birthday', String(birthday.value));
-	formData.append('gender', gender.value);
-	formData.append('createdAt', password.value);
-	formData.append('avatarFile', file, file.name); // 直接上傳檔案
+applybutton.addEventListener('click', function () {
+	const fr = new FileReader();
+	fr.addEventListener('load', e => {
+		const imgBase64 = e.target.result.split(',')[1];
 
-	location.href = 'registerSuccessPage.html';
+		document.querySelectorAll(registerCheck);
 
+		fetch('register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				cntCode: cnt_code.value,
+				distCode: dist_code.value,
+				detailAddress: detail_address.value,
+				email: email.value,
+				name: username.value,
+				password: password.value,
+				phone: phoneNumber.value,
+				birthday: birthday.value,
+				gender: gender.value,
+				createdAt: password.value,
+				imgBase64,
+				avatarUrl: avatarImg.files[0].name
+			})
+		})
+			.then(resp => resp.json())
+			.then(body => {
+				if (body.successful) {
+					location.href = 'registerSuccessPage.html';
+				} else {
+					alert(body.message);
+				}
+			});
+	});
 });

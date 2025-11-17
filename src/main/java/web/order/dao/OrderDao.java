@@ -7,6 +7,7 @@ import web.course.pojo.Course;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.promotions.pojo.CoursePromo;
+import web.user.pojo.User;
 
 public interface OrderDao extends CoreDao<Orders, Integer>{
 	
@@ -16,11 +17,13 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Integer selectCoursePriceByCourseId(Integer courseId);
 	
-	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId);
+	List<Orderitems> selectOrderitemsListByOrderId(Integer orderId); //1找多
 	
-	List<Course> selectCourseAndOrderitemListByOrderitems(List<Integer> courseIdList);
+	List<Course> selectCourseListByOrderitemsCourseIdList(List<Integer> courseIdList);
 	
-	Integer selectPromoPriceByCourseId (Integer courseId);
+	Integer selectPromoPriceByCourseId (Integer courseId); //沒用到
+	
+	CoursePromo selectCoursePromoByCourseId(Integer courseId);
 	
 	Integer deleteOrderitemsByOrderItemId(Integer orderItemId);
 	
@@ -28,9 +31,19 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	Course selectCourseByCourseId (Integer courseId);
 	
-	CoursePromo selectCoursePromoPriceByCourseId(Integer courseId);
-	
 	Orders selectOrdersByOrderId(Integer orderId);
 	
 	int insert(Orders orders);
+	
+	Integer selectOrderIdAfterPaymentByUesrId (Integer userId);
+	
+	String selectUserEmailByUserId(Integer userId);
+	
+	User selectUserByUserId(Integer userId);
+	
+	List<Orders> selectShoppingRecordOrdersByUserId(Integer userId);
+	
+	List<Orderitems>selectOrderitemListByOrderIdList(List<Integer> orderIdList); //多找多
+	
+	List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status);
 }
