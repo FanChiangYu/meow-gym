@@ -169,10 +169,6 @@ const payOnCash = document.querySelector('#payOnCash');
 const cardNumber = document.querySelector('#cardNumber');
 const cardHolder = document.querySelector('#cardHolder');
 const paymentCardExpiryDate = document.querySelector('#paymentCardExpiryDate');
-let expYear = paymentCardExpiryDate.toString().slice(0, 2);
-let expMonth = paymentCardExpiryDate.toString().slice(-2);
-// const expYear = document.querySelector('#expYear');
-// const expMonth = document.querySelector('#expMonth');
 const cvc = document.querySelector('#cvc');
 
 document.getElementById('payOnCard').addEventListener('click', paymentByCard);
@@ -184,8 +180,7 @@ function paymentByCard(){
 			paymentMethod: 'Card',
 			cardHolder: valueOrNull(cardHolder.value),
 			cardNumber: valueOrNull(cardNumber.value),
-			expYear: valueOrNull(expYear.value),
-			expMonth: valueOrNull(expMonth.value),
+			expDate: valueOrNull(paymentCardExpiryDate.value),
 			cvc: valueOrNull(cvc.value)
 		}),
 	})

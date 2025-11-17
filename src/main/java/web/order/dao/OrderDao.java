@@ -35,6 +35,8 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	
 	int insert(Orders orders);
 	
+	Integer selectOrderIdAfterPaymentByUesrId (Integer userId);
+	
 	String selectUserEmailByUserId(Integer userId);
 	
 	User selectUserByUserId(Integer userId);
@@ -42,4 +44,6 @@ public interface OrderDao extends CoreDao<Orders, Integer>{
 	List<Orders> selectShoppingRecordOrdersByUserId(Integer userId);
 	
 	List<Orderitems>selectOrderitemListByOrderIdList(List<Integer> orderIdList); //多找多
+	
+	List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status);
 }
