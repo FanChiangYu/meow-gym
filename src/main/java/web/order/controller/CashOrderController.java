@@ -1,5 +1,6 @@
 package web.order.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,21 @@ public class CashOrderController {
 	@GetMapping("cashOrder")
 	@ResponseBody
 	protected Map<String, Object> cashOrder(@SessionAttribute(value = "user", required = false) User setUser) {
-		//取會員資料
-		Integer userId = setUser.getUserId();
+		//取登入資料
+		String name = setUser.getName();
 		// 先寫死
 //		Integer userId = 1;
-
-		// 回傳購物車清單
-		Map<String, Object> cashOrderList = orderservice.getAllCashOrderListByUserId(userId);
-		return cashOrderList;
+		//判斷登入者是否為管理員
+		if(name.equals("系統管理員")) {
+			// 回傳購物車清單
+			Map<String, Object> cashOrderList = orderservice.getAllCashOrderList();
+			return cashOrderList;
+		}else {
+			Map<String, Object> core = new HashMap<>();
+			String message = "無系統管理員權限，請洽櫃台";
+			core.put("message", message);
+			return core;
+		}
 	}
 	
 	@PostMapping("statusChange")
