@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -358,5 +357,31 @@ public class OrderServiceImpl implements OrderService{
 		cashOrderList.put("User", cashUser);
 		cashOrderList.put("Orderitems", cashOrderItemsList);
 		return cashOrderList;
+	}
+
+	@Override
+	public Boolean changeOrderStatusForPaymentByCash(Integer orderId, Integer userId) {
+		//Step1:確認需更改狀態的orderID
+		Integer changeStatusOrderId = orderdao.selectChangeStatusOrderIdByUesrIdAndOrderId(userId, orderId);
+		System.out.println(changeStatusOrderId);
+		//Step2:更改狀態為PAID
+		int count1 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(changeStatusOrderId, "PAID"); 
+		if(count1 == 1) {
+			System.out.println("orders updatestatus_PAID成功");
+			Orders changeStatusOrder = orderdao.selectOrdersByOrderId(changeStatusOrderId);
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			changeStatusOrder.setCreatedAt(timestamp);
+			int count2 = orderdao.insert(changeStatusOrder);
+			if(count2 == 1) {
+				System.out.println("orders updateCreatedAt成功");
+				return true;
+			} else {
+				System.out.println("orders updateCreatedAt失敗");
+				return false;
+			}
+		}else {
+			System.out.println("orders updatestatus_PAID失敗");
+			return false;
+		}
 	}
 }

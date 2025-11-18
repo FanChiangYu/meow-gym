@@ -1,7 +1,21 @@
 //現金付款處理清單
+let cashOrders;
+let cashOrderItemsList;
+let cashUsers;
+
+function valueOrNull (value) {
+	if(value === undefined || value === null || value === ''){
+		return null;
+	}else{
+		return value;
+	}
+};
+
+const tbody = document.querySelector('tbody');
+const dt_invoice_table = document.querySelector('.invoice-list-table');
 
 document.addEventListener('DOMContentLoaded', function () {
-  const dt_invoice_table = document.querySelector('.invoice-list-table');
+  
 
   if (dt_invoice_table) {
     const dt_invoice = new DataTable(dt_invoice_table, {

@@ -185,6 +185,15 @@ public class OrderDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Integer selectChangeStatusOrderIdByUesrIdAndOrderId(Integer orderId, Integer userId) {
+		String hql= "select orderId from Orders where userId = :userId and orderId = :orderId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("userId", userId)
+				.setParameter("orderId", orderId)
+				.uniqueResult();
+	}
 }
 
 
