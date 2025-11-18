@@ -35,7 +35,7 @@
 	<!-- Vendors CSS -->
 
 	<link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
+  <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 	<!-- endbuild -->
 
 	<!-- Page CSS -->
@@ -62,7 +62,9 @@
 
 			<aside id="layout-menu" class="layout-menu menu-vertical menu">
 				<div class="app-brand demo">
-					<a href="index.html" class="app-brand-link"> <span class="app-brand-logo demo"> <span class="text-primary">
+					<a href="index.html" class="app-brand-link">
+						<span class="app-brand-logo demo">
+							<span class="text-primary">
 								<svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" clip-rule="evenodd"
 										d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
@@ -76,11 +78,13 @@
 										fill="currentColor" />
 								</svg>
 							</span>
-						</span> <span class="app-brand-text demo menu-text fw-bold ms-3">MEOW
-							GYM</span>
-					</a> <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto"> <i
-							class="icon-base ti menu-toggle-icon d-none d-xl-block"></i> <i
-							class="icon-base ti tabler-x d-block d-xl-none"></i>
+						</span>
+						<span class="app-brand-text demo menu-text fw-bold ms-3">MEOW GYM</span>
+					</a>
+
+					<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+						<i class="icon-base ti menu-toggle-icon d-none d-xl-block"></i>
+						<i class="icon-base ti tabler-x d-block d-xl-none"></i>
 					</a>
 				</div>
 
@@ -88,8 +92,10 @@
 
 				<ul class="menu-inner py-1">
 
-					<li class="menu-header"><span class="menu-header-text">您好！
-						</span> <!-- 使用者名稱 --> <span class="menu-header-text" id="user-name"></span>
+					<li class="menu-header">
+						<span class="menu-header-text">您好！ </span>
+						<!-- 使用者名稱 -->
+						<span class="menu-header-text" id="user-name"></span>
 					</li>
 
 					<!-- 會員專區 -->
@@ -133,55 +139,64 @@
 					</li>
 
 					<!-- 教練專區 -->
-					<li class="menu-item d-none" id="coach-menu"><a href="javascript:void(0);" class="menu-link menu-toggle"> <i
-								class="menu-icon icon-base ti tabler-users"></i>
+					<li class="menu-item d-none" id="coach-menu">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+							<i class="menu-icon icon-base ti tabler-users"></i>
 							<div>教練專區</div>
 						</a>
 						<ul class="menu-sub">
-							<li class="menu-item"><a href="#" class="menu-link">
-									<div>課程瀏覽</div>
-								</a></li>
-							<li class="menu-item"><a href="../course/newCourse.html" class="menu-link">
+							<li class="menu-item">
+								<a href="/meow-gym/course/manageCourse.html" class="menu-link">
+									<div>課程管理</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/course/newCourse.html" class="menu-link">
 									<div>上架課程</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
-									<div>上課紀錄</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/coach/applyCoach.html" class="menu-link">
 									<div>教練資格申請</div>
-								</a></li>
+								</a>
+							</li>
 						</ul>
 					</li>
 
 					<!-- 管理者專區 -->
-					<li class="menu-item d-none" id="admin-menu"><a href="javascript:void(0);" class="menu-link menu-toggle"> <i
-								class="menu-icon icon-base ti tabler-users"></i>
+					<li class="menu-item d-none" id="admin-menu">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+							<i class="menu-icon icon-base ti tabler-users"></i>
 							<div>管理者專區</div>
 						</a>
 						<ul class="menu-sub">
-							<li class="menu-item"><a href="#" class="menu-link">
+							<li class="menu-item">
+								<a href="/meow-gym/blacklist/showList.html" class="menu-link">
 									<div>黑名單管理</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/coach/manageCoach.html" class="menu-link">
 									<div>教練審核</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
-									<div>促銷活動審核</div>
-								</a></li>
-							<li class="menu-item"><a href="../course/reviewCourseList.html" class="menu-link">
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
+									<div>促銷活動管理</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
 									<div>課程審核</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="/meow-gym/order/cashOrder.html" class="menu-link">
 									<div>現金付款訂單</div>
-								</a></li>
-							<li class="menu-item"><a href="#" class="menu-link">
-									<div>報表</div>
-								</a></li>
+								</a>
+							</li>
 						</ul>
 					</li>
-
-
-
 				</ul>
 			</aside>
 
@@ -471,6 +486,7 @@
 		<!-- Vendors JS -->
 		<script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
 		<script src="../assets/vendor/libs/select2/select2.js"></script>
+		<script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
 		<!-- Main JS -->
 
