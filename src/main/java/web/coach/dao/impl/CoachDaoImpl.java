@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import web.coach.dao.CoachDao;
@@ -72,6 +71,109 @@ public class CoachDaoImpl implements CoachDao{
 	public int insertCoachExperiences(CoachExperiences experiences) {
 		session.persist(experiences);
 		return 1;
+	}
+
+	@Override
+	public CoachCertificates selectCertificateByCoachId(Integer coachId) {
+		String hql = "FROM CoachCertificates WHERE coachId = :coachId";
+		
+		return session
+				.createQuery(hql, CoachCertificates.class)
+				.setParameter("coachId", coachId)
+				.uniqueResult();
+	}
+
+	@Override
+	public CoachEducations selectEducationByCoachId(Integer coachId) {
+		String hql = "FROM CoachEducations WHERE coachId = :coachId";
+		
+		return session
+				.createQuery(hql, CoachEducations.class)
+				.setParameter("coachId", coachId)
+				.uniqueResult();
+	}
+
+	@Override
+	public CoachExperiences selectExperienceByCoachId(Integer coachId) {
+		String hql = "FROM CoachExperiences WHERE coachId = :coachId";
+		
+		return session
+				.createQuery(hql, CoachExperiences.class)
+				.setParameter("coachId", coachId)
+				.uniqueResult();
+	}
+
+	@Override
+	public int updateProfileBio(CoachProfiles profile) {
+		String hql = "UPDATE CoachProfiles SET bio = :bio WHERE coachId = :coachId";
+
+	    return session.createQuery(hql)
+	            .setParameter("bio", profile.getBio())
+	            .setParameter("coachId", profile.getCoachId())
+	            .executeUpdate();
+	}
+
+	@Override
+	public int updateEducation(CoachEducations education) {
+		String hql = "UPDATE CoachEducations " +
+                "SET school = :school, degree = :degree " +
+                "WHERE coachId = :coachId";
+
+		return session.createQuery(hql)
+                 .setParameter("school", education.getSchool())
+                 .setParameter("degree", education.getDegree())
+                 .setParameter("coachId", education.getCoachId())
+                 .executeUpdate();
+	}
+
+	@Override
+	public int updateExperience(CoachExperiences experience) {
+		String hql = "UPDATE CoachExperiences " +
+                "SET company = :company, " +
+                "    title = :title, " +
+                "    startDate = :startDate, " +
+                "    endDate = :endDate " +
+                "WHERE coachId = :coachId";
+
+		return session.createQuery(hql)
+	           .setParameter("company", experience.getCompany())
+	           .setParameter("title", experience.getTitle())
+	           .setParameter("startDate", experience.getStartDate())
+	           .setParameter("endDate", experience.getEndDate())
+	           .setParameter("coachId", experience.getCoachId())
+	           .executeUpdate();
+	}
+
+	@Override
+	public int updateCertificate(CoachCertificates certificate) {
+		String hql = "UPDATE CoachCertificates " +
+                "SET name = :name, " +
+                "    fileUrl = :fileUrl " +
+                "WHERE coachId = :coachId";
+
+		return session.createQuery(hql)
+		       .setParameter("name", certificate.getName())
+		       .setParameter("fileUrl", certificate.getFileUrl())
+		       .setParameter("coachId", certificate.getCoachId())
+		       .executeUpdate();
+	}
+
+	@Override
+	public User selectUserById(Integer userId) {
+		return session.get(User.class, userId);
+	}
+
+	@Override
+	public int updateApprovalStatus(CoachProfiles profile) {
+		String hql = "UPDATE CoachProfiles " + 
+				"SET approvalStatus = :approvalStatus, " + 
+				"    approvedAt = NOW() " + 
+				"WHERE coachId = :coachId";
+
+	    return session.createQuery(hql)
+	            .setParameter("approvalStatus", profile.getApprovalStatus())
+	            .setParameter("coachId", profile.getCoachId())
+	            .executeUpdate();
 	}
 
 	

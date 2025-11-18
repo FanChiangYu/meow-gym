@@ -24,7 +24,7 @@ public class CoachProfiles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COACH_ID")
-	private Integer couachId;
+	private Integer coachId;
 	@Column(name = "USER_ID")
 	private Integer userId;
 	@Column(name = "BIO")
