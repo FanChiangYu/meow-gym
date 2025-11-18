@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +27,9 @@ public class ImgController {
 	@Autowired
 	private CourseService service;
 	
-	@GetMapping("{fileName}")
+	@GetMapping(value =  "{fileName}", produces = MediaType.IMAGE_PNG_VALUE)
 	public byte[] getImg(@PathVariable String fileName) throws IOException {
-		byte[] bytes = Files.readAllBytes(Paths.get(fileRootPath, fileName));
-		return bytes;
+		return Files.readAllBytes(Paths.get(fileRootPath, fileName));
 	}
 	
 	@PostMapping

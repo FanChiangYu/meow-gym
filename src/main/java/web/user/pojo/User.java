@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -64,7 +66,7 @@ public class User extends Core {
 	private String avatarUrl;
 
 	@Column(name = "is_banned")
-	private boolean isBanned;
+	private Boolean isBanned;
 
 	@Column(name = "birthday")
 	private Date birthday;
@@ -72,6 +74,7 @@ public class User extends Core {
 	@Column(name = "gender")
 	private String gender;
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 

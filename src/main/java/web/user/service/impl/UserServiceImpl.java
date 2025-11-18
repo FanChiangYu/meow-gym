@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 		user.setAvatarUrl("/meow-gym/course/img/" + filename);
 
 		user.setRole(1);
-		user.setBanned(false);
+		user.setIsBanned(false);
 		user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 		int count = dao.insertUser(user);
 		if (count == 1) {

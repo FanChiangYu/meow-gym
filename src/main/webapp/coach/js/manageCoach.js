@@ -64,6 +64,10 @@ function roleName (role) {
   }
 }
 
+function gender (gender) {
+  return gender === 'M' ? '男' : '女'; 
+}
+
 function inviteById (userId) {
   fetch('manage', {
     method: 'POST',
@@ -93,6 +97,75 @@ function inviteById (userId) {
   });
 }
 
+function auditById (userId) {
+  fetch(`audit/${userId}`)
+  .then(resp => resp.json())
+  .then(respbody => {
+    let certHtml = '';
+    if(respbody.certificate.fileUrl != '' && respbody.certificate.name != ''){
+      certHtml = `<p>證照: <a href="${respbody.certificate.fileUrl}" class="card-link" download>${respbody.certificate.name}</a></p>`;
+    }
+    Swal.fire({
+      title: respbody.user.name,
+      html: `
+        <div style="text-align:left">
+          <p>教練ID: ${respbody.profile.coachId}</p>
+          <p>性別: ${gender(respbody.user.gender)}</p>
+          <p>自我介紹: </p>
+          <p>${respbody.profile.bio}</p>
+          <p>學歷: ${respbody.education.school} ${respbody.education.degree}</p>
+          <p>工作經歷: ${respbody.experience.company} ${respbody.experience.title}</p>
+          <p>任職日期: ${respbody.experience.startDate} ~ ${respbody.experience.endDate}</p>
+          ${certHtml}
+        </div>
+      `,
+      imageUrl: respbody.user.avatarUrl,
+      imageWidth: 500,
+      // imageHeight: 500,
+      imageAlt: '教練頭像',
+      icon: 'info',
+      showCancelButton: true,
+      showDenyButton: true,
+      confirmButtonText: '通過',
+      denyButtonText: '不通過',
+      cancelButtonText: '取消',
+      reverseButtons: true, 
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-gray me-12',
+        denyButton: 'btn btn-danger me-12'
+      }
+    }).then(result => {
+
+      if (result.isConfirmed) {
+        fetch('audit', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            coachId: respbody.profile.coachId,
+            approvalStatus: '通過'
+          }),
+        })
+        .then(() => location.reload());
+      } else if(result.isDenied) {
+        fetch('audit', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            coachId: respbody.profile.coachId,
+            approvalStatus: '不通過'
+          }),
+        })
+        .then(() => location.reload());
+      } else {
+        console.log('取消');
+      }
+
+    });
+  });
+
+}
+
 fetch('/meow-gym/index/loginData')
 .then(resp => resp.json())
 .then(respbody => {
@@ -115,7 +188,7 @@ fetch('manage')
     // 判斷有沒被邀請教練資格
     if(cu.coachProfiles){
       statusHtml = `<span class="badge ${approvalLabel(cu.coachProfiles.approvalStatus)}">${cu.coachProfiles.approvalStatus}</span>`;
-      auditBtnHtml = `<button onclick="auditById(${cu.coachProfiles.coachId})" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>`;
+      auditBtnHtml = `<button onclick="auditById(${cu.user.userId})" class="btn rounded-pill btn-primary waves-effect waves-light">審核</button>`;
       inviteBtnHtml = `<button class="btn rounded-pill btn-gray waves-effect waves-light" disabled>已邀請</button>`;
     }else{
       statusHtml = `<span> - </span>`;
