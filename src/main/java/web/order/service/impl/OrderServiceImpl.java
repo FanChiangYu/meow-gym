@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -316,7 +317,16 @@ public class OrderServiceImpl implements OrderService{
 		//Step2:撈OrderItemsList by OrdersList
 		List<Integer> orderIdList = shoppingRecordOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
 		List<Orderitems> shoppingRecordOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
-		//Step3:回傳Orders, Orderitems
+		for (Orderitems orderitems : shoppingRecordOrderItemsList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+		}
+		//Step3:OrderItemsList打包入OrdersList
+		for (Orders orders : shoppingRecordOrders) {
+			orders.setOrderitems(shoppingRecordOrderItemsList);
+		}
+		//Step4:回傳Orders, Orderitems
 		Map<String, Object> shoppingRecordList = new HashMap<>();
 		shoppingRecordList.put("Orders", shoppingRecordOrders);
 		shoppingRecordList.put("Orderitems", shoppingRecordOrderItemsList);	
@@ -325,18 +335,28 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Map<String, Object> getAllCashOrderListByUserId(Integer userId) {
-		//Step1:撈Users by userId
-		User user = orderdao.selectUserByUserId(userId);
-		//Step2:撈OrderList by userId
+		//Step1:撈OrderList by userId
 		List<Orders> cashOrders = orderdao.selectCashOrdersByUserIdAndStatus(userId, "WAIT_PAID");
-		//Step3:撈OrderItemsList by OrdersList
+		//Step2:撈OrderItemsList by OrdersList
 		List<Integer> orderIdList = cashOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
 		List<Orderitems> cashOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
-		//Step4:回傳User, Orders, and Orderitems
+		for (Orderitems orderitems : cashOrderItemsList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+		}
+		//Step3:撈Users by userId
+		User cashUser = orderdao.selectUserByUserId(userId);
+		//Step4:Users, OrderItemsList打包入OrdersList
+		for (Orders orders : cashOrders) {
+			orders.setOrderitems(cashOrderItemsList);
+			orders.setUser(cashUser);
+		}
+		//Step4:回傳Orders
 		Map<String, Object> cashOrderList = new HashMap<>();
-		cashOrderList.put("User", user);
 		cashOrderList.put("Orders", cashOrders);
-		cashOrderList.put("Orderitems", cashOrderItemsList);	
+		cashOrderList.put("User", cashUser);
+		cashOrderList.put("Orderitems", cashOrderItemsList);
 		return cashOrderList;
 	}
 }
