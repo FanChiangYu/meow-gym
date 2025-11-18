@@ -22,7 +22,7 @@ public class OrderDaoImpl implements OrderDao{
 	//Hibernate寫法	
 	@Override
 	public Integer selectOrderIdByUesrIdAndStatus(Integer userId, String status) {
-		String hql= "select max(orderId) from Orders where userId =:userId and status =:status";
+		String hql= "select max(orderId) from Orders where userId = :userId and status = :status";
 		Query<Integer> query = session.createQuery(hql, Integer.class);		
 		return query.setParameter("userId", userId)
 				.setParameter("status", status)
@@ -112,6 +112,15 @@ public class OrderDaoImpl implements OrderDao{
 		session.persist(orders);
 		return 1;
 	}
+	
+
+	@Override
+	public Integer selectOrderIdAfterPaymentByUesrId(Integer userId) {
+		String hql= "select max(orderId) from Orders where userId = :userId and status IN ('PAID', 'WAIT_PAID')";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("userId", userId)
+				.uniqueResult();
+	}
 
 	@Override
 	public String selectUserEmailByUserId(Integer userId) {
@@ -128,10 +137,10 @@ public class OrderDaoImpl implements OrderDao{
 	
 	@Override
 	public List<Orders> selectShoppingRecordOrdersByUserId(Integer userId) {
-		String hql = "FROM Orders where userId =:userId and AND status IN ('PAID', 'WAIT_PAID')";
+		String hql = "FROM Orders where userId =:userId and status IN ('PAID', 'WAIT_PAID')";
 		Query<Orders> query = session.createQuery(hql, Orders.class);
-		List<Orders> shoppingRecordOrders = query.setParameter("userId", userId).getResultList();
-		return shoppingRecordOrders;
+		return query.setParameter("userId", userId)
+				.getResultList();
 	}
 	
 	@Override
@@ -139,8 +148,17 @@ public class OrderDaoImpl implements OrderDao{
 		//找Orderitems.class
 		String hql = "FROM Orderitems where orderId IN(:orderIdList)";
 		Query<Orderitems> query = session.createQuery(hql, Orderitems.class);
-		List<Orderitems> shoppingRecordOrderItemsList = query.setParameterList("orderIdList", orderIdList).getResultList();
-		return shoppingRecordOrderItemsList;
+		return query.setParameterList("orderIdList", orderIdList)
+				.getResultList();
+	}
+	
+	@Override
+	public List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status) {
+		String hql = "FROM Orders where userId = :userId and AND status = :status";
+		Query<Orders> query = session.createQuery(hql, Orders.class);
+		return query.setParameter("userId", userId)
+				.setParameter("status", status)
+				.getResultList();
 	}
 
     //未使用的方法

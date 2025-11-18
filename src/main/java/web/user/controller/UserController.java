@@ -22,6 +22,8 @@ import web.user.service.UserService;
 @RequestMapping("user")
 public class UserController extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private UserService userService;
 
