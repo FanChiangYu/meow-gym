@@ -60,9 +60,9 @@ public class Orders extends Core{
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
 	private List<Orderitems> Orderitems;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", insertable = false, updatable = false)
-	private User user;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+//	private User user;
 	
 //fields
 //	private static final long serialVersionUID = 1L;

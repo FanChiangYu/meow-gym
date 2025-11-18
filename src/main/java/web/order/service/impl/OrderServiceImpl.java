@@ -347,10 +347,10 @@ public class OrderServiceImpl implements OrderService{
 		//Step3:撈Users by userId
 		User cashUser = orderdao.selectUserByUserId(userId);
 		//Step4:Users, OrderItemsList打包入OrdersList
-		for (Orders orders : cashOrders) {
-			orders.setOrderitems(cashOrderItemsList);
-			orders.setUser(cashUser);
-		}
+//		for (Orders orders : cashOrders) {
+//			orders.setOrderitems(cashOrderItemsList);
+//			orders.setUser(cashUser);
+//		}
 		//Step4:回傳Orders
 		Map<String, Object> cashOrderList = new HashMap<>();
 		cashOrderList.put("Orders", cashOrders);
