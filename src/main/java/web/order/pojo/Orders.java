@@ -10,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.user.pojo.User;
 
 @Entity
 @Setter
@@ -59,6 +58,12 @@ public class Orders extends Core{
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
 	private List<Orderitems> Orderitems;
+	
+	// 回應前端用
+	@Transient
+	private String name;  //回傳前端會員姓名
+	@Transient
+	private String email;  //回傳前端會員Email
 	
 //	@ManyToOne(fetch = FetchType.EAGER)
 //	@JoinColumn(name = "user_id", insertable = false, updatable = false)

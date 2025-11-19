@@ -21,6 +21,7 @@ import web.order.service.OrderService;
 import web.promotions.pojo.CoursePromo;
 import web.user.pojo.User;
 
+@Transactional	
 @Service
 public class OrderServiceImpl implements OrderService{	
 	@Autowired
@@ -29,7 +30,6 @@ public class OrderServiceImpl implements OrderService{
 	private CourseService courseService;
 	
 	//標註需要交易控制的⽅法
-	@Transactional
 	@Override
 	public Boolean addcart(Course course, Integer userId) {
 		//比對訂單course資訊		
@@ -72,7 +72,6 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 	
-	@Transactional	
 	@Override
 	public Map<String, Object> getAllOrderitemsAndCourseByUserId(Integer userId) {
 		//Step1:用userId找orderId by Orders
@@ -107,7 +106,6 @@ public class OrderServiceImpl implements OrderService{
 		return orderitemsAndCourseList;
 	}
 	
-	@Transactional	
 	@Override
 	public boolean deletecoursefromcart(Integer orderItemId, Integer userId) {
 		//Step1:確認and刪除orderitems的課程資訊
@@ -119,7 +117,7 @@ public class OrderServiceImpl implements OrderService{
 			List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
 			if (orderitemList == null || orderitemList.isEmpty()) {
 				orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
-				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "CANCEL"); 
+				int count2 = orderdao.modifyStatusByOrderIdAndStatus(orderId, "CANCEL"); 
 				if(count2 == 1) {
 					System.out.println("orderitems不存在 orders updatestatus_CANCEL成功");
 				}else {
@@ -133,7 +131,6 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 	
-	@Transactional
 	@Override
 	public Map<String, Object> getPayAmountListByUserId(Integer userId) {
 		//Step1:確認Orders and Orderitems 的 orderId
@@ -176,7 +173,6 @@ public class OrderServiceImpl implements OrderService{
 		return payAmountList;
 	}
 
-	@Transactional
 	@Override
 	public Orders payment(Orders orders, Integer userId) {
 		//Step1:判斷信用卡 or 現金付款, 使用信用卡比對前端付款資訊
@@ -224,7 +220,7 @@ public class OrderServiceImpl implements OrderService{
 			if(count1 == 1) {
 				payOrder.setMessage("送出成功");
 				payOrder.setSuccessful(true);
-				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "WAIT_PAID"); 
+				int count2 = orderdao.modifyStatusByOrderIdAndStatus(orderId, "WAIT_PAID"); 
 				if(count2 == 1) {
 					System.out.println("orders updatestatus_WAIT_PAID成功");
 				}else {
@@ -248,7 +244,7 @@ public class OrderServiceImpl implements OrderService{
 			if(count1 == 1) {
 				payOrder.setMessage("送出成功");
 				payOrder.setSuccessful(true);
-				int count2 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(orderId, "PAID"); 
+				int count2 = orderdao.modifyStatusByOrderIdAndStatus(orderId, "PAID"); 
 				if(count2 == 1) {
 					System.out.println("orders updatestatus_PAID成功");
 				}else {
@@ -262,7 +258,6 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
-	@Transactional	
 	@Override
 	public Map<String, Object> getOrderConfirmation(Integer userId) {
 		//Step1:用userId找orderId by Orders
@@ -333,9 +328,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Map<String, Object> getAllCashOrderListByUserId(Integer userId) {
+	public Map<String, Object> getAllCashOrderList() {
 		//Step1:撈OrderList by userId
-		List<Orders> cashOrders = orderdao.selectCashOrdersByUserIdAndStatus(userId, "WAIT_PAID");
+		List<Orders> cashOrders = orderdao.selectCashOrdersByStatus("WAIT_PAID");
 		//Step2:撈OrderItemsList by OrdersList
 		List<Integer> orderIdList = cashOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
 		List<Orderitems> cashOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
@@ -344,31 +339,28 @@ public class OrderServiceImpl implements OrderService{
 			Course course = orderdao.selectCourseByCourseId(courseId);
 			orderitems.setTitle(course.getTitle());
 		}
-		//Step3:撈Users by userId
-		User cashUser = orderdao.selectUserByUserId(userId);
-		//Step4:Users, OrderItemsList打包入OrdersList
-//		for (Orders orders : cashOrders) {
-//			orders.setOrderitems(cashOrderItemsList);
-//			orders.setUser(cashUser);
-//		}
+		//Step3:跑foreach 放入 userName/userEmail, OrderItemsList打包入OrdersList
+		for (Orders orders : cashOrders) {
+			orders.setOrderitems(cashOrderItemsList);
+			Integer userId = orderdao.selectUserIdByOrderId(orders.getOrderId());
+			User user = orderdao.selectUserByUserId(userId);
+			orders.setName(user.getName());
+			orders.setEmail(user.getEmail());
+		}
 		//Step4:回傳Orders
 		Map<String, Object> cashOrderList = new HashMap<>();
 		cashOrderList.put("Orders", cashOrders);
-		cashOrderList.put("User", cashUser);
 		cashOrderList.put("Orderitems", cashOrderItemsList);
 		return cashOrderList;
 	}
 
 	@Override
-	public Boolean changeOrderStatusForPaymentByCash(Integer orderId, Integer userId) {
-		//Step1:確認需更改狀態的orderID
-		Integer changeStatusOrderId = orderdao.selectChangeStatusOrderIdByUesrIdAndOrderId(userId, orderId);
-		System.out.println(changeStatusOrderId);
-		//Step2:更改狀態為PAID
-		int count1 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(changeStatusOrderId, "PAID"); 
+	public Boolean changeOrderStatusForPaymentByCash(Integer orderId) {
+		System.out.println(orderId);
+		int count1 = orderdao.modifyStatusByOrderIdAndStatus(orderId, "PAID"); 
 		if(count1 == 1) {
 			System.out.println("orders updatestatus_PAID成功");
-			Orders changeStatusOrder = orderdao.selectOrdersByOrderId(changeStatusOrderId);
+			Orders changeStatusOrder = orderdao.selectOrdersByOrderId(orderId);
 			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 			changeStatusOrder.setCreatedAt(timestamp);
 			int count2 = orderdao.insert(changeStatusOrder);
