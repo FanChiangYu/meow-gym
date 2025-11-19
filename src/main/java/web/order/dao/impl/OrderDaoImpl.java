@@ -79,7 +79,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status) {		
+	public Integer modifyStatusByOrderIdAndStatus(Integer orderId, String status) {		
 		int result = session.createQuery("UPDATE Orders "
 				+ "SET status = :status "
 				+ "WHERE orderId = :orderId")

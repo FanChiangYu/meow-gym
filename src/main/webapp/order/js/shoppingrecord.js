@@ -71,8 +71,7 @@ function shoppingRecord(){
 					}, // checkbox 或空欄
 					{ data: 'orderId' },
 					{ data: 'createdAt' },
-					{ 
-						data: null,
+					{ data: null,
 						render: function(row) {
 							const orderId = row.orderId;
 							const items = row.orderitems;
@@ -358,18 +357,18 @@ function shoppingRecord(){
 	});
 }
 
-
-				// for (let orders of shoppingRecordOrders) {
-				// 	tbody.innerHTML += `
-				// 		<tr>
-				// 			<td></td>
-				// 			<td></td>
-				// 			<td>${orders.orderId}</td>
-				// 			<td>${orders.createdAt}</td>
-				// 			<td>${orders.paymentMethod}</td> //需要改
-				// 			<td>${orders.payAmount}</td>
-				// 			<td>${orders.paymentMethod}</td>
-				// 			<td>${orders.status}</td>
-				// 		</tr>
-				// 	`;
-				// },
+//未使用
+// for (let orders of shoppingRecordOrders) {
+// 	tbody.innerHTML += `
+// 		<tr>
+// 			<td></td>
+// 			<td></td>
+// 			<td>${orders.orderId}</td>
+// 			<td>${orders.createdAt}</td>
+// 			<td>${orders.paymentMethod}</td> //需要改
+// 			<td>${orders.payAmount}</td>
+// 			<td>${orders.paymentMethod}</td>
+// 			<td>${orders.status}</td>
+// 		</tr>
+// 	`;
+// },
