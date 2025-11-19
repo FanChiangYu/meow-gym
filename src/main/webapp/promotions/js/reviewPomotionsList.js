@@ -37,6 +37,14 @@ fetch('/meow-gym/index/loginData')
     switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
     userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
     avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+  }else{
+    Swal.fire({
+      title: '錯誤',
+      text: '請先登入',
+      icon: 'error',
+      target: document.body 
+    })
+    .then(() => location.href = '/meow-gym/user/login.html');
   }
 });
 //以下自己編寫的js

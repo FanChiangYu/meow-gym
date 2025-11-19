@@ -14,6 +14,12 @@ public interface CoachDao {
 	
 	CoachProfiles selectByUserId(Integer userId);
 	
+	CoachCertificates selectCertificateByCoachId(Integer coachId);
+	
+	CoachEducations selectEducationByCoachId(Integer coachId);
+	
+	CoachExperiences selectExperienceByCoachId(Integer coachId);
+	
 	int updateRole(Integer userId);
 	
 	int insertCoachProfiles(CoachProfiles coachProfiles);
@@ -23,4 +29,16 @@ public interface CoachDao {
 	int insertCoachEducations(CoachEducations educations);
 	
 	int insertCoachExperiences(CoachExperiences experiences);
+	
+	int updateProfileBio(CoachProfiles profile);
+	
+	int updateEducation(CoachEducations education);
+	
+	int updateExperience(CoachExperiences experience);
+	
+	int updateCertificate(CoachCertificates certificate);
+
+	User selectUserById(Integer userId);
+
+	int updateApprovalStatus(CoachProfiles profile);
 }

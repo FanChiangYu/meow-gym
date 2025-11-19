@@ -65,126 +65,159 @@
 			<!-- Menu 側邊欄 -->
 
 			<aside id="layout-menu" class="layout-menu menu-vertical menu">
-				<div class="app-brand demo">
-					<a href="index.html" class="app-brand-link"> <span
-						class="app-brand-logo demo"> <span class="text-primary">
-								<svg width="32" height="22" viewBox="0 0 32 22" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-										d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-										fill="currentColor" />
-                    <path opacity="0.06" fill-rule="evenodd"
-										clip-rule="evenodd"
-										d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
-										fill="#161616" />
-                    <path opacity="0.06" fill-rule="evenodd"
-										clip-rule="evenodd"
-										d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
-										fill="#161616" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-										d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-										fill="currentColor" />
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <span class="text-primary">
+                  <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+                      fill="currentColor" />
+                    <path
+                      opacity="0.06"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+                      fill="#161616" />
+                    <path
+                      opacity="0.06"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+                      fill="#161616" />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+                      fill="currentColor" />
                   </svg>
-						</span>
-					</span> <span class="app-brand-text demo menu-text fw-bold ms-3">MEOW
-							GYM</span>
-					</a> <a href="javascript:void(0);"
-						class="layout-menu-toggle menu-link text-large ms-auto"> <i
-						class="icon-base ti menu-toggle-icon d-none d-xl-block"></i> <i
-						class="icon-base ti tabler-x d-block d-xl-none"></i>
-					</a>
-				</div>
+                </span>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-3">MEOW GYM</span>
+            </a>
 
-				<div class="menu-inner-shadow"></div>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+              <i class="icon-base ti menu-toggle-icon d-none d-xl-block"></i>
+              <i class="icon-base ti tabler-x d-block d-xl-none"></i>
+            </a>
+          </div>
 
-				<ul class="menu-inner py-1">
+          <div class="menu-inner-shadow"></div>
 
-					<li class="menu-header"><span class="menu-header-text">您好！
-					</span> <!-- 使用者名稱 --> <span class="menu-header-text" id="user-name"></span>
-					</li>
+          <ul class="menu-inner py-1">
+            
+            <li class="menu-header">
+              <span class="menu-header-text">您好！ </span>
+              <!-- 使用者名稱 -->
+              <span class="menu-header-text" id="user-name"></span>
+            </li>
 
-					<!-- 會員專區 -->
-					<li class="menu-item open" id="user-menu"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
-							class="menu-icon icon-base ti tabler-users"></i>
-							<div>會員專區</div>
-					</a>
-						<ul class="menu-sub">
-							<li class="menu-item active"><a href="/meow-gym/user/edit.html" class="menu-link">
-									<div>基本資料</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/browseCourse.html" class="menu-link">
-									<div>課程瀏覽</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/bookClass.html" class="menu-link">
-									<div>預約上課</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/classRecord.html" class="menu-link">
-									<div>上課紀錄</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/order/shoppingrecord.html"
-								class="menu-link">
-									<div>購買紀錄</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/order/newOrder.html"
-								class="menu-link">
-									<div>購物車</div>
-							</a></li>
-						</ul></li>
+            <!-- 會員專區 -->
+            <li class="menu-item d-none" id="user-menu">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-users"></i>
+                <div>會員專區</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="/meow-gym/user/edit.html" class="menu-link">
+                    <div>基本資料</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/course/browseCourse.html" class="menu-link">
+                    <div>課程瀏覽</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/course/bookClass.html" class="menu-link">
+                    <div>預約上課</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/course/classRecord.html" class="menu-link">
+                    <div>上課紀錄</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/order/shoppingrecord.html" class="menu-link">
+                    <div>購買紀錄</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/order/newOrder.html" class="menu-link">
+                    <div>購物車</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-					<!-- 教練專區 -->
-					<li class="menu-item open" id="coach-menu"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
-							class="menu-icon icon-base ti tabler-users"></i>
-							<div>教練專區</div>
-					</a>
-						<ul class="menu-sub">
-							<li class="menu-item active"><a href="/meow-gym/course/browseCourse.html" class="menu-link">
-									<div>課程瀏覽</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/newCourse.html"
-								class="menu-link">
-									<div>上架課程</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/classRecord.html" class="menu-link">
-									<div>上課紀錄</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/coach/applyCoach.html" class="menu-link">
-									<div>教練資格申請</div>
-							</a></li>
-						</ul></li>
+            <!-- 教練專區 -->
+            <li class="menu-item d-none" id="coach-menu">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-users"></i>
+                <div>教練專區</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="/meow-gym/course/manageCourse.html" class="menu-link">
+                    <div>課程管理</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/course/newCourse.html" class="menu-link">
+                    <div>上架課程</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/coach/applyCoach.html" class="menu-link">
+                    <div>教練資格申請</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-					<!-- 管理者專區 -->
-					<li class="menu-item open" id="admin-menu"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
-							class="menu-icon icon-base ti tabler-users"></i>
-							<div>管理者專區</div>
-					</a>
-						<ul class="menu-sub">
-							<li class="menu-item active"><a href="/meow-gym/blacklist/reviewBlocklist.html" class="menu-link">
-									<div>黑名單管理</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/coach/manageCoach.html" class="menu-link">
-									<div>教練審核</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
-									<div>促銷活動審核</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
-									<div>課程審核</div>
-							</a></li>
-							<li class="menu-item active"><a href="/meow-gym/order/cashOrder.html" class="menu-link">
-									<div>現金付款訂單</div>
-							</a></li>
-							<li class="menu-item active"><a href="#" class="menu-link">
-									<div>報表</div>
-							</a></li>
-						</ul></li>
+            <!-- 管理者專區 -->
+            <li class="menu-item d-none open" id="admin-menu">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-users"></i>
+                <div>管理者專區</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="/meow-gym/blacklist/reviewBlocklist.html" class="menu-link">
+                    <div>黑名單管理</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/coach/manageCoach.html" class="menu-link">
+                    <div>教練審核</div>
+                  </a>
+                </li>
+                <li class="menu-item active">
+                  <a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
+                    <div>促銷活動管理</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
+                    <div>課程審核</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/meow-gym/order/cashOrder.html" class="menu-link">
+                    <div>現金付款訂單</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
 
-
-				</ul>
-			</aside>
+         
+          </ul>
+        </aside>
 
 			<div class="menu-mobile-toggler d-xl-none rounded-1">
 				<a href="javascript:void(0);"
