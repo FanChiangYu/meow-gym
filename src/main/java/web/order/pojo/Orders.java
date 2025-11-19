@@ -1,12 +1,17 @@
 package web.order.pojo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.user.pojo.User;
 
 @Entity
 @Setter
@@ -48,7 +54,15 @@ public class Orders extends Core{
 	private String cvc; // CVC驗證碼
 	@Column(name = "CREATED_AT")
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	private Timestamp createdAt; // 付款時間
+	private Timestamp createdAt; // 訂單成立時間
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
+	private List<Orderitems> Orderitems;
+	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+//	private User user;
 	
 //fields
 //	private static final long serialVersionUID = 1L;

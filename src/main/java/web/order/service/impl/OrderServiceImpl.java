@@ -316,7 +316,16 @@ public class OrderServiceImpl implements OrderService{
 		//Step2:撈OrderItemsList by OrdersList
 		List<Integer> orderIdList = shoppingRecordOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
 		List<Orderitems> shoppingRecordOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
-		//Step3:回傳Orders, Orderitems
+		for (Orderitems orderitems : shoppingRecordOrderItemsList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+		}
+		//Step3:OrderItemsList打包入OrdersList
+		for (Orders orders : shoppingRecordOrders) {
+			orders.setOrderitems(shoppingRecordOrderItemsList);
+		}
+		//Step4:回傳Orders, Orderitems
 		Map<String, Object> shoppingRecordList = new HashMap<>();
 		shoppingRecordList.put("Orders", shoppingRecordOrders);
 		shoppingRecordList.put("Orderitems", shoppingRecordOrderItemsList);	
@@ -325,18 +334,54 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Map<String, Object> getAllCashOrderListByUserId(Integer userId) {
-		//Step1:撈Users by userId
-		User user = orderdao.selectUserByUserId(userId);
-		//Step2:撈OrderList by userId
+		//Step1:撈OrderList by userId
 		List<Orders> cashOrders = orderdao.selectCashOrdersByUserIdAndStatus(userId, "WAIT_PAID");
-		//Step3:撈OrderItemsList by OrdersList
+		//Step2:撈OrderItemsList by OrdersList
 		List<Integer> orderIdList = cashOrders.stream().map(item -> item.getOrderId()).collect(Collectors.toList());
 		List<Orderitems> cashOrderItemsList = orderdao.selectOrderitemListByOrderIdList(orderIdList);
-		//Step4:回傳User, Orders, and Orderitems
+		for (Orderitems orderitems : cashOrderItemsList) {
+			Integer courseId = orderitems.getCourseId();
+			Course course = orderdao.selectCourseByCourseId(courseId);
+			orderitems.setTitle(course.getTitle());
+		}
+		//Step3:撈Users by userId
+		User cashUser = orderdao.selectUserByUserId(userId);
+		//Step4:Users, OrderItemsList打包入OrdersList
+//		for (Orders orders : cashOrders) {
+//			orders.setOrderitems(cashOrderItemsList);
+//			orders.setUser(cashUser);
+//		}
+		//Step4:回傳Orders
 		Map<String, Object> cashOrderList = new HashMap<>();
-		cashOrderList.put("User", user);
 		cashOrderList.put("Orders", cashOrders);
-		cashOrderList.put("Orderitems", cashOrderItemsList);	
+		cashOrderList.put("User", cashUser);
+		cashOrderList.put("Orderitems", cashOrderItemsList);
 		return cashOrderList;
+	}
+
+	@Override
+	public Boolean changeOrderStatusForPaymentByCash(Integer orderId, Integer userId) {
+		//Step1:確認需更改狀態的orderID
+		Integer changeStatusOrderId = orderdao.selectChangeStatusOrderIdByUesrIdAndOrderId(userId, orderId);
+		System.out.println(changeStatusOrderId);
+		//Step2:更改狀態為PAID
+		int count1 = orderdao.modifyStatusByUesrIdAndOrderIdAndStatus(changeStatusOrderId, "PAID"); 
+		if(count1 == 1) {
+			System.out.println("orders updatestatus_PAID成功");
+			Orders changeStatusOrder = orderdao.selectOrdersByOrderId(changeStatusOrderId);
+			Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+			changeStatusOrder.setCreatedAt(timestamp);
+			int count2 = orderdao.insert(changeStatusOrder);
+			if(count2 == 1) {
+				System.out.println("orders updateCreatedAt成功");
+				return true;
+			} else {
+				System.out.println("orders updateCreatedAt失敗");
+				return false;
+			}
+		}else {
+			System.out.println("orders updatestatus_PAID失敗");
+			return false;
+		}
 	}
 }
