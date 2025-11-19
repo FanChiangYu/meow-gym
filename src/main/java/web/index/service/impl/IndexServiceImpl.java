@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import web.coach.pojo.CoachProfiles;
 import web.index.dao.IndexDao;
 import web.index.service.IndexService;
 import web.promotions.pojo.CoursePromo;
+import web.user.pojo.User;
 
 @Service
 @Transactional
@@ -41,6 +43,17 @@ public class IndexServiceImpl implements IndexService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<CoachProfiles> findAllCoach() {
+		List<CoachProfiles> profileList = dao.selectAllCoach();
+		for (CoachProfiles profile : profileList) {
+			User user = dao.selectUserById(profile.getUserId());
+			profile.setCoachName(user.getName());
+			profile.setAvatarUrl(user.getAvatarUrl());
+		}
+		return profileList;
 	}
 	
 }
