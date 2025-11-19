@@ -79,7 +79,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public Integer modifyStatusByUesrIdAndOrderIdAndStatus(Integer orderId, String status) {		
+	public Integer modifyStatusByOrderIdAndStatus(Integer orderId, String status) {		
 		int result = session.createQuery("UPDATE Orders "
 				+ "SET status = :status "
 				+ "WHERE orderId = :orderId")
@@ -153,12 +153,30 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	@Override
-	public List<Orders> selectCashOrdersByUserIdAndStatus(Integer userId, String status) {
-		String hql = "FROM Orders where userId = :userId and AND status = :status";
+	public List<Orders> selectCashOrdersByStatus(String status) {
+		String hql = "FROM Orders where status = :status";
 		Query<Orders> query = session.createQuery(hql, Orders.class);
-		return query.setParameter("userId", userId)
-				.setParameter("status", status)
+		return query.setParameter("status", status)
 				.getResultList();
+	}
+	
+
+	@Override
+	public Integer selectUserIdByOrderId(Integer orderId) {
+		String hql= "select userId from Orders where orderId = :orderId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("orderId", orderId)
+				.uniqueResult();
+	}
+	
+
+	@Override
+	public Integer selectChangeStatusOrderIdByUesrIdAndOrderId(Integer orderId, Integer userId) {
+		String hql= "select orderId from Orders where userId = :userId and orderId = :orderId";
+		Query<Integer> query = session.createQuery(hql, Integer.class);		
+		return query.setParameter("userId", userId)
+				.setParameter("orderId", orderId)
+				.uniqueResult();
 	}
 
     //未使用的方法

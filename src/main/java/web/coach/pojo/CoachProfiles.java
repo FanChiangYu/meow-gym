@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class CoachProfiles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COACH_ID")
-	private Integer couachId;
+	private Integer coachId;
 	@Column(name = "USER_ID")
 	private Integer userId;
 	@Column(name = "BIO")
@@ -32,5 +33,9 @@ public class CoachProfiles {
 	@Column(name = "APPROVAL_STATUS")
 	private String approvalStatus; 
 	@Column(name = "APPROVED_AT")
-	private Timestamp approvedAt; 
+	private Timestamp approvedAt;
+	@Transient
+	private String coachName;
+	@Transient
+	private String avatarUrl;
 }

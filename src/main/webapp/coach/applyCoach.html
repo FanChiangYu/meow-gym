@@ -125,32 +125,32 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/user/edit.html" class="menu-link">
                     <div>基本資料</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/browseCourse.html" class="menu-link">
                     <div>課程瀏覽</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/bookClass.html" class="menu-link">
                     <div>預約上課</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/course/classRecord.html" class="menu-link">
                     <div>上課紀錄</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../order/shoppingrecord.html" class="menu-link">
+                  <a href="/meow-gym/order/shoppingrecord.html" class="menu-link">
                     <div>購買紀錄</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../order/newOrder.html" class="menu-link">
+                  <a href="/meow-gym/order/newOrder.html" class="menu-link">
                     <div>購物車</div>
                   </a>
                 </li>
@@ -158,29 +158,24 @@
             </li>
 
             <!-- 教練專區 -->
-            <li class="menu-item d-none" id="coach-menu">
+            <li class="menu-item open d-none" id="coach-menu">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>教練專區</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>課程瀏覽</div>
+                  <a href="/meow-gym/course/manageCourse.html" class="menu-link">
+                    <div>課程管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/newCourse.html" class="menu-link">
+                  <a href="/meow-gym/course/newCourse.html" class="menu-link">
                     <div>上架課程</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>上課紀錄</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
+                <li class="menu-item active">
+                  <a href="/meow-gym/coach/applyCoach.html" class="menu-link">
                     <div>教練資格申請</div>
                   </a>
                 </li>
@@ -195,40 +190,35 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/blacklist/showList.html" class="menu-link">
                     <div>黑名單管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/coach/manageCoach.html" class="menu-link">
                     <div>教練審核</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>促銷活動審核</div>
+                  <a href="/meow-gym/promotions/reviewPomotionsList.html" class="menu-link">
+                    <div>促銷活動管理</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../course/reviewCourseList.html" class="menu-link">
+                  <a href="/meow-gym/course/reviewCourseList.html" class="menu-link">
                     <div>課程審核</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="/meow-gym/order/cashOrder.html" class="menu-link">
                     <div>現金付款訂單</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div>報表</div>
                   </a>
                 </li>
               </ul>
             </li>
 
 
-         
+          
           </ul>
         </aside>
 
@@ -308,7 +298,7 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y" style="border: 2px solid red;">
+            <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
       
               <div class="row mb-6 gy-6">
@@ -316,7 +306,7 @@
                   <div class="card">
                     <div class="card-header d-flex justify-content-start align-items-center gap-2">
                       <h5 class="mb-0">教練資格申請</h5>
-                      <span class="badge bg-label-info fs-5">待審核</span>
+                      <span class="badge fs-5" id="status"></span>
                     </div>
                     <div class="card-body">
                       <form>
@@ -362,11 +352,11 @@
                           <input type="text" class="form-control" id="certificate" placeholder="證照名稱" />
                         </div>
                         <div class="mb-6">
-                          <label for="img" class="form-label">證照截圖 (僅允許 PNG 格式圖片)</label>
-                          <input class="form-control" type="file" id="img" accept=".png" />
+                          <label for="cert-img" class="form-label">證照截圖 (僅允許 PNG 格式圖片)</label>
+                          <input class="form-control" type="file" id="cert-img" accept=".png" />
                         </div>  
-                        <div class="mb-6">
-                          <a href="javascript:void(0)" class="card-link">已上傳檔名.png</a>
+                        <div class="mb-6" id="img-download">
+                          <a href="javascript:void(0)" class="card-link"></a>
                         </div>
                         <hr class="my-6 mx-n6">
                         <button id="change-btn" type="button" class="btn btn-primary">資料變更</button>
