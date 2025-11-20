@@ -20,55 +20,102 @@ function valueOrNull(value) {
 }
 
 applybutton.addEventListener('click', function () {
-
 	if (email.value.match(reg) === null) {
-		alert('帳號格式不正確');
+		Swal.fire({
+			title: '錯誤',
+			text: '帳號格式有誤',
+			icon: 'error',
+			target: document.body
+		});
 	}
+
 	if (valueOrNull(username.value) == null) {
-		alert('姓名未輸入');
+		Swal.fire({
+			title: '錯誤',
+			text: '姓名未輸入',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(password.value) == null) {
-		alert('密碼未輸入');
+		Swal.fire({
+			title: '錯誤',
+			text: '密碼未輸入',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(phoneNumber.value) == null) {
-		alert('欄位必填');
+		Swal.fire({
+			title: '錯誤',
+			text: '電話欄位必填',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(gender.value) == null) {
-		alert('請選擇性別');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇性別',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(birthday.value) == null) {
-		alert('生日為必填欄位');
+		Swal.fire({
+			title: '錯誤',
+			text: '生日為必填欄位',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(cnt_code.value) == null) {
-		alert('請選擇縣市');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇縣市',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(dist_code.value) == null) {
-		alert('請選擇鄉鎮');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇鄉鎮',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(detail_address.value) == null) {
-		alert('地址為必填欄位');
+		Swal.fire({
+			title: '錯誤',
+			text: '地址為必填欄位',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
-
-
-
 	const file = avatarUrl.files[0];
 	if (!file) {
-		alert("請上傳圖片！");
+		Swal.fire({
+			title: '錯誤',
+			text: '請上傳圖片！',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
