@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import web.coach.dao.CoachDao;
 import web.coach.pojo.CoachProfiles;
 import web.index.dao.IndexDao;
 import web.index.service.IndexService;
@@ -19,6 +20,9 @@ import web.user.pojo.User;
 public class IndexServiceImpl implements IndexService {
 	@Autowired
 	private IndexDao dao;
+	
+	@Autowired
+	private CoachDao coachDao;
 
 	@Override
 	public List<CoursePromo> findAllPromo() {
@@ -54,6 +58,16 @@ public class IndexServiceImpl implements IndexService {
 			profile.setAvatarUrl(user.getAvatarUrl());
 		}
 		return profileList;
+	}
+
+	@Override
+	public Boolean coachApprovalStatus(User user) {
+		CoachProfiles profile = coachDao.selectByUserId(user.getUserId());
+		if ("通過".equals(profile.getApprovalStatus())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

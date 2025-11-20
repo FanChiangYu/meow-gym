@@ -1,16 +1,18 @@
-swiperReviews = document.getElementById('swiper-reviews');
-ReviewsPreviousBtn = document.getElementById('reviews-previous-btn');
-ReviewsNextBtn = document.getElementById('reviews-next-btn');
-ReviewsSliderPrev = document.querySelector('.swiper-button-prev');
-ReviewsSliderNext = document.querySelector('.swiper-button-next');
-promotionsContent = document.querySelector('#promotions-content');
-cartBtn = document.querySelector('#cart-btn');
-loginBtn = document.querySelector('#login-btn');
-registerBtn = document.querySelector('#register-btn');
-userName = document.querySelector('#user-name');
-userAvatar = document.querySelector('#user-avatar');
-userInfo = document.querySelector('#user-info');
-coachContainer = document.querySelector('#coach-container');
+const swiperReviews = document.getElementById('swiper-reviews');
+const ReviewsPreviousBtn = document.getElementById('reviews-previous-btn');
+const ReviewsNextBtn = document.getElementById('reviews-next-btn');
+const ReviewsSliderPrev = document.querySelector('.swiper-button-prev');
+const ReviewsSliderNext = document.querySelector('.swiper-button-next');
+const promotionsContent = document.querySelector('#promotions-content');
+const cartBtn = document.querySelector('#cart-btn');
+const loginBtn = document.querySelector('#login-btn');
+const registerBtn = document.querySelector('#register-btn');
+const userName = document.querySelector('#user-name');
+const userAvatar = document.querySelector('#user-avatar');
+const userInfo = document.querySelector('#user-info');
+const coachContainer = document.querySelector('#coach-container');
+const userCenterBtn = document.querySelector('#user-center-btn');
+const logoutBtn = document.querySelector('#logout-btn');
 
 fetch('/meow-gym/index/loginData')
 .then(resp => resp.json())
@@ -19,6 +21,7 @@ fetch('/meow-gym/index/loginData')
     userName.textContent = `您好! ${respbody.user.name}`; // 修改標籤內使用者名稱
     userAvatar.src = respbody.user.avatarUrl; // 更換img標籤圖片
     userInfo.classList.remove('d-none');
+    userCenterBtn.classList.remove('d-none');
     if(respbody.user.role === 1){
       cartBtn.classList.remove('d-none');
     }
@@ -28,7 +31,7 @@ fetch('/meow-gym/index/loginData')
   }
 });
 
-fetch('getPromotions')
+fetch('/meow-gym/index/getPromotions')
 .then(resp => resp.json())
 .then(cpList => {
   
@@ -99,7 +102,7 @@ fetch('getPromotions')
 
 });
 
-fetch('coachInfo')
+fetch('/meow-gym/index/coachInfo')
 .then(resp => resp.json())
 .then(profileList => {
   profileList.forEach(profile => {
@@ -119,3 +122,25 @@ fetch('coachInfo')
   });
 });
 
+userCenterBtn.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
+});
+
+
+logoutBtn.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/user/logout')
+  .then(()=>location.href = '/meow-gym/index/index.html');
+  // location.href = '/meow-gym/index/index.html';
+});
+
+// logoutBtn.addEventListener('click', e => {
+//   e.preventDefault();
+//   fetch('/meow-gym/index/logout');
+//   // location.href = '/meow-gym/index/index.html';
+// });
