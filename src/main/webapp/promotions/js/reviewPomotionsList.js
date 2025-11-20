@@ -125,9 +125,8 @@ function removePromotion(courseId) {
                     text: response.message,
                     icon: 'success',
                     target: document.body
-                });
-
-                setTimeout(() => location.reload(), 2000);
+                })
+                .then(() => location.reload());;
 
             } else {
                 Swal.fire({
@@ -135,9 +134,8 @@ function removePromotion(courseId) {
                     text: response.message,
                     icon: 'error',
                     target: document.body
-                });
-
-                setTimeout(() => location.reload(), 2000);
+                })
+                .then(() => location.reload());;
             }
         });
     });

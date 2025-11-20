@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import core.pojo.Core;
 import lombok.AllArgsConstructor;
@@ -85,6 +86,7 @@ public class User extends Core {
 	private String filename;
 	
 	@Transient
+	@JsonIgnore
 	private MultipartFile avatarFile;
 
 }

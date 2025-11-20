@@ -19,14 +19,15 @@ function valueOrNull(value) {
 	}
 }
 
-email.addEventListener('blur', function () {
-	if (email.value.match(reg) === null) {
-		alert('帳號格式不正確');
-	}
-});
-
 check();
 function check() {
+
+	email.addEventListener('blur', function () {
+		if (email.value.match(reg) === null) {
+			alert('帳號格式不正確');
+		}
+	});
+
 	if (valueOrNull(username.value) == null) {
 		alert('姓名未輸入');
 		return;
@@ -88,6 +89,16 @@ applybutton.addEventListener('click', function () {
 	formData.append('createdAt', password.value);
 	formData.append('avatarFile', file, file.name); // 直接上傳檔案
 
-	location.href = 'registerSuccessPage.html';
-
+	fetch('register', {
+		method: 'POST',
+		body: formData
+	})
+		.then(resp => resp.json())
+		.then(body => {
+			if (body.successful) {
+				location.href = '/meow-gym/index/index.html';
+			} else {
+				alert(body.message);
+			}
+		});
 });
