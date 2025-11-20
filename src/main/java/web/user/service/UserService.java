@@ -11,4 +11,6 @@ public interface UserService extends CoreService {
 
 	User register(User user) throws IOException;
 
+	User edit(User user);
+
 }
