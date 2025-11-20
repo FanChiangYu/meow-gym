@@ -19,15 +19,11 @@ function valueOrNull(value) {
 	}
 }
 
-check();
-function check() {
+applybutton.addEventListener('click', function () {
 
-	email.addEventListener('blur', function () {
-		if (email.value.match(reg) === null) {
-			alert('帳號格式不正確');
-		}
-	});
-
+	if (email.value.match(reg) === null) {
+		alert('帳號格式不正確');
+	}
 	if (valueOrNull(username.value) == null) {
 		alert('姓名未輸入');
 		return;
@@ -67,9 +63,9 @@ function check() {
 		alert('地址為必填欄位');
 		return;
 	}
-}
 
-applybutton.addEventListener('click', function () {
+
+
 	const file = avatarUrl.files[0];
 	if (!file) {
 		alert("請上傳圖片！");
