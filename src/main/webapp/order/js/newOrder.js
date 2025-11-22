@@ -18,6 +18,28 @@ const course_capacityMax = document.querySelector('#course_capacityMax');
 const course_promoPrice = document.querySelector('#course_promoPrice');
 const course_coursePrice = document.querySelector('#course_coursePrice');
 const myCart = document.querySelector('#myCart');
+const promotions = document.querySelector('#promotions');
+
+
+promotionsInfo();
+function promotionsInfo(){
+	fetch('addCart')
+	.then(resp => resp.json())
+	.then(body => {
+		promoList = body.CoursePromo;
+
+		for(let promo of promoList){
+			promotions.innerHTML += 
+			`
+			<li>
+				<div>
+					<img src="${promo.imgUrl}" class="w-px-200" />
+				</div>
+			</li>
+			`;
+		}
+	});
+}
 
 addCart();
 function addCart(){
@@ -26,8 +48,21 @@ function addCart(){
 	.then(body => {
 		courseList = body.Course;
 		orderItemList = body.Orderitems;
-		
+		promoList = body.CoursePromo;
+
 		for (let course of courseList) {
+			var promoHtml = '';
+			if(course.promoPrice === null){
+				promoHtml = `原價：<span class="text-primary" id="course_coursePrice" >${course.coursePrice}</span>`;
+			}else{
+				promoHtml = `
+					<ul style="List-style:none">
+						<li>促銷價：<span class="text-primary" id="course_promoPrice" >${course.promoPrice}</span></li>
+						<li>原價：<span class="text-decoration-line-through" id="course_coursePrice" >${course.coursePrice}</span></li>
+					</ul>
+				`;
+			}
+
 			myCart.innerHTML += 
 			`
 				<li class="list-group-item p-6">
@@ -68,8 +103,7 @@ function addCart(){
 												<div class="text-md-end">
 													<button type="button" class="btn-close btn-pinned" aria-label="Close" onclick="deleteCourse(${course.courseId})"></button>
 													<div class="my-2 mt-md-6 mb-md-4">
-															<span class="text-primary" id="course_promoPrice">${course.promoPrice}</span>
-															<span class="text-primary" id="course_coursePrice">${course.coursePrice}</span>
+														${promoHtml}
 													</div>
 												</div>
 										</div>
@@ -281,6 +315,18 @@ function confirmation(){
 		`;
 
 		for (let course of confirmation_courseList) {
+			var promoHtml = '';
+			if(course.promoPrice === null){
+				promoHtml = `原價：<span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>`;
+			}else{
+				promoHtml = `
+				<ul style="List-style:none">
+					<li>促銷價：<span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span></li>
+					<li>原價：<span class="text-decoration-line-through" id="confirmation_coursePrice">${course.coursePrice}</span></li>
+				</ul>
+				`;
+			}
+
 			confirmation_course.innerHTML += 
 			`
 			<li class="list-group-item p-6">
@@ -310,8 +356,7 @@ function confirmation(){
 							<div class="col-md-4">
 								<div class="text-md-end">
 									<div class="my-2 my-lg-6">
-										<span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
-										<span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
+										${promoHtml}
 									</div>
 								</div>
 							</div>
@@ -339,15 +384,3 @@ function confirmation(){
 		`;
 	});
 }
-
-
-// if(e.target.classList.contains("delete_btn")){
-//   //console.log("delete");
-//   let r = confirm("確認移除？");
-//   if (r){
-// 	  e.target.closest("li").classList.add("fade_out");
-// 	  setTimeout(function(){
-// 	  e.target.closest("li").remove();
-// 	  }, 1000);      
-//   }
-// }

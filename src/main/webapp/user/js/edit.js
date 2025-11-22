@@ -1,5 +1,4 @@
-//const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const avatarImg = document.querySelector('#upload');
+const avatarImg = document.querySelector('#avatarImg');
 const email = document.querySelector("#email");
 const username = document.querySelector("#name");
 const password = document.querySelector("#password");
@@ -12,11 +11,10 @@ const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
 
 
-
 fetch('/meow-gym/index/loginData')
 	.then(resp => resp.json())
 	.then(respLoginData => {
-		avatarImg.value = respLoginData.user.avatarUrl;
+		avatarImg.src = respLoginData.user.avatarUrl;
 		email.value = respLoginData.user.email;
 		username.value = respLoginData.user.name;
 		password.value = respLoginData.user.password;
@@ -27,6 +25,43 @@ fetch('/meow-gym/index/loginData')
 		dist_code.value = respLoginData.user.distCode;
 		detail_address.value = respLoginData.user.detailAddress;
 	});
+
+
+let distDate = null;
+
+fetch('dist')
+	.then(resp => resp.json())
+	.then(body => {
+		distDate = body;
+		cnt_code.innerHTML = '<option value="">選擇縣市</option>';
+
+		let cntOption = '';
+		body.countryList.forEach(country => {
+			cntOption += `<option value="${country.cntCode}">${country.cntName}</option>`;
+		});
+		cnt_code.innerHTML += cntOption;
+		$('#cnt_code').trigger('change.select2');
+
+	});
+
+$('#cnt_code').on('change', function () {
+	dist_code.innerHTML = '<option value="">選擇鄉鎮</option>';
+
+	if (!this.value) {
+		$('#dist_code').trigger('change.select2');
+		return;
+	}
+
+	var distOption = '';
+	distDate.distList.forEach(dist => {
+		if (dist.cntCode === Number(this.value)) {
+			distOption += `<option value="${dist.distCode}">${dist.distName}</option>`;
+		}
+	});
+	dist_code.innerHTML += distOption;
+	$('#dist_code').trigger('change.select2');
+
+});
 
 /*
 function checkOldPassword() {
