@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import web.user.service.UserService;
 public class UserController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -62,6 +63,27 @@ public class UserController extends HttpServlet {
 		user.setAvatarFile(avatarFile);
 
 		return userService.register(user);
+	}
+
+	@PostMapping("edit")
+	@ResponseBody
+	public User edit(@RequestBody User user, HttpSession session) {
+
+		User respbody = userService.edit(user);
+
+		if (!respbody.isSuccessful()) {
+			System.out.println("error");
+		} else {
+			session.setAttribute("user", respbody);
+		}
+		return respbody;
+
+	}
+
+	@GetMapping("logout")
+	@ResponseBody
+	public void logout(HttpSession session) {
+		session.removeAttribute("user");
 	}
 
 }

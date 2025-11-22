@@ -55,7 +55,7 @@ fetch('reviewBlocklist')
   .then(resp => resp.json())
   .then(users => {
     for (const user of users) {
-      const bannedText = user.isBanned ? '已加入黑名單' : '未加入黑名單';
+      const bannedText = user.isBanned ? '**黑名單**' : '尚未加入黑名單';
       if(user.role === 1){
         tbody.innerHTML += `
         <tr>

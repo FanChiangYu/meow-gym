@@ -9,6 +9,6 @@ public interface UserDao extends CoreDao<User, Integer> {
 
 	int insertUser(User user);
 
-	int updateUser(User user);
+	User edit(String email);
 
 }

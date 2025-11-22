@@ -21,42 +21,82 @@ function valueOrNull(value) {
 
 function registerCheck(value) {
 	if (valueOrNull(username.value) == null) {
-		alert('姓名未輸入');
+		Swal.fire({
+			title: '錯誤',
+			text: '姓名未輸入',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(password.value) == null) {
-		alert('密碼未輸入');
+		Swal.fire({
+			title: '錯誤',
+			text: '密碼未輸入',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(phoneNumber.value) == null) {
-		alert('欄位必填');
+		Swal.fire({
+			title: '錯誤',
+			text: '欄位必填',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(gender.value) == null) {
-		alert('請選擇性別');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇性別',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(birthday.value) == null) {
-		alert('生日為必填欄位');
+		Swal.fire({
+			title: '錯誤',
+			text: '生日為必填欄位',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(cnt_code.value) == null) {
-		alert('請選擇縣市');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇縣市',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(dist_code.value) == null) {
-		alert('請選擇鄉鎮');
+		Swal.fire({
+			title: '錯誤',
+			text: '請選擇鄉鎮',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (valueOrNull(detail_address.value) == null) {
-		alert('地址為必填欄位');
+		Swal.fire({
+			title: '錯誤',
+			text: '地址為必填欄位',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
@@ -65,7 +105,12 @@ function registerCheck(value) {
 
 email.addEventListener('blur', function () {
 	if (email.value.match(reg) === null) {
-		alert('帳號格式不正確');
+		Swal.fire({
+			title: '錯誤',
+			text: '帳號格式不正確',
+			icon: 'error',
+			target: document.body
+		});
 	}
 })
 
@@ -99,7 +144,7 @@ applybutton.addEventListener('click', function () {
 			.then(resp => resp.json())
 			.then(body => {
 				if (body.successful) {
-					location.href = 'registerSuccessPage.html';
+					location.reload();
 				} else {
 					alert(body.message);
 				}

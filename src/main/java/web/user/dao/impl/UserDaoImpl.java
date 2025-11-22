@@ -3,6 +3,9 @@ package web.user.dao.impl;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -30,10 +33,16 @@ public class UserDaoImpl implements UserDao {
 		session.persist(user);
 		return 1;
 	}
-	
+
 	@Override
-	public int updateUser(User user) {
-		return 1;
+	public User edit(String email) {
+		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<User> cQuery = cBuilder.createQuery(User.class);
+
+		Root<User> root = cQuery.from(User.class);
+		cQuery.where(cBuilder.equal(root.get("email"), email));
+		return session.createQuery(cQuery).uniqueResult();
+
 	}
 
 	@Override
