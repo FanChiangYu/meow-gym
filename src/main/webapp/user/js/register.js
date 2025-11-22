@@ -11,6 +11,7 @@ const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.getElementById("applybutton");
 
+
 function valueOrNull(value) {
 	if (value === undefined || value === null || value === '' || Number.isNaN(value)) {
 		return null;

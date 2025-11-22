@@ -283,7 +283,7 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                       <div class="d-grid px-2 pt-2 pb-1">
-                        <a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank">
+                        <a class="btn btn-sm btn-danger d-flex" href="#" target="_blank" id="logout-btn">
                           <small class="align-middle">Logout</small>
                           <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                         </a>
@@ -303,348 +303,348 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-              <section class="section-py bg-body first-section-pt">
-                <div class="container">
-                  <!--/ Checkout Wizard -->
-                  <!-- Checkout Wizard -->
-                  <div id="wizard-checkout" class="bs-stepper wizard-icons wizard-icons-example">
-                    <div class="bs-stepper-header m-lg-auto border-0">
-                      <div class="step" data-target="#checkout-cart">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 60 60">
-                              <use xlink:href="../assets/svg/icons/wizard-checkout-cart.svg#wizardCart"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">購物車</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="icon-base ti tabler-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#checkout-payment">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 60 60">
-                              <use xlink:href="../assets/svg/icons/wizard-checkout-payment.svg#wizardPayment"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">付款</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="icon-base ti tabler-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#checkout-confirmation">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 60 60">
-                              <use xlink:href="../assets/svg/icons/wizard-checkout-confirmation.svg#wizardConfirm"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">結帳確認</span>
-                        </button>
-                      </div>
+              <!-- <section class="section-py bg-body first-section-pt"> -->
+              <div class="container">
+                <!--/ Checkout Wizard -->
+                <!-- Checkout Wizard -->
+                <div id="wizard-checkout" class="bs-stepper wizard-icons wizard-icons-example">
+                  <div class="bs-stepper-header m-lg-auto border-0">
+                    <div class="step" data-target="#checkout-cart">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-icon">
+                          <svg viewBox="0 0 60 60">
+                            <use xlink:href="../assets/svg/icons/wizard-checkout-cart.svg#wizardCart"></use>
+                          </svg>
+                        </span>
+                        <span class="bs-stepper-label">購物車</span>
+                      </button>
                     </div>
-                    <div class="bs-stepper-content border-top">
-                      <form id="wizard-checkout-form" onSubmit="return false">
-                        <!-- Cart -->
-                        <div id="checkout-cart" class="content">
-                          <div class="row">
-                            <!-- Cart left -->
-                            <div class="col-xl-8 mb-6 mb-xl-0">
-                              <!-- Offer alert -->
-                              <div class="alert alert-success alert-dismissible mb-4" role="alert">
-                                <div class="d-flex gap-4">
-                                  <div class="alert-icon flex-shrink-0 rounded me-0">
-                                    <i class="icon-base ti tabler-percentage"></i>
-                                  </div>
-                                  <div class="flex-grow-1">
-                                    <h5 class="alert-heading mb-1">課程活動促銷報你知</h5>
-                                    <ul class="list-unstyled mb-0" id="promotions" 
-                                    style="
-                                    List-style:none; 
-                                    display:inline-flex;
-                                    flex-flow: row nowrap;
-                                    justify-content: space-around;
-                                    ">
-                                    </ul>
-                                  </div>
-                                </div>
-                                <button
-                                  type="button"
-                                  class="btn-close btn-pinned"
-                                  data-bs-dismiss="alert"
-                                  aria-label="Close"></button>
-                              </div>
-          
-                              <!-- Shopping bag -->
-                              <h5>我的購物車</h5>
-                              <ul class="list-group mb-4" id="myCart">
-                              <!-- 課程畫面 -->
-                              </ul>
-                            </div>	     
-          
-                            <!-- Cart right -->
-                            <div class="col-xl-4">
-                              <div class="border rounded p-6 mb-4">
-                                <!-- Price Details -->
-                                <h6>結帳細項</h6>
-                                <dl class="row mb-0 text-heading" id="orderPayCourseList">
-                                  <!-- <dt class="col-6 fw-normal" id="title">重量訓練入門</dt>
-                                  <dd class="col-6 text-end" id="coursePromoPrice">3500</dd> -->
-                                  <!-- <dd class="col-6 text-end" id="coursePrice">4000</dd> -->
-                                </dl>
-                                <hr class="mx-n6 my-6" />
-                                <dl class="row mb-0" id="orderTotalAmount">
-                                  <!-- <dt class="col-6 text-heading">總價</dt>
-                                  <dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">price</dd> -->
-                                </dl>
-                              </div>
-                              <div class="d-grid">
-                                <button class="btn btn-primary btn-next">結帳：選擇付款方式</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <!-- Payment -->
-                        <div id="checkout-payment" class="content">
-                          <div class="row">
-                            <!-- Payment left -->
-                            <div class="col-xl-8 mb-6 mb-xl-0">			
-                              <!-- Payment Tabs -->
-                              <div class="col-xxl-6 col-lg-8">
-                                <div class="nav-align-top">
-                                  <ul class="nav nav-pills card-header-pills row-gap-2 flex-wrap" id="paymentTabs" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                      <button
-                                        class="nav-link active"
-                                        id="Card"
-                                        data-bs-toggle="pill"
-                                        data-bs-target="#pills-cc"
-                                        type="button"
-                                        role="tab"
-                                        aria-controls="pills-cc"
-                                        aria-selected="true">
-                                        信用卡付款
-                                      </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                      <button
-                                        class="nav-link"
-                                        id="Cash"
-                                        data-bs-toggle="pill"
-                                        data-bs-target="#pills-cod"
-                                        type="button"
-                                        role="tab"
-                                        aria-controls="pills-cod"
-                                        aria-selected="false">
-                                        現金付款
-                                      </button>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div class="tab-content px-0 pb-0" id="paymentTabsContent">
-                                  <!-- Credit card -->
-                                  <div
-                                    class="tab-pane fade show active"
-                                    id="pills-cc"
-                                    role="tabpanel"
-                                    aria-labelledby="pills-cc-tab">
-                                    <div class="row g-6">
-                                      <div class="col-12">
-                                        <label class="form-label w-100" for="paymentCard">Card Number</label>
-                                        <div class="input-group input-group-merge">
-                                          <input
-                                            id="cardNumber"
-                                            name="paymentCard"
-                                            class="form-control credit-card-mask"
-                                            type="text"
-                                            placeholder="0000 0000 0000 0000"
-                                            aria-describedby="paymentCard2" />
-                                          <span class="input-group-text cursor-pointer p-1" id="paymentCard2"
-                                            ><span class="card-type"></span
-                                          ></span>
-                                        </div>
-                                      </div>
-                                      <div class="col-12 col-md-4">
-                                        <label class="form-label" for="paymentCardName">Name</label>
-                                        <input 
-                                        type="text" 
-                                        id="cardHolder" 
-                                        class="form-control" 
-                                        placeholder="Name" />
-                                      </div>
-                                      <div class="col-6 col-md-4">
-                                        <label class="form-label" for="paymentCardExpiryDate">Exp. Date</label>
-                                        <input
-                                          type="text"
-                                          id="paymentCardExpiryDate"
-                                          class="form-control expiry-date-mask"
-                                          placeholder="MM/YY" />
-                                      </div>
-                                      <div class="col-6 col-md-4">
-                                        <label class="form-label" for="paymentCardCvv">CVV Code</label>
-                                        <div class="input-group input-group-merge">
-                                          <input
-                                            type="text"
-                                            id="cvc"
-                                            class="form-control cvv-code-mask"
-                                            maxlength="3"
-                                            placeholder="000" />
-                                          <span class="input-group-text cursor-pointer" id="paymentCardCvv2"
-                                            ><i
-                                              class="icon-base ti tabler-help text-body-secondary"
-                                              data-bs-toggle="tooltip"
-                                              data-bs-placement="top"
-                                              title="Card Verification Value"></i
-                                          ></span>
-                                        </div>
-                                      </div>
-                                      <div class="col-12">
-                                        <button type="button" class="btn btn-primary btn-next me-3" id="payOnCard">付款</button>
-                                        <button type="reset" class="btn btn-label-secondary">消除重填</button>
-                                      </div>
-                                    </div>
-                                  </div>
-          
-                                  <!-- COD -->
-                                  <div class="tab-pane fade" id="pills-cod" role="tabpanel" aria-labelledby="pills-cod-tab">
-                                    <p>
-                                      請洽櫃台進行現金付款！
-                                    </p>
-                                    <button type="button" class="btn btn-primary btn-next" id="payOnCash">付款</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <!-- Price Details -->
-                            <div class="col-xl-4">
-                              <div class="border rounded p-6">
-                                <!-- Price Details -->
-                                <h6>結帳細項</h6>
-                                <dl class="row mb-0 text-heading" id="paymentPayCourseList">
-                                  <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
-                                  <dd class="col-6 text-end">4000</dd>
-                                  <dt class="col-6 fw-normal">初階瑜珈課</dt>
-                                  <dd class="col-6 text-end">3500</dd> -->
-                                </dl>
-                                <hr class="mx-n6 my-6" />
-                                <dl class="row mb-0" id="paymentTotalAmount">
-                                  <!-- <dt class="col-6 text-heading mb-3">總價</dt>
-                                  <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <!-- Confirmation -->
-                        <div id="checkout-confirmation" class="content">
-                          <div class="row mb-6" >
-                            <div class="col-12 col-lg-8 mx-auto text-center mb-2">
-                              <h4>感謝您的購買，請確認以下購買資訊</h4>
-                              <p>
-                                您的訂單已成立，我們已將訂單資訊寄至您登記的mail信箱，請至您的mail信箱確認，若兩分鐘後仍未收到，請來電告知我們專人處理，謝謝
-                              </p>
-                              <p>
-                                MEOW GYM 聯絡電話 : 02-2712-0589
-                              </P>                   
-                            </div>
-                            
-                            <!-- Confirmation details -->
-                            <div class="col-12">
-                              <ul class="list-group list-group-horizontal-md" id="confirmation_payment">
-                                <!-- <li class="list-group-item flex-fill p-6 text-body">
-                                  <h6 class="d-flex align-items-center gap-2">會員付款資訊</h6>
-                                  <p class="mb-0 mt-4">
-                                    <i class="icon-base ti tabler-file-dollar"></i>訂單編號 : <span>###</span>
-                                  </p>
-                                  <p class="mb-0 mt-4">
-                                    <i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間 : &nbsp;<span>25/05/2020 13:35pm</span>
-                                  </p>
-                                  <p class="mb-0 mt-4">
-                                    <i class="icon-base ti tabler-credit-card"></i>付款方式 : <span>pay_method</span>
-                                  </p>
-                                  <p class="mb-0 mt-4">
-                                    <i class="icon-base ti tabler-mail"></i>信箱 : <span>john.doe@example.com</span>
-                                  </p>  
-                                </li> -->
-                              </ul>
-                            </div>
-                          </div>
-          
-                          <div class="row">
-                            <!-- Confirmation items -->
-                            <div class="col-xl-9 mb-6 mb-xl-0">
-                              <ul class="list-group" id="confirmation_course">
-                                <!-- <li class="list-group-item p-6">
-                                  <div class="d-flex gap-4">
-                                    <div class="flex-shrink-0">
-                                      <img src="${course.imgUrl}" alt="google home" class="w-px-80" />
-                                    </div>
-                                    <div class="flex-grow-1">
-                                      <div class="row">
-                                        <div class="col-md-8">
-                                          <a href="javascript:void(0)">
-                                            <h6 class="mb-2" id="confirmation_title">${course.title}</h6>
-                                          </a>
-                                          <div class="text-body mb-2 d-flex flex-wrap">
-                                            <span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
-                                          </div>
-                                          <div class="text-body mb-2 d-flex flex-wrap">
-                                            <span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
-                                          </div>
-                                          <div class="text-body mb-2 d-flex flex-wrap">
-                                            <span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
-                                          </div>
-                                          <div class="text-body mb-2 d-flex flex-wrap">
-                                            <span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
-                                          </div>                           
-                                        </div>
-                                        <div class="col-md-4">
-                                          <div class="text-md-end">
-                                            <div class="my-2 my-lg-6">
-                                              <span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
-                                              <span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>			                       -->
-                              </ul>
-                            </div>
-                            
-                            <!-- Confirmation total -->
-                            <div class="col-xl-3">
-                              <div class="border rounded p-6">
-                                <!-- Price Details -->
-                                <h6>結帳細項</h6>
-                                <dl class="row mb-0 text-heading" id="confirmPayCourseList">
-                                  <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
-                                  <dd class="col-6 text-end">4000</dd>
-                                  <dt class="col-6 fw-normal">初階瑜珈課</dt>
-                                  <dd class="col-6 text-end">3500</dd> -->
-                                </dl>
-                                <hr class="mx-n6 my-6" />
-                                <dl class="row mb-0" id="confirmTotalAmount">
-                                  <!-- <dt class="col-6 text-heading">總價</dt>
-                                  <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
+                    <div class="line">
+                      <i class="icon-base ti tabler-chevron-right"></i>
+                    </div>
+                    <div class="step" data-target="#checkout-payment">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-icon">
+                          <svg viewBox="0 0 60 60">
+                            <use xlink:href="../assets/svg/icons/wizard-checkout-payment.svg#wizardPayment"></use>
+                          </svg>
+                        </span>
+                        <span class="bs-stepper-label">付款</span>
+                      </button>
+                    </div>
+                    <div class="line">
+                      <i class="icon-base ti tabler-chevron-right"></i>
+                    </div>
+                    <div class="step" data-target="#checkout-confirmation">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-icon">
+                          <svg viewBox="0 0 60 60">
+                            <use xlink:href="../assets/svg/icons/wizard-checkout-confirmation.svg#wizardConfirm"></use>
+                          </svg>
+                        </span>
+                        <span class="bs-stepper-label">結帳確認</span>
+                      </button>
                     </div>
                   </div>
-                  <!--/ Checkout Wizard -->
+                  <div class="bs-stepper-content border-top">
+                    <form id="wizard-checkout-form" onSubmit="return false">
+                      <!-- Cart -->
+                      <div id="checkout-cart" class="content">
+                        <div class="row">
+                          <!-- Cart left -->
+                          <div class="col-xl-8 mb-6 mb-xl-0">
+                            <!-- Offer alert -->
+                            <div class="alert alert-success alert-dismissible mb-4" role="alert">
+                              <div class="d-flex gap-4">
+                                <div class="alert-icon flex-shrink-0 rounded me-0">
+                                  <i class="icon-base ti tabler-percentage"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                  <h5 class="alert-heading mb-1">課程活動促銷報你知</h5>
+                                  <ul class="list-unstyled mb-0" id="promotions" 
+                                  style="
+                                  List-style:none; 
+                                  display:inline-flex;
+                                  flex-flow: row nowrap;
+                                  justify-content: space-around
+                                  ">
+                                  </ul>
+                                </div>
+                              </div>
+                              <button
+                                type="button"
+                                class="btn-close btn-pinned"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                            </div>
+        
+                            <!-- Shopping bag -->
+                            <h5>我的購物車</h5>
+                            <ul class="list-group mb-4" id="myCart">
+                            <!-- 課程畫面 -->
+                            </ul>
+                          </div>	     
+        
+                          <!-- Cart right -->
+                          <div class="col-xl-4">
+                            <div class="border rounded p-6 mb-4">
+                              <!-- Price Details -->
+                              <h6>結帳細項</h6>
+                              <dl class="row mb-0 text-heading" id="orderPayCourseList">
+                                <!-- <dt class="col-6 fw-normal" id="title">重量訓練入門</dt>
+                                <dd class="col-6 text-end" id="coursePromoPrice">3500</dd> -->
+                                <!-- <dd class="col-6 text-end" id="coursePrice">4000</dd> -->
+                              </dl>
+                              <hr class="mx-n6 my-6" />
+                              <dl class="row mb-0" id="orderTotalAmount">
+                                <!-- <dt class="col-6 text-heading">總價</dt>
+                                <dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">price</dd> -->
+                              </dl>
+                            </div>
+                            <div class="d-grid">
+                              <button class="btn btn-primary btn-next">結帳：選擇付款方式</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        
+                      <!-- Payment -->
+                      <div id="checkout-payment" class="content">
+                        <div class="row">
+                          <!-- Payment left -->
+                          <div class="col-xl-8 mb-6 mb-xl-0">			
+                            <!-- Payment Tabs -->
+                            <div class="col-xxl-6 col-lg-8">
+                              <div class="nav-align-top">
+                                <ul class="nav nav-pills card-header-pills row-gap-2 flex-wrap" id="paymentTabs" role="tablist">
+                                  <li class="nav-item" role="presentation">
+                                    <button
+                                      class="nav-link active"
+                                      id="Card"
+                                      data-bs-toggle="pill"
+                                      data-bs-target="#pills-cc"
+                                      type="button"
+                                      role="tab"
+                                      aria-controls="pills-cc"
+                                      aria-selected="true">
+                                      信用卡付款
+                                    </button>
+                                  </li>
+                                  <li class="nav-item" role="presentation">
+                                    <button
+                                      class="nav-link"
+                                      id="Cash"
+                                      data-bs-toggle="pill"
+                                      data-bs-target="#pills-cod"
+                                      type="button"
+                                      role="tab"
+                                      aria-controls="pills-cod"
+                                      aria-selected="false">
+                                      現金付款
+                                    </button>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="tab-content px-0 pb-0" id="paymentTabsContent">
+                                <!-- Credit card -->
+                                <div
+                                  class="tab-pane fade show active"
+                                  id="pills-cc"
+                                  role="tabpanel"
+                                  aria-labelledby="pills-cc-tab">
+                                  <div class="row g-6">
+                                    <div class="col-12">
+                                      <label class="form-label w-100" for="paymentCard">Card Number</label>
+                                      <div class="input-group input-group-merge">
+                                        <input
+                                          id="cardNumber"
+                                          name="paymentCard"
+                                          class="form-control credit-card-mask"
+                                          type="text"
+                                          placeholder="0000 0000 0000 0000"
+                                          aria-describedby="paymentCard2" />
+                                        <span class="input-group-text cursor-pointer p-1" id="paymentCard2"
+                                          ><span class="card-type"></span
+                                        ></span>
+                                      </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <label class="form-label" for="paymentCardName">Name</label>
+                                      <input 
+                                      type="text" 
+                                      id="cardHolder" 
+                                      class="form-control" 
+                                      placeholder="Name" />
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                      <label class="form-label" for="paymentCardExpiryDate">Exp. Date</label>
+                                      <input
+                                        type="text"
+                                        id="paymentCardExpiryDate"
+                                        class="form-control expiry-date-mask"
+                                        placeholder="MM/YY" />
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                      <label class="form-label" for="paymentCardCvv">CVV Code</label>
+                                      <div class="input-group input-group-merge">
+                                        <input
+                                          type="text"
+                                          id="cvc"
+                                          class="form-control cvv-code-mask"
+                                          maxlength="3"
+                                          placeholder="000" />
+                                        <span class="input-group-text cursor-pointer" id="paymentCardCvv2"
+                                          ><i
+                                            class="icon-base ti tabler-help text-body-secondary"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Card Verification Value"></i
+                                        ></span>
+                                      </div>
+                                    </div>
+                                    <div class="col-12">
+                                      <button type="button" class="btn btn-primary btn-next me-3" id="payOnCard">付款</button>
+                                      <button type="reset" class="btn btn-label-secondary">消除重填</button>
+                                    </div>
+                                  </div>
+                                </div>
+        
+                                <!-- COD -->
+                                <div class="tab-pane fade" id="pills-cod" role="tabpanel" aria-labelledby="pills-cod-tab">
+                                  <p>
+                                    請洽櫃台進行現金付款！
+                                  </p>
+                                  <button type="button" class="btn btn-primary btn-next" id="payOnCash">付款</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!-- Price Details -->
+                          <div class="col-xl-4">
+                            <div class="border rounded p-6">
+                              <!-- Price Details -->
+                              <h6>結帳細項</h6>
+                              <dl class="row mb-0 text-heading" id="paymentPayCourseList">
+                                <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
+                                <dd class="col-6 text-end">4000</dd>
+                                <dt class="col-6 fw-normal">初階瑜珈課</dt>
+                                <dd class="col-6 text-end">3500</dd> -->
+                              </dl>
+                              <hr class="mx-n6 my-6" />
+                              <dl class="row mb-0" id="paymentTotalAmount">
+                                <!-- <dt class="col-6 text-heading mb-3">總價</dt>
+                                <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
+                              </dl>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        
+                      <!-- Confirmation -->
+                      <div id="checkout-confirmation" class="content">
+                        <div class="row mb-6" >
+                          <div class="col-12 col-lg-8 mx-auto text-center mb-2">
+                            <h4>感謝您的購買，請確認以下購買資訊</h4>
+                            <p>
+                              您的訂單已成立，我們已將訂單資訊寄至您登記的mail信箱，請至您的mail信箱確認，若兩分鐘後仍未收到，請來電告知我們專人處理，謝謝
+                            </p>
+                            <p>
+                              MEOW GYM 聯絡電話 : 02-2712-0589
+                            </P>                   
+                          </div>
+                          
+                          <!-- Confirmation details -->
+                          <div class="col-12">
+                            <ul class="list-group list-group-horizontal-md" id="confirmation_payment">
+                              <!-- <li class="list-group-item flex-fill p-6 text-body">
+                                <h6 class="d-flex align-items-center gap-2">會員付款資訊</h6>
+                                <p class="mb-0 mt-4">
+                                  <i class="icon-base ti tabler-file-dollar"></i>訂單編號 : <span>###</span>
+                                </p>
+                                <p class="mb-0 mt-4">
+                                  <i class="icon-base ti tabler-clock me-1 text-heading"></i>訂單成立時間 : &nbsp;<span>25/05/2020 13:35pm</span>
+                                </p>
+                                <p class="mb-0 mt-4">
+                                  <i class="icon-base ti tabler-credit-card"></i>付款方式 : <span>pay_method</span>
+                                </p>
+                                <p class="mb-0 mt-4">
+                                  <i class="icon-base ti tabler-mail"></i>信箱 : <span>john.doe@example.com</span>
+                                </p>  
+                              </li> -->
+                            </ul>
+                          </div>
+                        </div>
+        
+                        <div class="row">
+                          <!-- Confirmation items -->
+                          <div class="col-xl-9 mb-6 mb-xl-0">
+                            <ul class="list-group" id="confirmation_course">
+                              <!-- <li class="list-group-item p-6">
+                                <div class="d-flex gap-4">
+                                  <div class="flex-shrink-0">
+                                    <img src="${course.imgUrl}" alt="google home" class="w-px-80" />
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <div class="row">
+                                      <div class="col-md-8">
+                                        <a href="javascript:void(0)">
+                                          <h6 class="mb-2" id="confirmation_title">${course.title}</h6>
+                                        </a>
+                                        <div class="text-body mb-2 d-flex flex-wrap">
+                                          <span class="me-1" id="confirmation_coachName">教練：</span> <a href="javascript:void(0)">${course.coachName}</a>
+                                        </div>
+                                        <div class="text-body mb-2 d-flex flex-wrap">
+                                          <span class="me-1" id="confirmation_dateStart">開課日：</span> <a href="javascript:void(0)">${course.dateStart}</a>
+                                        </div>
+                                        <div class="text-body mb-2 d-flex flex-wrap">
+                                          <span class="me-1" id="confirmation_dateEnd">完課日：</span> <a href="javascript:void(0)">${course.dateEnd}</a>
+                                        </div>
+                                        <div class="text-body mb-2 d-flex flex-wrap">
+                                          <span class="me-1">課堂額度：</span> <a href="javascript:void(0)" id="confirmation_capacityMax">${course.capacityMax}</a>
+                                        </div>                           
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="text-md-end">
+                                          <div class="my-2 my-lg-6">
+                                            <span class="text-primary" id="confirmation_promoPrice">${course.promoPrice}</span>
+                                            <span class="text-primary" id="confirmation_coursePrice">${course.coursePrice}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>			                       -->
+                            </ul>
+                          </div>
+                          
+                          <!-- Confirmation total -->
+                          <div class="col-xl-3">
+                            <div class="border rounded p-6">
+                              <!-- Price Details -->
+                              <h6>結帳細項</h6>
+                              <dl class="row mb-0 text-heading" id="confirmPayCourseList">
+                                <!-- <dt class="col-6 fw-normal">重量訓練入門</dt>
+                                <dd class="col-6 text-end">4000</dd>
+                                <dt class="col-6 fw-normal">初階瑜珈課</dt>
+                                <dd class="col-6 text-end">3500</dd> -->
+                              </dl>
+                              <hr class="mx-n6 my-6" />
+                              <dl class="row mb-0" id="confirmTotalAmount">
+                                <!-- <dt class="col-6 text-heading">總價</dt>
+                                <dd class="col-6 fw-medium text-end text-heading mb-0">7500</dd> -->
+                              </dl>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </section>      
+                <!--/ Checkout Wizard -->
+              </div>
+              <!-- </section>       -->
               <!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
             </div>
             <!-- / Content -->
@@ -758,7 +758,6 @@
     <script src="../index/js/project_template.js"></script>
 
     <!-- Page JS -->
-    <script src="../assets/js/wizard-ex-checkout.js"></script> <!--新增-->
     <script src="js/newOrder.js"></script> <!--加入購物車-->
     <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
   </body>
