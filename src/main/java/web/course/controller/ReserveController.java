@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.service.CourseService;
+import web.user.pojo.User;
 
 @RestController
 @RequestMapping("course/reserve")
@@ -25,17 +27,13 @@ public class ReserveController {
 	private CourseService service;
 	
 	@GetMapping
-	public List<ClassResponse> bookClass(){
-		// 假設已從session取得userId = 1;
-		Integer userId = 1;
-		return service.findClass(userId);
+	public List<ClassResponse> bookClass(@SessionAttribute(value = "user", required = false) User user){
+		return service.findClass(user.getUserId());
 	}
 	
 	@PutMapping
-	public Map<String, Object> reserveSession(@RequestBody ClassSessions cs) {
-		// 假設已從session取得userId = 1;
-		Integer userId = 1;
-		Boolean result = service.reserveUpdate(cs, userId);
+	public Map<String, Object> reserveSession(@RequestBody ClassSessions cs, @SessionAttribute(value = "user", required = false) User user) {
+		Boolean result = service.reserveUpdate(cs, user.getUserId());
 		Map<String, Object> respBody = new HashMap<>();
 		respBody.put("successful", result);
 		if (!result) {
