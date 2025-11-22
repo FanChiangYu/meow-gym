@@ -244,7 +244,7 @@ function browseById(courseId) {
           if(courseResponse.course.payStatus == "PAID"){
             confirmBtn.disabled = true;
             confirmBtn.textContent = "已購買"; 
-          } else if(courseResponse.course.payStatus == "PENDING") {
+          } else if(courseResponse.course.payStatus == "PENDING" || courseResponse.course.payStatus == "WAIT_PAID") {
             confirmBtn.disabled = true;
             confirmBtn.textContent = "已加入購物車"; 
           }
