@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Demo: Reset Password Basic - Pages | Vuexy - Bootstrap Dashboard PRO</title>
+    <title>Demo: Login Basic - Pages | Vuexy - Bootstrap Dashboard PRO</title>
 
     <meta name="description" content="" />
 
@@ -72,7 +72,7 @@
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner py-6">
-          <!-- Reset Password -->
+          <!-- Login -->
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
@@ -110,13 +110,22 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-1">重設密碼 🔒</h4>
-              <p class="mb-6">
-                <span class="fw-medium">新密碼必須與之前使用的密碼不同。</span>
-              </p>
-              <form id="formAuthentication" action="auth-login-basic.html" method="GET">
+              <h4 class="mb-1">歡迎來到 MEOW GYM! 👋</h4>
+              <p class="mb-6">登入，開始您的健身之旅</p>
+
+              <form id="formAuthentication" class="mb-4">
+                <div class="mb-6 form-control-validation">
+                  <label for="email" class="form-label">帳號 (註冊信箱)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email-username"
+                    placeholder="輸入註冊信箱"
+                    autofocus />
+                </div>
                 <div class="mb-6 form-password-toggle form-control-validation">
-                  <label class="form-label" for="password">新密碼</label>
+                  <label class="form-label" for="password">密碼</label>
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
@@ -128,30 +137,30 @@
                     <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
                   </div>
                 </div>
-                <div class="mb-6 form-password-toggle form-control-validation">
-                  <label class="form-label" for="confirm-password">確認密碼</label>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="confirm-password"
-                      class="form-control"
-                      name="confirm-password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
+                <div class="my-8">
+                  <div class="d-flex justify-content-between">
+                    
+                    <a href="/meow-gym/user/forgotPassword.html">
+                      <p class="mb-0">忘記密碼?</p>
+                    </a>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary d-grid w-100 mb-6" id="set-btn">設定新密碼</button>
-                <div class="text-center">
-                  <a href="auth-login-basic.html" class="d-flex justify-content-center">
-                    <i class="icon-base ti tabler-chevron-left scaleX-n1-rtl me-1_5"></i>
-                    返回登入頁面
-                  </a>
+                <div class="mb-6">
+                  <button class="btn btn-primary d-grid w-100" type="button" id="loginbt">登入</button>
                 </div>
               </form>
+
+              <p class="text-center">
+                <span>第一次健身?</span>
+                <a href="/meow-gym/user/register.html">
+                  <span>註冊新會員</span>
+                </a>
+              </p>
+
+             
             </div>
           </div>
-          <!-- /Reset Password -->
+          <!-- /Login -->
         </div>
       </div>
     </div>
@@ -193,6 +202,6 @@
 
     <!-- Page JS -->
     <!-- <script src="../assets/js/pages-auth.js"></script> -->
-    <script src="js/resetPassword.js"></script>
+    <script src="js/user.js"></script>
   </body>
 </html>
