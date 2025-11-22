@@ -18,6 +18,7 @@ import web.order.dao.OrderDao;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.order.service.OrderService;
+import web.promotions.dao.PromotionsDao;
 import web.promotions.pojo.CoursePromo;
 import web.user.pojo.User;
 
@@ -28,6 +29,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDao orderdao;
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private PromotionsDao promotionsDao;
 	
 	//標註需要交易控制的⽅法
 	@Override
@@ -99,10 +102,13 @@ public class OrderServiceImpl implements OrderService{
 				}
 			}
 		}
-		//Step7:回傳Orderitems and Course
+		//Step7:抓所有的promoinfo.
+		List<CoursePromo> allCoursePromo = promotionsDao.selectPromo();	
+		//Step8:回傳Orderitems and Course
 		Map<String, Object> orderitemsAndCourseList = new HashMap<>();
 		orderitemsAndCourseList.put("Orderitems", orderitemsList);
 		orderitemsAndCourseList.put("Course", courseList);
+		orderitemsAndCourseList.put("CoursePromo", allCoursePromo);
 		return orderitemsAndCourseList;
 	}
 	
