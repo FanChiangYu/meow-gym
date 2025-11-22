@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import core.util.FileUtil;
 import web.course.service.CourseService;
 import web.user.dao.UserDao;
+import web.user.pojo.Country;
+import web.user.pojo.District;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
@@ -134,6 +138,90 @@ public class UserServiceImpl implements UserService {
 			user.setSuccessful(false);
 		}
 		return user;
+	}
+
+	@Override
+	public User edit(User user) {
+		final User oUser = dao.edit(user.getEmail());
+		user.setAvatarUrl(oUser.getAvatarUrl());
+		user.setName(oUser.getName());
+		user.setPassword(oUser.getPassword());
+		user.setGender(oUser.getGender());
+		user.setPhone(oUser.getPhone());
+		user.setBirthday(oUser.getBirthday());
+		user.setCntCode(oUser.getCntCode());
+		user.setDistCode(oUser.getDistCode());
+		user.setDetailAddress(oUser.getDetailAddress());
+		final int resultCount = dao.update(user);
+		user.setSuccessful(resultCount > 0);
+		user.setMessage(resultCount > 0 ? "編輯成功" : "編輯失敗");
+		return user;
+	}
+
+	@Override
+	public List<District> findDist() {
+		return dao.selectDist();
+	}
+
+	@Override
+	public List<Country> findCountry() {
+		return dao.selectCountry();
+	}
+
+	@Override
+	public User updateCode(User user) {
+		user = dao.selectByEmail(user);
+		if (user == null) {
+			User respUser = new User();
+			respUser.setSuccessful(false);
+			respUser.setMessage("輸入的email未註冊");
+			return respUser;
+		}
+
+		user.setResetCode(generateCode());
+		int count = dao.updateCodebByUser(user);
+		if (count > 0) {
+			user.setSuccessful(true);
+		} else {
+			user.setSuccessful(false);
+			user.setMessage("驗證碼發送失敗");
+		}
+		return user;
+	}
+
+	@Override
+	public String generateCode() {
+		Random random = new Random();
+		int code = random.nextInt(1000000);
+		return String.format("%06d", code);
+	}
+
+	@Override
+	public int updateCodeAgain(User user) {
+		user.setResetCode(generateCode());
+		return dao.updateCodebByUser(user);
+	}
+
+	@Override
+	public boolean checkRestCode(User user) {
+		String inputCode = user.getResetCode();
+		String originalCode = dao.selectCodeById(user.getUserId());
+		if (inputCode.equals(originalCode)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean changePassword(User user) {
+		String newPassword = user.getPassword();
+		String oldPassword = dao.selectPasswordById(user.getUserId());
+		if (newPassword.equals(oldPassword)) {
+			return false;
+		}
+		dao.updatePasswordByUser(user);
+		return true;
 	}
 
 }
