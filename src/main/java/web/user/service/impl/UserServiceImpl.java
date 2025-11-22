@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import core.util.FileUtil;
 import web.course.service.CourseService;
 import web.user.dao.UserDao;
+import web.user.pojo.Country;
+import web.user.pojo.District;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
@@ -139,19 +142,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User edit(User user) {
 		final User oUser = dao.edit(user.getEmail());
-		user.setAvatarUrl(oUser.getAvatarUrl());
-		user.setName(oUser.getName());
-		user.setPassword(oUser.getPassword());
-		user.setGender(oUser.getGender());
-		user.setPhone(oUser.getPhone());
-		user.setBirthday(oUser.getBirthday());
-		user.setCntCode(oUser.getCntCode());
-		user.setDistCode(oUser.getDistCode());
-		user.setDetailAddress(oUser.getDetailAddress());
-		final int resultCount = dao.update(user);
-		user.setSuccessful(resultCount >0);
-		user.setMessage(resultCount > 0 ? "編輯成功" : "編輯失敗");
+		user.setEmail(oUser.getEmail());
+		
+//		final int resultCount = dao.update(user);
+//		user.setSuccessful(resultCount > 0);
+//		user.setMessage(resultCount > 0 ? "編輯成功" : "編輯失敗");
 		return user;
+	}
+
+	@Override
+	public List<District> findDist() {
+		return dao.selectDist();
+	}
+
+	@Override
+	public List<Country> findCountry() {
+		return dao.selectCountry();
 	}
 
 }

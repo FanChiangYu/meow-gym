@@ -19,15 +19,19 @@ function valueOrNull(value) {
 	}
 }
 
-applybutton.addEventListener('click', function () {
-	if (email.value.match(reg) === null) {
-		Swal.fire({
-			title: '錯誤',
-			text: '帳號格式有誤',
-			icon: 'error',
-			target: document.body
-		});
-	}
+// check();
+function check() {
+
+	email.addEventListener('blur', function () {
+		if (email.value.match(reg) === null) {
+			Swal.fire({
+				title: '錯誤',
+				text: '帳號格式不正確',
+				icon: 'error',
+				target: document.body
+			});
+		}
+	});
 
 	if (valueOrNull(username.value) == null) {
 		Swal.fire({
@@ -52,7 +56,7 @@ applybutton.addEventListener('click', function () {
 	if (valueOrNull(phoneNumber.value) == null) {
 		Swal.fire({
 			title: '錯誤',
-			text: '電話欄位必填',
+			text: '欄位必填',
 			icon: 'error',
 			target: document.body
 		});
@@ -60,9 +64,10 @@ applybutton.addEventListener('click', function () {
 	}
 
 	if (valueOrNull(gender.value) == null) {
+		alert('請選擇性別');
 		Swal.fire({
 			title: '錯誤',
-			text: '請選擇性別',
+			text: body.message,
 			icon: 'error',
 			target: document.body
 		});
@@ -108,6 +113,9 @@ applybutton.addEventListener('click', function () {
 		});
 		return;
 	}
+}
+
+applybutton.addEventListener('click', function () {
 	const file = avatarUrl.files[0];
 	if (!file) {
 		Swal.fire({
@@ -144,4 +152,41 @@ applybutton.addEventListener('click', function () {
 				alert(body.message);
 			}
 		});
+});
+
+
+let distDate = null;
+
+fetch('dist')
+	.then(resp => resp.json())
+	.then(body => {
+		distDate = body;
+		cnt_code.innerHTML = '<option value="">選擇縣市</option>';
+
+		let cntOption = '';
+		body.countryList.forEach(country => {
+			cntOption += `<option value="${country.cntCode}">${country.cntName}</option>`;
+		});
+		cnt_code.innerHTML += cntOption;
+		$('#cnt_code').trigger('change.select2');
+
+	});
+
+$('#cnt_code').on('change', function () {
+	dist_code.innerHTML = '<option value="">選擇鄉鎮</option>';
+
+	if (!this.value) {
+		$('#dist_code').trigger('change.select2');
+		return;
+	}
+
+	var distOption = '';
+	distDate.distList.forEach(dist => {
+		if (dist.cntCode === Number(this.value)) {
+			distOption += `<option value="${dist.distCode}">${dist.distName}</option>`;
+		}
+	});
+	dist_code.innerHTML += distOption;
+	$('#dist_code').trigger('change.select2');
+
 });

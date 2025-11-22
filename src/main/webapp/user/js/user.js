@@ -34,7 +34,7 @@ loginbt.addEventListener("click", () => {
 		.then(resp => resp.json())
 		.then(body => {
 			if (body.successful) {
-				location.href = "userDetail.html"
+				location.href = "/meow-gym/index/index.html";
 			} else {
 				Swal.fire({
 					title: '錯誤',

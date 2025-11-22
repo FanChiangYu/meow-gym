@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import web.user.dao.UserDao;
+import web.user.pojo.Country;
+import web.user.pojo.District;
 import web.user.pojo.User;
 
 @Repository
@@ -68,6 +70,18 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> selectAll() {
 		return null;
+	}
+
+	@Override
+	public List<District> selectDist() {
+		final String hql = "FROM District ORDER BY distCode";
+		return session.createQuery(hql, District.class).getResultList();
+	}
+
+	@Override
+	public List<Country> selectCountry() {
+		final String hql = "FROM Country ORDER BY cntCode";
+		return session.createQuery(hql, Country.class).getResultList();
 	}
 
 }
