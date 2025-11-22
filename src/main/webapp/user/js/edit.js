@@ -9,6 +9,7 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
+const logoutBtn = document.querySelector('#logout-btn');
 
 
 fetch('/meow-gym/index/loginData')
@@ -61,6 +62,12 @@ $('#cnt_code').on('change', function () {
 	dist_code.innerHTML += distOption;
 	$('#dist_code').trigger('change.select2');
 
+});
+
+logoutBtn.addEventListener('click', e => {
+	e.preventDefault();
+	fetch('/meow-gym/user/logout')
+		.then(() => location.href = '/meow-gym/index/index.html');
 });
 
 /*
