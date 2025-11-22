@@ -69,6 +69,7 @@ public class User extends Core {
 	@Column(name = "is_banned")
 	private Boolean isBanned;
 
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	@Column(name = "birthday")
 	private Date birthday;
 
