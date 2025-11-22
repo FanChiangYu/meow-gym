@@ -48,6 +48,7 @@
 
     <!-- Vendor -->
     <link rel="stylesheet" href="../assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
     <!-- Page -->
@@ -146,12 +147,12 @@
                     maxlength="1" />
                 </div>
                 <!-- Create a hidden field which is combined by 3 fields above -->
-                <input type="hidden" name="otp" />
+                <input type="hidden" name="otp"/>
               </div>
-              <button class="btn btn-primary d-grid w-100 mb-6">下一步，重設密碼</button>
+              <button type="button" id="next-btn" class="btn btn-primary d-grid w-100 mb-6">下一步，重設密碼</button>
               <div class="text-center">
                 未取得驗證碼?
-                <a href="javascript:void(0);"> 重新發送 </a>
+                <a href="#" id="resend-btn"> 重新發送 </a>
               </div>
             </form>
           </div>
@@ -190,6 +191,7 @@
     <script src="../assets/vendor/libs/@form-validation/popular.js"></script>
     <script src="../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
     <script src="../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
 
@@ -198,5 +200,6 @@
     <!-- Page JS -->
     <!-- <script src="../assets/js/pages-auth.js"></script> -->
     <script src="../assets/js/pages-auth-two-steps.js"></script>
+    <script src="js/authCode.js"></script>
   </body>
 </html>
