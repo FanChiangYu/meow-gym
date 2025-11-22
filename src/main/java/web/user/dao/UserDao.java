@@ -19,4 +19,14 @@ public interface UserDao extends CoreDao<User, Integer> {
 
 	List<Country> selectCountry();
 
+	User selectByEmail(User user);
+
+	int updateCodebByUser(User user);
+
+	String selectCodeById(Integer userId);
+
+	String selectPasswordById(Integer userId);
+
+	void updatePasswordByUser(User user);
+
 }

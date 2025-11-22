@@ -20,4 +20,14 @@ public interface UserService extends CoreService {
 
 	List<Country> findCountry();
 
+	User updateCode(User user);
+
+	String generateCode();
+
+	int updateCodeAgain(User user);
+
+	boolean checkRestCode(User user);
+
+	boolean changePassword(User user);
+
 }
