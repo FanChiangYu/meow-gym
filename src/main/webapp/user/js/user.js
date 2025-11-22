@@ -4,12 +4,22 @@ const loginbt = document.querySelector("#loginbt");
 
 loginbt.addEventListener("click", () => {
 	if (!email.value) {
-		alert("使⽤者名稱不得為空白");
+		Swal.fire({
+			title: '錯誤',
+			text: '使⽤者名稱不得為空白',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
 	if (!password.value) {
-		alert("密碼不得為空白");
+		Swal.fire({
+			title: '錯誤',
+			text: '密碼不得為空白',
+			icon: 'error',
+			target: document.body
+		});
 		return;
 	}
 
@@ -24,9 +34,14 @@ loginbt.addEventListener("click", () => {
 		.then(resp => resp.json())
 		.then(body => {
 			if (body.successful) {
-				location.href = "userDetail.html"
+				location.href = "/meow-gym/index/index.html";
 			} else {
-				alert("使用者名稱或密碼錯誤");
+				Swal.fire({
+					title: '錯誤',
+					text: '使用者名稱或密碼錯誤',
+					icon: 'error',
+					target: document.body
+				});
 			}
 		});
 
