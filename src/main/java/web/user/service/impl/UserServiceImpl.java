@@ -143,7 +143,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User edit(User user) {
 		final User oUser = dao.edit(user.getEmail());
-		user.setEmail(oUser.getEmail());
+		user.setUserId(oUser.getUserId());
+		final int resultCount = dao.update(user);
+		user.setSuccessful(resultCount > 0);
+		user.setMessage(resultCount > 0 ? "編輯成功" : "編輯失敗");
 		return user;
 	}
 

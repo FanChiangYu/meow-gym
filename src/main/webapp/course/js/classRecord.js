@@ -5,6 +5,7 @@ const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
 const classContent = document.querySelector('#class-content');
+var isBanned = false;
 
 function switchMenu (role) {
   switch (role) {
@@ -39,6 +40,7 @@ fetch('/meow-gym/index/loginData')
     switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
     userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
     avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+    isBanned = respbody.user.isBanned;
   }
 });
 
@@ -119,6 +121,7 @@ fetch('record')
 
     // 班次迭代
     let sessionHtml = '';
+    let chatHtml = '';
     for (let classSession of classResponse.classSessions) {
       if(classSession.bookStatus == '已預約'){  
         sessionHtml += `
@@ -154,6 +157,11 @@ fetch('record')
     if(sessionHtml == ''){
       return;                     // 如果沒有任合預約班次紀錄，則不顯示
     }
+
+    if(!isBanned){
+      chatHtml = `<button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary ">聊天室</button>`;
+    }
+
     classContent.innerHTML += `
       <div class="card mb-6">
         <div class="card-header d-flex flex-wrap justify-content-between gap-4">
@@ -170,7 +178,7 @@ fetch('record')
                   <p class="mt-1">教練 : ${classResponse.coachName}</p>
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <p class="mt-1">地點 : ${roomName(classResponse.course.roomId)}</p>
-                    <button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary ">聊天室</button>
+                    ${chatHtml}
                   </div>
                 </div>
                 <div class="card-datatable">
