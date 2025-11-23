@@ -10,7 +10,17 @@ const classlist = document.querySelector(".class-list");
 const chatlink = document.querySelector(".chat-link");
 
 const courselink = document.querySelector(".course-link");
+
+
+
+const userMenu = document.querySelector('#user-menu');
+const coachMenu = document.querySelector('#coach-menu');
+const adminMenu = document.querySelector('#admin-menu');
+const userName = document.querySelector('#user-name');
+const avatarImg = document.querySelector('#user-avatar');
+const shoppingCart = document.querySelector('#shopping-cart');
 const logoutBtn = document.querySelector('#logout-btn');
+console.log(logoutBtn);
 
 let loginUser = null;//提前宣告，載入資料後，要把會員資料儲存在這裡
 let currentCourseId = null;
@@ -158,7 +168,6 @@ function connectChat(currentCourseId) {
 							</div>
 
 			                  <div class="text-end text-body-secondary mt-1">
-			                    <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
 			                    <small>${allMessages[i].time.slice(0, 16)}</small>
 			                  </div>
 			                </div>
@@ -183,7 +192,6 @@ function connectChat(currentCourseId) {
 							</div>
 
 			                  <div class="text-end text-body-secondary mt-1">
-			                    <i class="icon-base ti tabler-checks icon-16px text-success me-1"></i>
 			                    <small>${allMessages[i].time.slice(0, 16)}</small>
 			                  </div>
 			                </div>
