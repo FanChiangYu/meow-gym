@@ -237,8 +237,6 @@ function paymentByCard(){
 				target: document.body 
 			});
 		}
-
-		location.reload();
 	});
 };
 
@@ -270,8 +268,6 @@ function paymentByCash(){
 				target: document.body 
 			});
 		}
-
-		location.reload();
 	});
 };
 
@@ -481,4 +477,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
   }
 })();
+
+//禁止點擊
+document.querySelectorAll('#wizard-checkout .step').forEach(step => {
+    step.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
+});
 
