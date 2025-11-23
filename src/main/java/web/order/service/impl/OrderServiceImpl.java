@@ -35,14 +35,10 @@ public class OrderServiceImpl implements OrderService{
 	//標註需要交易控制的⽅法
 	@Override
 	public Boolean addcart(Course course, Integer userId) {
-		//比對訂單course資訊		
-//		if(course.getCourseId() == null) {
-//			System.out.println("取得訂單course資訊失敗");
-//			return false;
-//		}
+		//取得訂單courseId
 		System.out.println(course.getCourseId());
 		
-		//邏輯：產生Orders By userId/
+		//邏輯：產生Orders By userId/status
 		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
 		if (orderId == null) {
 			Orders orders = new Orders(); 
@@ -266,7 +262,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Map<String, Object> getOrderConfirmation(Integer userId) {
-		//Step1:用userId找orderId by Orders
+		//Step1:用 userId 找最大 orderId in Orders
 		Integer orderId = orderdao.selectOrderIdAfterPaymentByUesrId(userId);
 		//Step2:撈Orders by orderId
 		Orders completeOrders = orderdao.selectOrdersByOrderId(orderId);		
