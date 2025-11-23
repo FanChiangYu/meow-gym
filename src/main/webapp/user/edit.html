@@ -29,13 +29,15 @@
 
 	<link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
 
+	<link rel="stylesheet" href="../assets/vendor/libs/pickr/pickr-themes.css" />
+
 	<link rel="stylesheet" href="../assets/vendor/css/core.css" />
 	<link rel="stylesheet" href="../assets/css/demo.css" />
 
 	<!-- Vendors CSS -->
 
 	<link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
+	<link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 	<!-- endbuild -->
 
 	<!-- Page CSS -->
@@ -247,8 +249,9 @@
 								<ul class="dropdown-menu dropdown-menu-end">
 									<li>
 										<div class="d-grid px-2 pt-2 pb-1">
-											<a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank"> <small
-													class="align-middle">Logout</small> <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
+											<a class="btn btn-sm btn-danger d-flex" href="#" id="logout-btn">
+												<small class="align-middle">登出</small>
+												<i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
 											</a>
 										</div>
 									</li>
@@ -272,7 +275,7 @@
 								<div class="card-body">
 									<div class="d-flex align-items-start align-items-sm-center gap-6">
 										<img src="./default/img/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded"
-											id="uploadedAvatar" />
+											id="avatarImg" />
 										<div class="button-wrapper">
 											<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
 												<span class="d-none d-sm-block">更換頭像</span>
@@ -303,7 +306,7 @@
 												</div>
 												<div class="col-md-6">
 													<label for="password" class="form-label">修改密碼</label> <input class="form-control"
-														type="password" id="password" name="password" minlength="8" placeholder="至少8位數，包含英文及數字" />
+														type="password" id="opassword" name="opassword" minlength="8" placeholder="至少8位數，包含英文及數字" />
 												</div>
 												<div class="col-md-6">
 													<label class="form-label" for="phoneNumber">聯繫電話</label>
@@ -327,41 +330,11 @@
 												<div class="col-md-6">
 													<label class="form-label" for="cnt_code">縣市</label> <select id="cnt_code"
 														class="select2 form-select">
-														<option value="">選擇縣市</option>
-														<option value="1">01 台北市</option>
-														<option value="3">03 台中市</option>
-														<option value="5">05 台南市</option>
-														<option value="7">07 高雄市</option>
-														<option value="11">11 基隆市</option>
-														<option value="12">12 新竹市</option>
-														<option value="22">22 嘉義市</option>
-														<option value="31">31 新北市</option>
-														<option value="32">32 桃園市</option>
-														<option value="33">33 新竹縣</option>
-														<option value="34">34 宜蘭縣</option>
-														<option value="35">35 苗栗縣</option>
-														<option value="37">37 彰化縣</option>
-														<option value="38">38 南投縣</option>
-														<option value="39">39 雲林縣</option>
-														<option value="40">40 嘉義縣</option>
-														<option value="43">43 屏東縣</option>
-														<option value="44">44 澎湖縣</option>
-														<option value="45">45 花蓮縣</option>
-														<option value="46">46 台東縣</option>
-														<option value="90">90 金門縣</option>
-														<option value="91">91 連江縣</option>
 													</select>
 												</div>
 												<div class="col-md-6">
 													<label for="dist_code" class="form-label">鄉鎮區域</label> <select id="dist_code"
 														class="select2 form-select">
-														<option value="">選擇鄉鎮</option>
-														<option value="101">松山區</option>
-														<option value="102">大安區</option>
-														<option value="109">大同區</option>
-														<option value="110">中山區</option>
-														<option value="111">內湖區</option>
-														<option value="112">南港區</option>
 													</select>
 												</div>
 												<div class="col-md-6">
@@ -473,6 +446,10 @@
 		<script src="../assets/vendor/js/bootstrap.js"></script>
 		<script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
 
+		<script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script>
+
+		<script src="../assets/vendor/libs/pickr/pickr.js"></script>
+
 		<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
 		<script src="../assets/vendor/libs/hammer/hammer.js"></script>
@@ -491,11 +468,9 @@
 		<!-- Main JS -->
 
 		<script src="../assets/js/main.js"></script>
-		<script src="js/project_template.js"></script>
-		<script src="js/register.js"></script>
-		<script src="js/form-layouts.js"></script>
 
 		<!-- Page JS -->
+		<script src="js/edit.js"></script>
 </body>
 
 </html>

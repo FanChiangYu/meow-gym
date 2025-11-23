@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import web.user.dao.UserDao;
+import web.user.pojo.Country;
+import web.user.pojo.District;
 import web.user.pojo.User;
 
 @Repository
@@ -57,7 +59,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int update(User pojo) {
-		return 0;
+		final StringBuilder hql = new StringBuilder().append("update User set ").append("cntCode = :cntCode, ")
+				.append("distCode = :distCode, ").append("detailAddress = :detailAddress, ")
+				.append("password = :password, ").append("name = :name, ").append("phone = :phone, ")
+				.append("avatarUrl = :avatarUrl, ").append("birthday = :birthday, ").append("gender = :gender ")
+				.append("where userId = :userId");
+
+		return session.createQuery(hql.toString()).setParameter("cntCode", pojo.getCntCode())
+				.setParameter("distCode", pojo.getDistCode()).setParameter("detailAddress", pojo.getDetailAddress())
+				.setParameter("password", pojo.getPassword()).setParameter("name", pojo.getName())
+				.setParameter("phone", pojo.getPhone()).setParameter("avatarUrl", pojo.getAvatarUrl())
+				.setParameter("birthday", pojo.getBirthday()).setParameter("gender", pojo.getGender())
+				.setParameter("userId", pojo.getUserId()).executeUpdate();
 	}
 
 	@Override
@@ -68,6 +81,57 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> selectAll() {
 		return null;
+	}
+
+	@Override
+	public List<District> selectDist() {
+		final String hql = "FROM District ORDER BY distCode";
+		return session.createQuery(hql, District.class).getResultList();
+	}
+
+	@Override
+	public List<Country> selectCountry() {
+		final String hql = "FROM Country ORDER BY cntCode";
+		return session.createQuery(hql, Country.class).getResultList();
+	}
+
+	@Override
+	public User selectByEmail(User user) {
+		String hql1 = "from User where email = :email";
+
+		return session.createQuery(hql1, User.class).setParameter("email", user.getEmail()).uniqueResult();
+	}
+
+	@Override
+	public int updateCodebByUser(User user) {
+		final StringBuilder hql = new StringBuilder().append("update User set ").append("resetCode = :resetCode ")
+				.append("where userId = :userId");
+
+		return session.createQuery(hql.toString()).setParameter("userId", user.getUserId())
+				.setParameter("resetCode", user.getResetCode()).executeUpdate();
+	}
+
+	@Override
+	public String selectCodeById(Integer userId) {
+		String hql = "SELECT resetCode FROM User WHERE userId = :userId";
+
+		return session.createQuery(hql, String.class).setParameter("userId", userId).uniqueResult();
+	}
+
+	@Override
+	public String selectPasswordById(Integer userId) {
+		String hql = "SELECT password FROM User WHERE userId = :userId";
+
+		return session.createQuery(hql, String.class).setParameter("userId", userId).uniqueResult();
+	}
+
+	@Override
+	public void updatePasswordByUser(User user) {
+		final StringBuilder hql = new StringBuilder().append("update User set ").append("password = :password ")
+				.append("where userId = :userId");
+
+		session.createQuery(hql.toString()).setParameter("userId", user.getUserId())
+				.setParameter("password", user.getPassword()).executeUpdate();
 	}
 
 }

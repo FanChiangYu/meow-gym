@@ -1,6 +1,7 @@
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const loginbt = document.querySelector("#loginbt");
+const logoutBtn = document.querySelector('#logout-btn');
 
 loginbt.addEventListener("click", () => {
 	if (!email.value) {
@@ -34,7 +35,7 @@ loginbt.addEventListener("click", () => {
 		.then(resp => resp.json())
 		.then(body => {
 			if (body.successful) {
-				location.href = "userDetail.html"
+				location.href = "/meow-gym/index/index.html";
 			} else {
 				Swal.fire({
 					title: '錯誤',
@@ -45,4 +46,10 @@ loginbt.addEventListener("click", () => {
 			}
 		});
 
+});
+
+logoutBtn.addEventListener('click', e => {
+	e.preventDefault();
+	fetch('/meow-gym/user/logout')
+		.then(() => location.href = '/meow-gym/index/index.html');
 });
