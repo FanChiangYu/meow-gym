@@ -31,7 +31,8 @@ public class AddCartController {
 //		Integer userId = 1;
 
 		// 判斷是否有加入購物車的課程，如無則顯示課程清單
-		if (setCourse != null) {// 比對訂單course資訊
+		if (setCourse != null) {
+			// 比對訂單course資訊
 			Boolean booLean = orderservice.addcart(setCourse, userId);
 			System.out.println(booLean);
 		}

@@ -158,7 +158,8 @@ const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
 const orderTotalAmount = document.querySelector('#orderTotalAmount');
 const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
 
-payAmountList();
+// payAmountList();
+setTimeout(payAmountList, 3000);
 function payAmountList(){
 	fetch('payAmount')
 	.then(resp => resp.json())
@@ -194,6 +195,7 @@ function payAmountList(){
 		  <dt class="col-6 text-heading mb-3">總價</dt>
 			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${payAmount_orders.payAmount}</dd>
 		`;
+
 	});
 }
 
@@ -228,6 +230,7 @@ function paymentByCard(){
 				icon: 'success', 
 				target: document.body
 			});
+			confirmation();
 		}else{
 			// alert(body.message,);
 			Swal.fire({
@@ -259,6 +262,7 @@ function paymentByCash(){
 				icon: 'success',
 				target: document.body 
 			});
+			confirmation();
 		}else{
 			// alert(body.message);
 			Swal.fire({
@@ -285,7 +289,7 @@ const confirmation_course = document.querySelector('#confirmation_course');
 const confirmPayCourseList = document.querySelector('#confirmPayCourseList');
 const confirmTotalAmount = document.querySelector('#confirmTotalAmount');
 
-confirmation();
+// confirmation();
 function confirmation(){
 	fetch('confirmation')
 	.then(resp => resp.json())
