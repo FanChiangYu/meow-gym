@@ -53,24 +53,26 @@ public class PromotionsServiceImpl implements PromotionsService {
 			return coursePromo;
 		}
 
-		Date dateStart = new Date(coursePromo.getDateStart().getTime());
-		Date dateEnd = new Date(coursePromo.getDateEnd().getTime());
-		Date dateNow = new Date();
+		Date promoDateStart = coursePromo.getDateStart();
+		Date promoDateEnd = coursePromo.getDateEnd();
 
-		if (dateStart.before(dateNow)) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			coursePromo.setMessage("開始日期請選擇" + sdf.format(dateNow) + "之後");
+		Course course = courseDao.selectById(coursePromo.getCourseId());
+		Date courseDateStart = course.getDateStart();
+		Date courseDateEnd = course.getDateEnd();
+		
+		if (!promoDateStart.after(courseDateStart)) {
+			coursePromo.setMessage("促銷活動日期必須在課程開始日期之後");
+			coursePromo.setSuccessful(false);
+			return coursePromo;
+		}
+		
+		if (!promoDateEnd.before(courseDateEnd)) {
+			coursePromo.setMessage("促銷活動日期必須在課程結束日期之前");
 			coursePromo.setSuccessful(false);
 			return coursePromo;
 		}
 
-		long dateDiff = (dateEnd.getTime() - dateStart.getTime()) / (1000 * 60 * 60 * 24);
-
-		if (dateDiff < 30) {
-			coursePromo.setMessage("結束日期需大於開始日期30天");
-			coursePromo.setSuccessful(false);
-			return coursePromo;
-		}
+	
 
 		final String imgBase64 = coursePromo.getImgBase64();
 		if (imgBase64 == null || imgBase64.isEmpty()) {
