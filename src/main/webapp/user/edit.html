@@ -29,8 +29,6 @@
 
 	<link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
 
-	<link rel="stylesheet" href="../assets/vendor/libs/pickr/pickr-themes.css" />
-
 	<link rel="stylesheet" href="../assets/vendor/css/core.css" />
 	<link rel="stylesheet" href="../assets/css/demo.css" />
 
@@ -38,13 +36,12 @@
 
 	<link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 	<link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
+
 	<!-- endbuild -->
 
 	<!-- Page CSS -->
 
 	<link rel="stylesheet" href="../assets/vendor/css/pages/page-icons.css" />
-	<link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css" />
-	<link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
 
 	<!-- Helpers -->
 	<script src="../assets/vendor/js/helpers.js"></script>
@@ -204,7 +201,8 @@
 
 			<div class="menu-mobile-toggler d-xl-none rounded-1">
 				<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large text-bg-secondary p-2 rounded-1">
-					<i class="ti tabler-menu icon-base"></i> <i class="ti tabler-chevron-right icon-base"></i>
+					<i class="ti tabler-menu icon-base"></i>
+					<i class="ti tabler-chevron-right icon-base"></i>
 				</a>
 			</div>
 			<!-- / Menu 側邊欄 -->
@@ -217,8 +215,8 @@
 					class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme"
 					id="layout-navbar">
 					<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-						<a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)"> <i
-								class="icon-base ti tabler-menu-2 icon-md"></i>
+						<a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+							<i class="icon-base ti tabler-menu-2 icon-md"></i>
 						</a>
 					</div>
 
@@ -228,14 +226,15 @@
 
 							<!-- 購物車 -->
 							<li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2 d-none"
-								id="shopping-cart"><a
-									class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-									href="javascript:void(0);" data-bs-auto-close="outside" aria-expanded="false"> <span
-										class="position-relative">
+								id="shopping-cart">
+								<a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
+									href="javascript:void(0);" data-bs-auto-close="outside" aria-expanded="false">
+									<span class="position-relative">
 										<i class="icon-base ti tabler-shopping-cart icon-22px text-heading"></i>
 										<span class="badge rounded-pill bg-danger badge-notifications border"></span>
 									</span>
-								</a></li>
+								</a>
+							</li>
 							<!--/ 購物車 -->
 
 							<!-- User -->
@@ -426,51 +425,51 @@
 					</div>
 					<!-- Content wrapper -->
 				</div>
-				<!-- / Layout page -->
+				<!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
 			</div>
-
-			<!-- Overlay -->
-			<div class="layout-overlay layout-menu-toggle"></div>
-
-			<!-- Drag Target Area To SlideIn Menu On Small Screens -->
-			<div class="drag-target"></div>
+			<!-- / Content -->
+			<div class="content-backdrop fade"></div>
 		</div>
-		<!-- / Layout wrapper -->
+		<!-- Content wrapper -->
+	</div>
+	<!-- / Layout page -->
+	</div>
 
-		<!-- Core JS -->
-		<!-- build:js assets/vendor/js/theme.js  -->
+	<!-- Overlay -->
+	<div class="layout-overlay layout-menu-toggle"></div>
 
-		<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+	<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+	<div class="drag-target"></div>
+	</div>
+	<!-- / Layout wrapper -->
 
-		<script src="../assets/vendor/libs/popper/popper.js"></script>
-		<script src="../assets/vendor/js/bootstrap.js"></script>
-		<script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/theme.js  -->
 
-		<script src="../assets/vendor/libs/@algolia/autocomplete-js.js"></script>
+	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
 
-		<script src="../assets/vendor/libs/pickr/pickr.js"></script>
+	<script src="../assets/vendor/libs/popper/popper.js"></script>
+	<script src="../assets/vendor/js/bootstrap.js"></script>
+	<script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
 
-		<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-		<script src="../assets/vendor/libs/hammer/hammer.js"></script>
+	<script src="../assets/vendor/libs/hammer/hammer.js"></script>
 
-		<script src="../assets/vendor/libs/i18n/i18n.js"></script>
+	<script src="../assets/vendor/libs/i18n/i18n.js"></script>
 
-		<script src="../assets/vendor/js/menu.js"></script>
+	<script src="../assets/vendor/js/menu.js"></script>
 
-		<!-- endbuild -->
+	<!-- endbuild -->
 
-		<!-- Vendors JS -->
-		<script src="../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-		<script src="../assets/vendor/libs/select2/select2.js"></script>
-		<script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+	<!-- Vendors JS -->
+	<script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
-		<!-- Main JS -->
+	<!-- Main JS -->
 
-		<script src="../assets/js/main.js"></script>
-
-		<!-- Page JS -->
-		<script src="js/edit.js"></script>
+	<script src="../assets/js/main.js"></script>
+	<script src="./js/edit.js"></script>
+	<!-- Page JS -->
 </body>
 
 </html>
