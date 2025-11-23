@@ -52,6 +52,6 @@ fetch('/meow-gym/index/loginData')
 
 logoutBtn.addEventListener('click', e => {
   e.preventDefault();
-  fetch('/meow-gym/user/logout');
-  // location.href = '/meow-gym/index/index.html';
+  fetch('/meow-gym/user/logout')
+  .then(()=>location.href = '/meow-gym/index/index.html');
 });
