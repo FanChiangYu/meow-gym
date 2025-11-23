@@ -1,4 +1,4 @@
-const avatarImg = document.querySelector("#avatarImg");
+const avatarImg2 = document.querySelector("#avatarImg");
 const email = document.querySelector("#email");
 const username = document.querySelector("#name");
 const password = document.querySelector("#password");
@@ -9,14 +9,14 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
-const logoutBtn = document.querySelector('#logout-btn');
+const logoutBtn2 = document.querySelector('#logout-btn');
 
 
 fetch('/meow-gym/index/loginData')
 	.then(resp => resp.json())
 	.then(respLoginData => {
 		userId  = respLoginData.user.userId;
-		avatarImg.src = respLoginData.user.avatarUrl;
+		avatarImg2.src = respLoginData.user.avatarUrl;
 		email.value = respLoginData.user.email;
 		username.value = respLoginData.user.name;
 		password.value = respLoginData.user.password;
@@ -28,7 +28,7 @@ fetch('/meow-gym/index/loginData')
 		detail_address.value = respLoginData.user.detailAddress;
 	});
 
-logoutBtn.addEventListener('click', e => {
+logoutBtn2.addEventListener('click', e => {
 	e.preventDefault();
 	fetch('/meow-gym/user/logout')
 		.then(() => location.href = '/meow-gym/index/index.html');
@@ -142,7 +142,7 @@ applybutton.addEventListener('click', e => {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
-			avatarImg: avatarImg.src,
+			avatarImg: avatarImg2.src,
 			email: email.value,
 			name: username.value,
 			password: password.value,
