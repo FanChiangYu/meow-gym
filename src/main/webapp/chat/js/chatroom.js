@@ -10,7 +10,7 @@ const classlist = document.querySelector(".class-list");
 const chatlink = document.querySelector(".chat-link");
 
 const courselink = document.querySelector(".course-link");
-
+const logoutBtn = document.querySelector('#logout-btn');
 
 let loginUser = null;//提前宣告，載入資料後，要把會員資料儲存在這裡
 let currentCourseId = null;
@@ -273,6 +273,14 @@ fetch('/meow-gym/index/loginData')
 		}
 	});
 
+// Log out
+
+
+logoutBtn.addEventListener('click', e => {
+	e.preventDefault();
+	fetch('/meow-gym/user/logout')
+		.then(() => location.href = '/meow-gym/index/index.html');
+});
 
 
 
