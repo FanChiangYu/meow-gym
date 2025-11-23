@@ -35,10 +35,10 @@ public class CoursePromo extends Core {
 	@Column(name = "promo_price")
 	private Integer promoPrice;
 	@Column(name = "date_start")
-	@JsonFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date dateStart;
 	@Column(name = "date_end")
-	@JsonFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date dateEnd;
 	@Column(name = "img_url")
 	private String imgUrl;
