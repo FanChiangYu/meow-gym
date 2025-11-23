@@ -266,246 +266,241 @@
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
 					<!-- Content -->
-					<div class="container-xxl flex-grow-1 container-p-y" style="">
+					<div class="container-xxl flex-grow-1 container-p-y">
 						<!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-						<div class="content-wrapper">
-							<!-- Content -->
-							<div class="container-xxl flex-grow-1 container-p-y">
-								<!------------------------------------------------- 各功能要顯示的內容寫在這 ------------------------------------------------->
-								<div class="col-md-12">
-									<div class="card mb-6">
-										<!-- Account -->
-										<div class="card-body">
-											<div class="d-flex align-items-start align-items-sm-center gap-6">
-												<img src="./default/img/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded"
-													id="avatarImg" />
-												<div class="button-wrapper">
-													<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-														<span class="d-none d-sm-block">更換頭像</span>
-														<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
-														<input type="file" id="upload" class="account-file-input" hidden accept=".png" />
-													</label>
-													<button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-														<i class="icon-base ti tabler-reset d-block d-sm-none"></i>
-														<span class="d-none d-sm-block">Reset</span>
-													</button>
-													<div>Allowed PNG.</div>
-												</div>
-											</div>
-											<div class="card-body pt-4">
-												<form id="formAccountSettings" method="GET" onsubmit="return false">
-													<div class="row gy-4 gx-6 mb-6">
-														<div class="col-md-6 form-control-validation">
-															<label for="email" class="form-label">會員帳號</label> <input class="form-control" type="text"
-																id="email" name="email" placeholder="請輸入Email" disabled />
-														</div>
-														<div class="col-md-6 form-control-validation">
-															<label for="name" class="form-label">姓名</label> <input class="form-control" type="text"
-																name="name" id="name" placeholder="姓名" />
-														</div>
-														<div class="col-md-6">
-															<label for="password" class="form-label">密碼</label> <input class="form-control"
-																type="password" id="password" name="password" minlength="8" disabled />
-														</div>
-														<div class="col-md-6">
-															<label for="password" class="form-label">修改密碼</label> <input class="form-control"
-																type="password" id="opassword" name="opassword" minlength="8"
-																placeholder="至少8位數，包含英文及數字" />
-														</div>
-														<div class="col-md-6">
-															<label class="form-label" for="phoneNumber">聯繫電話</label>
-															<div class="input-group input-group-merge">
-																<span class="input-group-text">+886</span> <input type="text" id="phoneNumber"
-																	name="phoneNumber" class="form-control" placeholder="ex. 0912-345-678" />
-															</div>
-														</div>
-														<div class="col-md-6">
-															<label for="gender" class="form-label">性別</label> <select id="gender"
-																class="select2 form-select">
-																<option value="">性別</option>
-																<option value="F">女</option>
-																<option value="M">男</option>
-															</select>
-														</div>
-														<div class="mb-6">
-															<label class="form-label" for="date-birthday">出生日期</label> <input type="text"
-																id="date-birthday" class="form-control dob-picker" placeholder="YYYY-MM-DD" />
-														</div>
-														<div class="col-md-6">
-															<label class="form-label" for="cnt_code">縣市</label> <select id="cnt_code"
-																class="select2 form-select">
-															</select>
-														</div>
-														<div class="col-md-6">
-															<label for="dist_code" class="form-label">鄉鎮區域</label> <select id="dist_code"
-																class="select2 form-select">
-															</select>
-														</div>
-														<div class="col-md-6">
-															<label class="form-label" for="detail_address">修改地址</label>
-															<div class="input-group input-group-merge">
-																<span class="input-group-text"></span> <input type="text" id="detail_address"
-																	name="detail_address" class="form-control" placeholder="填寫地址" />
-															</div>
-														</div>
-													</div>
-													<div class="mt-2">
-														<button type="button" class="btn btn-primary me-3" id="applybutton">修改資料</button>
-														<button type="reset" class="btn btn-label-secondary">Cancel</button>
-													</div>
-												</form>
-											</div>
-											<!-- /Account -->
+						<div class="col-md-12">
+							<div class="card mb-6">
+								<!-- Account -->
+								<div class="card-body">
+									<div class="d-flex align-items-start align-items-sm-center gap-6">
+										<img src="./default/img/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded"
+											id="avatarImg" />
+										<div class="button-wrapper">
+											<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
+												<span class="d-none d-sm-block">更換頭像</span>
+												<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
+												<input type="file" id="upload" class="account-file-input" hidden accept=".png" />
+											</label>
+											<button type="button" class="btn btn-label-secondary account-image-reset mb-4">
+												<i class="icon-base ti tabler-reset d-block d-sm-none"></i>
+												<span class="d-none d-sm-block">Reset</span>
+											</button>
+											<div>Allowed PNG.</div>
 										</div>
 									</div>
-									<!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
+									<div class="card-body pt-4">
+										<form id="formAccountSettings" method="GET" onsubmit="return false">
+											<div class="row gy-4 gx-6 mb-6">
+												<div class="col-md-6 form-control-validation">
+													<label for="email" class="form-label">會員帳號</label> <input class="form-control" type="text"
+														id="email" name="email" placeholder="請輸入Email" disabled />
+												</div>
+												<div class="col-md-6 form-control-validation">
+													<label for="name" class="form-label">姓名</label> <input class="form-control" type="text"
+														name="name" id="name" placeholder="姓名" />
+												</div>
+												<div class="col-md-6">
+													<label for="password" class="form-label">密碼</label> <input class="form-control"
+														type="password" id="password" name="password" minlength="8" disabled />
+												</div>
+												<div class="col-md-6">
+													<label for="password" class="form-label">修改密碼</label> <input class="form-control"
+														type="password" id="opassword" name="opassword" minlength="8" placeholder="至少8位數，包含英文及數字" />
+												</div>
+												<div class="col-md-6">
+													<label class="form-label" for="phoneNumber">聯繫電話</label>
+													<div class="input-group input-group-merge">
+														<span class="input-group-text">+886</span> <input type="text" id="phoneNumber"
+															name="phoneNumber" class="form-control" placeholder="ex. 0912-345-678" />
+													</div>
+												</div>
+												<div class="col-md-6">
+													<label for="gender" class="form-label">性別</label> <select id="gender"
+														class="select2 form-select">
+														<option value="">性別</option>
+														<option value="F">女</option>
+														<option value="M">男</option>
+													</select>
+												</div>
+												<div class="mb-6">
+													<label class="form-label" for="date-birthday">出生日期</label> <input type="text"
+														id="date-birthday" class="form-control dob-picker" placeholder="YYYY-MM-DD" />
+												</div>
+												<div class="col-md-6">
+													<label class="form-label" for="cnt_code">縣市</label> <select id="cnt_code"
+														class="select2 form-select">
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label for="dist_code" class="form-label">鄉鎮區域</label> <select id="dist_code"
+														class="select2 form-select">
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label class="form-label" for="detail_address">修改地址</label>
+													<div class="input-group input-group-merge">
+														<span class="input-group-text"></span> <input type="text" id="detail_address"
+															name="detail_address" class="form-control" placeholder="填寫地址" />
+													</div>
+												</div>
+											</div>
+											<div class="mt-2">
+												<button type="button" class="btn btn-primary me-3" id="applybutton">修改資料</button>
+												<button type="reset" class="btn btn-label-secondary">Cancel</button>
+											</div>
+										</form>
+									</div>
+									<!-- /Account -->
 								</div>
-								<!-- / Content -->
-
-								<!-- Footer -->
-								<footer class="footer bg-dark">
-									<div class="container-fluid container-p-x pt-12 pb-6">
-										<div class="row">
-											<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-												<h4 class="fw-bold mb-4">
-													<a href="#" class="footer-text">MEOW GYM </a>
-												</h4>
-												<span>健身 從這裡出發！</span>
-												<div class="social-icon my-4">
-													<a href="javascript:void(0)" class="btn btn-icon btn-sm btn-facebook me-2"><i
-															class="icon-base ti tabler-brand-facebook icon-20px"></i></a> <a href="javascript:void(0)"
-														class="btn btn-icon btn-sm btn-instagram me-2"><i
-															class="icon-base ti tabler-brand-instagram icon-20px"></i></a> <a
-														href="javascript:void(0)" class="btn btn-icon btn-sm btn-linkedin me-2"><i
-															class="icon-base ti tabler-brand-linkedin icon-20px"></i></a> <a
-														href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"><i
-															class="icon-base ti tabler-brand-github icon-20px"></i></a>
-												</div>
-												<p class="pt-6">
-													<script>
-														document.write(new Date()
-															.getFullYear());
-													</script>
-													© Tibame TJA201
-												</p>
-											</div>
-											<div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
-												<h5 class="footer-text">聯絡方式</h5>
-												<ul class="list-unstyled">
-													<li><span class="footer-text d-block pb-2">聯絡電話 :
-															02-2712-0589</span></li>
-													<li><span class="footer-text d-block pb-2">場館地址 :
-															台北市中山區南京東路三段219號4F</span></li>
-													<li><span class="footer-text d-block pb-2">公司信箱 :
-															service@tibame.com</span></li>
-													<li><span class="footer-text d-block pb-2">營業時間 :
-															7 : 00 ~ 23 : 00</span></li>
-												</ul>
-											</div>
-											<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-												<h5 class="footer-text">快速導覽</h5>
-												<ul class="list-unstyled">
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">首頁</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
-												</ul>
-											</div>
-											<div class="col-12 col-sm-6 col-md-3">
-												<h5 class="footer-text">專題成員履歷</h5>
-												<ul class="list-unstyled">
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡芝</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
-													<li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</footer>
-								<!-- / Footer -->
-
-								<div class="content-backdrop fade"></div>
 							</div>
-							<!-- Content wrapper -->
+							<!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
 						</div>
-						<!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
+						<!-- / Content -->
+
+						<!-- Footer -->
+						<footer class="footer bg-dark">
+							<div class="container-fluid container-p-x pt-12 pb-6">
+								<div class="row">
+									<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+										<h4 class="fw-bold mb-4">
+											<a href="#" class="footer-text">MEOW GYM </a>
+										</h4>
+										<span>健身 從這裡出發！</span>
+										<div class="social-icon my-4">
+											<a href="javascript:void(0)" class="btn btn-icon btn-sm btn-facebook me-2"><i
+													class="icon-base ti tabler-brand-facebook icon-20px"></i></a> <a href="javascript:void(0)"
+												class="btn btn-icon btn-sm btn-instagram me-2"><i
+													class="icon-base ti tabler-brand-instagram icon-20px"></i></a> <a href="javascript:void(0)"
+												class="btn btn-icon btn-sm btn-linkedin me-2"><i
+													class="icon-base ti tabler-brand-linkedin icon-20px"></i></a> <a
+												href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"><i
+													class="icon-base ti tabler-brand-github icon-20px"></i></a>
+										</div>
+										<p class="pt-6">
+											<script>
+												document.write(new Date()
+													.getFullYear());
+											</script>
+											© Tibame TJA201
+										</p>
+									</div>
+									<div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
+										<h5 class="footer-text">聯絡方式</h5>
+										<ul class="list-unstyled">
+											<li><span class="footer-text d-block pb-2">聯絡電話 :
+													02-2712-0589</span></li>
+											<li><span class="footer-text d-block pb-2">場館地址 :
+													台北市中山區南京東路三段219號4F</span></li>
+											<li><span class="footer-text d-block pb-2">公司信箱 :
+													service@tibame.com</span></li>
+											<li><span class="footer-text d-block pb-2">營業時間 :
+													7 : 00 ~ 23 : 00</span></li>
+										</ul>
+									</div>
+									<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+										<h5 class="footer-text">快速導覽</h5>
+										<ul class="list-unstyled">
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">首頁</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
+										</ul>
+									</div>
+									<div class="col-12 col-sm-6 col-md-3">
+										<h5 class="footer-text">專題成員履歷</h5>
+										<ul class="list-unstyled">
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡芝</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
+											<li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</footer>
+						<!-- / Footer -->
+
+						<div class="content-backdrop fade"></div>
 					</div>
-					<!-- / Content -->
-
-					<!-- Footer -->
-					<footer class="footer bg-dark">
-						<div class="container-fluid container-p-x pt-12 pb-6">
-							<div class="row">
-								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-									<h4 class="fw-bold mb-4">
-										<a href="#" class="footer-text">MEOW GYM
-										</a>
-									</h4>
-									<span>健身 從這裡出發！</span>
-									<div class="social-icon my-4">
-										<a href="https://www.youtube.com/" class="btn btn-icon btn-sm btn-youtube me-2" target="_blank"><i
-												class="icon-base ti tabler-brand-youtube icon-20px"></i></a>
-										<a href="https://docs.google.com/presentation/d/1-ehXuTcuDbF5bMBY3hELMEt8-c1DOdwq/edit?usp=drive_link&ouid=111231428259003544179&rtpof=true&sd=true"
-											class="btn btn-icon btn-sm btn-google-plus me-2" target="_blank"><img
-												src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftpowerpoint.svg"
-												style="width:24px;height:24px; filter: brightness(0) invert(1);"></a>
-										<a href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"
-											target="_blank"><i class="icon-base ti tabler-brand-github icon-20px"></i></a>
-									</div>
-									<p class="pt-6">
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										© Tibame TJA201
-									</p>
-								</div>
-								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
-									<h5 class="footer-text">聯絡方式</h5>
-									<ul class="list-unstyled">
-										<li><span class="footer-text d-block pb-2">聯絡電話 : 02-2712-0589</span></li>
-										<li><span class="footer-text d-block pb-2">場館地址 : 台北市中山區南京東路三段219號4F</span></li>
-										<li><span class="footer-text d-block pb-2">公司信箱 : service@tibame.com</span></li>
-										<li><span class="footer-text d-block pb-2">營業時間 : 7 : 00 ~ 23 : 00</span></li>
-									</ul>
-								</div>
-								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
-									<h5 class="footer-text">快速導覽</h5>
-									<ul class="list-unstyled">
-										<li><a href="/meow-gym/user/edit.html" class="footer-link d-block pb-2">首頁</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
-									</ul>
-								</div>
-								<div class="col-12 col-sm-6 col-md-3">
-									<h5 class="footer-text">專題成員履歷</h5>
-									<ul class="list-unstyled">
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡之</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
-										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</footer>
-					<!-- / Footer -->
-
-					<div class="content-backdrop fade"></div>
+					<!-- Content wrapper -->
 				</div>
-				<!-- Content wrapper -->
+				<!------------------------------------------------- / 各功能要顯示的內容寫在這 ------------------------------------------------->
 			</div>
-			<!-- / Layout page -->
+			<!-- / Content -->
+
+			<!-- Footer -->
+			<footer class="footer bg-dark">
+				<div class="container-fluid container-p-x pt-12 pb-6">
+					<div class="row">
+						<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+							<h4 class="fw-bold mb-4">
+								<a href="#" class="footer-text">MEOW GYM
+								</a>
+							</h4>
+							<span>健身 從這裡出發！</span>
+							<div class="social-icon my-4">
+								<a href="https://www.youtube.com/" class="btn btn-icon btn-sm btn-youtube me-2" target="_blank"><i
+										class="icon-base ti tabler-brand-youtube icon-20px"></i></a>
+								<a href="https://docs.google.com/presentation/d/1-ehXuTcuDbF5bMBY3hELMEt8-c1DOdwq/edit?usp=drive_link&ouid=111231428259003544179&rtpof=true&sd=true"
+									class="btn btn-icon btn-sm btn-google-plus me-2" target="_blank"><img
+										src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftpowerpoint.svg"
+										style="width:24px;height:24px; filter: brightness(0) invert(1);"></a>
+								<a href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github"
+									target="_blank"><i class="icon-base ti tabler-brand-github icon-20px"></i></a>
+							</div>
+							<p class="pt-6">
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+								© Tibame TJA201
+							</p>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
+							<h5 class="footer-text">聯絡方式</h5>
+							<ul class="list-unstyled">
+								<li><span class="footer-text d-block pb-2">聯絡電話 : 02-2712-0589</span></li>
+								<li><span class="footer-text d-block pb-2">場館地址 : 台北市中山區南京東路三段219號4F</span></li>
+								<li><span class="footer-text d-block pb-2">公司信箱 : service@tibame.com</span></li>
+								<li><span class="footer-text d-block pb-2">營業時間 : 7 : 00 ~ 23 : 00</span></li>
+							</ul>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
+							<h5 class="footer-text">快速導覽</h5>
+							<ul class="list-unstyled">
+								<li><a href="/meow-gym/user/edit.html" class="footer-link d-block pb-2">首頁</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">會員中心</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">課程瀏覽</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">教練專區</a></li>
+							</ul>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
+							<h5 class="footer-text">專題成員履歷</h5>
+							<ul class="list-unstyled">
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡之</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
+								<li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- / Footer -->
+
+			<div class="content-backdrop fade"></div>
 		</div>
+		<!-- Content wrapper -->
+	</div>
+	<!-- / Layout page -->
+	</div>
 
-		<!-- Overlay -->
-		<div class="layout-overlay layout-menu-toggle"></div>
+	<!-- Overlay -->
+	<div class="layout-overlay layout-menu-toggle"></div>
 
-		<!-- Drag Target Area To SlideIn Menu On Small Screens -->
-		<div class="drag-target"></div>
+	<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+	<div class="drag-target"></div>
 	</div>
 	<!-- / Layout wrapper -->
 
