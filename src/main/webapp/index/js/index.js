@@ -13,6 +13,7 @@ const userInfo = document.querySelector('#user-info');
 const coachContainer = document.querySelector('#coach-container');
 const userCenterBtn = document.querySelector('#user-center-btn');
 const logoutBtn = document.querySelector('#logout-btn');
+const userCenter = document.querySelector('#user-center');
 
 fetch('/meow-gym/index/loginData')
 .then(resp => resp.json())
@@ -138,8 +139,11 @@ logoutBtn.addEventListener('click', e => {
   .then(()=>location.href = '/meow-gym/index/index.html');
 });
 
-// logoutBtn.addEventListener('click', e => {
-//   e.preventDefault();
-//   fetch('/meow-gym/index/logout');
-//   // location.href = '/meow-gym/index/index.html';
-// });
+userCenter.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
+});

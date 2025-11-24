@@ -21,6 +21,12 @@ public class UserCenterController {
 	@GetMapping
 	public Map<String, Object> toUserCenter (@SessionAttribute(value = "user", required = false) User user){
 		Map<String, Object> respbody = new HashMap<>();
+		
+		if(user == null) {
+			respbody.put("url", "/meow-gym/user/login.html");
+			return respbody;
+		}
+		
 		switch (user.getRole()) {
 		case 1:
 			respbody.put("url", "/meow-gym/user/edit.html");
