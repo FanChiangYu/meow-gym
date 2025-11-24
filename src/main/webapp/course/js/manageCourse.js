@@ -5,17 +5,8 @@ const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
 const classContent = document.querySelector('#class-content');
-
-// 1a. 用fetch向後端取得roleId(角色ID)
-// 1b. 或從瀏覽器的sessionStorage取得roleId (如果登入時有存的話)
-// 2. 呼叫switchMenu(); 切換側邊欄顯示
-
-// roldId = 1 -> 一般會員
-// roldId = 2 -> 教練
-// roldId = 3 -> 管理者
-
-// 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
-let Id = 1;
+const logoutBtn = document.querySelector('#logout-btn');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (roleId) {
   switch (roleId) {
@@ -43,18 +34,23 @@ function switchMenu (roleId) {
   }
 }
 
-switchMenu(Id); // 呼叫function切換側邊欄
-
-
-// 使用者名稱顯示同理，如果還無法向後端取得user table的name，一樣先寫死，改標籤內的顯示文字
-let uName = '金城武'; 
-userName.textContent = uName; // 修改標籤內使用者名稱文字
-
-
-// 使用者頭像顯示，如果還無法向後端取得user table的avatal_url，img標籤src可不改，直接顯示預設頭像
-// 如果有取得avatal_url，按照以下寫法更改img標籤src的圖片路徑，以顯示使用者上傳的頭像
-let avatarUrl = '../img/avatar/result1.png'; // 假設從後端取得到使用者頭像Url
-avatarImg.src = avatarUrl; // 更換img標籤內的src屬性值
+fetch('/meow-gym/index/loginData')
+.then(resp => resp.json())
+.then(respbody => {
+  if(respbody.successful){
+    switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
+    userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
+    avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+  }else{
+    Swal.fire({
+      title: '錯誤',
+      text: '請先登入',
+      icon: 'error',
+      target: document.body 
+    })
+    .then(() => location.href = '/meow-gym/user/login.html');
+  }
+});
 
 function roomName (number){
   switch (number) {
@@ -200,9 +196,9 @@ fetch('manage')
                 <th>時段</th>
                 <th>預約人數</th>
                 <th>上課打卡時間</th>
-                <th>下卡打卡時間</th>
+                <th>下課打卡時間</th>
                 <th>上課打卡</th>
-                <th>下卡打卡</th>
+                <th>下課打卡</th>
               </tr>
             </thead>
             <tbody>     
@@ -229,7 +225,7 @@ fetch('manage')
           <div class="col-sm-6 col-lg-12">
             <div class="card p-2 h-100 shadow-none border">
               <div class="rounded-2 text-center mb-4">
-                <img class="img-fluid" src="${classResponse.course.imgUrl}" alt="課程圖片">
+                <img class="img-fluid d-block mx-auto my-6 rounded w-50" src="${classResponse.course.imgUrl}" alt="課程圖片">
               </div>
               <div class="card-body p-4 pt-2">
                 <p class="mt-1">課程ID : ${classResponse.course.courseId}</p>
@@ -334,3 +330,18 @@ function chatById(courseId) {
     }
   });
 }
+
+logoutBtn.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/user/logout')
+  .then(()=>location.href = '/meow-gym/index/index.html');
+});
+
+userCenter.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
+});

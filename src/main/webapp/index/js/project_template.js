@@ -1,3 +1,5 @@
+'use struct'
+
 const userMenu = document.querySelector('#user-menu');
 const coachMenu = document.querySelector('#coach-menu');
 const adminMenu = document.querySelector('#admin-menu');
@@ -5,6 +7,7 @@ const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
 const logoutBtn = document.querySelector('#logout-btn');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (role) {
   switch (role) {
@@ -54,4 +57,13 @@ logoutBtn.addEventListener('click', e => {
   e.preventDefault();
   fetch('/meow-gym/user/logout')
   .then(()=>location.href = '/meow-gym/index/index.html');
+});
+
+userCenter.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
 });
