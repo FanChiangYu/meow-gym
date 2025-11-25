@@ -1,4 +1,4 @@
-'use struct'
+'use strict';
 
 const userMenu = document.querySelector('#user-menu');
 const coachMenu = document.querySelector('#coach-menu');
