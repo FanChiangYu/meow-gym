@@ -4,10 +4,10 @@ const adminMenu = document.querySelector('#admin-menu');
 const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
-const addCartBtn = document.querySelector('#add-cart-btn');
 const courseId = document.querySelector('#course-id');
 const courseContainer = document.querySelector('#course-container');
-
+const logoutBtn = document.querySelector('#logout-btn');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (role) {
   switch (role) {
@@ -38,10 +38,18 @@ function switchMenu (role) {
 fetch('/meow-gym/index/loginData')
 .then(resp => resp.json())
 .then(respbody => {
-  if(respbody.successful){
+  if(respbody.successful && respbody.user.role === 1){
     switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
     userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
     avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+  } else if(respbody.successful) {
+    Swal.fire({
+      title: '錯誤',
+      text: '非訪客及一般會員即將登出',
+      icon: 'error',
+      target: document.body 
+    })
+    .then(() => logoutBtn.click());
   }
 });
 
@@ -176,7 +184,8 @@ function addCart(courseId){
         text: body.message,
         icon: 'error',
         target: document.body 
-      });
+      })
+      .then(()=>location.href = '/meow-gym/user/login.html');
     }
   });
 }
@@ -294,19 +303,17 @@ fetch('browse')
   courseContainer.innerHTML += courseHtml;
 });
 
-// 測試用
-addCartBtn.addEventListener('click', function(){
+logoutBtn.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/user/logout')
+  .then(()=>location.href = '/meow-gym/index/index.html');
+});
 
-  if(courseId.value === "" || isNaN(courseId.value)){
-    Swal.fire({
-      title: '提醒',
-      text: '請輸入課程ID！',
-      icon: 'warning',
-      target: document.body
-    });
-    return;
-  }
-
-  addCart(courseId.value);
-
+userCenter.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
 });
