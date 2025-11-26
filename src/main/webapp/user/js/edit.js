@@ -11,15 +11,7 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
-
-
-// function checkOldPassword() {
-// 	fetch(`edit/${oPassword.value}`)
-// 		.then(resp => resp.json())
-// 		.then(body => {
-// 			btn1.disabled = !body['successful']
-// 		});
-// }
+const upload = document.querySelector('#upload');
 
 function valueOrNull(value) {
 	if (value === undefined || value === null || value === '' || Number.isNaN(value)) {
@@ -115,6 +107,8 @@ function editCheck() {
 
 applybutton.addEventListener('click', e => {
 
+
+
 	if (!editCheck()) {
 		return;
 	}
@@ -192,5 +186,6 @@ fetch('dist')
 		detail_address.value = respLoginData.user.detailAddress;
 		$('#cnt_code').val(String(respLoginData.user.cntCode)).trigger('change');
 		$('#dist_code').val(String(respLoginData.user.distCode)).trigger('change.select2');
+		$('#gender').val(String(respLoginData.user.gender)).trigger('change.select2');
 	});
 

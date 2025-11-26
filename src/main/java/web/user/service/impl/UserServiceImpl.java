@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import core.util.FileUtil;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import web.course.service.CourseService;
 import web.user.dao.UserDao;
 import web.user.pojo.Country;
@@ -161,7 +171,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateCode(User user) {
+	public User updateCode(User user) throws AddressException, MessagingException {
 		user = dao.selectByEmail(user);
 		if (user == null) {
 			User respUser = new User();
@@ -174,6 +184,7 @@ public class UserServiceImpl implements UserService {
 		int count = dao.updateCodebByUser(user);
 		if (count > 0) {
 			user.setSuccessful(true);
+			sendCodeByEmail(user);
 		} else {
 			user.setSuccessful(false);
 			user.setMessage("驗證碼發送失敗");
@@ -189,8 +200,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int updateCodeAgain(User user) {
+	public int updateCodeAgain(User user) throws AddressException, MessagingException {
+		user = dao.selectByEmail(user);
 		user.setResetCode(generateCode());
+		sendCodeByEmail(user);
 		return dao.updateCodebByUser(user);
 	}
 
@@ -214,6 +227,36 @@ public class UserServiceImpl implements UserService {
 		}
 		dao.updatePasswordByUser(user);
 		return true;
+	}
+
+	@Override
+	public void sendCodeByEmail(User user) throws AddressException, MessagingException {
+		String host = "smtp.gmail.com";
+		String username = "legoas299@gmail.com";
+		String password = "nyovnwpanytuxipi";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+
+		Session session = Session.getInstance(props, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+
+		Message msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress(username));
+		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+		msg.setSubject("MEOW GYM 驗證碼");
+		msg.setContent("<h2>你的驗證碼：</h2><h1 style='color:red'>" + user.getResetCode() + "</h1>",
+				"text/html; charset=UTF-8");
+
+		Transport.send(msg);
+
 	}
 
 }
