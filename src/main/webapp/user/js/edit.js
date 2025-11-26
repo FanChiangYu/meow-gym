@@ -13,15 +13,6 @@ const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
 const upload = document.querySelector('#upload');
 
-
-// function checkOldPassword() {
-// 	fetch(`edit/${oPassword.value}`)
-// 		.then(resp => resp.json())
-// 		.then(body => {
-// 			btn1.disabled = !body['successful']
-// 		});
-// }
-
 function valueOrNull(value) {
 	if (value === undefined || value === null || value === '' || Number.isNaN(value)) {
 		return null;
@@ -116,7 +107,7 @@ function editCheck() {
 
 applybutton.addEventListener('click', e => {
 
-	
+
 
 	if (!editCheck()) {
 		return;
