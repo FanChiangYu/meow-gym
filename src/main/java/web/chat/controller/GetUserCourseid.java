@@ -20,30 +20,6 @@ import web.user.pojo.User;
 @RequestMapping("chat")
 public class GetUserCourseid {
 
-//	private static final long serialVersionUID = 1L;
-//
-//	@Autowired
-//	private ChatDao chatDao;
-//	
-//	@GetMapping("getusercourseid")
-//	@ResponseBody
-//	public Map<String, Object> getUserCourseId(HttpSession session) {
-//	
-//		Map<String, Object> body = new HashMap<>();
-//	
-//		// session原本就有，用舊的就好
-//		User loginUser = (User) session.getAttribute("user");
-//		int userid = loginUser.getUserId();
-//	
-//		List<UserCourseDTO> usercourseid = chatDao.selectUserCourseId(userid);
-//	
-//		body.put("ok", true);
-//		body.put("usercourseid", usercourseid);
-//	
-//		return body;
-//	
-//	}
-
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
