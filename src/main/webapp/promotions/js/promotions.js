@@ -4,6 +4,7 @@ const adminMenu = document.querySelector('#admin-menu');
 const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (role) {
   switch (role) {
@@ -76,12 +77,22 @@ document.querySelector('#apply-btn').addEventListener('click', () => {
             filename: courseImg.files[0].name
         })
     })
-        .then(resp => resp.json())
-        .then(body => {
+       .then(resp => resp.json())
+       .then(body => {
             if (body.successful) {
-                location.href = 'reviewPomotionsList.html';
+                Swal.fire({
+                    icon: 'success',
+                    title: '申請成功',
+                    text: '優惠活動已送出，等待審核。',
+                }).then(() => {
+                    location.href = 'reviewPomotionsList.html';
+                });
             } else {
-            	alert(body.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: '申請失敗',
+                    text: body.message
+                });
             }
         });
     });

@@ -70,21 +70,13 @@ public class ChatDaoImpl implements ChatDao {
 //		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
 //	}
 
-	// add 20251114
 	
 	@Override
 	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
 		String hql = "select new web.chat.pojo.ChatDTO(c.chatId, c.courseId, c.userId, u.name, c.content, c.createdAt, u.avatarUrl, u.role) from web.chat.pojo.Chats c join web.user.pojo.User u on u.userId = c.userId where c.courseId = :courseId order by c.createdAt";
 		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
 	}
-	// add end
 
-	// 對應orders & order_items to find courseId
-//	@Override
-//	public List<UserCourseDTO> selectUserCourseId(Integer userId) {
-//		String hql = "SELECT distinct new web.chat.pojo.UserCourseDTO(o.userId, i.courseId) FROM ChatOrders o JOIN o.items i WHERE o.userId = :userId";
-//		return session.createQuery(hql, UserCourseDTO.class).setParameter("userId", userId).getResultList();
-//	}
 
 	// 藉由Courses 表格 courseId >> 找到coachId
 	@Override
