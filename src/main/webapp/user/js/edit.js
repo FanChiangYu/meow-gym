@@ -1,4 +1,6 @@
-const avatarImg = document.querySelector("#avatarImg");
+'use strict'
+
+const avatarImg2 = document.querySelector("#avatarImg");
 const email = document.querySelector("#email");
 const username = document.querySelector("#name");
 const password = document.querySelector("#password");
@@ -9,30 +11,7 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
-const logoutBtn = document.querySelector('#logout-btn');
 
-
-fetch('/meow-gym/index/loginData')
-	.then(resp => resp.json())
-	.then(respLoginData => {
-		userId  = respLoginData.user.userId;
-		avatarImg.src = respLoginData.user.avatarUrl;
-		email.value = respLoginData.user.email;
-		username.value = respLoginData.user.name;
-		password.value = respLoginData.user.password;
-		phoneNumber.value = respLoginData.user.phone;
-		gender.value = respLoginData.user.gender;
-		birthday.value = respLoginData.user.birthday;
-		cnt_code.value = respLoginData.user.cntCode;
-		dist_code.value = respLoginData.user.distCode;
-		detail_address.value = respLoginData.user.detailAddress;
-	});
-
-logoutBtn.addEventListener('click', e => {
-	e.preventDefault();
-	fetch('/meow-gym/user/logout')
-		.then(() => location.href = '/meow-gym/index/index.html');
-});
 
 // function checkOldPassword() {
 // 	fetch(`edit/${oPassword.value}`)
@@ -50,7 +29,7 @@ function valueOrNull(value) {
 	}
 }
 
-function editCheck(value) {
+function editCheck() {
 	if (valueOrNull(username.value) == null) {
 		Swal.fire({
 			title: '錯誤',
@@ -58,7 +37,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(password.value) == null) {
@@ -68,7 +47,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(phoneNumber.value) == null) {
@@ -78,7 +57,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(gender.value) == null) {
@@ -88,7 +67,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(birthday.value) == null) {
@@ -98,7 +77,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(cnt_code.value) == null) {
@@ -108,7 +87,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(dist_code.value) == null) {
@@ -118,7 +97,7 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(detail_address.value) == null) {
@@ -128,27 +107,29 @@ function editCheck(value) {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
-	return value;
+	return true;
 }
 
 applybutton.addEventListener('click', e => {
 
-	editCheck();
+	if (!editCheck()) {
+		return;
+	}
 
 	fetch('edit', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
-			avatarImg: avatarImg.src,
+			avatarImg: avatarImg2.src,
 			email: email.value,
 			name: username.value,
 			password: password.value,
 			phone: phoneNumber.value,
 			gender: gender.value,
-			birthday: birthday.value,
+			birthday: birthday.value.replaceAll('-', '/'),
 			cntCode: cnt_code.value,
 			distCode: dist_code.value,
 			detailAddress: detail_address.value
@@ -157,7 +138,7 @@ applybutton.addEventListener('click', e => {
 
 		.then(resp => resp.json())
 		.then(body => {
-			location.reload() = body;
+			location.reload();
 		});
 });
 
@@ -176,23 +157,40 @@ fetch('dist')
 		cnt_code.innerHTML += cntOption;
 		$('#cnt_code').trigger('change.select2');
 
+		$('#cnt_code').on('change', function () {
+			dist_code.innerHTML = '<option value="">選擇鄉鎮</option>';
+
+			if (!this.value) {
+				$('#dist_code').trigger('change.select2');
+				return;
+			}
+
+			var distOption = '';
+			distDate.distList.forEach(dist => {
+				if (dist.cntCode === Number(this.value)) {
+					distOption += `<option value="${dist.distCode}">${dist.distName}</option>`;
+				}
+			});
+			dist_code.innerHTML += distOption;
+			$('#dist_code').trigger('change.select2');
+
+		});
+
+		return fetch('/meow-gym/index/loginData');
+	})
+	.then(resp => resp.json())
+	.then(respLoginData => {
+		avatarImg2.src = respLoginData.user.avatarUrl;
+		email.value = respLoginData.user.email;
+		username.value = respLoginData.user.name;
+		password.value = respLoginData.user.password;
+		phoneNumber.value = respLoginData.user.phone;
+		gender.value = respLoginData.user.gender;
+		birthday.value = respLoginData.user.birthday;
+		cnt_code.value = respLoginData.user.cntCode;
+		dist_code.value = respLoginData.user.distCode;
+		detail_address.value = respLoginData.user.detailAddress;
+		$('#cnt_code').val(String(respLoginData.user.cntCode)).trigger('change');
+		$('#dist_code').val(String(respLoginData.user.distCode)).trigger('change.select2');
 	});
 
-$('#cnt_code').on('change', function () {
-	dist_code.innerHTML = '<option value="">選擇鄉鎮</option>';
-
-	if (!this.value) {
-		$('#dist_code').trigger('change.select2');
-		return;
-	}
-
-	var distOption = '';
-	distDate.distList.forEach(dist => {
-		if (dist.cntCode === Number(this.value)) {
-			distOption += `<option value="${dist.distCode}">${dist.distName}</option>`;
-		}
-	});
-	dist_code.innerHTML += distOption;
-	$('#dist_code').trigger('change.select2');
-
-});

@@ -1,3 +1,5 @@
+'use strict';
+
 const userMenu = document.querySelector('#user-menu');
 const coachMenu = document.querySelector('#coach-menu');
 const adminMenu = document.querySelector('#admin-menu');
@@ -15,7 +17,11 @@ const certificateName = document.querySelector('#certificate');
 const certImg = document.querySelector('#cert-img');
 const changeBtn = document.querySelector('#change-btn');
 const approvalStatus = document.querySelector('#status');
-const imgDownload = document.querySelector('#img-download')
+const imgDownload = document.querySelector('#img-download');
+const courseManage = document.querySelector('#course-manage');
+const courseApply = document.querySelector('#course-apply');
+const logoutBtn = document.querySelector('#logout-btn');
+const userCenter = document.querySelector('#user-center');
 var coachId; 
 
 function switchMenu (role) {
@@ -48,6 +54,10 @@ fetch('/meow-gym/index/loginData')
 .then(resp => resp.json())
 .then(respbody => {
   if(respbody.successful){
+    if(respbody.profile.approvalStatus == '通過'){
+      courseManage.classList.remove('d-none'); 
+      courseApply.classList.remove('d-none'); 
+    }
     switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
     userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
     avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
@@ -265,4 +275,20 @@ changeBtn.addEventListener('click', function(){
 
   }
 
+});
+
+
+logoutBtn.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/user/logout')
+  .then(()=>location.href = '/meow-gym/index/index.html');
+});
+
+userCenter.addEventListener('click', e => {
+  e.preventDefault();
+  fetch('/meow-gym/index/userCenter')
+  .then(resp => resp.json())
+  .then(respbody => {
+    location.href = respbody.url;
+  });
 });

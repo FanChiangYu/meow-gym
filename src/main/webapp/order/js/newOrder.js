@@ -9,26 +9,30 @@ function valueOrNull (value) {
 	}
 }
 
-//我的購物車//
-const course_title = document.querySelector('#course_title');
-const course_coachName = document.querySelector('#course_coachName');
-const course_dateStart = document.querySelector('#course_dateStart');
-const course_dateEnd = document.querySelector('#course_dateEnd');
-const course_capacityMax = document.querySelector('#course_capacityMax');
-const course_promoPrice = document.querySelector('#course_promoPrice');
-const course_coursePrice = document.querySelector('#course_coursePrice');
-const myCart = document.querySelector('#myCart');
-const promotions = document.querySelector('#promotions');
+function removeDuplicateById(list) {
+    const seen = new Set();
+    const result = [];
 
+    for (let item of list) {
+        if (!seen.has(item.courseId)) {
+            seen.add(item.courseId);
+            result.push(item);   // 保留第一筆
+        }
+        // 若已存在，不 push → 自動移除重複資料
+    }
+
+    return result;
+}
+
+//促銷通知
+const promotions = document.querySelector('#promotions');
 
 promotionsInfo();
 function promotionsInfo(){
-	fetch('addCart')
+	fetch('getAllCoursePromo')
 	.then(resp => resp.json())
 	.then(body => {
-		promoList = body.CoursePromo;
-
-		for(let promo of promoList){
+		for(let promo of body){
 			promotions.innerHTML += 
 			`
 			<li>
@@ -41,6 +45,21 @@ function promotionsInfo(){
 	});
 }
 
+//我的購物車//
+const course_title = document.querySelector('#course_title');
+const course_coachName = document.querySelector('#course_coachName');
+const course_dateStart = document.querySelector('#course_dateStart');
+const course_dateEnd = document.querySelector('#course_dateEnd');
+const course_capacityMax = document.querySelector('#course_capacityMax');
+const course_promoPrice = document.querySelector('#course_promoPrice');
+const course_coursePrice = document.querySelector('#course_coursePrice');
+const myCart = document.querySelector('#myCart');
+
+const orderPayCourseList = document.querySelector('#orderPayCourseList');
+const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
+const orderTotalAmount = document.querySelector('#orderTotalAmount');
+const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
+
 addCart();
 function addCart(){
 	fetch('addCart')
@@ -48,7 +67,6 @@ function addCart(){
 	.then(body => {
 		courseList = body.Course;
 		orderItemList = body.Orderitems;
-		promoList = body.CoursePromo;
 
 		for (let course of courseList) {
 			var promoHtml = '';
@@ -113,8 +131,97 @@ function addCart(){
 				</li>
 			`;
 		}
+
+		payAmount_orders = body.Orders;
+		// payAmount_orderItemList = body.Orderitems;
+		// payAmount_orderItemList = removeDuplicateById(orderItemList);
+    // console.log(payAmount_orderItemList);  // 去除後的陣列
+
+		for (let orderItem of orderItemList) {
+			orderPayCourseList.innerHTML += 
+			`
+			<dl class="row mb-0 text-heading" id="orderPayCourseList">
+				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+			</dl>
+			`;
+
+			paymentPayCourseList.innerHTML += 
+			`
+			<dl class="row mb-0 text-heading" id="paymentPayCourseList">
+				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+			</dl>
+			`;
+		}
+
+		orderTotalAmount.innerHTML += 
+		`
+		  <dt class="col-6 text-heading">總價</dt>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${payAmount_orders.payAmount}</dd>
+		`;
+
+		paymentTotalAmount.innerHTML += 
+		`
+		  <dt class="col-6 text-heading mb-3">總價</dt>
+			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${payAmount_orders.payAmount}</dd>
+		`;
 	});
 }
+
+
+//課程結帳清單//
+// const title = document.querySelector('#title');
+// const coursePrice = document.querySelector('#coursePrice');
+// const orderPayCourseList = document.querySelector('#orderPayCourseList');
+// const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
+// const orderTotalAmount = document.querySelector('#orderTotalAmount');
+// const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
+
+// // payAmountList();
+// // setTimeout(payAmountList, 50);
+// function payAmountList(){
+// 	fetch('addCart')
+// 	.then(resp => resp.json())
+// 	.then(body => {
+// 		payAmount_orders = body.Orders;
+// 		payAmount_orderItemList = body.Orderitems;
+
+// 		payAmount_orderItemList = removeDuplicateById(payAmount_orderItemList);
+//     console.log(payAmount_orderItemList);  // 去除後的陣列
+
+// 		for (let orderItem of payAmount_orderItemList) {
+// 			orderPayCourseList.innerHTML += 
+// 			`
+// 			<dl class="row mb-0 text-heading" id="orderPayCourseList">
+// 				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+// 				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+// 			</dl>
+// 			`;
+
+// 			paymentPayCourseList.innerHTML += 
+// 			`
+// 			<dl class="row mb-0 text-heading" id="paymentPayCourseList">
+// 				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
+// 				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
+// 			</dl>
+// 			`;
+// 		}
+
+// 		orderTotalAmount.innerHTML += 
+// 		`
+// 		  <dt class="col-6 text-heading">總價</dt>
+// 			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${payAmount_orders.payAmount}</dd>
+// 		`;
+
+// 		paymentTotalAmount.innerHTML += 
+// 		`
+// 		  <dt class="col-6 text-heading mb-3">總價</dt>
+// 			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${payAmount_orders.payAmount}</dd>
+// 		`;
+
+// 	});
+// }
 
 //刪除課程//
 function deleteCourse(courseId){
@@ -147,55 +254,6 @@ function deleteCourse(courseId){
 				target: document.body 
 			});
 		}
-	});
-}
-
-//課程結帳清單//
-const title = document.querySelector('#title');
-const coursePrice = document.querySelector('#coursePrice');
-const orderPayCourseList = document.querySelector('#orderPayCourseList');
-const paymentPayCourseList = document.querySelector('#paymentPayCourseList');
-const orderTotalAmount = document.querySelector('#orderTotalAmount');
-const paymentTotalAmount = document.querySelector('#paymentTotalAmount');
-
-// payAmountList();
-setTimeout(payAmountList, 3000);
-function payAmountList(){
-	fetch('payAmount')
-	.then(resp => resp.json())
-	.then(body => {
-		payAmount_orders = body.Orders;
-		payAmount_orderItemList = body.Orderitems;
-		for (let orderItem of payAmount_orderItemList) {
-			orderPayCourseList.innerHTML += 
-			`
-			<dl class="row mb-0 text-heading" id="orderPayCourseList">
-				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
-				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
-			</dl>
-			`;
-
-			paymentPayCourseList.innerHTML += 
-			`
-			<dl class="row mb-0 text-heading" id="paymentPayCourseList">
-				<dt class="col-6 fw-normal" id="title">${orderItem.title}</dt>
-				<dd class="col-6 text-end" id="coursePrice">${orderItem.purchasedPrice}</dd>
-			</dl>
-			`;
-		}
-
-		orderTotalAmount.innerHTML += 
-		`
-		  <dt class="col-6 text-heading">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="orderTotalAmount">${payAmount_orders.payAmount}</dd>
-		`;
-
-		paymentTotalAmount.innerHTML += 
-		`
-		  <dt class="col-6 text-heading mb-3">總價</dt>
-			<dd class="col-6 fw-medium text-end text-heading mb-0" id="paymentTotalAmount">${payAmount_orders.payAmount}</dd>
-		`;
-
 	});
 }
 
