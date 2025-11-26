@@ -11,6 +11,7 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.querySelector("#applybutton");
+const upload = document.querySelector('#upload');
 
 
 // function checkOldPassword() {
@@ -115,6 +116,8 @@ function editCheck() {
 
 applybutton.addEventListener('click', e => {
 
+	
+
 	if (!editCheck()) {
 		return;
 	}
@@ -192,5 +195,6 @@ fetch('dist')
 		detail_address.value = respLoginData.user.detailAddress;
 		$('#cnt_code').val(String(respLoginData.user.cntCode)).trigger('change');
 		$('#dist_code').val(String(respLoginData.user.distCode)).trigger('change.select2');
+		$('#gender').val(String(respLoginData.user.gender)).trigger('change.select2');
 	});
 

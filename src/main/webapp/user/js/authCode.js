@@ -11,7 +11,7 @@ resendBtn.addEventListener('click', e => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      userId: sessionStorage.getItem('userId')
+      email: sessionStorage.getItem('email')
     }),
   })
     .then(resp => resp.json())
