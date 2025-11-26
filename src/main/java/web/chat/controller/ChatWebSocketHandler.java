@@ -68,13 +68,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		System.out.println("user.getUserName()" + user.getName());
 		System.out.println("user role" + user.getRole());
 
-	
 		// 如果登入者為"管理者"，取出所有狀態為"通過"的課程courseId，並
 		if (user.getRole() == 3) {
 			List<UserCourseDTO> managecourse = chatDao.selectUserCourseId(3);
 			System.out.println("managecourse" + managecourse);
 		}
-		
 
 		// 4. 放進房間
 		Set<WebSocketSession> room = ROOMS.get(courseId);
@@ -105,10 +103,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 				respbody.addProperty("courseId", record.getCourseId().toString());
 				respbody.addProperty("name", record.getName());
 
-			
 				respbody.addProperty("avatarUrl", record.getAvatarUrl());
 				respbody.addProperty("role", record.getRole());
-				
 
 				arr.add(respbody);
 			}
@@ -171,10 +167,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		resp.addProperty("time", saved.getCreatedAt().toString()); // 為何不能用Chats直接抓??
 		resp.addProperty("courseId", String.valueOf(courseId));
 
-	
 		resp.addProperty("avatarUrl", user.getAvatarUrl());
 		resp.addProperty("role", user.getRole());
-	
 
 		System.out.println("boardcast to all resp" + resp);
 
@@ -186,7 +180,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession wsSession, CloseStatus status) throws Exception {
-		
+
 		System.out.println("onClose session" + wsSession);
 		System.out.println("Client disconnected: " + wsSession.getId());
 		SESSION_ROOM.remove(wsSession);
