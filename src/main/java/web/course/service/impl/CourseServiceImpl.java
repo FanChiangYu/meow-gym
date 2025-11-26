@@ -118,7 +118,6 @@ public class CourseServiceImpl implements CourseService {
 			return course;
 		}
 		
-		course.setCoachId(1); // 暫定
 		course.setApprovalStatus("待審核");
 		int count = dao.insert(course);
 		if(count == 1) {

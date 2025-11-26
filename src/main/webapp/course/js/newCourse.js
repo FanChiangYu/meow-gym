@@ -16,17 +16,9 @@ document.addEventListener('DOMContentLoaded', function(){
   const userName = document.querySelector('#user-name');
   const avatarImg = document.querySelector('#user-avatar');
   const shoppingCart = document.querySelector('#shopping-cart');
+  const logoutBtn = document.querySelector('#logout-btn');
+  const userCenter = document.querySelector('#user-center');
 
-  // 1a. 用fetch向後端取得roleId(角色ID)
-  // 1b. 或從瀏覽器的sessionStorage取得roleId (如果登入時有存的話)
-  // 2. 呼叫switchMenu(); 切換側邊欄顯示
-
-  // roldId = 1 -> 一般會員
-  // roldId = 2 -> 教練
-  // roldId = 3 -> 管理者
-
-  // 如果還沒寫取得roleId，先依照功能關聯對象寫死一個數值，代入並呼叫switchMenu();以切換側邊欄
-  let Id = 2;
 
   function switchMenu (roleId) {
     switch (roleId) {
@@ -54,12 +46,23 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-switchMenu(Id); // 呼叫function切換側邊欄
-
-
-// 使用者名稱顯示同理，如果還無法向後端取得user table的name，一樣先寫死，改標籤內的顯示文字
-let uName = '金城武'; 
-userName.textContent = uName; // 修改標籤內使用者名稱文字
+  fetch('/meow-gym/index/loginData')
+  .then(resp => resp.json())
+  .then(respbody => {
+    if(respbody.successful){
+      switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
+      userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
+      avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+    }else{
+      Swal.fire({
+        title: '錯誤',
+        text: '請先登入',
+        icon: 'error',
+        target: document.body 
+      })
+      .then(() => location.href = '/meow-gym/user/login.html');
+    }
+  });
   
   function valueOrNull (value) {
     if(value === undefined || value === null || value === '' || Number.isNaN(value)){
@@ -203,5 +206,20 @@ userName.textContent = uName; // 修改標籤內使用者名稱文字
     `;
     document.querySelector('#rule-container').insertAdjacentHTML('beforeend', rule_html);
     ruleCount++;
+  });
+
+  logoutBtn.addEventListener('click', e => {
+    e.preventDefault();
+    fetch('/meow-gym/user/logout')
+    .then(()=>location.href = '/meow-gym/index/index.html');
+  });
+
+  userCenter.addEventListener('click', e => {
+    e.preventDefault();
+    fetch('/meow-gym/index/userCenter')
+    .then(resp => resp.json())
+    .then(respbody => {
+      location.href = respbody.url;
+    });
   });
 });

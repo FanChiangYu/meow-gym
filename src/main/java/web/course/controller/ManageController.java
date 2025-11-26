@@ -10,21 +10,27 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import web.coach.pojo.CoachProfiles;
+import web.coach.service.CoachService;
 import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.service.CourseService;
+import web.user.pojo.User;
 
 @RestController
 @RequestMapping("course/manage")
 public class ManageController {
 	@Autowired
 	private CourseService service;
+	@Autowired
+	private CoachService coachService;
 	
 	@GetMapping
-	public List<ClassResponse> getCourses(){
-		Integer coachId = 1; // 假設已從session取得coachId = 1;
-		return service.getCoursesByCoach(coachId);
+	public List<ClassResponse> getCourses(@SessionAttribute(value = "user", required = false) User user){
+		CoachProfiles profile = coachService.findProfile(user.getUserId());
+		return service.getCoursesByCoach(profile.getCoachId());
 	}
 	
 	@PutMapping
