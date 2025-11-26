@@ -4,6 +4,7 @@ const adminMenu = document.querySelector('#admin-menu');
 const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (role) {
   switch (role) {
@@ -55,7 +56,7 @@ fetch('reviewBlocklist')
   .then(resp => resp.json())
   .then(users => {
     for (const user of users) {
-      const bannedText = user.isBanned ? '**黑名單**' : '尚未加入黑名單';
+      const bannedText = user.isBanned ? '**黑名單**' : '白名單';
       if(user.role === 1){
         tbody.innerHTML += `
         <tr>

@@ -4,6 +4,7 @@ const adminMenu = document.querySelector('#admin-menu');
 const userName = document.querySelector('#user-name');
 const avatarImg = document.querySelector('#user-avatar');
 const shoppingCart = document.querySelector('#shopping-cart');
+const userCenter = document.querySelector('#user-center');
 
 function switchMenu (role) {
   switch (role) {
@@ -140,3 +141,4 @@ function removePromotion(courseId) {
         });
     });
 }
+
