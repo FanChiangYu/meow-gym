@@ -22,6 +22,9 @@ public interface ChatDao extends CoreDao<User, Integer>{
 	Chats saveAndLoad(Chats chats);
 
 	List<UserCourseDTO> selectUserCourseId(Integer role);
+	
+	//使用courseId 查詢課程名稱
+	String selectCourseTitle(Integer courseId);
 
 
 

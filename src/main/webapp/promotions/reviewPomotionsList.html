@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>MEOW GYM |促銷活動管理</title>
+<title>MEOW GYM | 促銷活動管理</title>
 
 <meta name="description" content="" />
 
@@ -276,9 +276,8 @@
 								<ul class="dropdown-menu dropdown-menu-end">
 									<li>
 										<div class="d-grid px-2 pt-2 pb-1">
-											<a class="btn btn-sm btn-danger d-flex"
-												href="auth-login-cover.html" target="_blank"> <small
-												class="align-middle">Logout</small> <i
+											<a class="btn btn-sm btn-danger d-flex" href="#" id="logout-btn"> <small
+												class="align-middle">登出</small> <i
 												class="icon-base ti tabler-logout ms-2 icon-14px"></i>
 											</a>
 										</div>
@@ -317,8 +316,8 @@
 											<th>促銷價格</th>
 											<th>促銷時間</th>
 											<th>原價</th>
-											<th>刪除</th>
-											<th>編輯</th>
+											<th>刪除活動</th>
+											<th>新增活動</th>
 										</tr>
 									</thead>
 									<tbody id="course-table-body">
@@ -429,28 +428,29 @@
 							<div class="row">
 								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
 									<h4 class="fw-bold mb-4">
-										<a href="#" class="footer-text">MEOW
-											GYM </a>
+										<a
+											href="#"
+											class="footer-text"
+											>MEOW GYM
+										</a>
 									</h4>
 									<span>健身 從這裡出發！</span>
 									<div class="social-icon my-4">
-										<a href="javascript:void(0)"
-											class="btn btn-icon btn-sm btn-facebook me-2"><i
-											class="icon-base ti tabler-brand-facebook icon-20px"></i></a> <a
-											href="javascript:void(0)"
-											class="btn btn-icon btn-sm btn-instagram me-2"><i
-											class="icon-base ti tabler-brand-instagram icon-20px"></i></a> <a
-											href="javascript:void(0)"
-											class="btn btn-icon btn-sm btn-linkedin me-2"><i
-											class="icon-base ti tabler-brand-linkedin icon-20px"></i></a> <a
-											href="https://github.com/FanChiangYu/meow-gym"
-											class="btn btn-icon btn-sm btn-github"><i
-											class="icon-base ti tabler-brand-github icon-20px"></i></a>
+										<a href="https://www.youtube.com/" class="btn btn-icon btn-sm btn-youtube me-2" target="_blank"
+											><i class="icon-base ti tabler-brand-youtube icon-20px"></i
+										></a>
+										<a href="https://docs.google.com/presentation/d/1-ehXuTcuDbF5bMBY3hELMEt8-c1DOdwq/edit?usp=drive_link&ouid=111231428259003544179&rtpof=true&sd=true" 
+												class="btn btn-icon btn-sm btn-google-plus me-2"
+												target="_blank"
+											><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftpowerpoint.svg"
+												style="width:24px;height:24px; filter: brightness(0) invert(1);"></a>
+										<a href="https://github.com/FanChiangYu/meow-gym" class="btn btn-icon btn-sm btn-github" target="_blank"
+											><i class="icon-base ti tabler-brand-github icon-20px"></i
+										></a>
 									</div>
 									<p class="pt-6">
 										<script>
-											document.write(new Date()
-													.getFullYear());
+											document.write(new Date().getFullYear());
 										</script>
 										© Tibame TJA201
 									</p>
@@ -458,42 +458,29 @@
 								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-md-0">
 									<h5 class="footer-text">聯絡方式</h5>
 									<ul class="list-unstyled">
-										<li><span class="footer-text d-block pb-2">聯絡電話 :
-												02-2712-0589</span></li>
-										<li><span class="footer-text d-block pb-2">場館地址 :
-												台北市中山區南京東路三段219號4F</span></li>
-										<li><span class="footer-text d-block pb-2">公司信箱 :
-												service@tibame.com</span></li>
-										<li><span class="footer-text d-block pb-2">營業時間 :
-												7 : 00 ~ 23 : 00</span></li>
+										<li><span class="footer-text d-block pb-2">聯絡電話 : 02-2712-0589</span></li>
+										<li><span class="footer-text d-block pb-2">場館地址 : 台北市中山區南京東路三段219號4F</span></li>
+										<li><span class="footer-text d-block pb-2">公司信箱 : service@tibame.com</span></li>
+										<li><span class="footer-text d-block pb-2">營業時間 : 7 : 00 ~ 23 : 00</span></li>
 									</ul>
 								</div>
 								<div class="col-12 col-sm-6 col-md-3 mb-6 mb-sm-0">
 									<h5 class="footer-text">快速導覽</h5>
 									<ul class="list-unstyled">
-										<li><a href="/meow-gym/index/index.html"
-											class="footer-link d-block pb-2">首頁</a></li>
-										<li><a href="#"
-											class="footer-link d-block pb-2">會員中心</a></li>
-										<li><a href="/meow-gym/course/browseCourse.html"
-											class="footer-link d-block pb-2">課程瀏覽</a></li>
-										<li><a href="/meow-gym/index/index.html#landingCoachs"
-											class="footer-link d-block pb-2">教練專區</a></li>
+										<li><a href="/meow-gym/index/index.html" class="footer-link d-block pb-2">首頁</a></li>
+										<li><a href="#" class="footer-link d-block pb-2" id="user-center">會員中心</a></li>
+										<li><a href="/meow-gym/course/browseCourse.html" class="footer-link d-block pb-2">課程瀏覽</a></li>
+										<li><a href="/meow-gym/index/index.html#landingCoachs" class="footer-link d-block pb-2">教練專區</a></li>
 									</ul>
 								</div>
 								<div class="col-12 col-sm-6 col-md-3">
 									<h5 class="footer-text">專題成員履歷</h5>
 									<ul class="list-unstyled">
-										<li><a href="javascript:void(0)"
-											class="footer-link d-block pb-2">范姜宇</a></li>
-										<li><a href="javascript:void(0)"
-											class="footer-link d-block pb-2">陳怡芝</a></li>
-										<li><a href="javascript:void(0)"
-											class="footer-link d-block pb-2">李芝穎</a></li>
-										<li><a href="javascript:void(0)"
-											class="footer-link d-block pb-2">張睿洋</a></li>
-										<li><a href="javascript:void(0)"
-											class="footer-link d-block pb-2">白千宸</a></li>
+										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">范姜宇</a></li>
+										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">陳怡之</a></li>
+										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">李芝穎</a></li>
+										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">張睿洋</a></li>
+										<li><a href="javascript:void(0)" class="footer-link d-block pb-2">白千宸</a></li>
 									</ul>
 								</div>
 							</div>
@@ -543,6 +530,6 @@
 	<script src="../assets/js/main.js"></script>
 	<!-- Page JS -->
 	<script src="./js/reviewPomotionsList.js"></script>
-	<script src="../index/project_template.html"></script>
+	<script src="../index/js/project_template.js"></script>
 </body>
 </html>

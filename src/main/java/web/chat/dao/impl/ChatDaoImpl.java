@@ -70,29 +70,32 @@ public class ChatDaoImpl implements ChatDao {
 //		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
 //	}
 
-	
 	@Override
 	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
 		String hql = "select new web.chat.pojo.ChatDTO(c.chatId, c.courseId, c.userId, u.name, c.content, c.createdAt, u.avatarUrl, u.role) from web.chat.pojo.Chats c join web.user.pojo.User u on u.userId = c.userId where c.courseId = :courseId order by c.createdAt";
 		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
 	}
 
-
 	// 藉由Courses 表格 courseId >> 找到coachId
 	@Override
 	public Integer selectCoachIdByCourse(Integer courseId) {
-		//ChatCourses course = session.get(ChatCourses.class, courseId);
+		// ChatCourses course = session.get(ChatCourses.class, courseId);
 		Course course = session.get(Course.class, courseId);
 		return course.getCoachId();
 	}
 
-	// add 20251115
 	@Override
 	public List<UserCourseDTO> selectUserCourseId(Integer role) {
 		String hql = "SELECT distinct new web.chat.pojo.UserCourseDTO(c.role, i.courseId) FROM Course c WHERE c.approvalStatus = :status";
 		return session.createQuery(hql, UserCourseDTO.class).setParameter("status", "通過").getResultList();
 	}
-	// add 20251115 end
+
+	// 使用courseId查詢課程名稱
+	@Override
+	public String selectCourseTitle(Integer courseId) {
+
+		return null;
+	}
 
 	@Override
 	public int insert(User pojo) {

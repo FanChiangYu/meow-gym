@@ -26,6 +26,7 @@ sendBtn.addEventListener('click', function () {
     .then(resp => resp.json())
     .then(user => {
       if (user.successful) {
+        sessionStorage.setItem('email', user.email);
         sessionStorage.setItem('userId', user.userId);
         location.href = '/meow-gym/user/authCode.html';
       } else {
@@ -38,4 +39,3 @@ sendBtn.addEventListener('click', function () {
       }
     });
 });
-

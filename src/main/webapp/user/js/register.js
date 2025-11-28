@@ -10,6 +10,7 @@ const cnt_code = document.querySelector("#cnt_code");
 const dist_code = document.querySelector("#dist_code");
 const detail_address = document.querySelector("#detail_address");
 const applybutton = document.getElementById("applybutton");
+const avatarImg = document.querySelector('#avatarImg');
 
 
 function valueOrNull(value) {
@@ -23,16 +24,17 @@ function valueOrNull(value) {
 // check();
 function check() {
 
-	email.addEventListener('blur', function () {
-		if (email.value.match(reg) === null) {
-			Swal.fire({
-				title: '錯誤',
-				text: '帳號格式不正確',
-				icon: 'error',
-				target: document.body
-			});
-		}
-	});
+
+	if (email.value.match(reg) === null) {
+		Swal.fire({
+			title: '錯誤',
+			text: '帳號格式不正確',
+			icon: 'error',
+			target: document.body
+		});
+		return false;
+	}
+
 
 	if (valueOrNull(username.value) == null) {
 		Swal.fire({
@@ -41,7 +43,7 @@ function check() {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(password.value) == null) {
@@ -51,17 +53,28 @@ function check() {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
+
+	if (password.value.length < 8) {
+		Swal.fire({
+			title: '錯誤',
+			text: '密碼長度不足(至少8位數)',
+			icon: 'error',
+			target: document.body
+		});
+		return false;
+	}
+
 
 	if (valueOrNull(phoneNumber.value) == null) {
 		Swal.fire({
 			title: '錯誤',
-			text: '欄位必填',
+			text: '電話號碼未輸入',
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(gender.value) == null) {
@@ -72,17 +85,17 @@ function check() {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(birthday.value) == null) {
 		Swal.fire({
 			title: '錯誤',
-			text: '生日為必填欄位',
+			text: '請選擇出生日期',
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(cnt_code.value) == null) {
@@ -92,7 +105,7 @@ function check() {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(dist_code.value) == null) {
@@ -102,18 +115,20 @@ function check() {
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
 
 	if (valueOrNull(detail_address.value) == null) {
 		Swal.fire({
 			title: '錯誤',
-			text: '地址為必填欄位',
+			text: '請填寫地址',
 			icon: 'error',
 			target: document.body
 		});
-		return;
+		return false;
 	}
+
+	return true;
 }
 
 applybutton.addEventListener('click', function () {
@@ -125,6 +140,10 @@ applybutton.addEventListener('click', function () {
 			icon: 'error',
 			target: document.body
 		});
+		return;
+	}
+
+	if (!check()) {
 		return;
 	}
 
@@ -148,9 +167,20 @@ applybutton.addEventListener('click', function () {
 		.then(resp => resp.json())
 		.then(body => {
 			if (body.successful) {
-				location.href = '/meow-gym/index/index.html';
+				Swal.fire({
+					title: '完成',
+					text: body.message,
+					icon: 'success',
+					target: document.body
+				})
+					.then(() => location.href = '/meow-gym/index/index.html');
 			} else {
-				alert(body.message);
+				Swal.fire({
+					title: '錯誤',
+					text: body.message,
+					icon: 'error',
+					target: document.body
+				})
 			}
 		});
 });
@@ -190,4 +220,12 @@ $('#cnt_code').on('change', function () {
 	dist_code.innerHTML += distOption;
 	$('#dist_code').trigger('change.select2');
 
+});
+
+avatarUrl.addEventListener('change', () => {
+	const file = avatarUrl.files[0];
+	if (file) {
+		avatarImg.src = URL.createObjectURL(file);
+		avatarImg.classList.remove('d-none');
+	}
 });
