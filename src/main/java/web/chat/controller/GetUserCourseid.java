@@ -34,15 +34,20 @@ public class GetUserCourseid {
 		User loginUser = (User) session.getAttribute("user");
 
 		// 呼叫 httpsession 的 courseId
-		// add
 		Integer courseIdNew = (Integer) session.getAttribute("courseId");
 		System.out.println("fan courseId" + courseIdNew); // send to frontend
-		// add end
 
-		//List<UserCourseDTO> usercourseid = chatDao.selectUserCourseId(userid);
+		// List<UserCourseDTO> usercourseid = chatDao.selectUserCourseId(userid);
+
+		// add 20251129
+		String courseTitle = chatDao.selectCourseTitle(courseIdNew);
+		System.out.println("courseTitle" + courseTitle);
+		// add 20251129 end
 
 		body.put("ok", true);
 		body.put("usercourseid", courseIdNew);
+
+		body.put("coursetitle", courseTitle);
 
 		System.out.println("fan body" + body);
 		return body;

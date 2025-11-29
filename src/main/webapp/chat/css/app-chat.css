@@ -13,3 +13,10 @@
   border: 4px solid #8d61de !important;
   border-radius: 30% !important;
 }
+
+#coursetitle {
+  background-color: #9e95ff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  color: white;
+}
