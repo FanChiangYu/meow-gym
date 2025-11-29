@@ -24,6 +24,7 @@ console.log(logoutBtn);
 
 let loginUser = null;//提前宣告，載入資料後，要把會員資料儲存在這裡
 let currentCourseId = null;
+let currentCourseTitle = null;
 let recentchats = null;
 let ws = null;
 
@@ -54,56 +55,13 @@ fetch('/meow-gym/chat/getusercourseid', {
 		console.log(body.usercourseid);
 
 		currentCourseId = body.usercourseid; // [CHANGED] 更新目前選擇的課程 ID	
+		currentCourseTitle = body.coursetitle;
+		$('#coursetitle').text(currentCourseTitle); // add courseTitle to frontend
+
 		console.log("載入課程:", currentCourseId);
 		connectChat(currentCourseId);
 
-		//列出現在課程 (可刪除)
-		// classlist.innerHTML += `
-		// 	<li class="chat-contact-list-item mb-0 course-link">
-		// 	        <a class="d-flex align-items-center chat-link"  data-courseid="${body.usercourseid}">
-		// 	          <div class="flex-shrink-0 avatar avatar-busy">
-		// 	            <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-		// 	          </div>
-		// 	          <div class="chat-contact-info flex-grow-1 ms-4">
-		// 	            <div class="d-flex justify-content-between align-items-center">
-		// 	              <h6 class="chat-contact-name text-truncate fw-normal m-0">${body.usercourseid}</h6>
-		// 	              <small class="chat-contact-list-item-time">1 Day</small>
-		// 	            </div>
-		// 	            <small class="chat-contact-status text-truncate">If it takes long you can mail inbox
-		// 	              user</small>
-		// 	          </div>
-		// 	        </a>
-		// 	      </li>`;
-
 	});
-
-// 分房間發fetch
-
-// classlist.addEventListener("click", function (e) {
-// 	const link = e.target.closest(".chat-link");
-// 	const li = e.target.closest("li");
-
-// 	// 1) 先清掉所有 active（包含先前選到的）
-// 	classlist.querySelectorAll(".chat-contact-list-item.active").forEach(item => { item.classList.remove("active") });
-
-// 	if (link) {
-// 		e.preventDefault(); // 阻止 a 連結的跳轉
-// 		console.log(e.target);
-// 		console.log(link);
-
-// 		//background become purple
-// 		console.log(li);
-
-// 		li.classList.add("active");
-
-// 		const courseId = link.dataset.courseid;
-// 		currentCourseId = Number(courseId); // [CHANGED] 更新目前選擇的課程 ID	
-// 		console.log("載入課程:", courseId);
-// 		connectChat(courseId);
-
-// 	}
-// });
-
 
 
 //websocket 處理點擊 courseId 後的聊天紀錄載入
@@ -125,8 +83,7 @@ function connectChat(currentCourseId) {
 	ws.onmessage = function (e) {
 		console.log("Server:", e);
 		let data;
-		//chatplace.innerHTML = "";
-		//console.log(JSON.parse(e.data));
+
 		const allMessages = JSON.parse(e.data);
 		console.log(allMessages);
 
