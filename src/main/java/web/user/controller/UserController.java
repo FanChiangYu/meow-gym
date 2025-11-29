@@ -73,17 +73,13 @@ public class UserController extends HttpServlet {
 
 	@PostMapping("edit")
 	@ResponseBody
-	public User edit(@RequestBody User user, HttpSession session) {
-
-		User respbody = userService.edit(user);
-
-		if (!respbody.isSuccessful()) {
-			System.out.println("error");
-		} else {
-			session.setAttribute("user", respbody);
+	public User edit(@RequestBody User user, HttpSession session) throws IOException {
+		User respUser = userService.edit(user);
+		
+		if(respUser.isSuccessful()) {
+			session.setAttribute("user", respUser);
 		}
-		return respbody;
-
+		return respUser;
 	}
 
 	@GetMapping("logout")

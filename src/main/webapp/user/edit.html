@@ -274,19 +274,19 @@
 							<div class="card mb-6">
 								<!-- Account -->
 								<div class="card-body">
-									<div class="d-flex align-items-start align-items-sm-center gap-6">
-										<img src="./default/img/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded"
-											id="avatarImg" />
-										<div class="button-wrapper">
-											<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-												<span class="d-none d-sm-block">更換頭像</span>
-												<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
-												<input type="file" id="upload" class="account-file-input" hidden accept=".png" />
-											</label>
-											<div>Allowed PNG.</div>
-										</div>
-									</div>
 									<div class="card-body pt-4">
+										<div class="d-flex gap-6 mb-6">
+											<img src="./default/img/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded d-none"
+												id="avatarImg" />
+											<div class="button-wrapper">
+												<label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
+													<span class="d-none d-sm-block">更換頭像</span>
+													<i class="icon-base ti tabler-upload d-block d-sm-none"></i>
+													<input type="file" id="upload" class="account-file-input" hidden accept=".png" />
+												</label>
+												<div>僅限PNG格式</div>
+											</div>
+										</div>
 										<form id="formAccountSettings" method="GET" onsubmit="return false">
 											<div class="row gy-4 gx-6 mb-6">
 												<div class="col-md-6 form-control-validation">
@@ -303,7 +303,7 @@
 												</div>
 												<div class="col-md-6">
 													<label for="password" class="form-label">修改密碼</label> <input class="form-control"
-														type="password" id="opassword" name="opassword" minlength="8" placeholder="至少8位數，包含英文及數字" />
+														type="password" id="opassword" name="opassword" minlength="8" placeholder="至少8位數" />
 												</div>
 												<div class="col-md-6">
 													<label class="form-label" for="phoneNumber">聯繫電話</label>
@@ -320,31 +320,28 @@
 														<option value="M">男</option>
 													</select>
 												</div>
-												<div class="mb-6">
-													<label class="form-label" for="date-birthday">出生日期</label> <input type="text"
-														id="date-birthday" class="form-control dob-picker" placeholder="YYYY-MM-DD" />
-												</div>
 												<div class="col-md-6">
 													<label class="form-label" for="cnt_code">縣市</label> <select id="cnt_code"
-														class="select2 form-select">
+													class="select2 form-select">
 													</select>
 												</div>
 												<div class="col-md-6">
 													<label for="dist_code" class="form-label">鄉鎮區域</label> <select id="dist_code"
-														class="select2 form-select">
+													class="select2 form-select">
 													</select>
-												</div>
-												<div class="col-md-6">
-													<label class="form-label" for="detail_address">修改地址</label>
-													<div class="input-group input-group-merge">
-														<span class="input-group-text"></span> <input type="text" id="detail_address"
-															name="detail_address" class="form-control" placeholder="填寫地址" />
-													</div>
+											</div>
+											<div class="col-md-6"">
+												<label class="form-label" for="date-birthday">出生日期</label> <input type="text"
+													id="date-birthday" class="form-control dob-picker" placeholder="YYYY-MM-DD" />
+											</div>
+											<div class="col-md-12">
+												<label class="form-label" for="detail_address">地址</label>
+												<input type="text" id="detail_address"
+																name="detail_address" class="form-control" placeholder="填寫地址" />
 												</div>
 											</div>
 											<div class="mt-2">
 												<button type="button" class="btn btn-primary me-3" id="applybutton">修改資料</button>
-												<button type="reset" class="btn btn-label-secondary">Cancel</button>
 											</div>
 										</form>
 									</div>

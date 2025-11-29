@@ -63,7 +63,7 @@ userCenter.addEventListener('click', e => {
   e.preventDefault();
   fetch('/meow-gym/index/userCenter')
   .then(resp => resp.json())
-  .then(respbody => {
+  .then(respbody => { 
     location.href = respbody.url;
   });
 });

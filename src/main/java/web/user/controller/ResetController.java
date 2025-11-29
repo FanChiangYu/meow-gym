@@ -7,13 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.AddressException;
 import web.user.pojo.User;
 import web.user.service.UserService;
 
@@ -26,13 +27,13 @@ public class ResetController {
 
 	@PostMapping("getCode")
 	@ResponseBody
-	public User getCode(@RequestBody User user) {
+	public User getCode(@RequestBody User user) throws AddressException, MessagingException {
 		return service.updateCode(user);
 	}
 
 	@PostMapping("getCodeAgain")
 	@ResponseBody
-	public Map<String, Object> getCodeAgain(@RequestBody User user) {
+	public Map<String, Object> getCodeAgain(@RequestBody User user) throws AddressException, MessagingException {
 		Map<String, Object> respbody = new HashMap<>();
 		int count = service.updateCodeAgain(user);
 		if (count > 0) {
