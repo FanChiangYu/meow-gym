@@ -16,7 +16,7 @@ public interface UserService extends CoreService {
 
 	User register(User user) throws IOException;
 
-	User edit(User user);
+	User edit(User user) throws IOException;
 
 	List<District> findDist();
 

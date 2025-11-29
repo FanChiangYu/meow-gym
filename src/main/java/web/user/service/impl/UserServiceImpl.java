@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -151,9 +152,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User edit(User user) {
+	public User edit(User user) throws IOException {
 		final User oUser = dao.edit(user.getEmail());
 		user.setUserId(oUser.getUserId());
+		user.setRole(oUser.getRole());
+		user.setIsBanned(oUser.getIsBanned());
+		user.setAvatarUrl(oUser.getAvatarUrl());
+		
+		String imgBase64 = user.getImgBase64();
+		if (imgBase64 != null && !imgBase64.isEmpty()) {
+			String fileName = courseService.addTimestampToFileName(user.getFilename());
+			String fullPath = FileUtil.IMG_ROOT_PATH + fileName;
+			byte[] img = Base64.getDecoder().decode(imgBase64);
+			Path path = Paths.get(fullPath);
+			Files.write(path, img);		
+			user.setAvatarUrl("/meow-gym/course/img/" + fileName);
+		}
+		
 		final int resultCount = dao.update(user);
 		user.setSuccessful(resultCount > 0);
 		user.setMessage(resultCount > 0 ? "編輯成功" : "編輯失敗");

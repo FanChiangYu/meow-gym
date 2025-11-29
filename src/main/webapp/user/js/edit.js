@@ -105,35 +105,119 @@ function editCheck() {
 	return true;
 }
 
-applybutton.addEventListener('click', e => {
-
-
+applybutton.addEventListener('click', () => {
 
 	if (!editCheck()) {
 		return;
 	}
 
-	fetch('edit', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({
-			avatarImg: avatarImg2.src,
-			email: email.value,
-			name: username.value,
-			password: password.value,
-			phone: phoneNumber.value,
-			gender: gender.value,
-			birthday: birthday.value.replaceAll('-', '/'),
-			cntCode: cnt_code.value,
-			distCode: dist_code.value,
-			detailAddress: detail_address.value
-		}),
+	Swal.fire({
+			title: "確認",
+			text: "是否修改資料？",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "確認",
+			cancelButtonText: "取消",
+			reverseButtons: true,
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-gray me-12'
+			}
 	})
+	.then(result => {
+		if (!result.isConfirmed) return;
 
-		.then(resp => resp.json())
-		.then(body => {
-			location.reload();
-		});
+		if(!upload.files || upload.files.length === 0){
+	
+			fetch('edit', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					avatarImg: avatarImg2.src,
+					email: email.value,
+					name: username.value,
+					password: password.value,
+					phone: phoneNumber.value,
+					gender: gender.value,
+					birthday: birthday.value.replaceAll('-', '/'),
+					cntCode: cnt_code.value,
+					distCode: dist_code.value,
+					detailAddress: detail_address.value
+				}),
+			})
+			.then(resp => resp.json())
+			.then(user => {
+				if(user.successful){
+					Swal.fire({
+						title: '完成',
+						text: user.message,
+						icon: 'success',
+						target: document.body 
+					})
+					.then(() => location.reload());
+				}else{
+					Swal.fire({
+						title: '錯誤',
+						text: user.message,
+						icon: 'error',
+						target: document.body 
+					})
+				}
+			});
+	
+		}else{
+	
+			const fr = new FileReader();
+			fr.addEventListener('load', e => {
+				const imgBase64 = e.target.result.split(',')[1];
+	
+				fetch('edit', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						avatarImg: avatarImg2.src,
+						email: email.value,
+						name: username.value,
+						password: password.value,
+						phone: phoneNumber.value,
+						gender: gender.value,
+						birthday: birthday.value.replaceAll('-', '/'),
+						cntCode: cnt_code.value,
+						distCode: dist_code.value,
+						detailAddress: detail_address.value,
+						imgBase64,
+						filename: upload.files[0].name
+					}),
+				})
+				.then(resp => resp.json())
+				.then(user => {
+				if(user.successful){
+					Swal.fire({
+						title: '完成',
+						text: user.message,
+						icon: 'success',
+						target: document.body 
+					})
+					.then(() => location.reload());
+				}else{
+					Swal.fire({
+						title: '錯誤',
+						text: user.message,
+						icon: 'error',
+						target: document.body 
+					})
+				}
+			});
+			 
+			});
+			fr.readAsDataURL(upload.files[0]);
+	
+		}
+
+	});
+
+
+
 });
 
 let distDate = null;
@@ -175,6 +259,7 @@ fetch('dist')
 	.then(resp => resp.json())
 	.then(respLoginData => {
 		avatarImg2.src = respLoginData.user.avatarUrl;
+		avatarImg2.classList.remove('d-none');
 		email.value = respLoginData.user.email;
 		username.value = respLoginData.user.name;
 		password.value = respLoginData.user.password;
@@ -189,3 +274,11 @@ fetch('dist')
 		$('#gender').val(String(respLoginData.user.gender)).trigger('change.select2');
 	});
 
+
+upload.addEventListener('change', () => {
+	const file = upload.files[0];
+	if (file) {
+		avatarImg2.src = URL.createObjectURL(file);
+		avatarImg2.classList.remove('d-none');
+	}
+});
