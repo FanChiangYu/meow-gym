@@ -20,3 +20,43 @@
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.4);
   color: white;
 }
+
+/* #chat-history-footer-id move to front. */
+#chat-history-footer-id {
+  position: relative;
+  z-index: 999;
+}
+
+/* 更改背景顏色 */
+.app-chat {
+  /* --bs-chat-bg: #99c3ff !important; */
+  --bs-chat-bg: rgba(153, 195, 255, 0) !important;
+  background-image: url("../image/christmas_dark_2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  /* block-size: calc(100vh - 10.9rem); */
+}
+
+/* .app-chat-history {
+  position: relative;
+} */
+
+#tsparticles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* .user-detail{
+  color: var(--bs-body-color);
+} */
+
+/* color: var(--bs-body-color); */
+
+#user_detail_id {
+  color: white;
+}

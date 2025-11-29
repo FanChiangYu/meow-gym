@@ -113,7 +113,7 @@ function connectChat(currentCourseId) {
 			                <div class="chat-message-wrapper flex-grow-1">
 							<div class="d-flex align-items-end flex-grow-1">
 								<div class="user-avatar ms-4">
-								<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
+								<div class="user-detail" data-role="${roleText}" id="user_detail_id" style="color:white;">${allMessages[i].name}</div>
 										<div class="avatar ${caochrole}">
 											<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
 										</div>
@@ -138,7 +138,7 @@ function connectChat(currentCourseId) {
 			                <div class="chat-message-wrapper flex-grow-1">
 							<div class="d-flex align-items-end flex-grow-1">
 								<div class="user-avatar ms-4">
-								<div class="user-detail" data-role="${roleText}">${allMessages[i].name}</div>
+								<div class="user-detail" data-role="${roleText}" id="user_detail_id">${allMessages[i].name}</div>
 										<div class="avatar ${caochrole}">
 											<img src="${allMessages[i].avatarUrl}" alt="User Avatar" class="rounded-circle" id="user-avatar" />
 										</div>
@@ -183,7 +183,12 @@ sendbutton.addEventListener("click", function () {
 	}
 
 	const text = input.value.trim();
+	console.log("text", text);
 	if (!text) return;
+
+	//加入背景效果
+	// 👉 加入背景「碰」效果（打出關鍵字時）
+	checkAndTriggerEffects(text);
 
 	// 後端 @OnMessage 會解析並存 DB、廣播
 	ws.send(JSON.stringify({ type: 'chat', text: text }));// 送訊息到後端 ChatEndpoint.java
@@ -239,8 +244,6 @@ fetch('/meow-gym/index/loginData')
 	});
 
 // Log out
-
-
 logoutBtn.addEventListener('click', e => {
 	e.preventDefault();
 	fetch('/meow-gym/user/logout')
@@ -248,7 +251,155 @@ logoutBtn.addEventListener('click', e => {
 });
 
 
+// 背景效果
+// 1.「碰」
+function boomEffect() {
+	// 做三個方向的 confetti，畫面比較滿
+	confetti({
+		particleCount: 160,
+		spread: 70,
+		origin: { y: 0.8 }
+	});
+	confetti({
+		particleCount: 120,
+		spread: 100,
+		angle: 60,
+		origin: { x: 0, y: 0.9 }
+	});
+	confetti({
+		particleCount: 120,
+		spread: 100,
+		angle: 120,
+		origin: { x: 1, y: 0.9 }
+	});
+};
 
 
+const keywordEffects = [
+	{
+		keys: ['生日快樂', 'happy birthday', 'HBD'],
+		fn: boomEffect
+	},
+	{
+		keys: ['恭喜', 'congrats'],
+		fn: boomEffect
+	}
+];
 
 
+let lastEffectTime = 0;
+const EFFECT_COOLDOWN = 3000; // 3 秒
+
+function checkAndTriggerEffects(text) {
+	const now = Date.now();
+	if (now - lastEffectTime < EFFECT_COOLDOWN) {
+		return; // 冷卻中，不觸發
+	}
+
+	const lower = text.toLowerCase();
+
+	for (const group of keywordEffects) {
+		const hit = group.keys.some(k => lower.includes(k.toLowerCase()));
+		if (hit) {
+			lastEffectTime = now;
+			group.fn(); // 執行對應效果
+			break;      // 找到一組就不再往下檢查
+		}
+	}
+}
+
+// tsParticles
+
+// tsParticles.load("tsparticles", {
+// 	fullScreen: { enable: false },        // 不要全螢幕，只用在 div 裡
+// 	background: { color: "transparent" },
+// 	fpsLimit: 60,
+// 	detectRetina: true,
+// 	particles: {
+// 		number: { value: 12 },            // 背景飄幾個
+// 		move: {
+// 			enable: true,
+// 			direction: "top",
+// 			speed: 2,
+// 			outModes: { default: "out" }
+// 		},
+// 		opacity: {
+// 			value: 0.7,
+// 			animation: {
+// 				enable: true,
+// 				speed: 0.4,
+// 				minimumValue: 0.3
+// 			}
+// 		},
+// 		size: {
+// 			value: { min: 16, max: 26 }
+// 		},
+// 		shape: {
+// 			// 想玩別的可以改成 "heart"、"triangle"、或自己設定 image
+// 			type: "star"
+// 			// type: "image",
+// 			// image: [
+// 			// 	{
+// 			// 		src: "../chat/image/christmas.png",
+// 			// 		width: 32,
+// 			// 		height: 32
+// 			// 	}
+// 			// ]
+// 		},
+// 		color: {
+// 			value: ["#ff8ac9", "#ffe45e", "#7cf6fd", "#c4a2ff"]
+// 		}
+// 	}
+// });
+
+
+tsParticles.load("tsparticles", {
+	fullScreen: { enable: false },        // 只在 #tsparticles div 裡跑
+	background: { color: "transparent" },
+	fpsLimit: 60,
+	detectRetina: true,
+	particles: {
+		number: {
+			value: 80,                        // 雪花數量，可再調多一點/少一點
+			density: {
+				enable: true,
+				area: 800
+			}
+		},
+		color: {
+			value: "#ffffff"                  // 白色雪花
+		},
+		shape: {
+			type: "circle"                    // 用圓形當雪花
+		},
+		opacity: {
+			value: 0.9,
+			random: true,
+			animation: {
+				enable: true,
+				speed: 0.5,
+				minimumValue: 0.3,
+				sync: false
+			}
+		},
+		size: {
+			value: { min: 2, max: 6 },        // 雪花大小範圍
+			random: true
+		},
+		move: {
+			enable: true,
+			direction: "bottom",              // ❗向下飄
+			speed: 1.5,                       // 速度，想快一點就 2~3
+			straight: false,                  // false 才會左右飄
+			outModes: {
+				default: "out"
+			},
+			random: false
+		},
+		wobble: {                           // 微微左右飄，像雪被風吹
+			enable: true,
+			distance: 5,
+			speed: 3
+		}
+	}
+});
