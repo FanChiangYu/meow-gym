@@ -111,7 +111,7 @@ fetch('/meow-gym/index/coachInfo')
       <div class="col-lg-4 col-md-6 col-12">
         <div class="card h-100">
           <img class="card-img-top" src="${profile.avatarUrl}" alt="Card image cap">
-          <div class="card-body text-center"">
+          <div class="card-body text-center">
             <h5 class="card-title">${profile.coachName}</h5>
             <p class="card-text">
               ${profile.bio}
@@ -122,6 +122,7 @@ fetch('/meow-gym/index/coachInfo')
     `;
   });
 });
+
 
 userCenterBtn.addEventListener('click', e => {
   e.preventDefault();
