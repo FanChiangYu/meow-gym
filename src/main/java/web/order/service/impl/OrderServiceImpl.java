@@ -138,48 +138,6 @@ public class OrderServiceImpl implements OrderService{
 		orderitemsAndCourseList.put("Course", courseList);
 		return orderitemsAndCourseList;
 	}
-
-//	@Override
-//	public Map<String, Object> getPayAmountListByUserId(Integer userId) {
-//		//Step1:確認Orders and Orderitems 的 orderId
-//		Integer orderId = orderdao.selectOrderIdByUesrIdAndStatus(userId, "PENDING");
-//		//Step2:撈List<Orderitems> by orderId
-//		List<Orderitems> orderitemList = orderdao.selectOrderitemsListByOrderId(orderId);
-//		//Step3:回傳Orders and List<Orderitems> payAmountList
-//		Integer totalAmount = 0;
-//		Orders orders = orderdao.selectOrdersByOrderId(orderId);
-//		for (Orderitems orderitems : orderitemList) {
-//			Integer courseId = orderitems.getCourseId();
-//			Course course = orderdao.selectCourseByCourseId(courseId);
-//			CoursePromo coursePromo = orderdao.selectCoursePromoByCourseId(courseId);
-//			orderitems.setTitle(course.getTitle());
-//			orderitems.setCoursePrice(course.getCoursePrice());
-//			//Step4:決定回傳課程價錢(確認是否為促銷區間)
-//			Date today = new Date();			
-//			if(coursePromo != null) {
-//				if((today.after(coursePromo.getDateStart()) || today.equals(coursePromo.getDateStart())) &&
-//					    (today.before(coursePromo.getDateEnd()) || today.equals(coursePromo.getDateEnd()))) {
-//					orderitems.setDateStart(coursePromo.getDateStart());
-//					orderitems.setDateEnd(coursePromo.getDateEnd());
-//					orderitems.setPromoPrice(coursePromo.getPromoPrice());
-//				}
-//			}
-//			if(orderitems.getPromoPrice() != null) {
-//				orderitems.setPurchasedPrice(orderitems.getPromoPrice());
-//			}else {
-//				orderitems.setPurchasedPrice(orderitems.getCoursePrice());
-//			}
-//			//Step5:計算payAmount and 回傳Orders payAmount (決定回傳課程總價)
-//			Integer purchasedPrice = orderitems.getPurchasedPrice();
-//			totalAmount += purchasedPrice;
-//			orders.setPayAmount(totalAmount); 
-//		}
-//		//Step6:回傳個課程價格及購課總價
-//		Map<String, Object> payAmountList = new HashMap<>();
-//		payAmountList.put("Orders", orders);
-//		payAmountList.put("Orderitems", orderitemList);
-//		return payAmountList;
-//	}
 	
 	@Override
 	public boolean deletecoursefromcart(Integer orderItemId, Integer userId) {
