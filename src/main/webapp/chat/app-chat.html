@@ -64,6 +64,11 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 
   <script src="../assets/js/config.js"></script>
+
+  <!-- decoration -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 </head>
 
 <body>
@@ -391,18 +396,19 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                     <!-- /Chat conversation -->
 
                     <!-- Chat History -->
-                    <h3>課程名稱</h3>
+                    <h5 id="coursetitle" class="py-2 px-4 m-0"></h5>
+
                     <div class="col app-chat-history d-block" id="app-chat-history">
+                      
+                      <!-- tsParticles 背景層 -->
+                      <div id="tsparticles"></div>
+
                       <div class="chat-history-body">
                         <ul class="list-unstyled chat-history" id="chat-place">
-
-                          <!-- add chat-place to load the history chats -->
-                          <!-- <div id="chat-place"></div> -->
                         </ul>
                       </div>
-
                       <!-- Chat message form -->
-                      <div class="chat-history-footer shadow-xs">
+                      <div class="chat-history-footer shadow-xs" id="chat-history-footer-id">
                         <form class="form-send-message d-flex justify-content-between align-items-center">
 
                           <!-- add id chat-message -->
@@ -420,10 +426,13 @@ Hey there, we’re just writing to let you know that you’ve been subscribed to
                         </form>
                       </div>
                     </div>
+
+
                   </div>
                   <!-- /Chat History -->
 
                   <div class="app-overlay"></div>
+
                 </div>
               </div>
             </div>

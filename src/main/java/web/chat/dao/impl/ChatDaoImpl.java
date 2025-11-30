@@ -93,8 +93,9 @@ public class ChatDaoImpl implements ChatDao {
 	// 使用courseId查詢課程名稱
 	@Override
 	public String selectCourseTitle(Integer courseId) {
-
-		return null;
+		Course course = session.get(Course.class, courseId);
+		System.out.println(course.getTitle());
+		return course.getTitle();
 	}
 
 	@Override
