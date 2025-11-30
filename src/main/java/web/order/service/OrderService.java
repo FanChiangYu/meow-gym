@@ -18,8 +18,6 @@ public interface OrderService extends CoreService{
 	
 	boolean deletecoursefromcart(Integer courseId, Integer userId);
 	
-//	Map<String, Object> getPayAmountListByUserId(Integer userId);
-	
 	Orders payment(Orders orders, Integer userId);
 	
 	Map<String, Object> getOrderConfirmation(Integer userId);

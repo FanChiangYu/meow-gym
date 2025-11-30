@@ -42,8 +42,6 @@ public class CartController {
 			@SessionAttribute(value = "course", required = false) Course setCourse) {
 		//取會員資料
 		Integer userId = setUser.getUserId();
-		// 先寫死
-//		Integer userId = 1;
 
 		// 判斷是否有加入購物車的課程，如無則顯示課程清單
 		if (setCourse != null) {
@@ -64,25 +62,11 @@ public class CartController {
 		Integer orderItemId = orderitems.getOrderItemId();
 		//取會員資料
 		Integer userId = setUser.getUserId();
-		//先寫死
-//		Integer userId = 1;
+
 		Core core = new Core();
 		core.setSuccessful(orderservice.deletecoursefromcart(orderItemId, userId));
 		return core;
 	}
-	
-//	@GetMapping("payAmount")
-//	@ResponseBody
-//	protected Map<String, Object> payAmount(@SessionAttribute(value = "user", required = false) User setUser) {
-//		//取會員資料
-//		Integer userId = setUser.getUserId();
-//		// 先寫死
-////		Integer userId = 1;
-//		
-//		// 回傳個課程價格及購課總價
-//		Map<String, Object> payAmountList = orderservice.getPayAmountListByUserId(userId);
-//		return payAmountList;
-//	}
 	
 	@PostMapping("payment")
 	@ResponseBody
@@ -90,8 +74,6 @@ public class CartController {
 			@SessionAttribute(value = "user", required = false) User setUser) {		
 		//取會員資料
 		Integer userId = setUser.getUserId();
-		// 先寫死
-//		Integer userId = 1;
 		
 		//import static 套件寫法		
 		return orderservice.payment(orders, userId);
@@ -103,8 +85,6 @@ public class CartController {
 			) {
 		//取會員資料
 		Integer userId = setUser.getUserId();
-		// 先寫死
-//		Integer userId = 1;
 		
 		// 回傳購物車清單
 		Map<String, Object> orderConfirmation = orderservice.getOrderConfirmation(userId);

@@ -356,19 +356,3 @@ function shoppingRecord(){
 		}, 100);
 	});
 }
-
-//未使用
-// for (let orders of shoppingRecordOrders) {
-// 	tbody.innerHTML += `
-// 		<tr>
-// 			<td></td>
-// 			<td></td>
-// 			<td>${orders.orderId}</td>
-// 			<td>${orders.createdAt}</td>
-// 			<td>${orders.paymentMethod}</td> //需要改
-// 			<td>${orders.payAmount}</td>
-// 			<td>${orders.paymentMethod}</td>
-// 			<td>${orders.status}</td>
-// 		</tr>
-// 	`;
-// },
