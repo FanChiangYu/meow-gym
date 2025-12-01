@@ -8,7 +8,6 @@ import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
-import web.index.pojo.CoursePromotions;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.promotions.pojo.CoursePromo;

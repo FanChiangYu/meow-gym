@@ -1,8 +1,5 @@
 package web.course.dao.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -18,7 +15,6 @@ import web.course.pojo.Course;
 import web.course.pojo.CourseRecurringRules;
 import web.course.pojo.SessionUsers;
 import web.course.pojo.SessionUsersId;
-import web.index.pojo.CoursePromotions;
 import web.order.pojo.Orderitems;
 import web.order.pojo.Orders;
 import web.promotions.pojo.CoursePromo;
@@ -38,7 +34,6 @@ public class CourseDaoImpl implements CourseDao {
 	
 	@Override
 	public int insert(CourseRecurringRules courseRecurringRules) {
-//		courseRecurringRules.setRuleId(null); // 回到暫態
 		session.persist(courseRecurringRules);
 		return 1;
 	}
