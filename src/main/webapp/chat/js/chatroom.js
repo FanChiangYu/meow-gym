@@ -252,9 +252,7 @@ logoutBtn.addEventListener('click', e => {
 
 
 // 背景效果
-// 1.「碰」
 function boomEffect() {
-	// 做三個方向的 confetti，畫面比較滿
 	confetti({
 		particleCount: 160,
 		spread: 70,
@@ -283,6 +281,14 @@ const keywordEffects = [
 	{
 		keys: ['恭喜', 'congrats'],
 		fn: boomEffect
+	},
+	{
+		keys: ['歡迎新同學', 'welcome'],
+		fn: boomEffect
+	},
+	{
+		keys: ['歡迎', 'welcome'],
+		fn: boomEffect
 	}
 ];
 
@@ -308,69 +314,25 @@ function checkAndTriggerEffects(text) {
 	}
 }
 
-// tsParticles
-
-// tsParticles.load("tsparticles", {
-// 	fullScreen: { enable: false },        // 不要全螢幕，只用在 div 裡
-// 	background: { color: "transparent" },
-// 	fpsLimit: 60,
-// 	detectRetina: true,
-// 	particles: {
-// 		number: { value: 12 },            // 背景飄幾個
-// 		move: {
-// 			enable: true,
-// 			direction: "top",
-// 			speed: 2,
-// 			outModes: { default: "out" }
-// 		},
-// 		opacity: {
-// 			value: 0.7,
-// 			animation: {
-// 				enable: true,
-// 				speed: 0.4,
-// 				minimumValue: 0.3
-// 			}
-// 		},
-// 		size: {
-// 			value: { min: 16, max: 26 }
-// 		},
-// 		shape: {
-// 			// 想玩別的可以改成 "heart"、"triangle"、或自己設定 image
-// 			type: "star"
-// 			// type: "image",
-// 			// image: [
-// 			// 	{
-// 			// 		src: "../chat/image/christmas.png",
-// 			// 		width: 32,
-// 			// 		height: 32
-// 			// 	}
-// 			// ]
-// 		},
-// 		color: {
-// 			value: ["#ff8ac9", "#ffe45e", "#7cf6fd", "#c4a2ff"]
-// 		}
-// 	}
-// });
-
 
 tsParticles.load("tsparticles", {
-	fullScreen: { enable: false },        // 只在 #tsparticles div 裡跑
+	fullScreen: { enable: false },
 	background: { color: "transparent" },
 	fpsLimit: 60,
 	detectRetina: true,
 	particles: {
 		number: {
-			value: 80,                        // 雪花數量，可再調多一點/少一點
+			value: 80,
 			density: {
 				enable: true,
 				area: 800
 			}
 		},
 		color: {
-			value: "#ffffff"                  // 白色雪花
+			value: "#ffffff"
 		},
 		shape: {
-			type: "circle"                    // 用圓形當雪花
+			type: "circle"
 		},
 		opacity: {
 			value: 0.9,
@@ -383,20 +345,20 @@ tsParticles.load("tsparticles", {
 			}
 		},
 		size: {
-			value: { min: 2, max: 6 },        // 雪花大小範圍
+			value: { min: 2, max: 6 },
 			random: true
 		},
 		move: {
 			enable: true,
-			direction: "bottom",              // ❗向下飄
-			speed: 1.5,                       // 速度，想快一點就 2~3
-			straight: false,                  // false 才會左右飄
+			direction: "bottom",
+			speed: 1.5,
+			straight: false,
 			outModes: {
 				default: "out"
 			},
 			random: false
 		},
-		wobble: {                           // 微微左右飄，像雪被風吹
+		wobble: {
 			enable: true,
 			distance: 5,
 			speed: 3

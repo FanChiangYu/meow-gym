@@ -1,7 +1,6 @@
 package web.chat.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.chat.dao.ChatDao;
-import web.chat.pojo.UserCourseDTO;
 import web.user.pojo.User;
 
 @Controller
 @RequestMapping("chat")
 public class GetUserCourseid {
-
-	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private ChatDao chatDao;
