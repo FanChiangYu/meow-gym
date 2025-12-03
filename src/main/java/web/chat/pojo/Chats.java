@@ -1,7 +1,7 @@
 package web.chat.pojo;
 
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "CHATS")
+
 public class Chats extends Core {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -69,7 +69,7 @@ public class ChatDTO {
 		this.createdAt = createdAt;
 	}
 
-	public void setAvatarUrl(String AvatarUrl) {
+	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
 
