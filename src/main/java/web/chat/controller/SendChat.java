@@ -14,7 +14,6 @@ import web.chat.pojo.Chats;
 @Controller
 @RequestMapping("chat")
 public class SendChat {
-	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private ChatDao chatDao;
