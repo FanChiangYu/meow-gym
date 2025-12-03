@@ -8,7 +8,6 @@ import javax.servlet.http.Part;
 import com.google.gson.JsonObject;
 
 import core.service.CoreService;
-import netscape.javascript.JSObject;
 import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;

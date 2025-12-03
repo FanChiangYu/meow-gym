@@ -42,6 +42,7 @@ fetch('/meow-gym/index/loginData')
     switchMenu(respbody.user.role); // 切換側邊欄: 1 -> 一般會員、2 -> 教練、3 -> 管理者
     userName.textContent = respbody.user.name; // 修改標籤內使用者名稱
     avatarImg.src = respbody.user.avatarUrl; // 更換img標籤圖片
+    isBanned = respbody.user.isBanned;
   }else{
     Swal.fire({
       title: '錯誤',
@@ -168,7 +169,14 @@ fetch('record')
     }
 
     if(!isBanned){
-      chatHtml = `<button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary ">聊天室</button>`;
+      chatHtml = `<button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary">聊天室</button>`;
+    }else{
+      chatHtml = `
+        <div class="d-flex flex-column align-items-end">
+          <button onclick="chatById(${classResponse.course.courseId})" class="btn rounded-pill waves-effect waves-light btn-primary" disabled>聊天室</button>
+          <small class="text-danger mt-1">請洽櫃檯人員了解詳情</small>
+        </div>
+      `;
     }
 
     classContent.innerHTML += `

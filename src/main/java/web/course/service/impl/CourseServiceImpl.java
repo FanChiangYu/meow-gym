@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import core.util.FileUtil;
 
-import javax.naming.NamingException;
 import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
 
+import core.util.FileUtil;
 import web.coach.pojo.CoachProfiles;
 import web.course.dao.CourseDao;
-import web.course.dao.impl.CourseDaoImpl;
 import web.course.pojo.ClassResponse;
 import web.course.pojo.ClassSessions;
 import web.course.pojo.Course;
