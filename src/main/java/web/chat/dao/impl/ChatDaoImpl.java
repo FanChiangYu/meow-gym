@@ -35,17 +35,6 @@ public class ChatDaoImpl implements ChatDao {
 	// 移到Service:即時拉出DB-對話訊息的所有詳細資料
 	@Override
 	public Chats saveAndLoad(Chats chats) {
-		// Chats chat = new Chats();
-
-//		chat.setCourseId(chatscourseId);
-//		chat.setUserId(userId);
-//		chat.setCoachId(coachId);
-//		chat.setContent(content);
-
-//		chats.setCourseId(chats.getCourseId());
-//		chats.setUserId(chats.getUserId());
-//		chats.setCoachId(chats.getCoachId());
-//		chats.setContent(chats.getContent());
 
 		// 寫入 + 立即同步 + 重新讀回 (created_at由DB填)
 		session.persist(chats); // insert
@@ -62,13 +51,6 @@ public class ChatDaoImpl implements ChatDao {
 		return session.createQuery(hql, Chats.class).setParameter("courseId", courseId).getResultList();
 	}
 
-	// 1. 用courseId 去抓有哪些User,為了user_id要對應到name而製作的，屬非必要
-	// ChatDTO為了user_id要對應到name而製作的，新增一個，有加上name的購物袋，因為本來的chats沒有name
-//	@Override
-//	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {
-//		String hql = "select new web.chat.pojo.ChatDTO(c.chatId, c.courseId, c.userId, u.name, c.content, c.createdAt) from web.chat.pojo.Chats c join web.user.pojo.User u on u.userId = c.userId where c.courseId = :courseId order by c.createdAt";
-//		return session.createQuery(hql, ChatDTO.class).setParameter("courseId", courseId).getResultList();
-//	}
 
 	@Override
 	public List<ChatDTO> selectCourseChatsWithUser(Integer courseId) {

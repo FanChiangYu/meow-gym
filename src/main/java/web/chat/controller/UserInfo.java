@@ -18,7 +18,6 @@ import web.user.pojo.User;
 @Controller
 @RequestMapping("chat")
 public class UserInfo{
-	private static final long serialVersionUID = 1L;
 
 	Map<String, Object> body = new HashMap<>();
 	
