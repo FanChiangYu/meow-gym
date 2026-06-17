@@ -1,11 +1,8 @@
 package web.blacklist.dao.impl;
-
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
-
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import web.blacklist.dao.BlockListDao;
